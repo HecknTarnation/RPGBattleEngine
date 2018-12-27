@@ -13,6 +13,7 @@ public class Enemy {
     public int health, attack, defense, luck, mAttack, mDefense, expValue;
     public Move[] moves;
     public byte AIID;
+    public Weakness weakness;
     
     /**
      * Creates a new enemy with the given parameters
@@ -52,6 +53,16 @@ public class Enemy {
         if(level > 2){
             this.AIID = 2;
         }
+        return this;
+    }
+    
+    /**
+     * Sets the enemy's weakness
+     * @since 1.0
+     * @param Weakness weakness
+     */
+    public Enemy setWeakness(Weakness weakness){
+        this.weakness = weakness;
         return this;
     }
     

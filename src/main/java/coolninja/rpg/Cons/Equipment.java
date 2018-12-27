@@ -23,7 +23,7 @@ public class Equipment extends Item{
      * @param The slot it goes into when equipped
      */
     public Equipment(String name, String desc, int attack, int defense, int luck, int mAttack, int mDefense, int slot){
-        super(name, desc, null);
+        super(name, desc);
         this.attack = attack;
         this.defense = defense;
         this.luck = luck;

@@ -2,6 +2,7 @@ package coolninja.rpg.Cons;
 
 import java.net.URL;
 
+import coolninja.rpg.WeaknessType;
 import coolninja.rpg.Cons.Graphic;
 import coolninja.rpg.Required.Player;
 
@@ -19,7 +20,7 @@ public class Move {
     public double accuracy;
     public Graphic graphic;
     public URL sound;
-    public Weakness type;
+    public WeaknessType type;
     
     /**
      * Creates a move
@@ -65,6 +66,16 @@ public class Move {
      */
     public Move setManaCost(int manaCost){
         this.manaCost = manaCost;
+        return this;
+    }
+    
+    /**
+     * Sets move type
+     * @since 1.0
+     * @param WeaknessType type
+     */
+    public Move setType(WeaknessType type){
+        this.type = type;
         return this;
     }
     

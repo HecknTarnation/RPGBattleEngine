@@ -126,12 +126,6 @@ public class BattleHandler {
             
             System.out.print("\n");
             
-            System.out.println(Runtime.getRuntime().freeMemory());
-            
-            float freemem = (Runtime.getRuntime().freeMemory())/1073741824;
-            
-            System.out.println("Memory(giga): " + freemem);
-            
             if(currentPlayer.name.equalsIgnoreCase("you")){
                 System.out.println("It's Your Turn");
             }else{
@@ -280,6 +274,12 @@ public class BattleHandler {
             t = 0;
         }
         
+        if(enemies[enemyIndex].weakness != null){
+            if(enemies[enemyIndex].weakness.type == move.type){
+                t *= enemies[enemyIndex].weakness.effectiveness;
+            }
+        }
+        
         printGraphic(move);
         
         enemies[enemyIndex].health -= t;
@@ -319,7 +319,7 @@ public class BattleHandler {
         switch(e.AIID){
             case 1:
                 for(int i = 0; i < e.moves.length; i++){
-                    if(p.currentWeakness != null && e.moves[i].type.type == p.currentWeakness.type){
+                    if(p.currentWeakness != null && e.moves[i].type == p.currentWeakness.type){
                         return e.moves[i];
                     }
                 }
