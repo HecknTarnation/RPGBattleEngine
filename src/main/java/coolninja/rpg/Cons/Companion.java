@@ -45,7 +45,7 @@ public class Companion extends Player{
     /**
      * Sets the companions moves
      * @since 1.0
-     * @param the moves
+     * @param ArrayList<Move> the moves
      */
     public final Companion setMoves(ArrayList<Move> moves){
         this.moves = moves;
@@ -55,7 +55,7 @@ public class Companion extends Player{
     /**
      * Adds a move to the companion
      * @since 1.0
-     * @param move to add
+     * @param Move move to add
      */
     public final Companion addMove(Move move){
         this.moves.add(move);
@@ -65,6 +65,7 @@ public class Companion extends Player{
     /**
      * Increases the exp
      * @since 1.0
+     * @param int exp
      */
     public void increaseEXP(int exp){
         this.exp += exp;

@@ -13,8 +13,8 @@ public class Graphic {
     
     /**
      * Creates a new Graphic object
-     * @param frames
-     * @param the time (in milliseconds) between frames
+     * @param String[] frames
+     * @param int the time (in milliseconds) between frames
      */
     public Graphic(String[] frames, int waitTime){
         this.frames = frames;

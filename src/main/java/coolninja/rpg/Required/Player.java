@@ -290,4 +290,13 @@ public class Player {
         this.currentWeakness = weakness;
         return this;
     }
+    
+    /**
+     * Deals given damage to player/compainion
+     * @since 1.0
+     * @param int damage
+     */
+    public void dealDamage(int damage){
+        this.health -= damage;
+    }
 }

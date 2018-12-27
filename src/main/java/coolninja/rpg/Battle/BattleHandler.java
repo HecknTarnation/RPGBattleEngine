@@ -25,10 +25,11 @@ public class BattleHandler {
     private static int prevIndex;
     private static int expVal = 0;
     
-    /**Starts battle with the given enemy/enemies
+    /**
+    * Starts battle with the given enemy/enemies
     * @since 1.0
-    * @param the enemy/enemies
-    * @param if the player can run
+    * @param Enemy[] the enemy/enemies
+    * @param boolean if the player can run
     */
     public static void StartBattle(Enemy en, boolean canRun){
         enemies = new Enemy[1];
@@ -58,6 +59,15 @@ public class BattleHandler {
         }
     }
     
+    /**
+     * Deals damage to the enemy given the index
+     * @since 1.0
+     * @param int index
+     * @param int damage
+     */
+    public static void dealEnemyDamage(int index, int damage){
+        enemies[index].health -= damage;
+    }
     
     //private methods
     
@@ -293,8 +303,6 @@ public class BattleHandler {
         for(int i = 0; i < enemies.length; i++){
             
             Player p = pick();
-                        
-            Console.printError(p.name, 1000);
             
             Enemy e = enemies[i];
         

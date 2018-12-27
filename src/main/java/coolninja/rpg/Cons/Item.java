@@ -10,18 +10,15 @@ public class Item {
     
     public String name;
     public String desc;
-    public Action action;
     public double chance;
     
     /**
      * @param name
      * @param description
-     * @param action
      */
-    public Item(String name, String desc, Action action){
+    public Item(String name, String desc){
         this.name = name;
         this.desc = desc;
-        this.action = action;
     }
     
     /**

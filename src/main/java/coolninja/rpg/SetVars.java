@@ -52,7 +52,7 @@ public class SetVars {
     }
     
     /**
-     * Sets the color code for the compainions on battle
+     * Sets the color code for the enemies on battle
      * @since 1.0
      */
     public static void setEnemyColor(String code){

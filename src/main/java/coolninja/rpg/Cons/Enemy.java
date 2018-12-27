@@ -44,7 +44,7 @@ public class Enemy {
      * 1 = uses players weakness to decide best move
      * 2 = uses players health to decide best move
      * if bigger than 2, it will be set to 2
-     * @param level (as byte)
+     * @param byte level
      * @since 1.0
      */
     public Enemy setAILevel(byte level){

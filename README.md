@@ -9,6 +9,8 @@ This engine and code is distributed under GNU version 3
 
 (Note, this engine is not yet complete)
 
+Documentation can be found here: https://coolninjagames.github.io/RPGEngine/index.html
+
 ########################################################
 The GNU General Public License is a free, copyleft license for software and other kinds of works.
 
