@@ -1,6 +1,10 @@
 # RPGEngine
 A text-based RPG battle engine for java
 
+Use of code written by Ben Ballard without authorization is not permitted
+
+(Created using maven)
+
 This engine and code is distributed under GNU version 3
 
 (Note, this engine is not yet complete)
