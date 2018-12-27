@@ -3,8 +3,6 @@ A text-based RPG battle engine, made in java
 
 Use or distribution of code written by Ben Ballard, without authorization, is not permitted unless it is in a built state (ie: a .jar file). If it is used, then you must include this file in your release.
 
-(Created using maven)
-
 This engine and it's code is distributed under GNU version 3
 
 (Note, this engine is not yet complete)
