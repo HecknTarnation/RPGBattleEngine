@@ -1,5 +1,6 @@
 # RPGEngine
 A text-based RPG battle engine for java
+(Created using maven)
 
 This engine and code is distributed under GNU version 3
 
