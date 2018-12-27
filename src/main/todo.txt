@@ -1,0 +1,7 @@
+Finish Player/Companion Level Up
+
+Battle:
+    -Enemy Turns
+        /Enemy AI
+    -public function to damage enemy
+    
