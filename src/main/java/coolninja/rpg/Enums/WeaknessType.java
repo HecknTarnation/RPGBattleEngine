@@ -1,4 +1,4 @@
-package coolninja.rpg;
+package coolninja.rpg.Enums;
 
 /**
  * List of weakness types

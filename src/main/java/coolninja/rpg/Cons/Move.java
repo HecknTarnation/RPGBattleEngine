@@ -2,7 +2,7 @@ package coolninja.rpg.Cons;
 
 import java.net.URL;
 
-import coolninja.rpg.WeaknessType;
+import coolninja.rpg.Enums.WeaknessType;
 import coolninja.rpg.Cons.Graphic;
 import coolninja.rpg.Required.Player;
 

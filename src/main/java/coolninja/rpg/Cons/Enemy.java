@@ -17,15 +17,15 @@ public class Enemy {
     
     /**
      * Creates a new enemy with the given parameters
-     * @param name
-     * @param health
-     * @param attack
-     * @param defense
-     * @param luck
-     * @param mAttack
-     * @param mDefense
-     * @param the exp value
-     * @param moves
+     * @param String name
+     * @param int health
+     * @param int attack
+     * @param int defense
+     * @param int luck
+     * @param int mAttack
+     * @param int mDefense
+     * @param int the exp value
+     * @param Move[] moves
      */
     public Enemy(String name, int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue, Move[] moves){
         this.name = name;

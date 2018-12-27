@@ -19,6 +19,15 @@ public class Companion extends Player{
     //public String name;
     //public int level = 1, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     public ArrayList<Move> moves = new ArrayList<Move>();
+    /**
+     * 0 = feet
+     * 1 = legs
+     * 2 = arms
+     * 3 = chest
+     * 4 = head
+     * 5 = weapon
+     * 6 = mod
+     */
     public Equipment[] equipment = new Equipment[5];
     
     private int skillPoints = 0;

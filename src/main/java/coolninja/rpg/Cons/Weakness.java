@@ -1,6 +1,6 @@
 package coolninja.rpg.Cons;
 
-import coolninja.rpg.WeaknessType;
+import coolninja.rpg.Enums.WeaknessType;
 
 /**
  * Weakness object

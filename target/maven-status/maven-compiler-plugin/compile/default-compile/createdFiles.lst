@@ -1,3 +1,4 @@
+coolninja/rpg/Enums/WeaknessType.class
 coolninja/rpg/SetVars.class
 coolninja/rpg/Cons/Move.class
 coolninja/rpg/Cons/Graphic.class
@@ -9,9 +10,9 @@ coolninja/rpg/Battle/BattleHandler.class
 coolninja/rpg/Cons/Equipment.class
 coolninja/rpg/Exception/NoPlayerSetException.class
 coolninja/rpg/Console/Colors.class
-coolninja/rpg/WeaknessType.class
 coolninja/rpg/Cons/Item.class
 coolninja/rpg/Cons/Weakness.class
 coolninja/rpg/Required/Player.class
 coolninja/rpg/Vars.class
 coolninja/rpg/Console/Console.class
+coolninja/rpg/Enums/EquipSlot.class
