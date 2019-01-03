@@ -1,5 +1,11 @@
 package coolninja.rpg.Enums;
 
+/**
+ * List of equipment slots
+ * @version 1.0
+ * @since 1.0
+ * @author Ben Ballard
+ */
 public enum EquipSlot {
     
     Feet(0), Legs(1), Arms(2), Chest(3), Head(4), Weapon(5), Mod(6);
