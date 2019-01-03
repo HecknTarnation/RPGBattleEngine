@@ -60,6 +60,22 @@ public class BattleHandler {
     }
     
     /**
+     * Starts a boss battle
+     * @since 1.0
+     */
+    public static void StartBoss(Boss en){
+        enemies = new Enemy[1];
+        
+        enemies[0] = new Boss(en.name, en.health, en.attack, en.defense, en.luck, en.mAttack, en.mDefense, en.expValue, en.moves);
+    
+        try {
+            BattleLoop(false);
+        } catch (NoPlayerSetException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /**
      * Deals damage to the enemy given the index
      * @since 1.0
      * @param int index
@@ -225,7 +241,7 @@ public class BattleHandler {
         if(currentPlayer.name.equalsIgnoreCase("you")){
             System.out.print("You did nothing");
         }else{
-            System.out.print(currentPlayer.name+" did nothing");
+            System.out.print(currentPlayer.name + " did nothing");
         }
         Console.Dots(3, 300);
     }

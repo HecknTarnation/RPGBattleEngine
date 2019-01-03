@@ -76,4 +76,12 @@ public class Enemy {
         return this;
     }
     
+    /**
+     * Converts Enemy to Boss
+     * @since 1.0
+     */
+    public Boss EnemyToBoss(){
+        return (Boss)this;
+    }
+    
 }
