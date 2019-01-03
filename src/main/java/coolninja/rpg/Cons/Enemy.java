@@ -14,6 +14,7 @@ public class Enemy {
     public Move[] moves;
     public byte AIID;
     public Weakness weakness;
+    public Item drop;
     
     /**
      * Creates a new enemy with the given parameters
@@ -63,6 +64,15 @@ public class Enemy {
      */
     public Enemy setWeakness(Weakness weakness){
         this.weakness = weakness;
+        return this;
+    }
+    
+    /**
+     * Sets the enemy's item drop
+     * @since 1.0
+     */
+    public Enemy setDrop(Item item){
+        this.drop = item;
         return this;
     }
     

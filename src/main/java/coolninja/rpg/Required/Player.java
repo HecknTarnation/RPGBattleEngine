@@ -308,4 +308,40 @@ public class Player {
     public void dealDamage(int damage){
         this.health -= damage;
     }
+    
+    /**
+     * Adds/Removes Armor
+     * @since 1.0
+     * @param boolean removing armor
+     * @param Equipment the armor
+     */
+    public Player addArmor(boolean removing, Equipment armor){
+        if(!removing){
+            this.maxHealth += armor.maxHealth;
+            this.maxMana += armor.maxMana;
+            this.attack += armor.attack;
+            this.defense += armor.defense;
+            this.luck += armor.luck;
+            this.mAttack += armor.mAttack;
+            this.mDefense += armor.mDefense;
+            if(armor.weakness != null)
+                this.currentWeakness = armor.weakness;
+            equipment[armor.slot.index] = armor;
+        }else{
+            this.maxHealth -= armor.maxHealth;
+            this.maxMana -= armor.maxMana;
+            this.attack -= armor.attack;
+            this.defense -= armor.defense;
+            this.luck -= armor.luck;
+            this.mAttack -= armor.mAttack;
+            this.mDefense -= armor.mDefense;
+            this.currentWeakness = null;
+            equipment[armor.slot.index] = null;
+        }
+        return this;
+    }
+    
+    public void addItemToInv(Item item){
+        inv.add(item);     
+    }
 }

@@ -360,7 +360,11 @@ public class BattleHandler {
         }
         
         printGraphic(move);
-
+        
+        if(p.currentWeakness != null && move.type == p.currentWeakness.type){
+            t *= p.currentWeakness.effectiveness;
+        }
+        
         p.health -= t;
         
         Console.Dots(3, 300);
@@ -374,6 +378,21 @@ public class BattleHandler {
         Console.waitFull(1);
     }
     
+    private static void DropItem(){
+        ArrayList<Item> drops = new ArrayList<Item>();
+        for(int i = 0; i < enemies.length; i++){
+            if(MathFunc.shouldDrop(enemies[i], enemies[i].drop)){
+                drops.add(enemies[i].drop);
+            }
+        }
+        
+        for(int i = 0; i < drops.size(); i++){
+            System.out.println("You got " + drops.get(i).name);
+            player.addItemToInv(drops.get(i));
+        }
+        
+    }
+    
     private static void BattleFinished(){
         
         if(expVal > 0){
@@ -382,6 +401,8 @@ public class BattleHandler {
             System.out.println("You earned " + expVal + " exp");
         
             player.increaseEXP(expVal);
+            
+            DropItem();
         
             for(int i = 0; i < comps.length; i++){
                 comps[i].increaseEXP(expVal);
