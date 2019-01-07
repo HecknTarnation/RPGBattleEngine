@@ -77,11 +77,19 @@ public class Enemy {
     }
     
     /**
-     * Converts Enemy to Boss
+     * Clones enemy
      * @since 1.0
      */
-    public Boss EnemyToBoss(){
-        return new Boss(this.name, this.health, this.attack, this.defense, this.luck, this.mAttack, this.mDefense, this.expValue, this.moves);
+    public Enemy clone(){
+        return new Enemy(this.name,
+        this.health,
+        this.attack,
+        this.defense,
+        this.luck,
+        this.mAttack,
+        this.mDefense,
+        this.expValue,
+        this.moves).setAILevel(this.AIID).setDrop(this.drop.setDropChance(this.drop.chance)).setWeakness(this.weakness);
     }
     
 }

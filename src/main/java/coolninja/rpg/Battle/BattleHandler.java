@@ -25,6 +25,7 @@ public class BattleHandler {
     private static int prevIndex;
     private static int expVal = 0;
     private static Item[] eDrops;
+    private static Enemy[] enArchive;
     
     /**
     * Starts battle with the given enemy/enemies
@@ -35,7 +36,7 @@ public class BattleHandler {
     public static void StartBattle(Enemy en, boolean canRun){
         enemies = new Enemy[1];
         
-        enemies[0] = new Enemy(en.name, en.health, en.attack, en.defense, en.luck, en.mAttack, en.mDefense, en.expValue, en.moves);
+        enemies[0] = en.clone();
         
         try {
             BattleLoop(canRun);
@@ -50,27 +51,11 @@ public class BattleHandler {
         
         for(int i = 0; i < ens.length; i++){
             Enemy t = ens[i];
-            enemies[i] = new Enemy(t.name, t.health, t.attack, t.defense, t.luck, t.mAttack, t.mDefense, t.expValue, t.moves);
+            enemies[i] = t.clone();
         }
         
         try {
             BattleLoop(canRun);
-        } catch (NoPlayerSetException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * Starts a boss battle
-     * @since 1.0
-     */
-    public static void StartBoss(Boss en){
-        enemies = new Enemy[1];
-        
-        enemies[0] = new Boss(en.name, en.health, en.attack, en.defense, en.luck, en.mAttack, en.mDefense, en.expValue, en.moves);
-    
-        try {
-            BattleLoop(false);
         } catch (NoPlayerSetException e) {
             e.printStackTrace();
         }
@@ -90,17 +75,19 @@ public class BattleHandler {
     
     private static void BattleLoop(boolean canRun) throws NoPlayerSetException{
         
-        eDrops = new Item[enemies.length];
-        for(int i = 0; i < enemies.length; i++){
-            eDrops[i] = enemies[i].drop;
-        }
-        
         player = Vars.player;
         
         comps = Vars.comps;
         
+        enArchive = enemies;
+        
         for(int i = 0; i < enemies.length; i++){
             expVal += enemies[i].expValue;
+        }
+        
+        eDrops = new Item[enemies.length];
+        for(int i = 0; i < enemies.length; i++){
+            eDrops[i] = enemies[i].drop;
         }
         
         if(player == null){
@@ -403,7 +390,7 @@ public class BattleHandler {
     private static void DropItem(){
         
         for(int i = 0; i < eDrops.length; i++){
-            if(eDrops[i] != null && MathFunc.shouldDrop(enemies[i], enemies[i].drop)){
+            if(eDrops[i] != null && MathFunc.shouldDrop(enArchive[i], eDrops[i])){
                 System.out.println("You got " + eDrops[i].name);
                 player.addItemToInv(eDrops[i]);
                 Console.waitFull(1);
