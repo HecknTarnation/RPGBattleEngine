@@ -24,6 +24,7 @@ public class BattleHandler {
     private static Player currentPlayer;
     private static int prevIndex;
     private static int expVal = 0;
+    private static Item[] eDrops;
     
     /**
     * Starts battle with the given enemy/enemies
@@ -88,6 +89,11 @@ public class BattleHandler {
     //private methods
     
     private static void BattleLoop(boolean canRun) throws NoPlayerSetException{
+        
+        eDrops = new Item[enemies.length];
+        for(int i = 0; i < enemies.length; i++){
+            eDrops[i] = enemies[i].drop;
+        }
         
         player = Vars.player;
         
@@ -395,16 +401,13 @@ public class BattleHandler {
     }
     
     private static void DropItem(){
-        ArrayList<Item> drops = new ArrayList<Item>();
-        for(int i = 0; i < enemies.length; i++){
-            if(MathFunc.shouldDrop(enemies[i], enemies[i].drop)){
-                drops.add(enemies[i].drop);
-            }
-        }
         
-        for(int i = 0; i < drops.size(); i++){
-            System.out.println("You got " + drops.get(i).name);
-            player.addItemToInv(drops.get(i));
+        for(int i = 0; i < eDrops.length; i++){
+            if(eDrops[i] != null && MathFunc.shouldDrop(enemies[i], enemies[i].drop)){
+                System.out.println("You got " + eDrops[i].name);
+                player.addItemToInv(eDrops[i]);
+                Console.waitFull(1);
+            }
         }
         
     }
@@ -417,13 +420,13 @@ public class BattleHandler {
             System.out.println("You earned " + expVal + " exp");
         
             player.increaseEXP(expVal);
-            
-            DropItem();
         
             for(int i = 0; i < comps.length; i++){
                 comps[i].increaseEXP(expVal);
             }
-        
+            
+            DropItem();
+            
             player.levelUp();
         
             for(int i = 0; i < comps.length; i++){

@@ -10,6 +10,7 @@ coolninja/rpg/Battle/BattleHandler.class
 coolninja/rpg/Cons/Equipment.class
 coolninja/rpg/Exception/NoPlayerSetException.class
 coolninja/rpg/Console/Colors.class
+coolninja/rpg/Cons/Boss.class
 coolninja/rpg/Cons/Item.class
 coolninja/rpg/Cons/Weakness.class
 coolninja/rpg/Required/Player.class

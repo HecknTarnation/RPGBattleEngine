@@ -81,7 +81,7 @@ public class Enemy {
      * @since 1.0
      */
     public Boss EnemyToBoss(){
-        return (Boss)this;
+        return new Boss(this.name, this.health, this.attack, this.defense, this.luck, this.mAttack, this.mDefense, this.expValue, this.moves);
     }
     
 }

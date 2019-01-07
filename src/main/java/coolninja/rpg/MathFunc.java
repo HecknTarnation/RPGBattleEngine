@@ -55,13 +55,18 @@ public class MathFunc {
     
     /**
      * Calculates if an item should drop
+     * (chance of 1 will always drop)
      * @param enemy
      * @param drop
      * @since 1.0
      */
     public static boolean shouldDrop(Enemy enemy, Item drop){
+
+        if(drop.chance == 1){
+            return true;
+        }
         
-        int temp = random(0);  
+        int temp = random(0)/10;  
         
         if(temp < drop.chance){
             return true;

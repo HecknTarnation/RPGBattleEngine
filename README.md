@@ -4,7 +4,7 @@
 # RPGEngine
 A text-based RPG battle engine, made in java
 
-Use or distribution of code written by Ben Ballard, without authorization, is not permitted unless it is in a built state (ie: a .jar file). If it is used, then you must include this file in your release.
+Use or distribution of code written by Ben Ballard, without authorization, is not permitted unless it is in a built state (ie: a .jar file) or you have modified some or all of the code. You must include this file in your release.
 
 This engine and it's code is distributed under GNU version 3
 
