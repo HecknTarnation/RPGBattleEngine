@@ -20,6 +20,10 @@ public class InputHandler {
         return scan.nextLine();
     }
     
+    /**
+     * Waits for the user to press enter
+     * @since 1.0
+     */
     public static void pressEnter(){
         System.out.println("Press Enter key to continue...");
         try
