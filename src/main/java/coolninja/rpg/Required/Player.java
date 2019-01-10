@@ -6,6 +6,7 @@ import coolninja.rpg.InputHandler;
 import coolninja.rpg.MathFunc;
 import coolninja.rpg.Vars;
 import coolninja.rpg.Cons.*;
+import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Console.Console;
 
 /**
@@ -41,7 +42,7 @@ public class Player {
     
     
     /**
-     * If name == "you", then "your turn" will be used on battle
+     * If name == "You", then "Your turn" will be used on battle
      * @since 1.0
      */
     public Player(String name, int health, int mana, int maxMana, int attack, int defense, 
@@ -231,9 +232,11 @@ public class Player {
         for(int i = 0; i < moves.size(); i++){
             Move m = moves.get(i);
             if(m.manaCost != 0){
-                System.out.println(m.name + " | Mana: " + m.manaCost);
+                System.out.print(Colors.BLACK);
+                System.out.println("  -" + Colors.WHITE_BACKGROUND + m.name + " | Mana: " + m.manaCost + Colors.reset());
             }else{
-                System.out.println(m.name);
+                System.out.print(Colors.BLACK);
+                System.out.println("  -" + Colors.WHITE_BACKGROUND + m.name + Colors.reset());
             }
         }
     }

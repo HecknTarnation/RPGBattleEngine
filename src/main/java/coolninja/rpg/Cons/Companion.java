@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import coolninja.rpg.InputHandler;
 import coolninja.rpg.MathFunc;
 import coolninja.rpg.Vars;
+import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Console.Console;
 import coolninja.rpg.Required.Player;
 
@@ -222,9 +223,11 @@ public class Companion extends Player{
         for(int i = 0; i < moves.size(); i++){
             Move m = moves.get(i);
             if(m.manaCost != 0){
-                System.out.println(m.name + " | Mana: " + m.manaCost);
+                System.out.print(Colors.BLACK);
+                System.out.println("  -" + Colors.WHITE_BACKGROUND + m.name + " | Mana: " + m.manaCost + Colors.reset());
             }else{
-                System.out.println(m.name);
+                System.out.print(Colors.BLACK);
+                System.out.println("  -" + Colors.WHITE_BACKGROUND + m.name + Colors.reset());
             }
         }
     }
