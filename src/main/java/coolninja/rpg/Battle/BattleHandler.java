@@ -240,11 +240,11 @@ public class BattleHandler {
     }
     
     private static void Run(boolean canRun){
-        System.out.print("You started to run");
+        System.out.print(currentPlayer.name + " started to run");
         Console.Dots(3, 400);
         
         if(!canRun){
-            System.out.println("You can't run from this battle!");
+            System.out.println(currentPlayer.name + " can't run from this battle!");
             return;
         }
         Player[] t = new Player[comps.length + 1];
@@ -255,11 +255,11 @@ public class BattleHandler {
         int a = MathFunc.addPlayerLuck(t);
         boolean can = MathFunc.canRun(a, MathFunc.addLuck(enemies));
         if(can){
-            System.out.println("and you got away!");
+            System.out.println("and " + currentPlayer.name + " got away!");
             enemies = null;
             expVal = 0;
         }else{
-            System.out.println("and you couldn't get away!");
+            System.out.println("and " + currentPlayer.name + " couldn't get away!");
         }
         
         Console.waitFull(1);
@@ -291,13 +291,22 @@ public class BattleHandler {
         
         printGraphic(move);
         
-        enemies[enemyIndex].health -= t;
+        if(MathFunc.random(0)*10 < player.luck){
+            System.out.println(Colors.BLUE+"C"+Colors.CYAN+" R"+Colors.GREEN+" I"+Colors.YELLOW+" T"+Colors.WHITE+" I"+Colors.RED+" C"+Colors.PURPLE+" A"+Colors.GREEN+" L!"+Colors.reset());
+            t *= (player.specialAttack/2 + 1.1)+1;
+            Console.Dots(3, 300);
+            System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
+            enemies[enemyIndex].health -= t;
+            Console.waitFull(1);
+            return;
+        }
         
+        enemies[enemyIndex].health -= t;
         
         Console.Dots(3, 300);
         
         if(t != 0){
-            System.out.println(enemies[enemyIndex].name + move.text + "for " + t + " damage");
+            System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
         }else{
             System.out.println(enemies[enemyIndex].name + " took no damage");
         }
