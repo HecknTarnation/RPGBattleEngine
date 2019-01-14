@@ -22,7 +22,7 @@ public class Vars {
     
     public static URL defaultBattleSoundLocation;
     
-    public static URL lowHealthSound;
+    public static URL winMusic;
     
     public static boolean shouldScroll = true;
     

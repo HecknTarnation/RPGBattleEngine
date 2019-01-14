@@ -81,6 +81,9 @@ public class BattleHandler {
         
         enArchive = enemies;
         
+        SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
+        handler.run();
+        
         for(int i = 0; i < enemies.length; i++){
             expVal += enemies[i].expValue;
         }
@@ -165,6 +168,7 @@ public class BattleHandler {
             
         }
         
+        handler.end();
         BattleFinished();
         
         
@@ -222,9 +226,30 @@ public class BattleHandler {
         
         String input = InputHandler.getInput();
         
+        System.out.println("Target?");
+        for(int i = 0; i < enemies.length; i++){
+            System.out.println(Colors.BLACK);
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemies[i].name + Colors.reset());
+        }
+        
+        String target = InputHandler.getInput();
+        Enemy t = null;
+        for(int i = 0; i < enemies.length; i++){
+            if(target.equalsIgnoreCase(enemies[i].name)){
+                t = enemies[i];
+                break;
+            }
+        }
+        
+        if(t == null){
+            Console.printError("Not A Valid Target!", 1000);
+            Item();
+            return;
+        }
+        
         for(int i = 0; i < player.getInv().size(); i++){
             if(input.equalsIgnoreCase(player.getInv().get(i).name)){
-                player.getInv().get(i).Use();
+                player.getInv().get(i).Use(currentPlayer, t);
             }
         }
         
@@ -289,6 +314,7 @@ public class BattleHandler {
             }
         }
         
+        playSound(move);
         printGraphic(move);
         
         if(MathFunc.random(0)*10 < player.luck){
@@ -377,6 +403,7 @@ public class BattleHandler {
             t = 1;
         }
         
+        playSound(move);
         printGraphic(move);
         
         if(p.currentWeakness != null && move.type == p.currentWeakness.type){
@@ -411,10 +438,13 @@ public class BattleHandler {
     private static void BattleFinished(){
         
         if(expVal > 0){
+            SoundHandler handler = new SoundHandler(Vars.winMusic, false);
+            
             System.out.println(Vars.winText);
         
             System.out.println("You earned " + expVal + " exp");
-        
+            
+            
             player.increaseEXP(expVal);
         
             for(int i = 0; i < comps.length; i++){
@@ -422,6 +452,10 @@ public class BattleHandler {
             }
             
             DropItem();
+            
+            while (handler.audio.isRunning()){}
+            handler.end();
+            InputHandler.pressEnter();
             
             player.levelUp();
         
@@ -482,6 +516,13 @@ public class BattleHandler {
         }
         prevIndex += 1;
         return comps[t];
+    }
+    
+    private static void playSound(Move move){
+        SoundHandler handler = new SoundHandler(move.sound, false);
+        handler.run();
+        while (handler.audio.isRunning()){}
+        handler.end();
     }
     
     private static void printGraphic(Move move){

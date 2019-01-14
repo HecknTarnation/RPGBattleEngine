@@ -1,5 +1,7 @@
 package coolninja.rpg;
 
+import java.net.URL;
+
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;
 
@@ -65,5 +67,21 @@ public class SetVars {
      */
     public static void setShouldScroll(boolean ss){
         Vars.shouldScroll = ss;
+    }
+    
+    /**
+     * Sets default battle music
+     * @since 1.0
+     */
+    public static void setBattleMusic(URL locationToSound){
+        Vars.defaultBattleSoundLocation = locationToSound;
+    }
+    
+    /**
+     * Sets win music
+     * @since 1.0
+     */
+    public static void setWinMusic(URL locationToSound){
+        Vars.winMusic = locationToSound;
     }
 }
