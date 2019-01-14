@@ -9,12 +9,12 @@ public class Console {
     
     /**
      * Creates 3 dots for the amount inputted
-     * @param the amount of times
-     * @param the time between (in ms)
+     * @param times
+     * @param timeBetween
      * @since 1.0
      */
-    public static void Dots(int time, long timeBetween){
-        for(int i = 0; i < time; i++){
+    public static void Dots(int times, long timeBetween){
+        for(int i = 0; i < times; i++){
             try {
                 Thread.sleep(timeBetween);
             } catch (InterruptedException e) {
@@ -27,13 +27,13 @@ public class Console {
     /**
      * Prints an error message with the given text
      * @since 1.0
-     * @param the text to print
-     * @param time to wait after printint
+     * @param text
+     * @param waitTime
      */
-    public static void printError(String text, long time){
+    public static void printError(String text, long waitTime){
         System.out.println(Colors.RED_BACKGROUND+text);
         try {
-            Thread.sleep(time);
+            Thread.sleep(waitTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
