@@ -27,7 +27,7 @@ public class SoundHandler extends Thread{
     private AudioInputStream input;
     
     /**
-     * Starts playing sound
+     * Sets up thread
      * @since 1.0
      * @param pathToSound
      * @param shouldLoop
@@ -37,6 +37,10 @@ public class SoundHandler extends Thread{
         this.shouldLoop = shouldLoop;
     }
 
+    /**
+     * Starts playing sound
+     * @since 1.0
+     */
     @Override
     public void run() {
         File file = new File(pathToSound.getFile());
