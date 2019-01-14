@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import coolninja.rpg.Required.Player;
+
 /**
  * The item class 
  * @version 1.0
@@ -36,6 +38,10 @@ public class Item {
      * (Should Be Overwritten!)
      * @since 1.0
      */
+    public void Use(Player player, Enemy enemy){
+        
+    }
+    
     public void Use(){
         
     }
