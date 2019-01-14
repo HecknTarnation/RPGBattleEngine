@@ -327,6 +327,11 @@ public class BattleHandler {
             return;
         }
         
+        if(!MathFunc.accHitCalc(move.accuracy)){
+            System.out.println(currentPlayer.name + " missed!");
+            return;
+        }
+        
         enemies[enemyIndex].health -= t;
         
         Console.Dots(3, 300);
@@ -408,6 +413,11 @@ public class BattleHandler {
         
         if(p.currentWeakness != null && move.type == p.currentWeakness.type){
             t *= p.currentWeakness.effectiveness;
+        }
+        
+        if(!MathFunc.accHitCalc(move.accuracy)){
+            System.out.println(enemy.name + " missed!");
+            return;
         }
         
         p.health -= t;
