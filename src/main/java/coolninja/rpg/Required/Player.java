@@ -209,7 +209,7 @@ public class Player {
      * Sets the players stats using the given equipment
      * (Can be overwritten)
      * @since 1.0
-     * @param the equipment
+     * @param equipment
      */
     public void setStats(Equipment equipment){
         
@@ -306,7 +306,7 @@ public class Player {
     /**
      * Deals given damage to player/compainion
      * @since 1.0
-     * @param int damage
+     * @param damage
      */
     public void dealDamage(int damage){
         this.health -= damage;
@@ -315,8 +315,8 @@ public class Player {
     /**
      * Adds/Removes Armor
      * @since 1.0
-     * @param boolean removing armor
-     * @param Equipment the armor
+     * @param removing
+     * @param armor
      */
     public Player addArmor(boolean removing, Equipment armor){
         if(!removing){

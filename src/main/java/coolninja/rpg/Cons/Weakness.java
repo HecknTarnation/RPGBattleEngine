@@ -16,6 +16,11 @@ public class Weakness {
      */
     public double effectiveness;
     
+    /**
+     * @since 1.0
+     * @param type
+     * @param effectiveness
+     */
     public Weakness(WeaknessType type, double effectiveness){
         this.type = type;
         this.effectiveness = effectiveness;

@@ -29,7 +29,7 @@ public class Move {
      * @param text
      * @param damage
      * @param mDamage
-     * @param accuracy
+     * @param acc
      */
     public Move(String name, String text, int damage, int mDamage, double acc){
         this.name = name;
@@ -52,7 +52,7 @@ public class Move {
     /**
      * Sets the move's sound
      * @since 1.0
-     * @param location of wav file
+     * @param location
      */
     public Move setSound(URL location){
         this.sound = location;
@@ -62,7 +62,7 @@ public class Move {
     /**
      * Sets the mana cost of this move (default: 0)
      * @since 1.0
-     * @param cost
+     * @param manaCost
      */
     public Move setManaCost(int manaCost){
         this.manaCost = manaCost;
@@ -72,7 +72,7 @@ public class Move {
     /**
      * Sets move type
      * @since 1.0
-     * @param WeaknessType type
+     * @param type
      */
     public Move setType(WeaknessType type){
         this.type = type;

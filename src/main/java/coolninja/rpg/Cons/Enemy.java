@@ -18,15 +18,15 @@ public class Enemy {
     
     /**
      * Creates a new enemy with the given parameters
-     * @param String name
-     * @param int health
-     * @param int attack
-     * @param int defense
-     * @param int luck
-     * @param int mAttack
-     * @param int mDefense
-     * @param int the exp value
-     * @param Move[] moves
+     * @param name
+     * @param health
+     * @param attack
+     * @param defense
+     * @param luck
+     * @param mAttack
+     * @param mDefense
+     * @param expValue
+     * @param moves
      */
     public Enemy(String name, int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue, Move[] moves){
         this.name = name;
@@ -46,7 +46,7 @@ public class Enemy {
      * 1 = uses players weakness to decide best move
      * 2 = uses players health to decide best move
      * if bigger than 2, it will be set to 2
-     * @param byte level
+     * @param level
      * @since 1.0
      */
     public Enemy setAILevel(byte level){
@@ -60,7 +60,7 @@ public class Enemy {
     /**
      * Sets the enemy's weakness
      * @since 1.0
-     * @param Weakness weakness
+     * @param weakness
      */
     public Enemy setWeakness(Weakness weakness){
         this.weakness = weakness;
@@ -70,6 +70,7 @@ public class Enemy {
     /**
      * Sets the enemy's item drop
      * @since 1.0
+     * @param item
      */
     public Enemy setDrop(Item item){
         this.drop = item;

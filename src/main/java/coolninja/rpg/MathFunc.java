@@ -15,7 +15,7 @@ public class MathFunc {
     /**
      * Gets a random number from 0-10
      * (0 = max of 10)
-     * @param the max number
+     * @param clamp
      * @since 1.0
      */
     public static int random(int clamp){
@@ -27,7 +27,7 @@ public class MathFunc {
     
     /**
      * Calculates if the move should hit
-     * @param accuracy
+     * @param acc
      * @since 1.0
      */
     public static boolean accHitCalc(double acc){
@@ -78,8 +78,8 @@ public class MathFunc {
     /**
      * Sees if the player can run from a battle
      * @since 1.0
-     * @param the players luck
-     * @param the enemies luck
+     * @param pLuck
+     * @param eLuck
      */
     public static boolean canRun(int pLuck, int eLuck){
         int t = pLuck - eLuck;
@@ -107,12 +107,12 @@ public class MathFunc {
     /**
      * Adds the player and companions luck
      * @since 1.0
-     * @param player and companions
+     * @param plrAndComps
      */
-    public static int addPlayerLuck(Player[] cs){
+    public static int addPlayerLuck(Player[] plrAndComps){
         int t = 0;
-        for(int i = 0; i < cs.length; i++){
-            t += cs[i].luck;
+        for(int i = 0; i < plrAndComps.length; i++){
+            t += plrAndComps[i].luck;
         }
         return t;
     }

@@ -16,7 +16,7 @@ public class Item {
     
     /**
      * @param name
-     * @param description
+     * @param desc
      */
     public Item(String name, String desc){
         this.name = name;
@@ -25,7 +25,7 @@ public class Item {
     
     /**
      * Sets the drop chance for an item off an enemy
-     * @param the chance of droping
+     * @param chance
      * @since 1.0
      */
     public Item setDropChance(double chance){

@@ -16,16 +16,16 @@ public class Equipment extends Item{
     
     /**
      * Creates new equipment
-     * @param String name
-     * @param String description
-     * @param int maxHealth
-     * @param int maxMana
-     * @param int attack
-     * @param int defense
-     * @param int luck
-     * @param int Magic Attack
-     * @param int Magic Defense
-     * @param EquipSlot The slot it goes into when equipped
+     * @param name
+     * @param desc
+     * @param maxHealth
+     * @param maxMana
+     * @param attack
+     * @param defense
+     * @param luck
+     * @param mAttack
+     * @param mDefense
+     * @param slot
      */
     public Equipment(String name, String desc, int maxHealth, int maxMana, int attack, int defense, int luck, int mAttack, int mDefense, EquipSlot slot){
         super(name, desc);
@@ -42,7 +42,7 @@ public class Equipment extends Item{
     /**
      * Sets the armors type
      * @since 1.0
-     * @param Weakness the type
+     * @param weakness
      */
     public Equipment setType(Weakness weakness){
         this.weakness = weakness;
