@@ -519,6 +519,8 @@ public class BattleHandler {
     }
     
     private static void playSound(Move move){
+        if(move.sound == null){return;}
+        
         SoundHandler handler = new SoundHandler(move.sound, false);
         handler.run();
         while (handler.audio.isRunning()){}
@@ -526,9 +528,8 @@ public class BattleHandler {
     }
     
     private static void printGraphic(Move move){
-        if(move.graphic == null){
-            return;
-        }
+        if(move.graphic == null){return;}
+        
         for(int i = 0; i < move.graphic.frames.length; i++){
             System.out.println(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
