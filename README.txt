@@ -17,3 +17,5 @@ Modifying the code for your own purpose is allowed as long as these 2 conditions
 (Note, this engine is not yet complete)
 
 Documentation can be found here: https://coolninjagames.github.io/RPGEngine/index.html
+
+Current Version: 1.0
