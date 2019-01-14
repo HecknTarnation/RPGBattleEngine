@@ -4,6 +4,7 @@
 /projects/RPGEngine/src/main/java/coolninja/rpg/Exception/NoPlayerSetException.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Cons/Enemy.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Cons/Equipment.java
+/projects/RPGEngine/src/main/java/coolninja/rpg/SoundHandler.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Required/Player.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Cons/Graphic.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Console/Colors.java
