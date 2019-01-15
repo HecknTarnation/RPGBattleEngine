@@ -3,8 +3,8 @@ package coolninja.rpg.Battle;
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;
 
-public interface LoseBattle {
+public class LoseBattle {
     
-    public void BattleLost(Player player, Companion[] comps);
+    public void BattleLost(Player player, Companion[] comps){}
     
 }

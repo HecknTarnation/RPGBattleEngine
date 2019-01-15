@@ -4,6 +4,7 @@ coolninja/rpg/Cons/Move.class
 coolninja/rpg/Cons/Graphic.class
 coolninja/rpg/MathFunc.class
 coolninja/rpg/InputHandler.class
+coolninja/rpg/Battle/LoseBattle.class
 coolninja/rpg/Cons/Enemy.class
 coolninja/rpg/Cons/Companion.class
 coolninja/rpg/SoundHandler.class

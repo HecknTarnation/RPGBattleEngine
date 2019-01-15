@@ -11,6 +11,7 @@
 /projects/RPGEngine/src/main/java/coolninja/rpg/Enums/EquipSlot.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Cons/Item.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/InputHandler.java
+/projects/RPGEngine/src/main/java/coolninja/rpg/Battle/LoseBattle.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Console/Console.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Battle/BattleHandler.java
 /projects/RPGEngine/src/main/java/coolninja/rpg/Cons/Weakness.java

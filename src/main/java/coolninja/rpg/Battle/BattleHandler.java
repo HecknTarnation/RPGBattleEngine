@@ -22,7 +22,7 @@ public class BattleHandler {
     private static Player player;
     private static Companion[] comps;
     private static Player currentPlayer;
-    private static int prevIndex;
+    private static byte prevIndex;
     private static int expVal = 0;
     private static Item[] eDrops;
     private static Enemy[] enArchive;
@@ -82,7 +82,7 @@ public class BattleHandler {
         enArchive = enemies;
         
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
-        handler.run();
+        //handler.run();
         
         for(int i = 0; i < enemies.length; i++){
             expVal += enemies[i].expValue;
@@ -104,17 +104,8 @@ public class BattleHandler {
                 enemies = null;
                 break;
             }
-            
-            if(didLose()){
-                Vars.loseBattle.BattleLost(player, comps);
-            }
-            
-            if(prevIndex == 0){
-                currentPlayer = player;
-                prevIndex = 1;
-            }else{
-                currentPlayer = findTurn();
-            }
+
+            currentPlayer = findTurn();
             
             if(currentPlayer == null){
                 currentPlayer = player;
@@ -124,11 +115,19 @@ public class BattleHandler {
             
             Console.clear();
             
-            System.out.println("\n -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + "\n");
-            
+            if(player.health > 0){
+                System.out.println("\n -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + "\n");
+            }else{
+                System.out.println("\n" + Colors.RED_BACKGROUND + "(Dead!) -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + Colors.reset() + "\n");
+            }
+
             if(comps != null){
                 for(int i = 0; i < comps.length; i++){
-                    System.out.println(Vars.compColorCode+" -" + comps[i].name + ": " + comps[i].health + "/" + comps[i].maxHealth + " | " + comps[i].mana + "/" + comps[i].maxMana);
+                    if(comps[i].health > 0){
+                        System.out.println(Vars.compColorCode+" -" + comps[i].name + ": " + comps[i].health + "/" + comps[i].maxHealth + " | " + comps[i].mana + "/" + comps[i].maxMana);
+                    }else{
+                        System.out.println(Vars.compColorCode+" (Dead!) -" + comps[i].name + ": " + comps[i].health + "/" + comps[i].maxHealth + " | " + comps[i].mana + "/" + comps[i].maxMana + Colors.reset());
+                    }
                 }   
             }
             
@@ -155,7 +154,7 @@ public class BattleHandler {
             
             String input = InputHandler.getInput();
             
-            switch(input){
+            switch(input.toLowerCase()){
                 case "attack":
                     Attack(currentPlayer);
                     break;
@@ -168,6 +167,11 @@ public class BattleHandler {
                 case "run":
                     Run(canRun);
                     break;
+            }
+            
+            if(didLose()){
+                Vars.loseBattle.BattleLost(player, comps);
+                return;
             }
             
         }
@@ -391,10 +395,16 @@ public class BattleHandler {
     
     private static Player pick(){
         int t = MathFunc.random(comps.length);
+        Player p;
         if(t <= 0){
-            return player;
+            p = player;
         }else{
-            return comps[t-1];
+            p = comps[t-1];
+        }
+        if(p.health <= 0){
+            return pick();
+        }else{
+            return p;
         }
     }
     
@@ -499,11 +509,13 @@ public class BattleHandler {
     
     private static boolean didLose(){
         int s = 0;
-        if(player.health == 0){
+        if(player.health <= 0){
+            player.health = 0;
             s += 1;
         }
         for(int i = 0; i < comps.length; i++){
-            if(comps[i].health == 0){
+            if(comps[i].health <= 0){
+                comps[i].health = 0;
                 s += 1;
             }
         }
@@ -540,13 +552,28 @@ public class BattleHandler {
     }
     
     private static Player findTurn(){
-        int t = prevIndex-1;
-        if(t >= comps.length){
-           prevIndex = 0;
-           return null;
+        if (prevIndex == 0){
+            if(player.health > 0){
+                prevIndex += 1;
+                return player;
+            }else{
+                prevIndex += 1;
+                return findTurn();
+            }
+        }else{
+            try{
+                if(comps[prevIndex-1].health > 0){
+                    byte t = (byte)(prevIndex-1);
+                    prevIndex += 1;
+                    return comps[t];
+                }else{
+                    prevIndex += 1;
+                    return findTurn();
+                }
+            }catch(IndexOutOfBoundsException e){
+                    return null;
+            }
         }
-        prevIndex += 1;
-        return comps[t];
     }
     
     private static void playSound(Move move){

@@ -15,7 +15,7 @@ public class Vars {
     
     public static String compColorCode = Colors.GREEN_BACKGROUND;
     
-    public static String enemyColorCode = Colors.RED_BACKGROUND;
+    public static String enemyColorCode = Colors.CYAN_BACKGROUND;
     
     public static String winText = "You Won!";
     
