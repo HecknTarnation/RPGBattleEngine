@@ -10,11 +10,12 @@ import java.util.Scanner;
  */
 public class InputHandler {
     
-    private static Scanner scan = new Scanner(System.in);
+    private static final Scanner scan = new Scanner(System.in);
     
     /**
      * Gets the input of the player as a string
      * @since 1.0
+     * @return string
      */
     public static String getInput(){
         return scan.nextLine();
