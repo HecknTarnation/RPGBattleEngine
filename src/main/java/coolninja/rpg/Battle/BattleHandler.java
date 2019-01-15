@@ -105,6 +105,10 @@ public class BattleHandler {
                 break;
             }
             
+            if(didLose()){
+                Vars.loseBattle.BattleLost(player, comps);
+            }
+            
             if(prevIndex == 0){
                 currentPlayer = player;
                 prevIndex = 1;
@@ -491,6 +495,23 @@ public class BattleHandler {
             return false;
         }
         
+    }
+    
+    private static boolean didLose(){
+        int s = 0;
+        if(player.health == 0){
+            s += 1;
+        }
+        for(int i = 0; i < comps.length; i++){
+            if(comps[i].health == 0){
+                s += 1;
+            }
+        }
+        if(s == comps.length+1){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     private static void updateArray(){

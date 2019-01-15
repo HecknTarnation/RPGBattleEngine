@@ -2,6 +2,7 @@ package coolninja.rpg;
 
 import java.net.URL;
 
+import coolninja.rpg.Battle.LoseBattle;
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Required.Player;
@@ -24,7 +25,11 @@ public class Vars {
     
     public static URL winMusic;
     
+    public static URL loseMusic;
+    
     public static boolean shouldScroll = true;
+    
+    public static LoseBattle loseBattle;
     
     
 }

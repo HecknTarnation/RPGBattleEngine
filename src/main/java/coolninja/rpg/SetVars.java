@@ -2,6 +2,7 @@ package coolninja.rpg;
 
 import java.net.URL;
 
+import coolninja.rpg.Battle.LoseBattle;
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;
 
@@ -83,5 +84,21 @@ public class SetVars {
      */
     public static void setWinMusic(URL locationToSound){
         Vars.winMusic = locationToSound;
+    }
+    
+    /**
+     * Sets lose music
+     * @since 1.0
+     */
+    public static void setLoseMusic(URL locationToSound){
+        Vars.loseMusic = locationToSound;
+    }
+    
+    /**
+     * Sets lose battle function
+     * @since 1.0
+     */
+    public static void setLoseFunction(LoseBattle classThatImplements){
+        Vars.loseBattle = classThatImplements;
     }
 }
