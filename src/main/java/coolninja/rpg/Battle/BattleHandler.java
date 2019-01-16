@@ -375,19 +375,19 @@ public class BattleHandler {
         
         switch(e.AIID){
             case 1:
-                for(int i = 0; i < e.moves.length; i++){
-                    if(p.currentWeakness != null && e.moves[i].type == p.currentWeakness.type){
-                        return e.moves[i];
+                for (Move move : e.moves) {
+                    if (p.currentWeakness != null && move.type == p.currentWeakness.type) {
+                        return move;
                     }
                 }
                 break;
             case 2:
-               for(int i = 0; i < e.moves.length; i++){
-                    if(e.moves[i].damage >= p.health){
-                        return e.moves[i];
+                for (Move move : e.moves) {
+                    if (move.damage >= p.health) {
+                        return move;
                     }
                 }
-                break;            
+                break;                        
         }
         
         return e.moves[MathFunc.random(e.moves.length-1)];
@@ -411,7 +411,7 @@ public class BattleHandler {
     private static void PlayerTakeDamage(Player p, Move move, Enemy enemy){
         Console.clear();
         
-        int t = 0;
+        int t;
         
         int a = (move.damage + enemy.attack)-p.defense;
         int mA = (move.mDamage + enemy.mAttack)-p.mDefense;
@@ -471,8 +471,8 @@ public class BattleHandler {
             
             player.increaseEXP(expVal);
         
-            for(int i = 0; i < comps.length; i++){
-                comps[i].increaseEXP(expVal);
+            for (Companion comp : comps) {
+                comp.increaseEXP(expVal);
             }
             
             DropItem();
@@ -483,8 +483,8 @@ public class BattleHandler {
             
             player.levelUp();
         
-            for(int i = 0; i < comps.length; i++){
-                comps[i].levelUp();
+            for (Companion comp : comps) {
+                comp.levelUp();
             }
         }else{
             
@@ -499,11 +499,7 @@ public class BattleHandler {
         
         updateArray();
         
-        if(enemies.length == 0){
-            return true;
-        }else{
-            return false;
-        }
+        return enemies.length == 0;
         
     }
     
@@ -513,25 +509,21 @@ public class BattleHandler {
             player.health = 0;
             s += 1;
         }
-        for(int i = 0; i < comps.length; i++){
-            if(comps[i].health <= 0){
-                comps[i].health = 0;
+        for (Companion comp : comps) {
+            if (comp.health <= 0) {
+                comp.health = 0;
                 s += 1;
             }
         }
-        if(s == comps.length+1){
-            return true;
-        }else{
-            return false;
-        }
+        return s == comps.length+1;
     }
     
     private static void updateArray(){
-        List<Enemy> z = new ArrayList<Enemy>();
+        List<Enemy> z = new ArrayList<>();
         
-        for(int i = 0; i < enemies.length; i++){
-            if(enemies[i].health > 0){
-                z.add(enemies[i]);
+        for (Enemy enemie : enemies) {
+            if (enemie.health > 0) {
+                z.add(enemie);
             }
         }        
         
@@ -588,8 +580,8 @@ public class BattleHandler {
     private static void printGraphic(Move move){
         if(move.graphic == null){return;}
         
-        for(int i = 0; i < move.graphic.frames.length; i++){
-            System.out.println(move.graphic.frames[i]);
+        for (String frame : move.graphic.frames) {
+            System.out.println(frame);
             Console.waitReal(move.graphic.waitTime);
         }
     }
