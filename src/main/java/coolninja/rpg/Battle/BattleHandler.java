@@ -82,10 +82,10 @@ public class BattleHandler {
         enArchive = enemies;
         
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
-        //handler.run();
+        handler.run();
         
-        for(int i = 0; i < enemies.length; i++){
-            expVal += enemies[i].expValue;
+        for (Enemy enemie : enemies) {
+            expVal += enemie.expValue;
         }
         
         eDrops = new Item[enemies.length];
@@ -122,19 +122,19 @@ public class BattleHandler {
             }
 
             if(comps != null){
-                for(int i = 0; i < comps.length; i++){
-                    if(comps[i].health > 0){
-                        System.out.println(Vars.compColorCode+" -" + comps[i].name + ": " + comps[i].health + "/" + comps[i].maxHealth + " | " + comps[i].mana + "/" + comps[i].maxMana);
-                    }else{
-                        System.out.println(Vars.compColorCode+" (Dead!) -" + comps[i].name + ": " + comps[i].health + "/" + comps[i].maxHealth + " | " + comps[i].mana + "/" + comps[i].maxMana + Colors.reset());
+                for (Companion comp : comps) {
+                    if (comp.health > 0) {
+                        System.out.println(Vars.compColorCode+" -" + comp.name + ": " + comp.health + "/" + comp.maxHealth + " | " + comp.mana + "/" + comp.maxMana);
+                    } else {
+                        System.out.println(Vars.compColorCode+" (Dead!) -" + comp.name + ": " + comp.health + "/" + comp.maxHealth + " | " + comp.mana + "/" + comp.maxMana + Colors.reset());
                     }
                 }   
             }
             
             System.out.print("\n");
             
-            for(int i = 0; i < enemies.length; i++){
-                System.out.println(Vars.enemyColorCode + " -" + enemies[i].name + ": " + enemies[i].health);
+            for (Enemy enemy : enemies) {
+                System.out.println(Vars.enemyColorCode + " -" + enemy.name + ": " + enemy.health);
             }
             
             Colors.RESET();
@@ -205,9 +205,9 @@ public class BattleHandler {
         }
         
         System.out.println("Target?");
-        for(int i = 0; i < enemies.length; i++){
+        for (Enemy enemie : enemies) {
             System.out.println(Colors.BLACK);
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemies[i].name + Colors.reset());
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemie.name + Colors.reset());
         }
         
         String target = InputHandler.getInput();
@@ -235,16 +235,16 @@ public class BattleHandler {
         String input = InputHandler.getInput();
         
         System.out.println("Target?");
-        for(int i = 0; i < enemies.length; i++){
+        for (Enemy enemie : enemies) {
             System.out.println(Colors.BLACK);
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemies[i].name + Colors.reset());
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemie.name + Colors.reset());
         }
         
         String target = InputHandler.getInput();
         Enemy t = null;
-        for(int i = 0; i < enemies.length; i++){
-            if(target.equalsIgnoreCase(enemies[i].name)){
-                t = enemies[i];
+        for (Enemy enemie : enemies) {
+            if (target.equalsIgnoreCase(enemie.name)) {
+                t = enemie;
                 break;
             }
         }
@@ -305,7 +305,7 @@ public class BattleHandler {
             player.mana -= move.manaCost;
         }
         
-        int t = 0;
+        int t;
         
         int a = (move.damage + player.attack)-enemies[enemyIndex].defense;
         int mA = (move.mDamage + player.mAttack)-enemies[enemyIndex].mDefense;
@@ -357,16 +357,11 @@ public class BattleHandler {
     
     private static void EnemyTurns(){
         
-        for(int i = 0; i < enemies.length; i++){
-            
+        for (Enemy enemie : enemies) {
             Player p = pick();
-            
-            Enemy e = enemies[i];
-        
+            Enemy e = enemie;
             Move m = pickEnemyMove(e, p);
-        
             PlayerTakeDamage(p, m, e);
-
         }
         
     }
