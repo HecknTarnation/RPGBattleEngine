@@ -84,8 +84,8 @@ public class BattleHandler {
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
         handler.run();
         
-        for (Enemy enemie : enemies) {
-            expVal += enemie.expValue;
+        for (Enemy enemy : enemies) {
+            expVal += enemy.expValue;
         }
         
         eDrops = new Item[enemies.length];
@@ -100,12 +100,24 @@ public class BattleHandler {
         //main battle loop
         while(enemies != null){
             
+            if(didLose()){
+                SoundHandler hand = new SoundHandler(Vars.loseMusic, false);
+                hand.run();
+                Vars.loseBattle.BattleLost(player, comps);
+                hand.end();
+                return;
+            }
+            
             if(CheckIfShouldFinish()){
                 enemies = null;
                 break;
             }
 
             currentPlayer = findTurn();
+            
+            if(currentPlayer == player && player.health <= 0){
+                currentPlayer = findTurn();
+            }
             
             if(currentPlayer == null){
                 currentPlayer = player;
@@ -156,7 +168,7 @@ public class BattleHandler {
             
             switch(input.toLowerCase()){
                 case "attack":
-                    Attack(currentPlayer);
+                    Attack();
                     break;
                 case "item":
                     Item();
@@ -182,10 +194,15 @@ public class BattleHandler {
         
     }
     
-    public static void Attack(Player player){
-        player.printMoves();
+    public static void Attack(){
         
-        ArrayList<Move> m = player.getMoves();
+        if(currentPlayer.health <= 0){
+            return;
+        }
+        
+        currentPlayer.printMoves();
+        
+        ArrayList<Move> m = currentPlayer.getMoves();
         
         Move move = null;
         
@@ -214,14 +231,14 @@ public class BattleHandler {
         
         for(int i = 0; i < enemies.length; i++){
             if(target.equalsIgnoreCase(enemies[i].name)){
-                EnemyTakeDamage(i, move, player);
+                EnemyTakeDamage(i, move);
                 return;
             }
         }
         
         Console.printError("Not A Valid Target!", 1000);
         
-        Attack(currentPlayer);
+        Attack();
         
     }
     
@@ -230,6 +247,11 @@ public class BattleHandler {
      * @since 1.0
      */
     public static void Item(){
+        
+        if(currentPlayer.health <= 0){
+            return;
+        }
+        
         player.printInv();
         
         String input = InputHandler.getInput();
@@ -264,6 +286,11 @@ public class BattleHandler {
     }
     
     private static void Idle(){
+        
+        if(currentPlayer.health <= 0){
+            return;
+        }
+        
         if(currentPlayer.name.equalsIgnoreCase("you")){
             System.out.print("You did nothing");
         }else{
@@ -273,6 +300,11 @@ public class BattleHandler {
     }
     
     private static void Run(boolean canRun){
+        
+        if(currentPlayer.health <= 0){
+            return;
+        }
+        
         System.out.print(currentPlayer.name + " started to run");
         Console.Dots(3, 400);
         
@@ -298,17 +330,17 @@ public class BattleHandler {
         Console.waitFull(1);
     }
     
-    private static void EnemyTakeDamage(int enemyIndex, Move move, Player player){
+    private static void EnemyTakeDamage(int enemyIndex, Move move){
         Console.clear();
         
         if(move.manaCost > 0){
-            player.mana -= move.manaCost;
+            currentPlayer.mana -= move.manaCost;
         }
         
         int t;
         
-        int a = (move.damage + player.attack)-enemies[enemyIndex].defense;
-        int mA = (move.mDamage + player.mAttack)-enemies[enemyIndex].mDefense;
+        int a = (move.damage + currentPlayer.attack)-enemies[enemyIndex].defense;
+        int mA = (move.mDamage + currentPlayer.mAttack)-enemies[enemyIndex].mDefense;
         
         t = a + mA;
         
@@ -325,9 +357,13 @@ public class BattleHandler {
         playSound(move);
         printGraphic(move);
         
-        if(MathFunc.random(0)*10 < player.luck){
+        if(MathFunc.random(0)*100 < currentPlayer.luck){
+            if(!MathFunc.accHitCalc(move.accuracy)){
+                System.out.println(currentPlayer.name + " missed!");
+                return;
+            }
             System.out.println(Colors.BLUE+"C"+Colors.CYAN+" R"+Colors.GREEN+" I"+Colors.YELLOW+" T"+Colors.WHITE+" I"+Colors.RED+" C"+Colors.PURPLE+" A"+Colors.GREEN+" L!"+Colors.reset());
-            t *= (player.specialAttack/2 + 1.1)+1;
+            t *= (currentPlayer.specialAttack/2 + 1.1)+1;
             Console.Dots(3, 300);
             System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
             enemies[enemyIndex].health -= t;
@@ -385,7 +421,12 @@ public class BattleHandler {
                 break;                        
         }
         
-        return e.moves[MathFunc.random(e.moves.length-1)];
+        try{
+            return e.moves[MathFunc.random(e.moves.length)-1];
+        }catch(IndexOutOfBoundsException x){
+            return e.moves[0];
+        }
+
     }
     
     private static Player pick(){
@@ -473,6 +514,7 @@ public class BattleHandler {
             DropItem();
             
             while (handler.audio.isRunning()){}
+            
             handler.end();
             InputHandler.pressEnter();
             
@@ -539,14 +581,12 @@ public class BattleHandler {
     }
     
     private static Player findTurn(){
-        if (prevIndex == 0){
-            if(player.health > 0){
-                prevIndex += 1;
-                return player;
-            }else{
-                prevIndex += 1;
-                return findTurn();
-            }
+        if (prevIndex == 0 && player.health > 0){
+            prevIndex += 1;
+            return player;
+        }else if(prevIndex == 0){
+            prevIndex += 1;
+            return findTurn();
         }else{
             try{
                 if(comps[prevIndex-1].health > 0){

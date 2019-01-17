@@ -16,8 +16,8 @@
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-source-plugin</artifactId>
   <configuration>
-          <reportOutputDirectory>/projects/RPGEngine/docs</reportOutputDirectory>
-          <destDir>docs</destDir>
+          <reportOutputDirectory>/projects/RPGEngine/docs/1.0</reportOutputDirectory>
+          <destDir>docs/1.0</destDir>
         </configuration>
   <executions>
     <execution>
@@ -32,8 +32,8 @@
   <groupId>org.apache.maven.plugins</groupId>
   <artifactId>maven-javadoc-plugin</artifactId>
   <configuration>
-          <reportOutputDirectory>/projects/RPGEngine/docs</reportOutputDirectory>
-          <destDir>docs</destDir>
+          <reportOutputDirectory>/projects/RPGEngine/docs/1.0</reportOutputDirectory>
+          <destDir>docs/1.0</destDir>
         </configuration>
   <executions>
     <execution>

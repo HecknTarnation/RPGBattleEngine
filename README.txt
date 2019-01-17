@@ -14,9 +14,7 @@ Modifying the code for your own purpose is allowed as long as these 2 conditions
     
     2). You do not distribute your modified code while claming it as your own (meaning that you may rerelease this engine with the modified code as long as you say that you did not make it and give a link to this repository).
 
-(Note, this engine is not yet complete)
-
-Documentation can be found here: https://coolninjagames.github.io/RPGEngine/index.html
+Documentation can be found here: https://coolninjagames.github.io/RPGEngine/1.0
 
 Please report any bugs you find in this engine to the github repository.
 

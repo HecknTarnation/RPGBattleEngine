@@ -1,6 +1,6 @@
 package coolninja.rpg.Cons;
 
-import java.net.URL;
+import java.net.URI;
 
 import coolninja.rpg.Enums.WeaknessType;
 import coolninja.rpg.Cons.Graphic;
@@ -19,7 +19,7 @@ public class Move {
     public int damage, mDamage, manaCost;
     public double accuracy;
     public Graphic graphic;
-    public URL sound;
+    public URI sound;
     public WeaknessType type;
     
     /**
@@ -54,7 +54,7 @@ public class Move {
      * @since 1.0
      * @param location
      */
-    public Move setSound(URL location){
+    public Move setSound(URI location){
         this.sound = location;
         return this;
     }

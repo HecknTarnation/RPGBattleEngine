@@ -1,6 +1,6 @@
 package coolninja.rpg;
 
-import java.net.URL;
+import java.net.URI;
 
 import coolninja.rpg.Battle.LoseBattle;
 import coolninja.rpg.Cons.Companion;
@@ -39,14 +39,6 @@ public class SetVars {
     }
     
     /**
-     * Sets the text displayed when a battle is lost
-     * @since 1.0
-     */
-    public static void setLoseText(String text){
-        Vars.loseText = text;
-    }
-    
-    /**
      * Sets the color code for the compainions on battle
      * @since 1.0
      */
@@ -74,7 +66,7 @@ public class SetVars {
      * Sets default battle music
      * @since 1.0
      */
-    public static void setBattleMusic(URL locationToSound){
+    public static void setBattleMusic(URI locationToSound){
         Vars.defaultBattleSoundLocation = locationToSound;
     }
     
@@ -82,7 +74,7 @@ public class SetVars {
      * Sets win music
      * @since 1.0
      */
-    public static void setWinMusic(URL locationToSound){
+    public static void setWinMusic(URI locationToSound){
         Vars.winMusic = locationToSound;
     }
     
@@ -90,7 +82,7 @@ public class SetVars {
      * Sets lose music
      * @since 1.0
      */
-    public static void setLoseMusic(URL locationToSound){
+    public static void setLoseMusic(URI locationToSound){
         Vars.loseMusic = locationToSound;
     }
     

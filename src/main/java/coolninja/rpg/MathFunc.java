@@ -1,6 +1,5 @@
 package coolninja.rpg;
 
-
 import coolninja.rpg.Cons.Enemy;
 import coolninja.rpg.Cons.Item;
 import coolninja.rpg.Required.Player;
@@ -19,10 +18,10 @@ public class MathFunc {
      * @since 1.0
      */
     public static int random(int clamp){
-        
-        int temp = (int) Math.round(Math.random()*10);
-        
-        return Math.min(clamp, temp);
+        if(clamp == 0){
+            clamp = 10;
+        }
+        return Math.min(clamp, (int) Math.round(Math.random()*10));
     }
     
     /**

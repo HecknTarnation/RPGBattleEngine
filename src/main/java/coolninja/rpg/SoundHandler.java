@@ -2,9 +2,11 @@ package coolninja.rpg;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 
 import javax.sound.sampled.*;
+
+import coolninja.rpg.Console.Console;
 
 /**
  * Handles playing sound
@@ -14,7 +16,7 @@ import javax.sound.sampled.*;
  */
 public class SoundHandler extends Thread{
     
-    public URL pathToSound;
+    public URI pathToSound;
     public boolean shouldLoop;
     
     public Clip audio;
@@ -26,7 +28,7 @@ public class SoundHandler extends Thread{
      * @param pathToSound
      * @param shouldLoop
      */
-    public SoundHandler(URL pathToSound, boolean shouldLoop){
+    public SoundHandler(URI pathToSound, boolean shouldLoop){
         this.pathToSound = pathToSound;
         this.shouldLoop = shouldLoop;
     }
@@ -37,12 +39,12 @@ public class SoundHandler extends Thread{
      */
     @Override
     public void run() {
-        File file = new File(pathToSound.getFile());
+        File file = new File(pathToSound.getPath());
         
         input = null;
         try {
             input = AudioSystem.getAudioInputStream(file);
-        } catch (UnsupportedAudioFileException | IOException e) {
+        }catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
         }
         AudioFormat format = input.getFormat();
@@ -54,13 +56,16 @@ public class SoundHandler extends Thread{
             if(shouldLoop){
                 audio.loop(Clip.LOOP_CONTINUOUSLY);
             }
-        } catch (LineUnavailableException e) {
+        }catch (LineUnavailableException e) {
             e.printStackTrace();
+        }catch(IllegalStateException e){
+            Console.printError("System couldn't play audio.", 1);
+            return;
         }
         
         try {
             audio.open(input);
-        } catch (LineUnavailableException | IOException e) {
+        }catch (LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
         audio.start();
@@ -75,7 +80,10 @@ public class SoundHandler extends Thread{
     }
     
     public void end(){
-        audio.close();
+        if(audio.isOpen()){
+            audio.close();
+        }
+
         try {
             input.close();
         } catch (IOException e) {

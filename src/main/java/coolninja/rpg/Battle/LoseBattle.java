@@ -3,8 +3,21 @@ package coolninja.rpg.Battle;
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;
 
+/**
+ * Class for handing losing a battle
+ * @since 1.0
+ * @version 1.0
+ * @author Ben Ballard
+ */
 public class LoseBattle {
     
-    public void BattleLost(Player player, Companion[] comps){}
+    /**
+     * Run when player loses battle
+     * @since 1.0
+     */
+    public void BattleLost(Player player, Companion[] comps){
+        //Default Text
+        System.out.println("You Lost!");
+    }
     
 }
