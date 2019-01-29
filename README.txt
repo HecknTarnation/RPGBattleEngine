@@ -16,6 +16,8 @@ Modifying the code for your own purpose is allowed as long as these 2 conditions
 
 Documentation can be found here: https://coolninjagames.github.io/RPGEngine/1.0
 
+For this to work correctly, ANSI control codes must be enabled
+
 Please report any bugs you find in this engine to the github repository.
 
 Current Version: 1.0

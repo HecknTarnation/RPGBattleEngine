@@ -91,7 +91,7 @@ public class MathFunc {
     }
     
     /**
-     * Adds the luck of enemies
+     * Adds the luck of enemies togehter
      * @since 1.0
      * @param enemies
      */
@@ -104,7 +104,7 @@ public class MathFunc {
     }
     
     /**
-     * Adds the player and companions luck
+     * Adds the player and companions luck togehter
      * @since 1.0
      * @param plrAndComps
      */

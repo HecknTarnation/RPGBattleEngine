@@ -71,8 +71,6 @@ public class BattleHandler {
         enemies[index].health -= damage;
     }
     
-    //private methods
-    
     private static void BattleLoop(boolean canRun) throws NoPlayerSetException{
         
         player = Vars.player;
@@ -81,25 +79,31 @@ public class BattleHandler {
         
         enArchive = enemies;
         
+        //starts battle music
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
         handler.run();
         
+        //finds out hos much exp this battle is worth
         for (Enemy enemy : enemies) {
             expVal += enemy.expValue;
         }
         
+        //creates array that contains enemy drops
         eDrops = new Item[enemies.length];
         for(int i = 0; i < enemies.length; i++){
             eDrops[i] = enemies[i].drop;
         }
         
+        //throws exception if player is null
         if(player == null){
             throw new NoPlayerSetException("No player was set");
         }
         
         //main battle loop
+        //runs until enemies array is empty/null
         while(enemies != null){
             
+            //ends battle if player and all companions are dead
             if(didLose()){
                 SoundHandler hand = new SoundHandler(Vars.loseMusic, false);
                 hand.run();
@@ -108,31 +112,39 @@ public class BattleHandler {
                 return;
             }
             
+            //ends battle if all enemies are dead
             if(CheckIfShouldFinish()){
                 enemies = null;
                 break;
             }
-
+            
+            //sets currentPlayer to next character
             currentPlayer = findTurn();
             
+            //checks if the currentPlayer is the player and if their health <= 0
+            //if so, it rerolls player
             if(currentPlayer == player && player.health <= 0){
                 currentPlayer = findTurn();
             }
             
+            //if currentPlayer is null, have enemies go
             if(currentPlayer == null){
                 currentPlayer = player;
                 prevIndex = 1;
                 EnemyTurns();
             }
             
+            //clears console to prepare for printing
             Console.clear();
             
+            //prints top if player is healthy, else bottom
             if(player.health > 0){
                 System.out.println("\n -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + "\n");
             }else{
                 System.out.println("\n" + Colors.RED_BACKGROUND + "(Dead!) -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + Colors.reset() + "\n");
             }
-
+            
+            //checks if companions are null, if not, then print using the same rules as above
             if(comps != null){
                 for (Companion comp : comps) {
                     if (comp.health > 0) {
@@ -143,22 +155,27 @@ public class BattleHandler {
                 }   
             }
             
+            //prints new line
             System.out.print("\n");
             
+            //prints out enemies's stats
             for (Enemy enemy : enemies) {
                 System.out.println(Vars.enemyColorCode + " -" + enemy.name + ": " + enemy.health);
             }
             
+            //resets colors
             Colors.RESET();
             
             System.out.print("\n");
             
+            //prints out currentPlayer's name
             if(currentPlayer.name.equalsIgnoreCase("you")){
                 System.out.println("It's Your Turn");
             }else{
                 System.out.println("It's " + currentPlayer.name + "'s Turn");
             }
             
+            //prints out player's options
             System.out.print(" -Attack\n -Item\n -Idle\n");
             if(canRun){
                 System.out.println(" -Run");
@@ -166,6 +183,7 @@ public class BattleHandler {
             
             String input = InputHandler.getInput();
             
+            //sees which option the player picked
             switch(input.toLowerCase()){
                 case "attack":
                     Attack();
@@ -181,6 +199,7 @@ public class BattleHandler {
                     break;
             }
             
+            //checks if player lost
             if(didLose()){
                 Vars.loseBattle.BattleLost(player, comps);
                 return;
@@ -188,18 +207,22 @@ public class BattleHandler {
             
         }
         
+        //once loop has ended, stop music and run BattleFinished
         handler.end();
         BattleFinished();
         
         
     }
     
-    public static void Attack(){
+    //lets player pick move
+    private static void Attack(){
         
+        //exits if player doesn't have at least 1 hp
         if(currentPlayer.health <= 0){
             return;
         }
         
+        //prints player's move
         currentPlayer.printMoves();
         
         ArrayList<Move> m = currentPlayer.getMoves();
@@ -221,6 +244,7 @@ public class BattleHandler {
             move = PickMove();
         }
         
+        //has player pick the target
         System.out.println("Target?");
         for (Enemy enemie : enemies) {
             System.out.println(Colors.BLACK);
@@ -238,6 +262,7 @@ public class BattleHandler {
         
         Console.printError("Not A Valid Target!", 1000);
         
+        //loops if target was invalid
         Attack();
         
     }
@@ -246,7 +271,7 @@ public class BattleHandler {
      * Uses an item
      * @since 1.0
      */
-    public static void Item(){
+    private static void Item(){
         
         if(currentPlayer.health <= 0){
             return;
@@ -285,6 +310,7 @@ public class BattleHandler {
         
     }
     
+    //allows player to skip their turn
     private static void Idle(){
         
         if(currentPlayer.health <= 0){
@@ -299,6 +325,7 @@ public class BattleHandler {
         Console.Dots(3, 300);
     }
     
+    //allows player to run from battle
     private static void Run(boolean canRun){
         
         if(currentPlayer.health <= 0){
@@ -308,6 +335,7 @@ public class BattleHandler {
         System.out.print(currentPlayer.name + " started to run");
         Console.Dots(3, 400);
         
+        //if the battle cannot be ran from, print this message and exit function
         if(!canRun){
             System.out.println(currentPlayer.name + " can't run from this battle!");
             return;
@@ -330,9 +358,11 @@ public class BattleHandler {
         Console.waitFull(1);
     }
     
+    //used to damage the enemy
     private static void EnemyTakeDamage(int enemyIndex, Move move){
         Console.clear();
         
+        //checks if move costs mana
         if(move.manaCost > 0){
             currentPlayer.mana -= move.manaCost;
         }
@@ -344,19 +374,28 @@ public class BattleHandler {
         
         t = a + mA;
         
+        //checks if damage is less than 0, if so, set it to 0
         if(t < 0){
             t = 0;
         }
         
-        if(enemies[enemyIndex].weakness != null){
-            if(enemies[enemyIndex].weakness.type == move.type){
-                t *= enemies[enemyIndex].weakness.effectiveness;
-            }
-        }
-        
+        //plays sound and prints graphic
         playSound(move);
         printGraphic(move);
         
+        //checks if move is super effective
+        if(enemies[enemyIndex].weakness != null){
+            if(enemies[enemyIndex].weakness.type == move.type){
+                t *= enemies[enemyIndex].weakness.effectiveness;
+                if(enemies[enemyIndex].weakness.effectiveness > 1){
+                    System.out.println("Move is super effective!");
+                }else{
+                    System.out.println("Move was not effective!");
+                }
+            }
+        }
+        
+        //checks if move is a critical hit
         if(MathFunc.random(0)*100 < currentPlayer.luck){
             if(!MathFunc.accHitCalc(move.accuracy)){
                 System.out.println(currentPlayer.name + " missed!");
@@ -371,21 +410,25 @@ public class BattleHandler {
             return;
         }
         
+        //checks if move missed
         if(!MathFunc.accHitCalc(move.accuracy)){
             System.out.println(currentPlayer.name + " missed!");
             return;
         }
         
+        //damages the enemy
         enemies[enemyIndex].health -= t;
         
         Console.Dots(3, 300);
         
-        if(t != 0){
+        //prints top if damsge is greater than 0, else bottom
+        if(t > 0){
             System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
         }else{
             System.out.println(enemies[enemyIndex].name + " took no damage");
         }
         
+        //waits one second
         Console.waitFull(1);
         
         
@@ -402,6 +445,7 @@ public class BattleHandler {
         
     }
     
+    //pciks the best move to use
     private static Move pickEnemyMove(Enemy e, Player p){
         
         switch(e.AIID){
@@ -429,6 +473,7 @@ public class BattleHandler {
 
     }
     
+    //picks a random character
     private static Player pick(){
         int t = MathFunc.random(comps.length);
         Player p;
@@ -444,6 +489,7 @@ public class BattleHandler {
         }
     }
     
+    //same as enemy take damage, but for the player's team
     private static void PlayerTakeDamage(Player p, Move move, Enemy enemy){
         Console.clear();
         
@@ -483,6 +529,7 @@ public class BattleHandler {
         Console.waitFull(1);
     }
     
+    //checks what items shou;d drop
     private static void DropItem(){
         
         for(int i = 0; i < eDrops.length; i++){
@@ -495,6 +542,7 @@ public class BattleHandler {
         
     }
     
+    //ends battle and awards items/exp
     private static void BattleFinished(){
         
         if(expVal > 0){
@@ -513,20 +561,24 @@ public class BattleHandler {
             
             DropItem();
             
+            //do nothing until win music has stopped playing
             while (handler.audio.isRunning()){}
             
+            //ends sound and waits for player to press enter
             handler.end();
             InputHandler.pressEnter();
             
+            //checks if player/companions should level up
             player.levelUp();
         
             for (Companion comp : comps) {
                 comp.levelUp();
             }
         }else{
-            
+            //skips these steps if there was no exp to be won
         }
         
+        //prepares for next battle
         currentPlayer = null;
         
         prevIndex = 0;
@@ -536,10 +588,12 @@ public class BattleHandler {
         
         updateArray();
         
+        //returns true if length is 0, false otherwise
         return enemies.length == 0;
         
     }
     
+    //checks if player lost the battle
     private static boolean didLose(){
         int s = 0;
         if(player.health <= 0){
@@ -555,6 +609,7 @@ public class BattleHandler {
         return s == comps.length+1;
     }
     
+    //removes dead enemies from the array
     private static void updateArray(){
         List<Enemy> z = new ArrayList<>();
         
@@ -568,6 +623,7 @@ public class BattleHandler {
         z.toArray(enemies);
     }
     
+    //allows player to pick move from move list
     private static Move PickMove(){
         String input = InputHandler.getInput();
         
@@ -577,9 +633,11 @@ public class BattleHandler {
             }
         }
         
+        //returns null if input doesn't match any moves
         return null;
     }
     
+    //finds the current characters turn
     private static Player findTurn(){
         if (prevIndex == 0 && player.health > 0){
             prevIndex += 1;
@@ -598,11 +656,13 @@ public class BattleHandler {
                     return findTurn();
                 }
             }catch(IndexOutOfBoundsException e){
+                    //returns null if there is a problem
                     return null;
             }
         }
     }
     
+    //plays move sound
     private static void playSound(Move move){
         if(move.sound == null){return;}
         
@@ -612,12 +672,16 @@ public class BattleHandler {
         handler.end();
     }
     
+    //prints move graphic
     private static void printGraphic(Move move){
         if(move.graphic == null){return;}
         
         for (String frame : move.graphic.frames) {
             System.out.println(frame);
             Console.waitReal(move.graphic.waitTime);
+            Console.clear();
         }
+        
+        System.out.println("---------------------------");
     }
 }
