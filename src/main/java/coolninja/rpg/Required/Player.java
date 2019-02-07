@@ -82,7 +82,11 @@ public class Player {
             
             exp -= expToNextLevel;
             
-            System.out.println("You have leveled up!");
+            if(this.name.equalsIgnoreCase("you")){
+                System.out.println("You have leveled up!");
+            }else{
+                System.out.println(this.name + " have leveled up!");
+            }
             
             Console.waitFull(2);
             
@@ -139,8 +143,6 @@ public class Player {
         while(skillPoints != 0){
             pickStat(skillPoints);
         }
-        
-        //addMove(level);
         
         Console.waitHalf(1);
         
@@ -207,7 +209,7 @@ public class Player {
     
     /**
      * Sets the players stats using the given equipment
-     * (Can be overwritten)
+     * (Should be overwritten)
      * @since 1.0
      * @param equipment
      */
