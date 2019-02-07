@@ -85,7 +85,7 @@ public class Player {
             if(this.name.equalsIgnoreCase("you")){
                 System.out.println("You have leveled up!");
             }else{
-                System.out.println(this.name + " have leveled up!");
+                System.out.println(this.name + " has leveled up!");
             }
             
             Console.waitFull(2);
