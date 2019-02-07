@@ -210,8 +210,6 @@ public class BattleHandler {
         //once loop has ended, stop music and run BattleFinished
         handler.end();
         BattleFinished();
-        
-        
     }
     
     //lets player pick move
