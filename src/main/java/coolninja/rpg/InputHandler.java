@@ -1,5 +1,6 @@
 package coolninja.rpg;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -27,12 +28,9 @@ public class InputHandler {
      */
     public static void pressEnter(){
         System.out.println("Press Enter key to continue...");
-        try
-        {
+        try {
             System.in.read();
-        }  
-        catch(Exception e)
-        {}
+        }catch (IOException e){}
     }
     
 }

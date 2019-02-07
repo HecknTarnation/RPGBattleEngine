@@ -72,9 +72,7 @@ public class SoundHandler extends Thread{
         while (audio.isRunning()){
             try{
                 this.wait(1);
-            }catch(InterruptedException e){
-               
-            }
+            }catch(InterruptedException e){}
         }
         
     }
