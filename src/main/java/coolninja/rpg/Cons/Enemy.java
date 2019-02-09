@@ -47,6 +47,7 @@ public class Enemy {
      * 2 = uses players health to decide best move
      * if bigger than 2, it will be set to 2
      * @param level
+     * @return enemy
      * @since 1.0
      */
     public Enemy setAILevel(byte level){
@@ -59,6 +60,7 @@ public class Enemy {
     
     /**
      * Sets the enemy's weakness
+     * @return enemy
      * @since 1.0
      * @param weakness
      */
@@ -69,6 +71,7 @@ public class Enemy {
     
     /**
      * Sets the enemy's item drop
+     * @return enemy
      * @since 1.0
      * @param item
      */
@@ -79,8 +82,10 @@ public class Enemy {
     
     /**
      * Clones enemy
+     * @return enemy
      * @since 1.0
      */
+    @Override
     public Enemy clone(){
         return new Enemy(this.name,
         this.health,

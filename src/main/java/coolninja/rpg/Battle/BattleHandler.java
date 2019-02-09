@@ -35,9 +35,8 @@ public class BattleHandler {
     */
     public static void StartBattle(Enemy en, boolean canRun){
         enemies = new Enemy[1];
-        
         enemies[0] = en.clone();
-        
+            
         try {
             BattleLoop(canRun);
         } catch (NoPlayerSetException e) {
