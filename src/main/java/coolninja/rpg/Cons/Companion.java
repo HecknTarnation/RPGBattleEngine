@@ -13,8 +13,6 @@ import coolninja.rpg.Required.Player;
  */
 public class Companion extends Player{
     
-    //public String name;
-    //public int level = 1, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     public ArrayList<Move> moves = new ArrayList<Move>();
     /**
      * 0 = feet
@@ -29,10 +27,10 @@ public class Companion extends Player{
     
      public Companion(String name, int health, int mana, int maxMana, int attack, int defense, 
         int luck, int mAttack, int mDefense, int specialAttack){
-        super(name, health, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack);
-        this.expToNextLevel = 10;
-        this.exp = 0;
-        this.level = 1;
+            super(name, health, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack);
+            this.expToNextLevel = 10;
+            this.exp = 0;
+            this.level = 1;
     }
     
     /**
@@ -52,6 +50,17 @@ public class Companion extends Player{
      */
     public final Companion addMove(Move move){
         this.moves.add(move);
+        return this;
+    }
+    
+    /**
+     * Adds a array move to the companion
+     * @since 1.0
+     */
+    public Companion addMoves(Move[] ms){
+        for(int i = 0; i < ms.length; i++){
+            moves.add(ms[i]);
+        }
         return this;
     }
     

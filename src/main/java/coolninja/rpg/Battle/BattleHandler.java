@@ -387,7 +387,7 @@ public class BattleHandler {
                 if(enemies[enemyIndex].weakness.effectiveness > 1){
                     System.out.println("Move is super effective!");
                 }else{
-                    System.out.println("Move was not effective!");
+                    System.out.println("Move was not very effective!");
                 }
             }
         }
@@ -506,6 +506,11 @@ public class BattleHandler {
         
         if(p.currentWeakness != null && move.type == p.currentWeakness.type){
             t *= p.currentWeakness.effectiveness;
+            if(p.currentWeakness.effectiveness > 1){
+                System.out.println("Enemy's Move is super effective!");
+            }else{
+                System.out.println("Enemy's Move was not very effective!");
+            }
         }
         
         if(!MathFunc.accHitCalc(move.accuracy)){

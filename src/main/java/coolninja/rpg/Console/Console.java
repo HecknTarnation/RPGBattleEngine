@@ -8,7 +8,7 @@ package coolninja.rpg.Console;
 public class Console {
     
     /**
-     * Creates 3 dots for the amount inputted
+     * Creates 3 dots for the amount of times passed
      * @param times
      * @param timeBetween
      * @since 1.0

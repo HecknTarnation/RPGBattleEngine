@@ -227,6 +227,17 @@ public class Player {
     }
     
     /**
+     * Adds a array move to the player
+     * @since 1.0
+     */
+    public Player addMoves(Move[] ms){
+        for(int i = 0; i < ms.length; i++){
+            moves.add(ms[i]);
+        }
+        return this;
+    }
+    
+    /**
      * Prints the players moves
      * @since 1.0
      */
