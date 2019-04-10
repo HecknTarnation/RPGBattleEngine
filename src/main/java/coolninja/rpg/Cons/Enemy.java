@@ -7,7 +7,7 @@ package coolninja.rpg.Cons;
  * @version 1.0
  * @since 1.0
  */
-public class Enemy {
+public class Enemy implements Serializable{
     
     public String name;
     public int health, attack, defense, luck, mAttack, mDefense, expValue;
