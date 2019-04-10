@@ -1,5 +1,12 @@
 package coolninja.rpg.Cons;
 
+/**
+ * The boss object
+ * 
+ * @author Ben Ballard
+ * @version 1.0
+ * @since 1.0
+ */
 public class Boss extends Enemy{
     
     public Boss(String name, int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue, Move[] moves) {

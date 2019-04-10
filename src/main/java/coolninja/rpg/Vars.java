@@ -35,5 +35,7 @@ public class Vars {
     
     public static LoseBattle loseBattle;
     
+    public static boolean shouldUseLuckForExtraDamage = false;
+    
     
 }

@@ -379,6 +379,7 @@ public class BattleHandler {
         //plays sound and prints graphic
         playSound(move);
         printGraphic(move);
+        move.Use(t, currentPlayer, enemies[enemyIndex], comps);
         
         //checks if move is super effective
         if(enemies[enemyIndex].weakness != null){
@@ -390,6 +391,10 @@ public class BattleHandler {
                     System.out.println("Move was not very effective!");
                 }
             }
+        }
+        
+        if(Vars.shouldUseLuckForExtraDamage){
+            t *= MathFunc.luckDamageCalc(currentPlayer.luck);
         }
         
         //checks if move is a critical hit

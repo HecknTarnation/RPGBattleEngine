@@ -8,6 +8,7 @@ import coolninja.rpg.Required.Player;
 
 /**
  * Used for setting varibles used in the engine
+ * (You can also manual set them by calling Vars.[variable] = [value])
  * @version 1.0
  * @since 1.0
  * @author Ben Ballard
@@ -92,5 +93,14 @@ public class SetVars {
      */
     public static void setLoseFunction(LoseBattle classThatImplements){
         Vars.loseBattle = classThatImplements;
+    }
+    
+    /**
+     * If true, the player's luck state will be used to give extra damage when using a move
+     * @since 1.0
+     * @param value
+     */
+    public static void setShoudlUseLuck(boolean value){
+        Vars.shouldUseLuckForExtraDamage = value;
     }
 }

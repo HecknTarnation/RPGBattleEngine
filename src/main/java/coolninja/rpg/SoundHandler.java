@@ -69,7 +69,7 @@ public class SoundHandler extends Thread{
             e.printStackTrace();
         }
         audio.start();
-        while (audio.isRunning()){
+        while (audio.isRunning() && !this.isInterrupted()){
             try{
                 this.wait(1);
             }catch(InterruptedException e){}
