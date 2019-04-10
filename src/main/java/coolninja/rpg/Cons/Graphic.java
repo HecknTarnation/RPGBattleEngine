@@ -6,7 +6,7 @@ package coolninja.rpg.Cons;
  * @since 1.0
  * @author Ben Ballard
  */
-public class Graphic {
+public class Graphic implements Serializable{
     
     public String[] frames;
     public int waitTime;
