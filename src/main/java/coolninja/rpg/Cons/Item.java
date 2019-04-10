@@ -8,7 +8,7 @@ import coolninja.rpg.Required.Player;
  * @since 1.0
  * @author Ben Ballard
  */
-public class Item {
+public class Item implements Serializable{
     
     public String name;
     public String desc;
