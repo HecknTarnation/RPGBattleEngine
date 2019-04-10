@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
+
 import coolninja.rpg.Enums.EquipSlot;
 
 /**
@@ -9,6 +11,8 @@ import coolninja.rpg.Enums.EquipSlot;
  * @since 1.0
  */
 public class Equipment extends Item implements Serializable{
+    
+    static final long serialVersionUID = 4;
     
     public int maxHealth, maxMana, attack, defense, luck, mAttack, mDefense;
     public Weakness weakness;

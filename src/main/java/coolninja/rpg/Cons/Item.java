@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
+
 import coolninja.rpg.Required.Player;
 
 /**
@@ -9,6 +11,8 @@ import coolninja.rpg.Required.Player;
  * @author Ben Ballard
  */
 public class Item implements Serializable{
+    
+    static final long serialVersionUID = 6;
     
     public String name;
     public String desc;

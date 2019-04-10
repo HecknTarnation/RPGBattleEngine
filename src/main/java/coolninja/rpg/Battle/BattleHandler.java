@@ -576,6 +576,12 @@ public class BattleHandler {
             for (Companion comp : comps) {
                 comp.levelUp();
             }
+            
+            //runs the enemies "onDeath" method
+            for(Enemy en : enemies){
+                en.onDeath();
+            }
+            
         }else{
             //skips these steps if there was no exp to be won
         }
@@ -615,9 +621,9 @@ public class BattleHandler {
     private static void updateArray(){
         List<Enemy> z = new ArrayList<>();
         
-        for (Enemy enemie : enemies) {
-            if (enemie.health > 0) {
-                z.add(enemie);
+        for (Enemy enemy : enemies) {
+            if (enemy.health > 0) {
+                z.add(enemy);
             }
         }        
         

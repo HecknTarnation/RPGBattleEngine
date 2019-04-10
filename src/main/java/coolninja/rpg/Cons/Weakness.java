@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
+
 import coolninja.rpg.Enums.WeaknessType;
 
 /**
@@ -9,6 +11,8 @@ import coolninja.rpg.Enums.WeaknessType;
  * @author Ben Ballard
  */
 public class Weakness implements Serializable{
+    
+    static final long serialVersionUID = 8;
     
     public WeaknessType type;
     /**

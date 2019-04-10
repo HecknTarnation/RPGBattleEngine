@@ -1,6 +1,7 @@
 package coolninja.rpg.Cons;
 
 import java.net.URI;
+import java.io.Serializable;
 
 import coolninja.rpg.Enums.WeaknessType;
 import coolninja.rpg.Cons.Graphic;
@@ -14,6 +15,8 @@ import coolninja.rpg.Required.Player;
  * @since 1.0
  */
 public class Move implements Serializable{
+    
+    static final long serialVersionUID = 7;
     
     public String name, text;
     public int damage, mDamage, manaCost;

@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
+
 /**
  * The graphic class
  * @version 1.0
@@ -7,6 +9,8 @@ package coolninja.rpg.Cons;
  * @author Ben Ballard
  */
 public class Graphic implements Serializable{
+    
+    static final long serialVersionUID = 5;
     
     public String[] frames;
     public int waitTime;

@@ -1,5 +1,6 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import coolninja.rpg.Console.Colors;
@@ -12,6 +13,8 @@ import coolninja.rpg.Required.Player;
  * @author Ben Ballard
  */
 public class Companion extends Player implements Serializable{
+    
+    static final long serialVersionUID = 2;
     
     public ArrayList<Move> moves = new ArrayList<Move>();
     /**

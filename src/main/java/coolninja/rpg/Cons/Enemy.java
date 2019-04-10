@@ -1,5 +1,7 @@
 package coolninja.rpg.Cons;
 
+import java.io.Serializable;
+
 /**
  * The basic enemy class
  * 
@@ -8,6 +10,8 @@ package coolninja.rpg.Cons;
  * @since 1.0
  */
 public class Enemy implements Serializable{
+    
+    static final long serialVersionUID = 3;
     
     public String name;
     public int health, attack, defense, luck, mAttack, mDefense, expValue;
@@ -41,7 +45,7 @@ public class Enemy implements Serializable{
     }
     
     /**
-     * Sets the enemy's AI level (0-3)
+     * Sets the enemy's AI level (0-2)
      * 0 = random move
      * 1 = uses players weakness to decide best move
      * 2 = uses players health to decide best move
@@ -78,6 +82,14 @@ public class Enemy implements Serializable{
     public Enemy setDrop(Item item){
         this.drop = item;
         return this;
+    }
+    
+    /**
+     * Run at end of battle
+     * (Optional)
+     */
+    public void onDeath(){
+        
     }
     
     /**

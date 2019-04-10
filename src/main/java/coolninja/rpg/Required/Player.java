@@ -1,6 +1,7 @@
 package coolninja.rpg.Required;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 import coolninja.rpg.InputHandler;
 import coolninja.rpg.MathFunc;
@@ -15,7 +16,9 @@ import coolninja.rpg.Console.Console;
  * @version 1.0
  * @author Ben Ballard
  */
-public class Player {
+public class Player implements Serializable{
+    
+    static final long serialVersionUID = 1;
     
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
