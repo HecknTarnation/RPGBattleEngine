@@ -13,7 +13,7 @@ import coolninja.rpg.Required.Player;
  * @version 1.0
  * @since 1.0
  */
-public class Move {
+public class Move implements Serializable{
     
     public String name, text;
     public int damage, mDamage, manaCost;
