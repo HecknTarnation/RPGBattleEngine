@@ -8,7 +8,7 @@ import coolninja.rpg.Enums.WeaknessType;
  * @since 1.0
  * @author Ben Ballard
  */
-public class Weakness {
+public class Weakness implements Serializable{
     
     public WeaknessType type;
     /**
