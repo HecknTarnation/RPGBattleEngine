@@ -81,6 +81,7 @@ public class Move {
     
     /**
      * The function called when a move is used (Can be overriden)
+     * Player is the character that used the move, enemy is the target, and damage is the total damage the move dealt
      * @since 1.0
      */
     public void Use(int damage, Player player, Enemy en){
