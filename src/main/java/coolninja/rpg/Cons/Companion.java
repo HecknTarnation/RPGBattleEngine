@@ -11,7 +11,7 @@ import coolninja.rpg.Required.Player;
  * @since 1.0
  * @author Ben Ballard
  */
-public class Companion extends Player{
+public class Companion extends Player implements Serializable{
     
     public ArrayList<Move> moves = new ArrayList<Move>();
     /**
