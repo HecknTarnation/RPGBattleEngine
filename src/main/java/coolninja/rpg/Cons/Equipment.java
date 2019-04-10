@@ -8,7 +8,7 @@ import coolninja.rpg.Enums.EquipSlot;
  * @version 1.0
  * @since 1.0
  */
-public class Equipment extends Item{
+public class Equipment extends Item implements Serializable{
     
     public int maxHealth, maxMana, attack, defense, luck, mAttack, mDefense;
     public Weakness weakness;
