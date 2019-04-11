@@ -583,8 +583,8 @@ public class BattleHandler {
             }
             
             //runs the enemies "onDeath" method
-            for(Enemy en : enemies){
-                en.onDeath();
+            if(enemies[0] instanceof Boss){
+                enemies[0].onDeath();
             }
             
         }else{
@@ -629,6 +629,8 @@ public class BattleHandler {
         for (Enemy enemy : enemies) {
             if (enemy.health > 0) {
                 z.add(enemy);
+            }else{
+                enemy.onDeath();
             }
         }        
         
