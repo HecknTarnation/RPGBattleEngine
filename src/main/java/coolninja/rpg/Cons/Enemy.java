@@ -34,6 +34,11 @@ public class Enemy implements Serializable{
      */
     public Enemy(String name, int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue, Move[] moves){
         this.name = name;
+        this.setStats(health, attack, defense, luck, mAttack, mDefense, expValue);
+        this.moves = moves;
+    }
+    
+    public void setStats(int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue){
         this.health = health;
         this.attack = attack;
         this.defense = defense;
@@ -41,7 +46,6 @@ public class Enemy implements Serializable{
         this.mAttack = mAttack;
         this.mDefense = mDefense;
         this.expValue = expValue;
-        this.moves = moves;
     }
     
     /**

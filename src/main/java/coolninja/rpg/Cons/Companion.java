@@ -26,7 +26,7 @@ public class Companion extends Player implements Serializable{
      * 5 = weapon
      * 6 = mod
      */
-    public Equipment[] equipment = new Equipment[5];
+    public Equipment[] equipment = new Equipment[7];
     
      public Companion(String name, int health, int mana, int maxMana, int attack, int defense, 
         int luck, int mAttack, int mDefense, int specialAttack){

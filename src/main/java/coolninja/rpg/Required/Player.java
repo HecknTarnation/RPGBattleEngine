@@ -45,7 +45,7 @@ public class Player implements Serializable{
     
     
     /**
-     * If name == "You", then "Your turn" will be used on battle
+     * If name == "You", then "Your turn" will be used in battle
      * @since 1.0
      */
     public Player(String name, int health, int mana, int maxMana, int attack, int defense, 

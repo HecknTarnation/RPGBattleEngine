@@ -16,7 +16,14 @@ public class Item implements Serializable{
     
     public String name;
     public String desc;
+    /**
+     * An item's chance to drop off an enemy
+     */
     public double chance;
+    /**
+     * Whether the item is meant to be used on companions
+     */
+    public boolean useOnFriends = false;
     
     /**
      * @param name
@@ -38,7 +45,7 @@ public class Item implements Serializable{
     }
     
     /**
-     * The void used when an item is used
+     * Used when an item is used
      * (Should Be Overwritten!)
      * @since 1.0
      */
@@ -46,7 +53,12 @@ public class Item implements Serializable{
         
     }
     
-    public void Use(){
+    /**
+     * Companion version
+     * (Should Be Overwritten!)
+     * @since 1.0
+     */
+    public void Use(Player player, Companion comp){
         
     }
     

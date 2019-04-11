@@ -278,10 +278,24 @@ public class BattleHandler {
         
         String input = InputHandler.getInput();
         
+        for(int i = 0; i < player.getInv().size(); i++){
+            if(input.equalsIgnoreCase(player.getInv().get(i).name)){
+                if(player.getInv().get(i).useOnFriends){
+                    player.getInv().get(i).Use(currentPlayer, compItem());
+                }else{
+                    player.getInv().get(i).Use(currentPlayer, enItem());
+                }
+                player.getInv().remove(i);
+            }
+        }
+        
+    }
+    
+    private static Enemy enItem(){
         System.out.println("Target?");
-        for (Enemy enemie : enemies) {
+        for (Enemy enemy : enemies) {
             System.out.println(Colors.BLACK);
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemie.name + Colors.reset());
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemy.name + Colors.reset());
         }
         
         String target = InputHandler.getInput();
@@ -295,16 +309,36 @@ public class BattleHandler {
         
         if(t == null){
             Console.printError("Not A Valid Target!", 1000);
-            Item();
-            return;
+            enItem();
+            return t;
         }
         
-        for(int i = 0; i < player.getInv().size(); i++){
-            if(input.equalsIgnoreCase(player.getInv().get(i).name)){
-                player.getInv().get(i).Use(currentPlayer, t);
+        return t;
+    }
+    
+    private static Companion compItem(){
+        System.out.println("Target?");
+        for (Companion c : comps) {
+            System.out.println(Colors.BLACK);
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + c.name + Colors.reset());
+        }
+        
+        String target = InputHandler.getInput();
+        Companion comp = null;
+        for (Companion c : comps) {
+            if (target.equalsIgnoreCase(c.name)) {
+                comp = c;
+                break;
             }
         }
         
+        if(comp == null){
+            Console.printError("Not A Valid Target!", 1000);
+            compItem();
+            return comp;
+        }
+        
+        return comp;
     }
     
     //allows player to skip their turn
