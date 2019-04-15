@@ -37,6 +37,7 @@ public class Item implements Serializable{
     /**
      * Sets the drop chance for an item off an enemy
      * @param chance
+     * @return 
      * @since 1.0
      */
     public Item setDropChance(double chance){
@@ -47,6 +48,8 @@ public class Item implements Serializable{
     /**
      * Used when an item is used
      * (Should Be Overwritten!)
+     * @param player
+     * @param enemy
      * @since 1.0
      */
     public void Use(Player player, Enemy enemy){
@@ -56,6 +59,8 @@ public class Item implements Serializable{
     /**
      * Companion version
      * (Should Be Overwritten!)
+     * @param player
+     * @param comp
      * @since 1.0
      */
     public void Use(Player player, Companion comp){

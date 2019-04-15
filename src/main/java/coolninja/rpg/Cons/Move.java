@@ -4,7 +4,6 @@ import java.net.URI;
 import java.io.Serializable;
 
 import coolninja.rpg.Enums.WeaknessType;
-import coolninja.rpg.Cons.Graphic;
 import coolninja.rpg.Required.Player;
 
 /**
@@ -45,6 +44,7 @@ public class Move implements Serializable{
     /**
      * Sets the move's graphic
      * @param graphic
+     * @return 
      * @since 1.0
      */
     public Move setGraphic(Graphic graphic){
@@ -54,6 +54,7 @@ public class Move implements Serializable{
     
     /**
      * Sets the move's sound
+     * @return 
      * @since 1.0
      * @param location
      */
@@ -64,6 +65,7 @@ public class Move implements Serializable{
     
     /**
      * Sets the mana cost of this move (default: 0)
+     * @return 
      * @since 1.0
      * @param manaCost
      */
@@ -74,6 +76,7 @@ public class Move implements Serializable{
     
     /**
      * Sets move type
+     * @return 
      * @since 1.0
      * @param type
      */
@@ -83,8 +86,12 @@ public class Move implements Serializable{
     }
     
     /**
-     * The function called when a move is used (Can be overriden)
+     * The function called when a move is used (Can be overridden)
      * Player is the character that used the move, enemy is the target, and damage is the total damage the move dealt
+     * @param damage
+     * @param player
+     * @param en
+     * @param comps
      * @since 1.0
      */
     public void Use(int damage, Player player, Enemy en, Companion[] comps){

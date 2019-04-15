@@ -8,7 +8,7 @@ import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Required.Player;
 
 /**
- * Class fo storing values used in the engine
+ * Class for storing values used in the engine
  * @version 1.0
  * @since 1.0
  * @author Ben Ballard

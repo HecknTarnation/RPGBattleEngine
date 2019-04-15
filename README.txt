@@ -1,4 +1,6 @@
-(Put info about your game, and if you choose, the modified code disclaimer)
+
+
+(Put info about your game, and if you choose, the modified code disclaimer. Anything above here can be removed in your release)
 
 ##########################
 # RPGEngine

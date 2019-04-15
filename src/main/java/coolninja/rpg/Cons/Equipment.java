@@ -45,6 +45,7 @@ public class Equipment extends Item implements Serializable{
     
     /**
      * Sets the armors type
+     * @return 
      * @since 1.0
      * @param weakness
      */

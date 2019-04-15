@@ -37,6 +37,7 @@ public class Colors {
     
     /**
      * Returns a control code that resets the colors
+     * @return 
      * @since 1.0
      */
     public static String reset(){

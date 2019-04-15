@@ -15,6 +15,7 @@ public class MathFunc {
      * Gets a random number from 0-10
      * (0 = max of 10)
      * @param clamp
+     * @return 
      * @since 1.0
      */
     public static int random(int clamp){
@@ -27,22 +28,20 @@ public class MathFunc {
     /**
      * Calculates if the move should hit
      * @param acc
+     * @return 
      * @since 1.0
      */
     public static boolean accHitCalc(double acc){
         
         if(acc > random(0)/10){
             return true;
-        }else if (acc == 1){
-            return true;
-        }else{
-            return false;
-        }
+        }else return acc == 1;
     }
     
     /**
      * Calculates extra damage using luck
      * @param luck
+     * @return 
      * @since 1.0
      */
     public static double luckDamageCalc(int luck){
@@ -57,6 +56,7 @@ public class MathFunc {
      * (chance of 1 will always drop)
      * @param enemy
      * @param drop
+     * @return 
      * @since 1.0
      */
     public static boolean shouldDrop(Enemy enemy, Item drop){
@@ -67,15 +67,12 @@ public class MathFunc {
         
         int temp = random(0)/10;  
         
-        if(temp < drop.chance){
-            return true;
-        }else{
-            return false;
-        }
+        return temp < drop.chance;
     }
     
     /**
      * Sees if the player can run from a battle
+     * @return 
      * @since 1.0
      * @param pLuck
      * @param eLuck
@@ -83,35 +80,33 @@ public class MathFunc {
     public static boolean canRun(int pLuck, int eLuck){
         int t = pLuck - eLuck;
         if(t <= 0) return false;
-        if(random(0) < t){
-            return true;
-        }else{
-            return false;
-        }
+        return random(0) < t;
     }
     
     /**
-     * Adds the luck of enemies togehter
+     * Adds the luck of enemies together
+     * @return 
      * @since 1.0
      * @param enemies
      */
     public static int addLuck(Enemy[] enemies){
         int t = 0;
-        for(int i = 0; i < enemies.length; i++){
-            t += enemies[i].luck;
+        for (Enemy enemie : enemies) {
+            t += enemie.luck;
         }
         return t;
     }
     
     /**
-     * Adds the player and companions luck togehter
+     * Adds the player and companions luck
+     * @return 
      * @since 1.0
      * @param plrAndComps
      */
     public static int addPlayerLuck(Player[] plrAndComps){
         int t = 0;
-        for(int i = 0; i < plrAndComps.length; i++){
-            t += plrAndComps[i].luck;
+        for (Player plrAndComp : plrAndComps) {
+            t += plrAndComp.luck;
         }
         return t;
     }

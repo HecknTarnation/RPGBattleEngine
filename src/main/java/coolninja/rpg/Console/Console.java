@@ -50,6 +50,7 @@ public class Console {
     
     /**
      * Waits the amount of time given (in ms)
+     * @param time
      * @since 1.0
      */
     public static void waitReal(long time){
@@ -62,6 +63,7 @@ public class Console {
     
     /**
      * Waits the amount of half seconds given
+     * @param time
      * @since 1.0
      */
     public static void waitHalf(int time){
@@ -74,6 +76,7 @@ public class Console {
     
     /**
      * Waits the amount of time given (in seconds)
+     * @param time
      * @since 1.0
      */
     public static void waitFull(int time){

@@ -16,7 +16,10 @@ public class Companion extends Player implements Serializable{
     
     static final long serialVersionUID = 2;
     
-    public ArrayList<Move> moves = new ArrayList<Move>();
+    /**
+     *  The companion's moves
+     */
+    public ArrayList<Move> moves;
     /**
      * 0 = feet
      * 1 = legs
@@ -26,11 +29,13 @@ public class Companion extends Player implements Serializable{
      * 5 = weapon
      * 6 = mod
      */
-    public Equipment[] equipment = new Equipment[7];
+    public Equipment[] equipment;
     
      public Companion(String name, int health, int mana, int maxMana, int attack, int defense, 
         int luck, int mAttack, int mDefense, int specialAttack){
             super(name, health, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack);
+            this.equipment = new Equipment[7];
+            this.moves = new ArrayList<>();
             this.expToNextLevel = 10;
             this.exp = 0;
             this.level = 1;
@@ -38,6 +43,7 @@ public class Companion extends Player implements Serializable{
     
     /**
      * Sets the companions moves
+     * @return 
      * @since 1.0
      * @param moves
      */
@@ -48,9 +54,11 @@ public class Companion extends Player implements Serializable{
     
     /**
      * Adds a move to the companion
+     * @return 
      * @since 1.0
      * @param move
      */
+    @Override
     public final Companion addMove(Move move){
         this.moves.add(move);
         return this;
@@ -58,11 +66,14 @@ public class Companion extends Player implements Serializable{
     
     /**
      * Adds a array move to the companion
+     * @param ms
+     * @return 
      * @since 1.0
      */
+    @Override
     public Companion addMoves(Move[] ms){
-        for(int i = 0; i < ms.length; i++){
-            moves.add(ms[i]);
+        for (Move m : ms) {
+            moves.add(m);
         }
         return this;
     }
@@ -72,6 +83,7 @@ public class Companion extends Player implements Serializable{
      * @since 1.0
      * @param exp
      */
+    @Override
     public void increaseEXP(int exp){
         this.exp += exp;
     }
@@ -80,6 +92,7 @@ public class Companion extends Player implements Serializable{
      * Prints the companion's moves
      * @since 1.0
      */
+    @Override
     public final void printMoves(){
         for(int i = 0; i < moves.size(); i++){
             Move m = moves.get(i);
@@ -95,8 +108,10 @@ public class Companion extends Player implements Serializable{
     
     /**
      * Returns the companion's moves
+     * @return 
      * @since 1.0
      */
+    @Override
     public ArrayList<Move> getMoves(){
         return this.moves;
     }
@@ -105,6 +120,7 @@ public class Companion extends Player implements Serializable{
      * Heals the companion to full health and mana
      * @since 1.0
      */
+    @Override
     public void heal(){
         this.health = maxHealth;
         this.mana = maxMana;

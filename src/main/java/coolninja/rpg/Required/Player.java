@@ -22,7 +22,11 @@ public class Player implements Serializable{
     
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
-    public ArrayList<Move> moves = new ArrayList<Move>();
+
+    /**
+     * Player's moves
+     */
+    public ArrayList<Move> moves;
     /**
      * 0 = feet
      * 1 = legs
@@ -33,7 +37,11 @@ public class Player implements Serializable{
      * 6 = mod
      */
     public Equipment[] equipment = new Equipment[7];
-    public ArrayList<Item> inv = new ArrayList<Item>();
+
+    /**
+     *  Player inventory
+     */
+    public ArrayList<Item> inv;
     public Weakness currentWeakness;
     
     /**
@@ -46,10 +54,22 @@ public class Player implements Serializable{
     
     /**
      * If name == "You", then "Your turn" will be used in battle
+     * @param name
+     * @param health
+     * @param mana
+     * @param maxMana
+     * @param defense
+     * @param attack
+     * @param luck
+     * @param mAttack
+     * @param specialAttack
+     * @param mDefense
      * @since 1.0
      */
     public Player(String name, int health, int mana, int maxMana, int attack, int defense, 
             int luck, int mAttack, int mDefense, int specialAttack){
+        this.inv = new ArrayList<>();
+        this.moves = new ArrayList<>();
         this.name = name;
         this.level = 1;
         this.health = health;
@@ -68,6 +88,7 @@ public class Player implements Serializable{
     
     /**
      * Increases the exp
+     * @param exp
      * @since 1.0
      */
     public void increaseEXP(int exp){
@@ -117,10 +138,10 @@ public class Player implements Serializable{
         Console.waitHalf(5);
         
         for(int i = 0; i < stat.length; i++){
-            String name = names[i];
+            String n = names[i];
             int temp = (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
             stat[i] = temp;
-            System.out.println(name + " increased by " + temp);
+            System.out.println(n + " increased by " + temp);
             if(Vars.shouldScroll){
                 for(int x = 0; x < 5; x++){
                     System.out.println("\n");
@@ -168,7 +189,7 @@ public class Player implements Serializable{
         
         try{
             s = Integer.parseInt(InputHandler.getInput());
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             System.out.println("That's Not A Number!");   
             Console.clear();
             return;
@@ -186,7 +207,7 @@ public class Player implements Serializable{
         int s;
         try{
             s = Integer.parseInt(InputHandler.getInput());
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             Console.printError("That's Not A Number!", 500);
             return;
         }
@@ -211,7 +232,7 @@ public class Player implements Serializable{
     }
     
     /**
-     * Sets the players stats using the given equipment
+     * Sets the player's stats using the given equipment
      * (Should be overwritten)
      * @since 1.0
      * @param equipment
@@ -222,6 +243,8 @@ public class Player implements Serializable{
     
     /**
      * Adds a move to the player
+     * @param move
+     * @return 
      * @since 1.0
      */
     public Player addMove(Move move){
@@ -231,11 +254,13 @@ public class Player implements Serializable{
     
     /**
      * Adds a array move to the player
+     * @param ms
+     * @return 
      * @since 1.0
      */
     public Player addMoves(Move[] ms){
-        for(int i = 0; i < ms.length; i++){
-            moves.add(ms[i]);
+        for (Move m : ms) {
+            moves.add(m);
         }
         return this;
     }
@@ -259,6 +284,7 @@ public class Player implements Serializable{
     
     /**
      * Returns the player's moves
+     * @return 
      * @since 1.0
      */
     public ArrayList<Move> getMoves(){
@@ -278,6 +304,7 @@ public class Player implements Serializable{
     
     /**
      * Returns the player's inventory
+     * @return 
      * @since 1.0
      */
     public ArrayList<Item> getInv(){
@@ -312,6 +339,8 @@ public class Player implements Serializable{
     
     /**
      * Sets the player's current weakness
+     * @param weakness
+     * @return 
      * @since 1.0
      */
     public Player setWeakness(Weakness weakness){
@@ -320,7 +349,7 @@ public class Player implements Serializable{
     }
     
     /**
-     * Deals given damage to player/compainion
+     * Deals given damage to player/companion
      * @since 1.0
      * @param damage
      */
@@ -330,6 +359,7 @@ public class Player implements Serializable{
     
     /**
      * Adds/Removes Armor
+     * @return 
      * @since 1.0
      * @param removing
      * @param armor

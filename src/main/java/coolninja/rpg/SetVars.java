@@ -7,7 +7,7 @@ import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;
 
 /**
- * Used for setting varibles used in the engine
+ * Used for setting variables used in the engine
  * (You can also manual set them by calling Vars.[variable] = [value])
  * @version 1.0
  * @since 1.0
@@ -17,6 +17,7 @@ public class SetVars {
     
     /**
      * Sets the main player
+     * @param player
      * @since 1.0
      */
     public static void setPlayer(Player player){
@@ -24,7 +25,8 @@ public class SetVars {
     }
     
     /**
-     * Sets the main player's compainions
+     * Sets the main player's companions
+     * @param comps
      * @since 1.0
      */
     public static void setCompainions(Companion[] comps){
@@ -33,6 +35,7 @@ public class SetVars {
     
     /**
      * Sets the text displayed when a battle is won
+     * @param text
      * @since 1.0
      */
     public static void setWinText(String text){
@@ -40,7 +43,8 @@ public class SetVars {
     }
     
     /**
-     * Sets the color code for the compainions on battle
+     * Sets the color code for the companions on battle
+     * @param code
      * @since 1.0
      */
     public static void setCompColor(String code){
@@ -49,6 +53,7 @@ public class SetVars {
     
     /**
      * Sets the color code for the enemies on battle
+     * @param code
      * @since 1.0
      */
     public static void setEnemyColor(String code){
@@ -57,6 +62,7 @@ public class SetVars {
     
     /**
      * Sets if the text should scroll when leveling up
+     * @param ss
      * @since 1.0
      */
     public static void setShouldScroll(boolean ss){
@@ -65,6 +71,7 @@ public class SetVars {
     
     /**
      * Sets default battle music
+     * @param locationToSound
      * @since 1.0
      */
     public static void setBattleMusic(URI locationToSound){
@@ -73,6 +80,7 @@ public class SetVars {
     
     /**
      * Sets win music
+     * @param locationToSound
      * @since 1.0
      */
     public static void setWinMusic(URI locationToSound){
@@ -81,6 +89,7 @@ public class SetVars {
     
     /**
      * Sets lose music
+     * @param locationToSound
      * @since 1.0
      */
     public static void setLoseMusic(URI locationToSound){
@@ -89,6 +98,7 @@ public class SetVars {
     
     /**
      * Sets lose battle function
+     * @param classThatImplements
      * @since 1.0
      */
     public static void setLoseFunction(LoseBattle classThatImplements){

@@ -7,7 +7,6 @@ import java.net.URI;
 import javax.sound.sampled.*;
 
 import coolninja.rpg.Console.Console;
-
 /**
  * Handles playing sound
  * @version 1.0

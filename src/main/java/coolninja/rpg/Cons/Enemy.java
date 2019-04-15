@@ -38,7 +38,7 @@ public class Enemy implements Serializable{
         this.moves = moves;
     }
     
-    public void setStats(int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue){
+    public final void setStats(int health, int attack, int defense, int luck, int mAttack, int mDefense, int expValue){
         this.health = health;
         this.attack = attack;
         this.defense = defense;
