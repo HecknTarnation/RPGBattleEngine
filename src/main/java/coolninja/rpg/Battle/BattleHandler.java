@@ -30,8 +30,8 @@ public class BattleHandler {
     /**
     * Starts battle with the given enemy/enemies
     * @since 1.0
-    * @param en
-    * @param canRun
+    * @param en The enemy (as an object or array)
+    * @param canRun if the player can run or not
     */
     public static void StartBattle(Enemy en, boolean canRun){
         enemies = new Enemy[1];
@@ -63,8 +63,8 @@ public class BattleHandler {
     /**
      * Deals damage to the enemy given the index
      * @since 1.0
-     * @param index
-     * @param damage
+     * @param index the enemy's index in the array
+     * @param damage the amount of damage
      */
     public static void dealEnemyDamage(int index, int damage){
         enemies[index].health -= damage;

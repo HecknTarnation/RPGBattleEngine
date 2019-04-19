@@ -13,8 +13,8 @@ public class LoseBattle {
     
     /**
      * Run when player loses battle
-     * @param player
-     * @param comps
+     * @param player The player
+     * @param comps The player's companions
      * @since 1.0
      */
     public void BattleLost(Player player, Companion[] comps){
