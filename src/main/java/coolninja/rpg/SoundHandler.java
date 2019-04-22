@@ -9,7 +9,7 @@ import javax.sound.sampled.*;
 import coolninja.rpg.Console.Console;
 /**
  * Handles playing sound
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  * @author Ben Ballard
  */
@@ -38,6 +38,9 @@ public class SoundHandler extends Thread{
      */
     @Override
     public void run() {
+        if(Vars.mute){
+            return;
+        }
         File file = new File(pathToSound.getPath());
         
         input = null;
@@ -77,6 +80,9 @@ public class SoundHandler extends Thread{
     }
     
     public void end(){
+        if(Vars.mute){
+            return;
+        }
         if(audio.isOpen()){
             audio.close();
         }

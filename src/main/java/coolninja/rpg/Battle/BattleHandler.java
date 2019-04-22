@@ -12,7 +12,7 @@ import coolninja.rpg.Required.Player;
 
 /**
  * The battle handler class
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  * @author Ben Ballard
  */
@@ -603,7 +603,10 @@ public class BattleHandler {
             DropItem();
             
             //do nothing until win music has stopped playing
-            while (handler.audio.isRunning()){}
+            if(!Vars.mute){
+                while (handler.audio.isRunning()){}
+            }
+
             
             //ends sound and waits for player to press enter
             handler.end();
@@ -744,13 +747,16 @@ public class BattleHandler {
                     }
                 }   
             }
+            Colors.RESET();
             for(Enemy en: enemies){
-                 System.out.println("\n"+ en.name + " HP: " + en.health);
+                 System.out.println(Vars.enemyColorCode + "\n"+ en.name + " HP: " + en.health);
             }
+            Colors.RESET();
             System.out.println("--------------"+ move.name +"----------------");
             System.out.print(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
+            Colors.RESET();
         }
     }
 }

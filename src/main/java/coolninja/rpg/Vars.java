@@ -9,7 +9,7 @@ import coolninja.rpg.Required.Player;
 
 /**
  * Class for storing values used in the engine
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  * @author Ben Ballard
  */
@@ -36,6 +36,8 @@ public class Vars {
     public static LoseBattle loseBattle;
     
     public static boolean shouldUseLuckForExtraDamage = false;
+    
+    public static boolean mute = false;
     
     
 }

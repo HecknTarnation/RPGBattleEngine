@@ -9,7 +9,7 @@ import coolninja.rpg.Required.Player;
 /**
  * Used for setting variables used in the engine
  * (You can also manual set them by calling Vars.[variable] = [value])
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  * @author Ben Ballard
  */
@@ -112,5 +112,15 @@ public class SetVars {
      */
     public static void setShoudlUseLuck(boolean value){
         Vars.shouldUseLuckForExtraDamage = value;
+    }
+    
+    /**
+     * Mutes/Unmutes audio
+     * (Do not set this during a battle! It will cause an NullPointerException)
+     * @since 1.1
+     * @param shouldMute
+     */
+    public static void mute(boolean shouldMute){
+        Vars.mute = shouldMute;
     }
 }
