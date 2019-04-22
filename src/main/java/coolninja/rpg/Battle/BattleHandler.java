@@ -725,12 +725,32 @@ public class BattleHandler {
     private static void printGraphic(Move move){
         if(move.graphic == null){return;}
         
-        for (String frame : move.graphic.frames) {
-            System.out.println(frame);
+        for(int i = 0; i < move.graphic.frames.length; i++){
+            Colors.RESET();
+            //prints top if player is healthy, else bottom
+            if(player.health > 0){
+                System.out.println("\n -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + "\n");
+            }else{
+                System.out.println("\n" + Colors.RED_BACKGROUND + "(Dead!) -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + Colors.reset() + "\n");
+            }
+            
+            //checks if companions are null, if not, then print using the same rules as above
+            if(comps != null){
+                for (Companion comp : comps) {
+                    if (comp.health > 0) {
+                        System.out.println(Vars.compColorCode+" -" + comp.name + ": " + comp.health + "/" + comp.maxHealth + " | " + comp.mana + "/" + comp.maxMana);
+                    } else {
+                        System.out.println(Vars.compColorCode+" (Dead!) -" + comp.name + ": " + comp.health + "/" + comp.maxHealth + " | " + comp.mana + "/" + comp.maxMana + Colors.reset());
+                    }
+                }   
+            }
+            for(Enemy en: enemies){
+                 System.out.println("\n"+ en.name + " HP: " + en.health);
+            }
+            System.out.println("--------------"+ move.name +"----------------");
+            System.out.print(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
         }
-        
-        System.out.println("---------------------------");
     }
 }
