@@ -12,7 +12,7 @@ import coolninja.rpg.Required.Player;
 
 /**
  * The battle handler class
- * @version 1.1
+ * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */
@@ -35,13 +35,7 @@ public class BattleHandler {
     */
     public static void StartBattle(Enemy en, boolean canRun){
         enemies = new Enemy[1];
-        
-        if(en instanceof Boss){
-            //doesn't clone boss
-            enemies[0] = en;
-        }else{
-            enemies[0] = en.clone();
-        }
+        enemies[0] = en.clone();
             
         try {
             BattleLoop(canRun);
@@ -206,7 +200,6 @@ public class BattleHandler {
             
             //checks if player lost
             if(didLose()){
-                handler.end();
                 Vars.loseBattle.BattleLost(player, comps);
                 return;
             }
@@ -593,8 +586,6 @@ public class BattleHandler {
     //ends battle and awards items/exp
     private static void BattleFinished(){
         
-        
-        
         if(expVal > 0){
             SoundHandler handler = new SoundHandler(Vars.winMusic, false);
             
@@ -612,10 +603,7 @@ public class BattleHandler {
             DropItem();
             
             //do nothing until win music has stopped playing
-            if(!Vars.mute){
-                while (handler.audio.isRunning()){}
-            }
-
+            while (handler.audio.isRunning()){}
             
             //ends sound and waits for player to press enter
             handler.end();
@@ -628,9 +616,9 @@ public class BattleHandler {
                 comp.levelUp();
             }
             
-            //runs the bosses "onDeath" method
-            if(enArchive[0] instanceof Boss){
-                enArchive[0].onDeath();
+            //runs the enemies "onDeath" method
+            if(enemies[0] instanceof Boss){
+                enemies[0].onDeath();
             }
             
         }else{
@@ -756,16 +744,13 @@ public class BattleHandler {
                     }
                 }   
             }
-            Colors.RESET();
             for(Enemy en: enemies){
-                 System.out.println(Vars.enemyColorCode + "\n"+ en.name + " HP: " + en.health);
+                 System.out.println("\n"+ en.name + " HP: " + en.health);
             }
-            Colors.RESET();
             System.out.println("--------------"+ move.name +"----------------");
             System.out.print(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
-            Colors.RESET();
         }
     }
 }
