@@ -24,4 +24,4 @@ Please report any bugs you find in this engine to the github repository.
 
 Current Working Version: 1.0
 
-Current Version: 1.1
+Current Version: 1.1-Beta
