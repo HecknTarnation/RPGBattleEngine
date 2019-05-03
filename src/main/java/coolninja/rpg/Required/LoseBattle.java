@@ -1,4 +1,4 @@
-package coolninja.rpg.Battle;
+package coolninja.rpg.Required;
 
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Required.Player;

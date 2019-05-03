@@ -6,7 +6,7 @@ import java.io.Serializable;
  * The basic enemy class
  * 
  * @author Ben Ballard
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 public class Enemy implements Serializable{
@@ -64,6 +64,17 @@ public class Enemy implements Serializable{
             this.AIID = 2;
         }
         return this;
+    }
+    
+    /**
+     * Enum version
+     * if bigger than 2, it will be set to 2
+     * @param id
+     * @return enemy
+     * @since 1.1
+     */
+    public Enemy setAILevel(coolninja.rpg.Enums.AIID id){
+        return this.setAILevel(id.level);
     }
     
     /**
