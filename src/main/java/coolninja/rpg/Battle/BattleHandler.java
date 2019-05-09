@@ -603,7 +603,7 @@ public class BattleHandler {
             DropItem();
             
             //do nothing until win music has stopped playing
-            while (handler.audio.isRunning()){}
+            while (handler != null && handler.audio.isRunning()){}
             
             //ends sound and waits for player to press enter
             handler.end();

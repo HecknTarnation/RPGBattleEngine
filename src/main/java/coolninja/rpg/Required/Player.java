@@ -13,7 +13,7 @@ import coolninja.rpg.Console.Console;
 /**
  * The required class to a define player
  * @since 1.0
- * @version 1.0
+ * @version 1.1
  * @author Ben Ballard
  */
 public class Player implements Serializable{
@@ -49,7 +49,7 @@ public class Player implements Serializable{
      */
     protected int[] stat;
     protected String[] names = new String[]{"Max Health", "Max Mana", "Attack", "Defense", "Luck", "Magic Attack", "Magic Defense", "Special Attack"};
-    protected int skillPoints = 0;
+    public int skillPoints = 0;
     
     
     /**
@@ -138,10 +138,8 @@ public class Player implements Serializable{
         Console.waitHalf(5);
         
         for(int i = 0; i < stat.length; i++){
-            String n = names[i];
-            int temp = (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
-            stat[i] = temp;
-            System.out.println(n + " increased by " + temp);
+            stat[i] += (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
+            System.out.println(names[i] + " increased by " + stat[i]);
             if(Vars.shouldScroll){
                 for(int x = 0; x < 5; x++){
                     System.out.println("\n");
@@ -160,8 +158,6 @@ public class Player implements Serializable{
         mDefense += stat[6];
         specialAttack += stat[7];
         expToNextLevel += MathFunc.random(0)+3*level;
-        health = maxHealth;
-        mana = maxMana;
         skillPoints = MathFunc.random(3)+2*level;
         
         while(skillPoints != 0){

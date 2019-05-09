@@ -22,7 +22,7 @@ public class Boss extends Enemy{
     public void onDeath(){
         System.out.println("Oh noes, you killed me D:");
     }
-
+    
     static final long serialVersionUID = 9;
     
     

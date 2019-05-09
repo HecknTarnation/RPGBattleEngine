@@ -2,7 +2,7 @@ package coolninja.rpg;
 
 import java.net.URI;
 
-import coolninja.rpg.Battle.LoseBattle;
+import coolninja.rpg.Required.LoseBattle;
 import coolninja.rpg.Cons.Companion;
 import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Required.Player;

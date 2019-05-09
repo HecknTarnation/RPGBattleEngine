@@ -114,7 +114,7 @@ public class Enemy implements Serializable{
      */
     @Override
     public Enemy clone(){
-        return new Enemy(this.name,
+        Enemy temp = new Enemy(this.name,
         this.health,
         this.attack,
         this.defense,
@@ -122,7 +122,14 @@ public class Enemy implements Serializable{
         this.mAttack,
         this.mDefense,
         this.expValue,
-        this.moves).setAILevel(this.AIID).setDrop(this.drop.setDropChance(this.drop.chance)).setWeakness(this.weakness);
+        this.moves).setAILevel(this.AIID);
+        if(this.drop != null){
+            temp.setDrop(this.drop.setDropChance(this.drop.chance));
+        }
+        if(this.weakness != null){
+            this.setWeakness(this.weakness);
+        }
+        return temp;
     }
     
 }
