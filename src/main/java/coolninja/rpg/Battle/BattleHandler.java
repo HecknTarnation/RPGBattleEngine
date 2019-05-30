@@ -34,6 +34,7 @@ public class BattleHandler {
     * @param canRun if the player can run or not
     */
     public static void StartBattle(Enemy en, boolean canRun){
+        Colors.RESET();
         enemies = new Enemy[1];
         enemies[0] = en.clone();
             
@@ -76,7 +77,7 @@ public class BattleHandler {
         
         comps = Vars.comps;
         
-        enArchive = enemies;
+        enArchive = enemies.clone();
         
         //starts battle music
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
@@ -603,7 +604,11 @@ public class BattleHandler {
             DropItem();
             
             //do nothing until win music has stopped playing
-            while (handler != null && handler.audio.isRunning()){}
+            if(handler != null){
+                 try{
+                     while (handler.audio.isRunning()){}
+                 }catch(NullPointerException e){}
+            }
             
             //ends sound and waits for player to press enter
             handler.end();
@@ -616,9 +621,9 @@ public class BattleHandler {
                 comp.levelUp();
             }
             
-            //runs the enemies "onDeath" method
-            if(enemies[0] instanceof Boss){
-                enemies[0].onDeath();
+            //runs the boss's "onDeath" method
+            if(enArchive[0] instanceof Boss){
+                enArchive[0].onDeath();
             }
             
         }else{
@@ -751,6 +756,8 @@ public class BattleHandler {
             System.out.print(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
+            Colors.RESET();
         }
+        Colors.RESET();
     }
 }

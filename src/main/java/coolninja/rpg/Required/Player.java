@@ -104,7 +104,12 @@ public class Player implements Serializable{
         
         if(exp >= expToNextLevel){
             
-            exp -= expToNextLevel;
+            int levelNeeded = 1;
+            
+            while(exp > expToNextLevel){
+                exp -= expToNextLevel;
+                levelNeeded++;
+            }
             
             if(this.name.equalsIgnoreCase("you")){
                 System.out.println("You have leveled up!");
@@ -116,13 +121,11 @@ public class Player implements Serializable{
             
             Console.clear();
             
-            System.out.println("Level " + level);
-            
             stat = null;
         
             stat = new int[]{maxHealth, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack};
         
-            LevelUpHelper();
+            LevelUpHelper(levelNeeded);
             
             levelUp();
             
@@ -130,15 +133,19 @@ public class Player implements Serializable{
         }
     }
     
-    private void LevelUpHelper(){
-        level += 1;
+    private void LevelUpHelper(int levelNeeded){
+        level += levelNeeded;
         Console.clear();
         
         System.out.println("Level " + level + "!");
         Console.waitHalf(5);
         
         for(int i = 0; i < stat.length; i++){
-            stat[i] += (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
+            if(levelNeeded > 1){
+                for(int x = 0; x < levelNeeded; x ++){
+                    stat[i] += (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
+                }
+            }
             System.out.println(names[i] + " increased by " + stat[i]);
             if(Vars.shouldScroll){
                 for(int x = 0; x < 5; x++){

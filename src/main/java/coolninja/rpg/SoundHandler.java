@@ -28,6 +28,9 @@ public class SoundHandler extends Thread{
      * @param shouldLoop
      */
     public SoundHandler(URI pathToSound, boolean shouldLoop){
+        if(pathToSound == null){
+            return;
+        }
         this.pathToSound = pathToSound;
         this.shouldLoop = shouldLoop;
     }
@@ -46,9 +49,7 @@ public class SoundHandler extends Thread{
         input = null;
         try {
             input = AudioSystem.getAudioInputStream(file);
-        }catch (UnsupportedAudioFileException | IOException e) {
-            e.printStackTrace();
-        }
+        }catch (UnsupportedAudioFileException | IOException e) {}
         AudioFormat format = input.getFormat();
         DataLine.Info info = new DataLine.Info(Clip.class, format);
         
