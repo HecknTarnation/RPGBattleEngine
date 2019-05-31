@@ -414,6 +414,7 @@ public class BattleHandler {
         //plays sound and prints graphic
         playSound(move);
         printGraphic(move);
+        Colors.RESET();
         move.Use(t, currentPlayer, enemies[enemyIndex], comps);
         
         //checks if move is super effective
@@ -543,6 +544,7 @@ public class BattleHandler {
         
         playSound(move);
         printGraphic(move);
+        Colors.RESET();
         
         if(p.currentWeakness != null && move.type == p.currentWeakness.type){
             t *= p.currentWeakness.effectiveness;
@@ -591,14 +593,16 @@ public class BattleHandler {
             SoundHandler handler = new SoundHandler(Vars.winMusic, false);
             
             System.out.println(Vars.winText);
+            
+            int tempEXP = (int)(expVal + (3 * Math.sin(MathFunc.random(0))));
         
-            System.out.println("You earned " + expVal + " exp");
+            System.out.println("You earned " + tempEXP + " exp");
             
             
-            player.increaseEXP(expVal);
+            player.increaseEXP(tempEXP);
         
             for (Companion comp : comps) {
-                comp.increaseEXP(expVal);
+                comp.increaseEXP(tempEXP);
             }
             
             DropItem();
@@ -749,6 +753,7 @@ public class BattleHandler {
                     }
                 }   
             }
+            Colors.RESET();
             for(Enemy en: enemies){
                  System.out.println("\n"+ en.name + " HP: " + en.health);
             }
@@ -756,7 +761,6 @@ public class BattleHandler {
             System.out.print(move.graphic.frames[i]);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
-            Colors.RESET();
         }
         Colors.RESET();
     }

@@ -108,6 +108,7 @@ public class Player implements Serializable{
             
             while(exp > expToNextLevel){
                 exp -= expToNextLevel;
+                expToNextLevel += MathFunc.random(0)+3*level;
                 levelNeeded++;
             }
             
@@ -133,7 +134,16 @@ public class Player implements Serializable{
         }
     }
     
+    private int[] mutliLevelUp(int i, int needed){
+        int[] tempStat = new int[8];
+        for(int x = 0; x < needed; x++){
+            tempStat[i] += MathFunc.statInc(level);
+        }
+        return tempStat;
+    }
+    
     private void LevelUpHelper(int levelNeeded){
+        int[] tempStat = new int[8];
         level += levelNeeded;
         Console.clear();
         
@@ -142,11 +152,12 @@ public class Player implements Serializable{
         
         for(int i = 0; i < stat.length; i++){
             if(levelNeeded > 1){
-                for(int x = 0; x < levelNeeded; x ++){
-                    stat[i] += (int) Math.round((((MathFunc.random(0)/2)))+1+(luck/4));
-                }
+                tempStat = mutliLevelUp(i, levelNeeded);
+                levelNeeded = 0;
+            }else{
+                tempStat[i] += MathFunc.statInc(this.level);
             }
-            System.out.println(names[i] + " increased by " + stat[i]);
+            System.out.println(names[i] + " increased by " + tempStat[i]);
             if(Vars.shouldScroll){
                 for(int x = 0; x < 5; x++){
                     System.out.println("\n");
@@ -156,15 +167,14 @@ public class Player implements Serializable{
             Console.waitFull(1);
         }
         
-        maxHealth += stat[0];
-        maxMana += stat[1];
-        attack += stat[2];
-        defense += stat[3];
-        luck += stat[4];
-        mAttack += stat[5];
-        mDefense += stat[6];
-        specialAttack += stat[7];
-        expToNextLevel += MathFunc.random(0)+3*level;
+        maxHealth += tempStat[0];
+        maxMana += tempStat[1];
+        attack += tempStat[2];
+        defense += tempStat[3];
+        luck += tempStat[4];
+        mAttack += tempStat[5];
+        mDefense += tempStat[6];
+        specialAttack += tempStat[7];
         skillPoints = MathFunc.random(3)+2*level;
         
         while(skillPoints != 0){

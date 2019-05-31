@@ -22,6 +22,6 @@ For this to work correctly, ANSI control codes must be enabled (this only applie
 
 Please report any bugs you find in this engine to the github repository.
 
-Current Working Version: 1.0
+Current Working Version: 0.0
 
-Current Version: 1.1-Beta
+Current Version: 1.0-Beta

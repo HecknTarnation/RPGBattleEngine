@@ -19,10 +19,15 @@ public class MathFunc {
      * @since 1.0
      */
     public static int random(int clamp){
+        int temp = (int)Math.round(Math.random()*10);
         if(clamp == 0){
             clamp = 10;
         }
-        return Math.min(clamp, (int) Math.round(Math.random()*10));
+        if(temp > clamp){
+            return random(clamp);
+        }else{
+            return temp;
+        }
     }
     
     /**
@@ -109,5 +114,15 @@ public class MathFunc {
             t += plrAndComp.luck;
         }
         return t;
+    }
+    
+    /**
+     * Calculates how much to increase a stat
+     * @return int
+     * @since 1.1
+     * @param level
+     */
+    public static int statInc(int level){
+        return (int) Math.abs(Math.round((random(4)) + 1 * (Math.sin(level))))+1;
     }
 }
