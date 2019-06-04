@@ -9,7 +9,7 @@ import coolninja.rpg.Required.Player;
 /**
  * Used for setting variables used in the engine
  * (You can also manual set them by calling Vars.[variable] = [value])
- * @version 1.1
+ * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */

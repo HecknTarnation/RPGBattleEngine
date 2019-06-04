@@ -9,7 +9,7 @@ import coolninja.rpg.Required.Player;
 
 /**
  * Class for storing values used in the engine
- * @version 1.1
+ * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */

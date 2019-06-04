@@ -9,7 +9,7 @@ import javax.sound.sampled.*;
 import coolninja.rpg.Console.Console;
 /**
  * Handles playing sound
- * @version 1.1
+ * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */
