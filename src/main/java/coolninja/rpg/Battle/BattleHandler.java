@@ -601,8 +601,10 @@ public class BattleHandler {
             
             player.increaseEXP(tempEXP);
         
-            for (Companion comp : comps) {
-                comp.increaseEXP(tempEXP);
+            if(comps != null){
+                for (Companion comp : comps) {
+                    comp.increaseEXP(tempEXP);
+                }
             }
             
             DropItem();
@@ -621,8 +623,10 @@ public class BattleHandler {
             //checks if player/companions should level up
             player.levelUp();
         
-            for (Companion comp : comps) {
-                comp.levelUp();
+            if(comps != null){
+                for (Companion comp : comps) {
+                    comp.levelUp();
+                }
             }
             
             //runs the boss's "onDeath" method
@@ -656,13 +660,17 @@ public class BattleHandler {
             player.health = 0;
             s += 1;
         }
-        for (Companion comp : comps) {
-            if (comp.health <= 0) {
-                comp.health = 0;
-                s += 1;
+        if(comps != null){
+            for (Companion comp : comps) {
+                if (comp.health <= 0) {
+                    comp.health = 0;
+                    s += 1;
+                }
             }
+            return s == comps.length+1;
+        }else{
+            return s == 1;
         }
-        return s == comps.length+1;
     }
     
     //removes dead enemies from the array
