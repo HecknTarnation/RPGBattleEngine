@@ -134,8 +134,6 @@ public class BattleHandler {
                 EnemyTurns();
             }
             
-            Choose:
-            
             //clears console to prepare for printing
             Console.clear();
             
@@ -201,7 +199,6 @@ public class BattleHandler {
                     break;
                 default:
                     Console.printError("Not a Command", 1000);
-                    continue Choose;
             }
             
             //checks if player lost
