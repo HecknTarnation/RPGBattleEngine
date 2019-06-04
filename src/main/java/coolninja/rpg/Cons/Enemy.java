@@ -2,6 +2,8 @@ package coolninja.rpg.Cons;
 
 import java.io.Serializable;
 
+import coolninja.rpg.Enums.WeaknessType;
+
 /**
  * The basic enemy class
  * 
@@ -85,6 +87,11 @@ public class Enemy implements Serializable{
      */
     public Enemy setWeakness(Weakness weakness){
         this.weakness = weakness;
+        return this;
+    }
+    
+    public Enemy setWeakness(WeaknessType type, double effectiveness){
+        this.weakness = new Weakness(type, effectiveness);
         return this;
     }
     
