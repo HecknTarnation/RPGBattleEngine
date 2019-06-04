@@ -549,9 +549,9 @@ public class BattleHandler {
         if(p.currentWeakness != null && move.type == p.currentWeakness.type){
             t *= p.currentWeakness.effectiveness;
             if(p.currentWeakness.effectiveness > 1){
-                System.out.println("Enemy's Move is super effective!");
+                System.out.println("Enemy's move is super effective!");
             }else{
-                System.out.println("Enemy's Move was not very effective!");
+                System.out.println("Enemy's move was not very effective!");
             }
         }
         
@@ -565,7 +565,7 @@ public class BattleHandler {
         Console.Dots(3, 300);
         
         if(t >= 0){
-            System.out.println(p.name + move.text + "for " + t + " damage");
+            System.out.println(enemy.name + move.text + p.name + " for " + t + " damage");
         }else{
             System.out.println(p.name + " took no damage");
         }
