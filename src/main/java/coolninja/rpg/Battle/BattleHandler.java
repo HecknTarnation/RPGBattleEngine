@@ -439,6 +439,7 @@ public class BattleHandler {
         if(MathFunc.random(0)*100 < currentPlayer.luck){
             if(!MathFunc.accHitCalc(move.accuracy)){
                 System.out.println(currentPlayer.name + " missed!");
+                Console.waitFull(1);
                 return;
             }
             System.out.println(Colors.BLUE+"C"+Colors.CYAN+" R"+Colors.GREEN+" I"+Colors.YELLOW+" T"+Colors.WHITE+" I"+Colors.RED+" C"+Colors.PURPLE+" A"+Colors.GREEN+" L!"+Colors.reset());
@@ -559,6 +560,7 @@ public class BattleHandler {
         
         if(!MathFunc.accHitCalc(move.accuracy)){
             System.out.println(enemy.name + " missed!");
+            Console.waitFull(1);
             return;
         }
         
