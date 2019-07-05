@@ -51,7 +51,7 @@ public class Console {
      * @since 1.0
      */
     public static void clear() {
-        if (System.getProperty("os.name").contains("win")) {
+        if (System.getProperty("os.name").startsWith("Windows")) {
             try {
                 Runtime.getRuntime().exec("cls");
             } catch (IOException e) {
