@@ -284,10 +284,10 @@ public class Player implements Serializable {
         for (int i = 0; i < moves.size(); i++) {
             Move m = moves.get(i);
             if (m.manaCost != 0) {
-                System.out.println("  -" + Colors.WHITE_BACKGROUND + Colors.BLACK + m.name + " | Mana: " + m.manaCost + Colors.reset());
+                System.out.println("  -" + Colors.BLACK + Colors.WHITE_BACKGROUND + m.name + " | Mana: " + m.manaCost + Colors.reset());
             } else {
                 System.out.print(Colors.BLACK);
-                System.out.println("  -" + Colors.WHITE_BACKGROUND + Colors.BLACK + m.name + Colors.reset());
+                System.out.println("  -" + Colors.BLACK + Colors.WHITE_BACKGROUND + m.name + Colors.reset());
             }
         }
     }
