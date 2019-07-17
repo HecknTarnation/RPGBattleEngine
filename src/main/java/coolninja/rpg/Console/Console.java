@@ -1,7 +1,5 @@
 package coolninja.rpg.Console;
 
-import java.io.IOException;
-
 /**
  * Built-in console effects functions
  *
@@ -51,13 +49,6 @@ public class Console {
      * @since 1.0
      */
     public static void clear() {
-        if (System.getProperty("os.name").startsWith("Windows")) {
-            try {
-                Runtime.getRuntime().exec("cls");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         System.out.print("\033[H\033[2J");
     }
 
