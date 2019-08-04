@@ -1,19 +1,21 @@
 package coolninja.rpg.Cons;
 
+import coolninja.rpg.Console.Colors;
+import coolninja.rpg.InputHandler;
+import coolninja.rpg.Required.Player;
 import java.io.Serializable;
 
-import coolninja.rpg.Required.Player;
-
 /**
- * The item class 
+ * The item class
+ *
  * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */
-public class Item implements Serializable{
-    
+public class Item implements Serializable {
+
     static final long serialVersionUID = 6;
-    
+
     public String name;
     public String desc;
     /**
@@ -24,47 +26,68 @@ public class Item implements Serializable{
      * Whether the item is meant to be used on companions
      */
     public boolean useOnFriends = false;
-    
+
     /**
      * @param name
      * @param desc
      */
-    public Item(String name, String desc){
+    public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
     }
-    
+
     /**
      * Sets the drop chance for an item off an enemy
+     *
      * @param chance
-     * @return 
+     * @return
      * @since 1.0
      */
-    public Item setDropChance(double chance){
+    public Item setDropChance(double chance) {
         this.chance = chance;
         return this;
     }
-    
+
     /**
-     * Used when an item is used
-     * (Should Be Overwritten!)
+     * Used when an item is used (Should Be Overwritten!)
+     *
      * @param player
      * @param enemy
      * @since 1.0
      */
-    public void Use(Player player, Enemy enemy){
-        
+    public void Use(Player player, Enemy enemy) {
+
     }
-    
+
     /**
-     * Companion version
-     * (Should Be Overwritten!)
+     * Companion version (Should Be Overwritten!)
+     *
      * @param player
      * @param comp
      * @since 1.0
      */
-    public void Use(Player player, Companion comp){
-        
+    public void Use(Player player, Companion comp) {
+
     }
-    
+
+    /**
+     * Allows you to pick a companion from an array
+     *
+     * @param comps
+     * @return
+     * @since 1.0
+     */
+    public Companion PickComp(Companion[] comps) {
+        for (Companion comp : comps) {
+            System.out.println("  -" + Colors.WHITE_BACKGROUND + comp.name);
+        }
+        String input = InputHandler.getInput();
+        for (Companion comp : comps) {
+            if (comp.name.equalsIgnoreCase(input)) {
+                return comp;
+            }
+        }
+        return null;
+    }
+
 }
