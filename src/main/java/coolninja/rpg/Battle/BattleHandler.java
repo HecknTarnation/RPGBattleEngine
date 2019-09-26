@@ -417,8 +417,7 @@ public class BattleHandler {
         }
 
         //plays sound and prints graphic
-        playSound(move);
-        printGraphic(move);
+        printGraphic(move, playSound(move));
         Colors.RESET();
         move.Use(t, currentPlayer, enemies[enemyIndex], comps);
 
@@ -547,8 +546,7 @@ public class BattleHandler {
             t = 1;
         }
 
-        playSound(move);
-        printGraphic(move);
+        printGraphic(move, playSound(move));
         Colors.RESET();
 
         if (p.currentWeakness != null && move.type == p.currentWeakness.type) {
@@ -736,20 +734,18 @@ public class BattleHandler {
     }
 
     //plays move sound
-    private static void playSound(Move move) {
+    private static SoundHandler playSound(Move move) {
         if (move.sound == null) {
-            return;
+            return null;
         }
 
         SoundHandler handler = new SoundHandler(move.sound, false);
         handler.run();
-        while (handler.audio.isRunning()) {
-        }
-        handler.end();
+        return handler;
     }
 
     //prints move graphic
-    private static void printGraphic(Move move) {
+    private static void printGraphic(Move move, SoundHandler handler) {
         if (move.graphic == null) {
             return;
         }
@@ -783,5 +779,8 @@ public class BattleHandler {
             Console.clear();
         }
         Colors.RESET();
+        if(handler != null){
+            while(handler.audio.isRunning()){}
+        }
     }
 }
