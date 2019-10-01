@@ -16,7 +16,7 @@ Modifying the code for your own purpose is allowed as long as these 2 conditions
     
     2). You do not distribute your modified code while claming it as your own (meaning that you may rerelease this engine with the modified code as long as you say that you did not make it and give a link to this repository).
 
-Documentation can be found here: https://coolninjagames.github.io/RPGEngine/1.0
+Documentation can be found here: https://coolninjagames.github.io/RPGBattleEngine/1.0/
 
 For this to work correctly, ANSI control codes must be enabled (this only applies to Windows, Mac and Linux support this by default)
 
