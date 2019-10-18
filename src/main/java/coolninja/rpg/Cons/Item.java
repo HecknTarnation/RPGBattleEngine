@@ -1,8 +1,5 @@
 package coolninja.rpg.Cons;
 
-import coolninja.rpg.Console.Colors;
-import coolninja.rpg.InputHandler;
-import coolninja.rpg.Required.Player;
 import java.io.Serializable;
 
 /**
@@ -22,10 +19,6 @@ public class Item implements Serializable {
      * An item's chance to drop off an enemy
      */
     public double chance;
-    /**
-     * Whether the item is meant to be used on companions
-     */
-    public boolean useOnFriends = false;
 
     /**
      * @param name
@@ -51,43 +44,11 @@ public class Item implements Serializable {
     /**
      * Used when an item is used (Should Be Overwritten!)
      *
-     * @param player
-     * @param enemy
+     * @param state infomation about the current battle going on, will be null if no battle is happening
      * @since 1.0
      */
-    public void Use(Player player, Enemy enemy) {
-
-    }
-
-    /**
-     * Companion version (Should Be Overwritten!)
-     *
-     * @param player
-     * @param comp
-     * @since 1.0
-     */
-    public void Use(Player player, Companion comp) {
-
-    }
-
-    /**
-     * Allows you to pick a companion from an array
-     *
-     * @param comps
-     * @return
-     * @since 1.0
-     */
-    public Companion PickComp(Companion[] comps) {
-        for (Companion comp : comps) {
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + comp.name);
-        }
-        String input = InputHandler.getInput();
-        for (Companion comp : comps) {
-            if (comp.name.equalsIgnoreCase(input)) {
-                return comp;
-            }
-        }
-        return null;
+    public void Use(BattleState state) {
+        
     }
 
 }
