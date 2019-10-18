@@ -8,6 +8,7 @@ import coolninja.rpg.Required.Player;
  * The built-in math functions
  * @version 1.0
  * @since 1.0
+ * @author Ben Ballard
  */
 public class MathFunc {
     
@@ -79,8 +80,8 @@ public class MathFunc {
      * Sees if the player can run from a battle
      * @return 
      * @since 1.0
-     * @param pLuck
-     * @param eLuck
+     * @param pLuck the player's luck
+     * @param eLuck the enemy's luck
      */
     public static boolean canRun(int pLuck, int eLuck){
         int t = pLuck - eLuck;
@@ -92,7 +93,7 @@ public class MathFunc {
      * Adds the luck of enemies together
      * @return 
      * @since 1.0
-     * @param enemies
+     * @param enemies an array of enemies
      */
     public static int addLuck(Enemy[] enemies){
         int t = 0;
@@ -106,7 +107,7 @@ public class MathFunc {
      * Adds the player and companions luck
      * @return 
      * @since 1.0
-     * @param plrAndComps
+     * @param plrAndComps an array of the player and companions
      */
     public static int addPlayerLuck(Player[] plrAndComps){
         int t = 0;

@@ -178,7 +178,7 @@ public class BattleHandler {
             }
 
             //prints out player's options
-            System.out.print(" -Attack\n -Item\n -Idle\n");
+            System.out.print(" -Attack\n -Item\n -Stats\n -Idle\n");
             if (canRun) {
                 System.out.println(" -Run");
             }
@@ -196,6 +196,11 @@ public class BattleHandler {
                 case "idle":
                     Idle();
                     break;
+                case "stats":
+                    Console.clear();
+                    currentPlayer.printStats();
+                    InputHandler.pressEnter();
+                    Attack();
                 case "run":
                     Run(canRun);
                     break;
@@ -208,6 +213,8 @@ public class BattleHandler {
                 Vars.loseBattle.BattleLost(player, comps);
                 return;
             }
+            
+            currentPlayer.checkTemStats();
 
         }
 
@@ -286,65 +293,11 @@ public class BattleHandler {
 
         for (int i = 0; i < player.getInv().size(); i++) {
             if (input.equalsIgnoreCase(player.getInv().get(i).name)) {
-                if (player.getInv().get(i).useOnFriends) {
-                    player.getInv().get(i).Use(currentPlayer, compItem());
-                } else {
-                    player.getInv().get(i).Use(currentPlayer, enItem());
-                }
+                player.getInv().get(i).Use(new BattleState());
                 player.getInv().remove(i);
             }
         }
 
-    }
-
-    private static Enemy enItem() {
-        System.out.println("Target?");
-        for (Enemy enemy : enemies) {
-            System.out.println(Colors.BLACK);
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + enemy.name + Colors.reset());
-        }
-
-        String target = InputHandler.getInput();
-        Enemy t = null;
-        for (Enemy enemie : enemies) {
-            if (target.equalsIgnoreCase(enemie.name)) {
-                t = enemie;
-                break;
-            }
-        }
-
-        if (t == null) {
-            Console.printError("Not A Valid Target!", 1000);
-            enItem();
-            return t;
-        }
-
-        return t;
-    }
-
-    private static Companion compItem() {
-        System.out.println("Target?");
-        for (Companion c : comps) {
-            System.out.println(Colors.BLACK);
-            System.out.println("  -" + Colors.WHITE_BACKGROUND + c.name + Colors.reset());
-        }
-
-        String target = InputHandler.getInput();
-        Companion comp = null;
-        for (Companion c : comps) {
-            if (target.equalsIgnoreCase(c.name)) {
-                comp = c;
-                break;
-            }
-        }
-
-        if (comp == null) {
-            Console.printError("Not A Valid Target!", 1000);
-            compItem();
-            return comp;
-        }
-
-        return comp;
     }
 
     //allows player to skip their turn
