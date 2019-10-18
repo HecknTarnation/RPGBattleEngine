@@ -18,15 +18,15 @@ import coolninja.rpg.Battle.BattleHandler;
  * @since 1.0
  * @version 1.0
  * @author Ben Ballard
- */
-public class BattleState {
+ *///extends BattleHandler so that it may access the protected variables
+public class BattleState extends BattleHandler{
     
     public Field[] fields;
     /**
      * The BattleState constructor
      */
     public BattleState(){
-        fields = BattleHandler.class.getFields();
+        fields = BattleHandler.class.getClass().getFields();
         System.out.println(fields.length);
     }
     

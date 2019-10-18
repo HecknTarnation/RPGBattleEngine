@@ -9,8 +9,8 @@ coolninja/rpg/Enums/AIID.class
 coolninja/rpg/Cons/Enemy.class
 coolninja/rpg/Cons/BattleState.class
 coolninja/rpg/Cons/Companion.class
-coolninja/rpg/SoundHandler.class
 coolninja/rpg/Battle/BattleHandler.class
+coolninja/rpg/SoundHandler.class
 coolninja/rpg/Cons/Equipment.class
 coolninja/rpg/Exception/NoPlayerSetException.class
 coolninja/rpg/Console/Colors.class

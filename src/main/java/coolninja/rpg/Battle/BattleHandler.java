@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class BattleHandler {
 
-    private static Enemy[] enemies;
-    private static Player player;
-    private static Companion[] comps;
-    private static Player currentPlayer;
-    private static byte prevIndex;
-    private static int expVal = 0;
-    private static Item[] eDrops;
-    private static Enemy[] enArchive;
+    protected static Enemy[] enemies;
+    protected static Player player;
+    protected static Companion[] comps;
+    protected static Player currentPlayer;
+    protected static byte prevIndex;
+    protected static int expVal = 0;
+    protected static Item[] eDrops;
+    protected static Enemy[] enArchive;
 
     /**
      * Starts battle with the given enemy/enemies
