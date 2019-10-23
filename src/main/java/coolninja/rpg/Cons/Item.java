@@ -44,10 +44,9 @@ public class Item implements Serializable {
     /**
      * Used when an item is used (Should Be Overwritten!)
      *
-     * @param state infomation about the current battle going on, will be null if no battle is happening
      * @since 1.0
      */
-    public void Use(BattleState state) {
+    public void Use() {
         
     }
 

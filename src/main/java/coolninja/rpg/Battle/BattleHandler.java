@@ -18,14 +18,14 @@ import java.util.List;
  */
 public class BattleHandler {
 
-    protected static Enemy[] enemies;
-    protected static Player player;
-    protected static Companion[] comps;
-    protected static Player currentPlayer;
-    protected static byte prevIndex;
-    protected static int expVal = 0;
-    protected static Item[] eDrops;
-    protected static Enemy[] enArchive;
+    public static Enemy[] enemies;
+    public static Player player;
+    public static Companion[] comps;
+    public static Player currentPlayer;
+    public static byte prevIndex;
+    public static int expVal = 0;
+    public static Item[] eDrops;
+    public static Enemy[] enArchive;
 
     /**
      * Starts battle with the given enemy/enemies
@@ -201,6 +201,7 @@ public class BattleHandler {
                     currentPlayer.printStats();
                     InputHandler.pressEnter();
                     Attack();
+                    break;
                 case "run":
                     Run(canRun);
                     break;
@@ -213,8 +214,6 @@ public class BattleHandler {
                 Vars.loseBattle.BattleLost(player, comps);
                 return;
             }
-            
-            currentPlayer.checkTemStats();
 
         }
 
@@ -290,11 +289,13 @@ public class BattleHandler {
         player.printInv();
 
         String input = InputHandler.getInput();
+        
+        ArrayList<Item> inv = player.getInv();
 
         for (int i = 0; i < player.getInv().size(); i++) {
             if (input.equalsIgnoreCase(player.getInv().get(i).name)) {
-                player.getInv().get(i).Use(new BattleState());
-                player.getInv().remove(i);
+                inv.get(i).Use();
+                inv.remove(i);
             }
         }
 

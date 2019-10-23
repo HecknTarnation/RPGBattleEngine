@@ -70,50 +70,6 @@ public class Enemy implements Serializable{
     }
     
     /**
-     * Max of 10 temporary state increases, any new ones will be ignored until one ends
-     */
-    public int[][] statTurnCount = new int[10][3];
-    
-    /**
-     * Increased(or decreases) the stats for the given amount of turns (if 0 is passed, then it lasts until the battle is over)
-     * <br> use this as reference for index {maxHealth, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack}
-     * @since 1.0
-     * @param stat an int with the index of the stat to increase
-     * @param turnCount the amount of turns to keep this stat
-     * @param amount the amount to increase the stat by
-     */
-    public void tempStatIncrease(int statIndex, int turnCount, int amount){
-        for(int i = 0; i < 10; i++){
-            if(statTurnCount[i] == null){
-                int[] temp = new int[3];
-                temp[0] = statIndex;
-                temp[1] = turnCount;
-                temp[2] = amount;
-                statTurnCount[i] = temp;
-            }
-        }
-    }
-    
-    public void checkTemStats(){
-        stat = new int[]{attack, defense, luck, mAttack, mDefense};
-        for(int i = 0; i < 10; i++){
-            if(statTurnCount[i] != null){
-                statTurnCount[i][1]--;
-                if(statTurnCount[i][1] < 0){
-                    stat[statTurnCount[i][0]] -= statTurnCount[i][2];
-                    statTurnCount[i] = null;
-                }
-            }
-        }
-        attack = stat[0];
-        defense = stat[1];
-        luck = stat[2];
-        mAttack = stat[3];
-        mDefense = stat[4];
-        stat = null;
-    }
-    
-    /**
      * Enum version
      * if bigger than 2, it will be set to 2
      * @param id

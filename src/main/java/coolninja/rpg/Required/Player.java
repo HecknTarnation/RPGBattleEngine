@@ -1,11 +1,13 @@
 package coolninja.rpg.Required;
 
+import coolninja.rpg.Battle.BattleHandler;
 import coolninja.rpg.Cons.*;
 import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Console.Console;
 import coolninja.rpg.InputHandler;
 import coolninja.rpg.MathFunc;
 import coolninja.rpg.Vars;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,53 +92,6 @@ public class Player implements Serializable {
     public void increaseEXP(int exp) {
         this.exp += exp;
     }
-    
-    /**
-     * Max of 10 temporary state increases, any new ones will be ignored until one ends
-     */
-    public int[][] statTurnCount = new int[10][3];
-    
-    /**
-     * Increased(or decreases) the stats for the given amount of turns (if 0 is passed, then it lasts until the battle is over)
-     * <br> use this as reference for index {maxHealth, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack}
-     * @since 1.0
-     * @param stat an int with the index of the stat to increase
-     * @param turnCount the amount of turns to keep this stat
-     * @param amount the amount to increase the stat by
-     */
-    public void tempStatIncrease(int statIndex, int turnCount, int amount){
-        for(int i = 0; i < 10; i++){
-            if(statTurnCount[i] == null){
-                int[] temp = new int[3];
-                temp[0] = statIndex;
-                temp[1] = turnCount;
-                temp[2] = amount;
-                statTurnCount[i] = temp;
-            }
-        }
-    }
-    
-    public void checkTemStats(){
-        stat = new int[]{maxHealth, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack};
-        for(int i = 0; i < 10; i++){
-            if(statTurnCount[i] != null){
-                statTurnCount[i][1]--;
-                if(statTurnCount[i][1] < 0){
-                    stat[statTurnCount[i][0]] -= statTurnCount[i][2];
-                    statTurnCount[i] = null;
-                }
-            }
-        }
-        maxHealth = stat[0];
-        maxMana = stat[1];
-        attack = stat[2];
-        defense = stat[3];
-        luck = stat[4];
-        mAttack = stat[5];
-        mDefense = stat[6];
-        specialAttack = stat[7];
-        stat = null;
-    }
 
     /**
      * Used to level up the player when the required exp is obtained (Can be
@@ -184,10 +139,12 @@ public class Player implements Serializable {
         }
     }
 
-    private int[] mutliLevelUp(int i, int needed) {
+    private int[] mutliLevelUp(int needed) {
         int[] tempStat = new int[8];
-        for (int x = 0; x < needed; x++) {
-            tempStat[i] += MathFunc.statInc(level);
+        for (int i = 0; i < needed; i++) {
+            for (int x = 0; x < stat.length; x++) {
+                tempStat[x] += MathFunc.statInc(level);
+            }
         }
         return tempStat;
     }
@@ -200,9 +157,9 @@ public class Player implements Serializable {
         System.out.println("Level " + level + "!");
         Console.waitHalf(5);
 
-        for (int i = 0; i < stat.length; i++) {
+        for (int i = 0; i < stat.length-1; i++) {
             if (levelNeeded > 1) {
-                tempStat = mutliLevelUp(i, levelNeeded);
+                tempStat = mutliLevelUp(levelNeeded);
                 levelNeeded = 0;
             } else {
                 tempStat[i] += MathFunc.statInc(this.level);
