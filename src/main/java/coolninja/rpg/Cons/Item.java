@@ -18,7 +18,7 @@ public class Item implements Serializable {
     /**
      * An item's chance to drop off an enemy
      */
-    public double chance;
+    public float chance;
 
     /**
      * @param name
@@ -36,7 +36,7 @@ public class Item implements Serializable {
      * @return
      * @since 1.0
      */
-    public Item setDropChance(double chance) {
+    public Item setDropChance(float chance) {
         this.chance = chance;
         return this;
     }

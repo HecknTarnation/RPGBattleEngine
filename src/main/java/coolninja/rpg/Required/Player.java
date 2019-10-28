@@ -1,6 +1,5 @@
 package coolninja.rpg.Required;
 
-import coolninja.rpg.Battle.BattleHandler;
 import coolninja.rpg.Cons.*;
 import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Console.Console;
@@ -25,7 +24,7 @@ public class Player implements Serializable {
 
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
-
+    public double growthRate = 1.0;
     /**
      * Player's moves
      */
@@ -101,6 +100,7 @@ public class Player implements Serializable {
      */
     public void levelUp() {
         if(level >= 99){
+            level = 99;
             if (this.name.equalsIgnoreCase("you")) {
                 System.out.println("You are max level!");
             } else {
@@ -143,7 +143,7 @@ public class Player implements Serializable {
         int[] tempStat = new int[8];
         for (int i = 0; i < needed; i++) {
             for (int x = 0; x < stat.length; x++) {
-                tempStat[x] += MathFunc.statInc(level);
+                tempStat[x] += MathFunc.statInc(level, this.growthRate);
             }
         }
         return tempStat;
@@ -162,7 +162,7 @@ public class Player implements Serializable {
                 tempStat = mutliLevelUp(levelNeeded);
                 levelNeeded = 0;
             } else {
-                tempStat[i] += MathFunc.statInc(this.level);
+                tempStat[i] += MathFunc.statInc(this.level, this.growthRate);
             }
             System.out.println(names[i] + " increased by " + tempStat[i]);
             if (Vars.shouldScroll) {
@@ -417,8 +417,22 @@ public class Player implements Serializable {
         }
         return this;
     }
-
+    
+    /**
+     * Adds an item to the players inventory
+     * @since 1.0
+     */
     public void addItemToInv(Item item) {
         inv.add(item);
+    }
+    
+    /**
+     * Sets the charater's growth rate for stats <br>
+     * Used in this formula (growth-rate x leve)/10 + 2
+     * @since 1.0
+     * @param rate
+     */
+    public void setGrowthRate(double rate){
+        this.growthRate = rate;
     }
 }

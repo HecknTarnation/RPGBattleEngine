@@ -7,7 +7,6 @@ coolninja/rpg/MathFunc.class
 coolninja/rpg/InputHandler.class
 coolninja/rpg/Enums/AIID.class
 coolninja/rpg/Cons/Enemy.class
-coolninja/rpg/Cons/BattleState.class
 coolninja/rpg/Cons/Companion.class
 coolninja/rpg/SoundHandler.class
 coolninja/rpg/Battle/BattleHandler.class
