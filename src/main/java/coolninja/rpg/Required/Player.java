@@ -24,7 +24,7 @@ public class Player implements Serializable {
 
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
-    public double growthRate = 1.0;
+    public double heathgrowthRate, manaGrowhRate, attackGrowthRate, defenseGrowthRate, mAttackGrowthRate, mDefenseGrowthRate = 1.0;
     /**
      * Player's moves
      */
@@ -46,6 +46,7 @@ public class Player implements Serializable {
     protected int[] stat;
     protected String[] names = new String[]{"Max Health", "Max Mana", "Attack", "Defense", "Luck", "Magic Attack", "Magic Defense", "Special Attack"};
     public int skillPoints = 0;
+    protected double[] growthRates = new double[6];
 
     /**
      * If name == "You", then "Your turn" will be used in battle
@@ -108,7 +109,14 @@ public class Player implements Serializable {
             }
         }
         if (exp >= expToNextLevel) {
-
+            
+            growthRates[0] = this.heathgrowthRate;
+            growthRates[1] = this.manaGrowhRate;
+            growthRates[2] = this.attackGrowthRate;
+            growthRates[3] = this.defenseGrowthRate;
+            growthRates[4] = this.mAttackGrowthRate;
+            growthRates[5] = this.mDefenseGrowthRate;
+            
             int levelNeeded = 1;
 
             while (exp > expToNextLevel) {
@@ -143,7 +151,7 @@ public class Player implements Serializable {
         int[] tempStat = new int[8];
         for (int i = 0; i < needed; i++) {
             for (int x = 0; x < stat.length; x++) {
-                tempStat[x] += MathFunc.statInc(level, this.growthRate);
+                tempStat[x] += MathFunc.statInc(this.level, x < growthRates.length-1 ? growthRates[x] : 1);
             }
         }
         return tempStat;
@@ -161,8 +169,8 @@ public class Player implements Serializable {
             if (levelNeeded > 1) {
                 tempStat = mutliLevelUp(levelNeeded);
                 levelNeeded = 0;
-            } else {
-                tempStat[i] += MathFunc.statInc(this.level, this.growthRate);
+            } else if(levelNeeded == 1){
+                tempStat[i] += MathFunc.statInc(this.level, i >= growthRates.length ? 1 : growthRates[i]);
             }
             System.out.println(names[i] + " increased by " + tempStat[i]);
             if (Vars.shouldScroll) {
@@ -187,7 +195,8 @@ public class Player implements Serializable {
         while (skillPoints != 0) {
             pickStat(skillPoints);
         }
-
+        printStats();
+        
         Console.waitHalf(1);
 
         InputHandler.pressEnter();
@@ -358,7 +367,6 @@ public class Player implements Serializable {
         System.out.println("Health: " + health + "/" + maxHealth);
         System.out.println("Mana: " + mana + "/" + maxMana);
         System.out.println("Exp: " + exp + "/" + expToNextLevel);
-        Console.waitFull(2);
     }
 
     /**
@@ -428,11 +436,27 @@ public class Player implements Serializable {
     
     /**
      * Sets the charater's growth rate for stats <br>
-     * Used in this formula (growth-rate x leve)/10 + 2
+     * Used in this formula (growth-rate x level)/10 + random(2) <br>
+     * Negative values will slowly decrease the stats, until it begins to apply negative ones.
      * @since 1.0
      * @param rate
      */
-    public void setGrowthRate(double rate){
-        this.growthRate = rate;
+    public void setHeathGrowthRate(double rate){
+        this.heathgrowthRate = rate;
+    }
+    public void setManaGrowthRate(double rate){
+        this.manaGrowhRate = rate;
+    }
+    public void setAttackGrowthRate(double rate){
+        this.attackGrowthRate = rate;
+    }
+    public void setDefenseGrowthRate(double rate){
+        this.defenseGrowthRate = rate;
+    }
+    public void setMAttackGrowthRate(double rate){
+        this.mAttackGrowthRate = rate;
+    }
+    public void setMDefenseGrowthRate(double rate){
+        this.mDefenseGrowthRate = rate;
     }
 }

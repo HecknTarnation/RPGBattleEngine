@@ -125,6 +125,6 @@ public class MathFunc {
      * @param growth the character's growth rate of stats
      */
     public static int statInc(int level, double growth){
-        return (int) Math.round((growth * level)/10 + 2 + random(4));
+        return (int) Math.round((growth * level)/10 + random(2));
     }
 }
