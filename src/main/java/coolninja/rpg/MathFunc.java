@@ -120,10 +120,11 @@ public class MathFunc {
     /**
      * Calculates how much to increase a stat
      * @return int
-     * @since 1.1
-     * @param level
+     * @since 1.0
+     * @param level the character's level
+     * @param growth the character's growth rate of stats
      */
-    public static int statInc(int level){
-        return (int) Math.abs(Math.round((random(4)) + 1 * (Math.sin(level))))+1;
+    public static int statInc(int level, double growth){
+        return (int) Math.round((growth * level)/10 + random(2));
     }
 }

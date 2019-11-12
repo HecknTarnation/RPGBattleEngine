@@ -2,7 +2,6 @@ package coolninja.rpg.Cons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import coolninja.rpg.Console.Colors;
 import coolninja.rpg.Required.Player;
 
