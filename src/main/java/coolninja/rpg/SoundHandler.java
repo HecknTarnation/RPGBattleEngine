@@ -1,34 +1,35 @@
 package coolninja.rpg;
 
+import coolninja.rpg.Console.Console;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
-
 import javax.sound.sampled.*;
 
-import coolninja.rpg.Console.Console;
 /**
  * Handles playing sound
+ *
  * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */
-public class SoundHandler extends Thread{
-    
+public class SoundHandler extends Thread {
+
     public URI pathToSound;
     public boolean shouldLoop;
-    
+
     public Clip audio;
     private AudioInputStream input;
-    
+
     /**
      * Sets up thread
+     *
      * @since 1.0
      * @param pathToSound
      * @param shouldLoop
      */
-    public SoundHandler(URI pathToSound, boolean shouldLoop){
-        if(pathToSound == null){
+    public SoundHandler(URI pathToSound, boolean shouldLoop) {
+        if (pathToSound == null) {
             return;
         }
         this.pathToSound = pathToSound;
@@ -37,54 +38,58 @@ public class SoundHandler extends Thread{
 
     /**
      * Starts playing sound
+     *
      * @since 1.0
      */
     @Override
     public void run() {
-        if(Vars.mute){
+        if (Vars.mute) {
             return;
         }
         File file = new File(pathToSound.getPath());
-        
+
         input = null;
         try {
             input = AudioSystem.getAudioInputStream(file);
-        }catch (UnsupportedAudioFileException | IOException e) {}
+        } catch (UnsupportedAudioFileException | IOException e) {
+        }
         AudioFormat format = input.getFormat();
         DataLine.Info info = new DataLine.Info(Clip.class, format);
-        
+
         audio = null;
         try {
             audio = (Clip) AudioSystem.getLine(info);
-            if(shouldLoop){
-                audio.loop(Clip.LOOP_CONTINUOUSLY);
-            }
-        }catch (LineUnavailableException e) {
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
-        }catch(IllegalStateException e){
+        } catch (IllegalStateException e) {
             Console.printError("System couldn't play audio.", 1);
             return;
         }
-        
+
+        if (shouldLoop) {
+            audio.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+
         try {
             audio.open(input);
-        }catch (LineUnavailableException | IOException e) {
+        } catch (LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
         audio.start();
-        while (audio.isRunning() && !this.isInterrupted()){
-            try{
+        while (audio.isRunning() && !this.isInterrupted()) {
+            try {
                 this.wait(1);
-            }catch(InterruptedException e){}
+            } catch (InterruptedException e) {
+            }
         }
-        
+
     }
-    
-    public void end(){
-        if(Vars.mute){
+
+    public void end() {
+        if (Vars.mute) {
             return;
         }
-        if(audio.isOpen()){
+        if (audio.isOpen()) {
             audio.close();
         }
 

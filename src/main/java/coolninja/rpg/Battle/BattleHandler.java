@@ -83,7 +83,7 @@ public class BattleHandler {
 
         //starts battle music
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
-        handler.run();
+        handler.start();
 
         //finds out hows much exp this battle is worth
         for (Enemy enemy : enemies) {
@@ -289,7 +289,7 @@ public class BattleHandler {
         player.printInv();
 
         String input = InputHandler.getInput();
-        
+
         ArrayList<Item> inv = player.getInv();
 
         for (int i = 0; i < player.getInv().size(); i++) {
@@ -733,8 +733,9 @@ public class BattleHandler {
             Console.clear();
         }
         Colors.RESET();
-        if(handler != null){
-            while(handler.audio.isRunning()){}
+        if (handler != null) {
+            while (handler.audio.isRunning()) {
+            }
         }
     }
 }
