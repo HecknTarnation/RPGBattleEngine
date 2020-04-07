@@ -6,125 +6,136 @@ import coolninja.rpg.Required.Player;
 
 /**
  * The built-in math functions
+ *
  * @version 1.0
  * @since 1.0
  * @author Ben Ballard
  */
 public class MathFunc {
-    
+
     /**
-     * Gets a random number from 0-10
-     * (0 = max of 10)
+     * Gets a random number from 0-10 (0 = max of 10)
+     *
      * @param clamp
-     * @return 
+     * @return
      * @since 1.0
      */
-    public static int random(int clamp){
-        int temp = (int)Math.round(Math.random()*10);
-        if(clamp == 0){
+    public static int random(int clamp) {
+        int temp = (int) Math.round(Math.random() * 10);
+        if (clamp == 0) {
             clamp = 10;
         }
-        if(temp > clamp){
+        if (temp > clamp) {
             return random(clamp);
-        }else{
+        } else {
             return temp;
         }
     }
-    
+
     /**
      * Calculates if the move should hit
+     *
      * @param acc
-     * @return 
+     * @return
      * @since 1.0
      */
-    public static boolean accHitCalc(double acc){
-        
-        if(acc > random(0)/10){
+    public static boolean accHitCalc(double acc) {
+
+        if (acc > random(0) / 10) {
             return true;
-        }else return acc == 1;
+        } else {
+            return acc == 1;
+        }
     }
-    
+
     /**
      * Calculates extra damage using luck
+     *
      * @param luck
-     * @return 
+     * @return
      * @since 1.0
      */
-    public static double luckDamageCalc(int luck){
-        
-        double temp = luck * (MathFunc.random(0)/2.2);
-        
+    public static double luckDamageCalc(int luck) {
+
+        double temp = luck * (MathFunc.random(0) / 2.2);
+
         return temp;
     }
-    
+
     /**
-     * Calculates if an item should drop
-     * (chance of 1 will always drop)
+     * Calculates if an item should drop (chance of 1 will always drop)
+     *
      * @param enemy
      * @param drop
-     * @return 
+     * @return
      * @since 1.0
      */
-    public static boolean shouldDrop(Enemy enemy, Item drop){
+    public static boolean shouldDrop(Enemy enemy, Item drop) {
 
-        if(drop.chance == 1){
+        if (drop.chance == 1) {
             return true;
         }
-        
-        int temp = random(0)/10;  
-        
+
+        int temp = random(0) / 10;
+
         return temp < drop.chance;
     }
-    
+
     /**
      * Sees if the player can run from a battle
-     * @return 
+     *
+     * @return
      * @since 1.0
      * @param pLuck the player's luck
      * @param eLuck the enemy's luck
      */
-    public static boolean canRun(int pLuck, int eLuck){
+    public static boolean canRun(int pLuck, int eLuck) {
         int t = pLuck - eLuck;
-        if(t <= 0) return false;
+        if (t <= 0) {
+            return false;
+        }
         return random(0) < t;
     }
-    
+
     /**
      * Adds the luck of enemies together
-     * @return 
+     *
+     * @return
      * @since 1.0
      * @param enemies an array of enemies
      */
-    public static int addLuck(Enemy[] enemies){
+    public static int addLuck(Enemy[] enemies) {
         int t = 0;
         for (Enemy enemie : enemies) {
             t += enemie.luck;
         }
         return t;
     }
-    
+
     /**
      * Adds the player and companions luck
-     * @return 
+     *
+     * @return
      * @since 1.0
      * @param plrAndComps an array of the player and companions
      */
-    public static int addPlayerLuck(Player[] plrAndComps){
+    public static int addPlayerLuck(Player[] plrAndComps) {
         int t = 0;
         for (Player plrAndComp : plrAndComps) {
             t += plrAndComp.luck;
         }
         return t;
     }
-    
+
     /**
      * Calculates how much to increase a stat
+     *
      * @return int
      * @since 1.0
      * @param level the character's level
-     * @param growth the character's growth rate of stats
+     * @param growth the character's growth rate of the stat to increase
      */
-    public static int statInc(int level, double growth){
-        return (int) Math.round((growth * level)/10 + random(2));
+    public static int statInc(int level, double growth) {
+        return (int) Math.round((growth * level) / 10 + random(2));
     }
 }

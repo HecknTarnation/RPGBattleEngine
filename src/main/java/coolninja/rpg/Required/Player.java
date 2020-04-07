@@ -6,7 +6,6 @@ import coolninja.rpg.Console.Console;
 import coolninja.rpg.InputHandler;
 import coolninja.rpg.MathFunc;
 import coolninja.rpg.Vars;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +24,7 @@ public class Player implements Serializable {
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
     public double heathgrowthRate, manaGrowhRate, attackGrowthRate, defenseGrowthRate, mAttackGrowthRate, mDefenseGrowthRate = 1.0;
+
     /**
      * Player's moves
      */
@@ -38,7 +38,9 @@ public class Player implements Serializable {
      * Player inventory
      */
     public ArrayList<Item> inv;
+
     public Weakness currentWeakness;
+    public StatusEffect statusEffect;
 
     /**
      * Used for internal handling of level ups
@@ -100,7 +102,7 @@ public class Player implements Serializable {
      * @since 1.0
      */
     public void levelUp() {
-        if(level >= 99){
+        if (level >= 99) {
             level = 99;
             if (this.name.equalsIgnoreCase("you")) {
                 System.out.println("You are max level!");
@@ -109,19 +111,19 @@ public class Player implements Serializable {
             }
         }
         if (exp >= expToNextLevel) {
-            
+
             growthRates[0] = this.heathgrowthRate;
             growthRates[1] = this.manaGrowhRate;
             growthRates[2] = this.attackGrowthRate;
             growthRates[3] = this.defenseGrowthRate;
             growthRates[4] = this.mAttackGrowthRate;
             growthRates[5] = this.mDefenseGrowthRate;
-            
+
             int levelNeeded = 1;
 
             while (exp > expToNextLevel) {
                 exp -= expToNextLevel;
-                expToNextLevel += MathFunc.random(0) + 3 * level;
+                expToNextLevel += (MathFunc.random(0) + 3) * level;
                 levelNeeded++;
             }
 
@@ -151,7 +153,7 @@ public class Player implements Serializable {
         int[] tempStat = new int[8];
         for (int i = 0; i < needed; i++) {
             for (int x = 0; x < stat.length; x++) {
-                tempStat[x] += MathFunc.statInc(this.level, x < growthRates.length-1 ? growthRates[x] : 1);
+                tempStat[x] += MathFunc.statInc(this.level, x < growthRates.length - 1 ? growthRates[x] : 1);
             }
         }
         return tempStat;
@@ -165,11 +167,11 @@ public class Player implements Serializable {
         System.out.println("Level " + level + "!");
         Console.waitHalf(5);
 
-        for (int i = 0; i < stat.length-1; i++) {
+        for (int i = 0; i < stat.length - 1; i++) {
             if (levelNeeded > 1) {
                 tempStat = mutliLevelUp(levelNeeded);
                 levelNeeded = 0;
-            } else if(levelNeeded == 1){
+            } else if (levelNeeded == 1) {
                 tempStat[i] += MathFunc.statInc(this.level, i >= growthRates.length ? 1 : growthRates[i]);
             }
             System.out.println(names[i] + " increased by " + tempStat[i]);
@@ -196,7 +198,7 @@ public class Player implements Serializable {
             pickStat(skillPoints);
         }
         printStats();
-        
+
         Console.waitHalf(1);
 
         InputHandler.pressEnter();
@@ -425,38 +427,56 @@ public class Player implements Serializable {
         }
         return this;
     }
-    
+
     /**
      * Adds an item to the players inventory
+     *
      * @since 1.0
      */
     public void addItemToInv(Item item) {
         inv.add(item);
     }
-    
+
     /**
-     * Sets the charater's growth rate for stats <br>
+     * Sets the character's status effect
+     *
+     * @since 1.0
+     * @param statusEffect
+     */
+    public void setStatusEffect(StatusEffect statusEffect) {
+        this.statusEffect = statusEffect;
+    }
+
+    /**
+     * Sets the character's growth rate for stats <br>
      * Used in this formula (growth-rate x level)/10 + random(2) <br>
-     * Negative values will slowly decrease the stats, until it begins to apply negative ones.
+     * Negative values will slowly decrease the stats, until it begins to apply
+     * negative ones.
+     *
      * @since 1.0
      * @param rate
      */
-    public void setHeathGrowthRate(double rate){
+    public void setHeathGrowthRate(double rate) {
         this.heathgrowthRate = rate;
     }
-    public void setManaGrowthRate(double rate){
+
+    public void setManaGrowthRate(double rate) {
         this.manaGrowhRate = rate;
     }
-    public void setAttackGrowthRate(double rate){
+
+    public void setAttackGrowthRate(double rate) {
         this.attackGrowthRate = rate;
     }
-    public void setDefenseGrowthRate(double rate){
+
+    public void setDefenseGrowthRate(double rate) {
         this.defenseGrowthRate = rate;
     }
-    public void setMAttackGrowthRate(double rate){
+
+    public void setMAttackGrowthRate(double rate) {
         this.mAttackGrowthRate = rate;
     }
-    public void setMDefenseGrowthRate(double rate){
+
+    public void setMDefenseGrowthRate(double rate) {
         this.mDefenseGrowthRate = rate;
     }
 }
