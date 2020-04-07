@@ -66,14 +66,13 @@ public class SoundHandler extends Thread {
             return;
         }
 
-        if (shouldLoop) {
-            audio.loop(Clip.LOOP_CONTINUOUSLY);
-        }
-
         try {
             audio.open(input);
         } catch (LineUnavailableException | IOException e) {
             e.printStackTrace();
+        }
+        if (shouldLoop) {
+            audio.loop(Clip.LOOP_CONTINUOUSLY);
         }
         audio.start();
         while (audio.isRunning() && !this.isInterrupted()) {
