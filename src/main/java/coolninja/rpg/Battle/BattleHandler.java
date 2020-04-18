@@ -73,6 +73,14 @@ public class BattleHandler {
         enemies[index].health -= damage;
     }
 
+    public static void dealPlayerDamage(int damage) {
+        if (Vars.player.name.equalsIgnoreCase("you")) {
+            System.out.println("You take " + damage + "damage");
+        } else {
+            System.out.println(Vars.player.name + " take " + damage + "damage");
+        }
+    }
+
     private static void BattleLoop(boolean canRun) throws NoPlayerSetException {
 
         player = Vars.player;
@@ -207,6 +215,20 @@ public class BattleHandler {
                     break;
                 default:
                     Console.printError("Not a Command", 1000);
+            }
+
+            if (Vars.player.statusEffect != null) {
+                Vars.player.statusEffect.endOfTurn();
+            }
+            for (Companion comp : comps) {
+                if (comp.statusEffect != null) {
+                    comp.statusEffect.endOfTurn();
+                }
+            }
+            for (Enemy en : enemies) {
+                if (en.statusEffect != null) {
+                    en.statusEffect.endOfTurn();
+                }
             }
 
             //checks if player lost

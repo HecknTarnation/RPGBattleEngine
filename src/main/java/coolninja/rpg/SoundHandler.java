@@ -91,12 +91,6 @@ public class SoundHandler extends Thread {
         if (audio.isOpen()) {
             audio.close();
         }
-
-        try {
-            input.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.interrupt();
     }
 }

@@ -9,5 +9,5 @@ package coolninja.rpg.Cons;
  */
 public interface IEffect {
 
-    public void effect();
+    public void effect(Object characterAttached);
 }
