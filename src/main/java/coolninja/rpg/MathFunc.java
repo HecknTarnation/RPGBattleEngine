@@ -14,7 +14,7 @@ import coolninja.rpg.Required.Player;
 public class MathFunc {
 
     /**
-     * Gets a random number from 0-10 (0 = max of 10)
+     * Gets a random number from 0-10 (or clamp) (0 = max of 10)
      *
      * @param clamp
      * @return
