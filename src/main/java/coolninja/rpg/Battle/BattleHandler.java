@@ -116,7 +116,7 @@ public class BattleHandler {
             //ends battle if player and all companions are dead
             if (didLose()) {
                 SoundHandler hand = new SoundHandler(Vars.loseMusic, false);
-                hand.run();
+                hand.start();
                 Vars.loseBattle.BattleLost(player, comps);
                 hand.end();
                 return;

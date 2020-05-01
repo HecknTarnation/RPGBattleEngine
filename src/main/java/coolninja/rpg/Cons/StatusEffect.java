@@ -27,7 +27,7 @@ public class StatusEffect {
         this.startOfEffect = startOfEffect;
         this.endOfTurn = endOfTurn;
         this.endOfEffect = endOfEffect;
-        this.startOfEffect.effect(characterAttached);
+        this.startOfEffect.effect(this.characterAttached);
     }
 
     /**
@@ -41,9 +41,9 @@ public class StatusEffect {
      */
     public void endOfTurn() {
         this.turnDuration--;
-        this.endOfTurn.effect(characterAttached);
+        this.endOfTurn.effect(this.characterAttached);
         if (turnDuration < 0) {
-            endOfEffect.effect(characterAttached);
+            endOfEffect.effect(this.characterAttached);
         }
     }
 
