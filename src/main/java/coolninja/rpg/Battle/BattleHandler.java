@@ -34,7 +34,7 @@ public class BattleHandler {
      * @param en The enemy (as an object or array)
      * @param canRun if the player can run or not
      */
-    public static void StartBattle(Enemy en, boolean canRun) {
+    public static void StartBattle(Enemy en, boolean canRun) throws InterruptedException {
         Colors.RESET();
         enemies = new Enemy[1];
         enemies[0] = en.clone();
@@ -46,7 +46,7 @@ public class BattleHandler {
         }
     }
 
-    public static void StartBattle(Enemy[] ens, boolean canRun) {
+    public static void StartBattle(Enemy[] ens, boolean canRun) throws InterruptedException {
 
         enemies = new Enemy[ens.length];
 
@@ -81,7 +81,7 @@ public class BattleHandler {
         }
     }
 
-    private static void BattleLoop(boolean canRun) throws NoPlayerSetException {
+    private static void BattleLoop(boolean canRun) throws NoPlayerSetException, InterruptedException {
 
         player = Vars.player;
 
@@ -494,6 +494,9 @@ public class BattleHandler {
     //picks a random character
     private static Player pick() {
         int t = MathFunc.random(comps.length);
+        if (comps.length == 0) {
+            t = 0;
+        }
         Player p;
         if (t <= 0) {
             p = player;
@@ -567,7 +570,7 @@ public class BattleHandler {
     }
 
     //ends battle and awards items/exp
-    private static void BattleFinished() {
+    private static void BattleFinished() throws InterruptedException {
 
         if (expVal > 0) {
             SoundHandler handler = new SoundHandler(Vars.winMusic, false);

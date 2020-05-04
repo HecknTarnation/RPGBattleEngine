@@ -84,12 +84,16 @@ public class SoundHandler extends Thread {
 
     }
 
-    public void end() {
+    public void end() throws InterruptedException {
         if (Vars.mute) {
             return;
         }
-        if (audio.isOpen()) {
-            audio.close();
+        try {
+            if (audio.isOpen()) {
+                audio.close();
+            }
+        } catch (Exception e) {
+            this.join();
         }
         this.interrupt();
     }

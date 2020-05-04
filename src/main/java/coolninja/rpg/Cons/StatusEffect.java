@@ -10,7 +10,6 @@ public class StatusEffect {
 
     public int turnDuration;
     public IEffect startOfEffect, endOfTurn, endOfEffect;
-    public Object characterAttached;
 
     /**
      * Creates a new StatusEffect object. startOfEffect is run when this object
@@ -27,7 +26,7 @@ public class StatusEffect {
         this.startOfEffect = startOfEffect;
         this.endOfTurn = endOfTurn;
         this.endOfEffect = endOfEffect;
-        this.startOfEffect.effect(this.characterAttached);
+        this.startOfEffect.effect();
     }
 
     /**
@@ -41,9 +40,9 @@ public class StatusEffect {
      */
     public void endOfTurn() {
         this.turnDuration--;
-        this.endOfTurn.effect(this.characterAttached);
+        this.endOfTurn.effect();
         if (turnDuration < 0) {
-            endOfEffect.effect(this.characterAttached);
+            endOfEffect.effect();
         }
     }
 

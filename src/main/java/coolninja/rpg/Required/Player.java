@@ -24,6 +24,7 @@ public class Player implements Serializable {
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, specialAttack, exp, expToNextLevel;
     public double heathgrowthRate, manaGrowhRate, attackGrowthRate, defenseGrowthRate, mAttackGrowthRate, mDefenseGrowthRate = 1.0;
+    public double luckGrowthRate = 0.1;
 
     /**
      * Player's moves
@@ -478,5 +479,9 @@ public class Player implements Serializable {
 
     public void setMDefenseGrowthRate(double rate) {
         this.mDefenseGrowthRate = rate;
+    }
+
+    public void setLuckGrowthRate(double rate) {
+        this.luckGrowthRate = rate;
     }
 }
