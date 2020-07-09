@@ -17,11 +17,7 @@ public class Console {
      */
     public static void Dots(int times, long timeBetween) {
         for (int i = 0; i < times; i++) {
-            try {
-                Thread.sleep(timeBetween);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            waitReal(timeBetween);
             System.out.print(".");
         }
     }
@@ -35,11 +31,7 @@ public class Console {
      */
     public static void printError(String text, long waitTime) {
         System.out.println(Colors.RED_BACKGROUND + text);
-        try {
-            Thread.sleep(waitTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitReal(waitTime);
         Colors.RESET();
     }
 

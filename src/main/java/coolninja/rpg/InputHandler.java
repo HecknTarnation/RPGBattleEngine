@@ -49,4 +49,13 @@ public class InputHandler {
         return scan.nextLine().equalsIgnoreCase("Y");
     }
 
+    /**
+     * Closes the scanner object, only do this when you are done with it.
+     *
+     * @since 1.0
+     */
+    public static void closeScanner() {
+        scan.close();
+    }
+
 }

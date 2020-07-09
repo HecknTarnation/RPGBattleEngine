@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * The required class to a define player
+ * The required class to a define player. This class should not be instantiated
+ * directly, you should use a sub class.
  *
  * @since 1.0
  * @version 1.0
@@ -49,7 +50,7 @@ public class Player implements Serializable {
     protected int[] stat;
     protected String[] names = new String[]{"Max Health", "Max Mana", "Attack", "Defense", "Luck", "Magic Attack", "Magic Defense", "Special Attack"};
     public int skillPoints = 0;
-    protected double[] growthRates = new double[6];
+    protected double[] growthRates = new double[7];
 
     /**
      * If name == "You", then "Your turn" will be used in battle
@@ -119,6 +120,7 @@ public class Player implements Serializable {
             growthRates[3] = this.defenseGrowthRate;
             growthRates[4] = this.mAttackGrowthRate;
             growthRates[5] = this.mDefenseGrowthRate;
+            growthRates[6] = this.luckGrowthRate;
 
             int levelNeeded = 1;
 
@@ -222,7 +224,7 @@ public class Player implements Serializable {
         try {
             s = Integer.parseInt(InputHandler.getInput());
         } catch (NumberFormatException e) {
-            System.out.println("That's Not A Number!");
+            Console.printError("That's not a number", 2500);
             Console.clear();
             return;
         }
@@ -367,9 +369,9 @@ public class Player implements Serializable {
             Console.waitReal(300);
             System.out.println(names[i] + ": " + stat[i]);
         }
-        System.out.println("Health: " + health + "/" + maxHealth);
-        System.out.println("Mana: " + mana + "/" + maxMana);
-        System.out.println("Exp: " + exp + "/" + expToNextLevel);
+        System.out.println("Health: " + health + "/" + maxHealth
+                + "\nMana: " + mana + "/" + maxMana
+                + "\nExp: " + exp + "/" + expToNextLevel);
     }
 
     /**
@@ -432,6 +434,7 @@ public class Player implements Serializable {
     /**
      * Adds an item to the players inventory
      *
+     * @param item
      * @since 1.0
      */
     public void addItemToInv(Item item) {

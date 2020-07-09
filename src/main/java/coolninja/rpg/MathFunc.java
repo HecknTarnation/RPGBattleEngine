@@ -25,11 +25,8 @@ public class MathFunc {
         if (clamp == 0) {
             clamp = 10;
         }
-        if (temp > clamp) {
-            return random(clamp);
-        } else {
-            return temp;
-        }
+
+        return temp > clamp ? random(clamp) : temp;
     }
 
     /**
@@ -40,12 +37,7 @@ public class MathFunc {
      * @since 1.0
      */
     public static boolean accHitCalc(double acc) {
-
-        if (acc > random(0) / 10) {
-            return true;
-        } else {
-            return acc == 1;
-        }
+        return (acc > random(0) / 10) ? true : acc == 1;
     }
 
     /**
@@ -56,29 +48,31 @@ public class MathFunc {
      * @since 1.0
      */
     public static double luckDamageCalc(int luck) {
-
-        double temp = luck * (MathFunc.random(0) / 2.2);
-
-        return temp;
+        return luck * (MathFunc.random(0) / 2.2);
     }
 
     /**
-     * Calculates if an item should drop (chance of 1 will always drop)
+     * Calculates if an item should drop (chance of 1 will always drop). Luck
+     * boost will add to the drop chance in this calculation, meaning it will be
+     * easier for the random number to be less than the chance.
      *
      * @param enemy
      * @param drop
+     * @param luckBoost
      * @return
      * @since 1.0
      */
-    public static boolean shouldDrop(Enemy enemy, Item drop) {
+    public static boolean shouldDrop(Enemy enemy, Item drop, double luckBoost) {
 
-        if (drop.chance == 1) {
+        if (drop.chance >= 1) {
             return true;
         }
 
-        int temp = random(0) / 10;
+        return (random(0) / 10) < drop.chance + luckBoost;
+    }
 
-        return temp < drop.chance;
+    public static boolean shouldDrop(Enemy enemy, Item drop) {
+        return shouldDrop(enemy, drop, 0);
     }
 
     /**
@@ -106,8 +100,8 @@ public class MathFunc {
      */
     public static int addLuck(Enemy[] enemies) {
         int t = 0;
-        for (Enemy enemie : enemies) {
-            t += enemie.luck;
+        for (Enemy enemy : enemies) {
+            t += enemy.luck;
         }
         return t;
     }

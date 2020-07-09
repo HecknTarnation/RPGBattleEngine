@@ -30,6 +30,7 @@ public class BattleHandler {
     /**
      * Starts battle with the given enemy/enemies
      *
+     * @throws java.lang.InterruptedException
      * @since 1.0
      * @param en The enemy (as an object or array)
      * @param canRun if the player can run or not
@@ -719,7 +720,7 @@ public class BattleHandler {
         }
 
         SoundHandler handler = new SoundHandler(move.sound, false);
-        handler.run();
+        handler.start();
         return handler;
     }
 
@@ -729,7 +730,7 @@ public class BattleHandler {
             return;
         }
 
-        for (int i = 0; i < move.graphic.frames.length; i++) {
+        for (String frame : move.graphic.frames) {
             Colors.RESET();
             //prints top if player is healthy, else bottom
             if (player.health > 0) {
@@ -737,7 +738,6 @@ public class BattleHandler {
             } else {
                 System.out.println("\n" + Colors.RED_BACKGROUND + "(Dead!) -Health: " + player.health + "/" + player.maxHealth + "\n -Mana: " + player.mana + "/" + player.maxMana + Colors.reset() + "\n");
             }
-
             //checks if companions are null, if not, then print using the same rules as above
             if (comps != null) {
                 for (Companion comp : comps) {
@@ -753,7 +753,7 @@ public class BattleHandler {
                 System.out.println("\n" + en.name + " HP: " + en.health);
             }
             System.out.println("--------------" + move.name + "----------------");
-            System.out.print(move.graphic.frames[i]);
+            System.out.print(frame);
             Console.waitReal(move.graphic.waitTime);
             Console.clear();
         }
