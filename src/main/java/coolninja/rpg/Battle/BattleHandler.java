@@ -293,7 +293,8 @@ public class BattleHandler {
 
         Console.printError("Not A Valid Target!", 1000);
 
-        //loops if target was invalid
+        /*loops if target was invalid, could cause a StackOverflowError if the use tries
+        TODO prevent StackOverFlowError */
         Attack();
 
     }
@@ -309,11 +310,17 @@ public class BattleHandler {
             return;
         }
 
+        ArrayList<Item> inv = player.getInv();
+
+        if (inv.isEmpty()) {
+            System.out.println("You don't have any items!");
+            Console.waitFull(2);
+            return;
+        }
+
         player.printInv();
 
         String input = InputHandler.getInput();
-
-        ArrayList<Item> inv = player.getInv();
 
         for (int i = 0; i < player.getInv().size(); i++) {
             if (input.equalsIgnoreCase(player.getInv().get(i).name)) {
@@ -331,11 +338,7 @@ public class BattleHandler {
             return;
         }
 
-        if (currentPlayer.name.equalsIgnoreCase("you")) {
-            System.out.print("You did nothing");
-        } else {
-            System.out.print(currentPlayer.name + " did nothing");
-        }
+        System.out.print(currentPlayer.name + "did nothing");
         Console.Dots(3, 300);
     }
 
@@ -346,14 +349,15 @@ public class BattleHandler {
             return;
         }
 
-        System.out.print(currentPlayer.name + " started to run");
-        Console.Dots(3, 400);
-
         //if the battle cannot be ran from, print this message and exit function
         if (!canRun) {
             System.out.println(currentPlayer.name + " can't run from this battle!");
             return;
         }
+
+        System.out.print(currentPlayer.name + " started to run");
+        Console.Dots(3, 400);
+
         Player[] t = new Player[comps.length + 1];
         for (int i = 0; i < t.length - 1; i++) {
             t[i] = comps[i];
@@ -455,9 +459,9 @@ public class BattleHandler {
 
     private static void EnemyTurns() {
 
-        for (Enemy enemie : enemies) {
+        for (Enemy enemy : enemies) {
             Player p = pick();
-            Enemy e = enemie;
+            Enemy e = enemy;
             Move m = pickEnemyMove(e, p);
             PlayerTakeDamage(p, m, e);
         }
@@ -614,9 +618,8 @@ public class BattleHandler {
                 }
             }
 
-            //runs the boss's "onDeath" method
-            if (enArchive[0] instanceof Boss) {
-                enArchive[0].onDeath();
+            for (Enemy en : enArchive) {
+                en.onDeath();
             }
 
         } else {
