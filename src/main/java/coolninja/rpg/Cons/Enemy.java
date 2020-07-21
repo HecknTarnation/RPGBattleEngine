@@ -142,4 +142,20 @@ public class Enemy implements Serializable {
         return temp;
     }
 
+    /**
+     * Gets enemy from array using name
+     *
+     * @param ens
+     * @param target
+     * @return
+     */
+    public static Enemy getEnemyFromArray(Enemy[] ens, String target) {
+        for (Enemy en : ens) {
+            if (en.name.equalsIgnoreCase(target)) {
+                return en;
+            }
+        }
+        return null;
+    }
+
 }

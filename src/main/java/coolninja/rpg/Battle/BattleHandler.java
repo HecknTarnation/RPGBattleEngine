@@ -284,18 +284,18 @@ public class BattleHandler {
 
         String target = InputHandler.getInput();
 
-        for (int i = 0; i < enemies.length; i++) {
-            if (target.equalsIgnoreCase(enemies[i].name)) {
-                EnemyTakeDamage(i, move);
-                return;
+        Enemy en = null;
+
+        while (en == null) {
+            en = Enemy.getEnemyFromArray(enemies, target);
+            if (en == null) {
+                continue;
             }
+            Console.printError("Not A Valid Target!", 1000);
+            target = InputHandler.getInput();
         }
 
-        Console.printError("Not A Valid Target!", 1000);
-
-        /*loops if target was invalid, could cause a StackOverflowError if the use tries
-        TODO prevent StackOverFlowError */
-        Attack();
+        EnemyTakeDamage(en, move);
 
     }
 
@@ -377,7 +377,7 @@ public class BattleHandler {
     }
 
     //used to damage the enemy
-    private static void EnemyTakeDamage(int enemyIndex, Move move) {
+    private static void EnemyTakeDamage(Enemy en, Move move) {
         Console.clear();
 
         //checks if move costs mana
@@ -387,8 +387,8 @@ public class BattleHandler {
 
         int t;
 
-        int a = (move.damage + currentPlayer.attack) - enemies[enemyIndex].defense;
-        int mA = (move.mDamage + currentPlayer.mAttack) - enemies[enemyIndex].mDefense;
+        int a = (move.damage + currentPlayer.attack) - en.defense;
+        int mA = (move.mDamage + currentPlayer.mAttack) - en.mDefense;
 
         t = a + mA;
 
@@ -400,13 +400,13 @@ public class BattleHandler {
         //plays sound and prints graphic
         printGraphic(move, playSound(move));
         Colors.RESET();
-        move.Use(t, currentPlayer, enemies[enemyIndex], comps);
+        move.Use(t, currentPlayer, en, comps);
 
         //checks if move is super effective
-        if (enemies[enemyIndex].weakness != null) {
-            if (enemies[enemyIndex].weakness.type == move.type) {
-                t *= enemies[enemyIndex].weakness.effectiveness;
-                if (enemies[enemyIndex].weakness.effectiveness > 1) {
+        if (en.weakness != null) {
+            if (en.weakness.type == move.type) {
+                t *= en.weakness.effectiveness;
+                if (en.weakness.effectiveness > 1) {
                     System.out.println("Move is super effective!");
                 } else {
                     System.out.println("Move was not very effective!");
@@ -428,8 +428,8 @@ public class BattleHandler {
             System.out.println(Colors.BLUE + "C" + Colors.CYAN + " R" + Colors.GREEN + " I" + Colors.YELLOW + " T" + Colors.WHITE + " I" + Colors.RED + " C" + Colors.PURPLE + " A" + Colors.GREEN + " L!" + Colors.reset());
             t *= (currentPlayer.specialAttack / 2 + 1.1) + 1;
             Console.Dots(3, 300);
-            System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
-            enemies[enemyIndex].health -= t;
+            System.out.println(currentPlayer.name + move.text + en.name + " for " + t + " damage");
+            en.health -= t;
             Console.waitFull(1);
             return;
         }
@@ -441,15 +441,15 @@ public class BattleHandler {
         }
 
         //damages the enemy
-        enemies[enemyIndex].health -= t;
+        en.health -= t;
 
         Console.Dots(3, 300);
 
         //prints top if damsge is greater than 0, else bottom
         if (t > 0) {
-            System.out.println(currentPlayer.name + move.text + enemies[enemyIndex].name + " for " + t + " damage");
+            System.out.println(currentPlayer.name + move.text + en.name + " for " + t + " damage");
         } else {
-            System.out.println(enemies[enemyIndex].name + " took no damage");
+            System.out.println(en.name + " took no damage");
         }
 
         //waits one second
