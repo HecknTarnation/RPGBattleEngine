@@ -158,4 +158,14 @@ public class Enemy implements Serializable {
         return null;
     }
 
+    /**
+     * Converts enemy to boss
+     *
+     * @since 1.0
+     * @return
+     */
+    public Boss convert() {
+        return new Boss(this);
+    }
+
 }
