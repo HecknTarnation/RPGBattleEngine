@@ -92,6 +92,9 @@ public class BattleHandler {
 
         //starts battle music
         SoundHandler handler = new SoundHandler(Vars.defaultBattleSoundLocation, true);
+        if (enemies[0].convert().musicLocation != null) {
+            handler = new SoundHandler(enemies[0].convert().musicLocation, true);
+        }
         handler.start();
 
         //finds out hows much exp this battle is worth
