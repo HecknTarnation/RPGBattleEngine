@@ -2,6 +2,7 @@ package coolninja.rpg.Cons;
 
 import coolninja.rpg.Enums.WeaknessType;
 import java.io.Serializable;
+import java.net.URI;
 
 /**
  * The basic enemy class
@@ -22,6 +23,11 @@ public class Enemy implements Serializable {
     public StatusEffect statusEffect;
     public Item drop;
     public int[] stat;
+
+    /**
+     * This is optional.
+     */
+    public URI musicLocation;
 
     /**
      * Creates a new enemy with the given parameters
