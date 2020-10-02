@@ -4,6 +4,9 @@ import coolninja.rpg.Console.Console;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
 
 /**
@@ -21,6 +24,8 @@ public class SoundHandler extends Thread {
     public Clip audio;
     private AudioInputStream input;
 
+    public static ArrayList<SoundHandler> handlers = new ArrayList<>();
+
     /**
      * Sets up thread
      *
@@ -34,6 +39,7 @@ public class SoundHandler extends Thread {
         }
         this.pathToSound = pathToSound;
         this.shouldLoop = shouldLoop;
+        SoundHandler.handlers.add(this);
     }
 
     /**
@@ -88,6 +94,7 @@ public class SoundHandler extends Thread {
         if (Vars.mute) {
             return;
         }
+        handlers.remove(this);
         try {
             if (audio.isOpen()) {
                 audio.close();
@@ -96,5 +103,21 @@ public class SoundHandler extends Thread {
             this.join();
         }
         this.interrupt();
+    }
+
+    /**
+     * Ends all currently running sounds
+     *
+     * @since 1.0
+     */
+    public static void endAll() {
+        handlers.forEach((handler) -> {
+            try {
+                handler.end();
+                handlers.remove(handler);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(SoundHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 }

@@ -80,11 +80,17 @@ public class BattleHandler {
         } else {
             System.out.println(Vars.player.name + " take " + damage + "damage");
         }
+        player.dealDamage(damage);
     }
 
     private static void BattleLoop(boolean canRun) throws NoPlayerSetException, InterruptedException {
 
         player = Vars.player;
+
+        //throws exception if player is null
+        if (player == null) {
+            throw new NoPlayerSetException("No player was set");
+        }
 
         comps = Vars.comps;
 
@@ -106,11 +112,6 @@ public class BattleHandler {
         eDrops = new Item[enemies.length];
         for (int i = 0; i < enemies.length; i++) {
             eDrops[i] = enemies[i].drop;
-        }
-
-        //throws exception if player is null
-        if (player == null) {
-            throw new NoPlayerSetException("No player was set");
         }
 
         //main battle loop
@@ -579,7 +580,7 @@ public class BattleHandler {
 
     //ends battle and awards items/exp
     private static void BattleFinished() throws InterruptedException {
-
+        SoundHandler.endAll();
         if (expVal > 0) {
             SoundHandler handler = new SoundHandler(Vars.winMusic, false);
 
@@ -600,12 +601,10 @@ public class BattleHandler {
             DropItem();
 
             //do nothing until win music has stopped playing
-            if (handler != null) {
-                try {
-                    while (handler.audio.isRunning()) {
-                    }
-                } catch (NullPointerException e) {
+            try {
+                while (handler.audio.isRunning()) {
                 }
+            } catch (NullPointerException e) {
             }
 
             //ends sound and waits for player to press enter
