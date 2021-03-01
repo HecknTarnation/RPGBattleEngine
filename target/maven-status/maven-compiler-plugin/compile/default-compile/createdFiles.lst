@@ -1,0 +1,8 @@
+com\coolninja\rpgengine\InputHandler.class
+com\coolninja\rpgengine\Cons\Enemy.class
+com\coolninja\rpgengine\Cons\Companion.class
+com\coolninja\rpgengine\Battle\BattleHandler.class
+com\coolninja\rpgengine\Engine.class
+com\coolninja\rpgengine\Vars.class
+com\coolninja\rpgengine\Cons\Player.class
+.netbeans_automatic_build
