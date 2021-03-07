@@ -4,6 +4,7 @@ import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.enums.AILevel;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -63,6 +64,16 @@ public class Enemy implements Serializable {
 
     public Item getDrop() {
         return this.drop;
+    }
+
+    /**
+     * TODO: write
+     *
+     * @return JSONObject
+     */
+    public JSONObject writeToFile() {
+
+        return null;
     }
 
 }
