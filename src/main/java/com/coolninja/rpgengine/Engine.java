@@ -54,6 +54,11 @@ public class Engine {
 
         JSONObject json = (JSONObject) obj;
 
+        return loadJSON(json);
+    }
+
+    public static Object loadJSON(JSONObject json) throws ParseException {
+
         String type = (String) json.get("type");
 
         if (type.equalsIgnoreCase("Enemy")) {
@@ -61,6 +66,7 @@ public class Engine {
             Enemy en = new Enemy((String) json.get("name"), (Integer) stats.get(0));
             en.setStats(StatusArray.fromJSONArr(stats));
             en.setDrop((Item) json.get("drop"));
+            //TODO: moves
             return en;
         }
 
