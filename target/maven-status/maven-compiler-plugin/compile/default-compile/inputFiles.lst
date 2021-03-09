@@ -1,3 +1,4 @@
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\handlers\BattleHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Enemy.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Player.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\enums\StatusArrayPosition.java
@@ -9,12 +10,12 @@ C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Co
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Item.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\arrays\StatusArray.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Colors.java
-C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Battle\BattleHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Companion.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Weakness.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\enums\EquipSlot.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\handlers\LocalizationHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Graphic.java
-C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\InputHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Engine.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\Move.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\handlers\InputHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\coolninja\rpgengine\Cons\StatusEffect.java

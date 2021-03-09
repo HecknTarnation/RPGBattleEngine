@@ -3,7 +3,6 @@ com\coolninja\rpgengine\enums\AILevel.class
 com\coolninja\rpgengine\Cons\Enemy.class
 com\coolninja\rpgengine\Cons\Companion.class
 com\coolninja\rpgengine\Cons\Equipment.class
-com\coolninja\rpgengine\Battle\BattleHandler.class
 com\coolninja\rpgengine\Vars.class
 com\coolninja\rpgengine\enums\EquipSlot.class
 com\coolninja\rpgengine\Cons\Player.class
@@ -11,10 +10,12 @@ com\coolninja\rpgengine\MathFunc.class
 com\coolninja\rpgengine\Cons\Move.class
 com\coolninja\rpgengine\Colors.class
 com\coolninja\rpgengine\Cons\StatusEffect.class
-com\coolninja\rpgengine\InputHandler.class
 com\coolninja\rpgengine\Cons\Weakness.class
 com\coolninja\rpgengine\ConsoleFunc.class
 com\coolninja\rpgengine\Engine.class
+com\coolninja\rpgengine\handlers\LocalizationHandler.class
 com\coolninja\rpgengine\arrays\StatusArray.class
+com\coolninja\rpgengine\handlers\BattleHandler.class
+com\coolninja\rpgengine\handlers\InputHandler.class
 com\coolninja\rpgengine\Cons\Graphic.class
 com\coolninja\rpgengine\Cons\Item.class
