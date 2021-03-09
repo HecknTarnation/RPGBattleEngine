@@ -1,5 +1,7 @@
-package com.coolninja.rpgengine;
+package com.coolninja.rpgengine.handlers;
 
+import com.coolninja.rpgengine.ConsoleFunc;
+import com.coolninja.rpgengine.Vars;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
@@ -16,11 +18,12 @@ import org.jnativehook.keyboard.NativeKeyListener;
  */
 public class InputHandler implements NativeKeyListener {
 
-    public static String[] menu;
-    private static int menuIndex;
+    public String[] menu;
+    private int menuIndex;
 
     //-1 = None, 0 = Menu
-    private static int currentMode = -1;
+    private int currentMode = -1;
+    private boolean enterPressed = false;
 
     public static InputHandler instance;
 
@@ -35,11 +38,12 @@ public class InputHandler implements NativeKeyListener {
         instance = i;
     }
 
-    public static void doMenu(String[] m) {
-        doMenu(m, "");
+    public int doMenu(String[] m) {
+        return doMenu(m, "");
     }
 
-    public static void doMenu(String[] m, String printFirst) {
+    public int doMenu(String[] m, String printFirst) {
+        currentMode = 0;
         menu = m;
         boolean run = true;
         while (run) {
@@ -53,11 +57,19 @@ public class InputHandler implements NativeKeyListener {
                 Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
             ConsoleFunc.clear();
+            run = !enterPressed;
         }
+        enterPressed = false;
+        return menuIndex;
     }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent nke) {
+
+    }
+
+    @Override
+    public void nativeKeyPressed(NativeKeyEvent nke) {
         if (currentMode == 0) {
             if (nke.getKeyCode() == Vars.Controls[0]) {
                 menuIndex++;
@@ -65,16 +77,9 @@ public class InputHandler implements NativeKeyListener {
             if (nke.getKeyCode() == Vars.Controls[2]) {
                 menuIndex--;
             }
-        }
-    }
-
-    @Override
-    public void nativeKeyPressed(NativeKeyEvent nke) {
-        if (nke.getKeyCode() == Vars.Controls[0]) {
-            menuIndex++;
-        }
-        if (nke.getKeyCode() == Vars.Controls[2]) {
-            menuIndex--;
+            if (nke.getKeyCode() == Vars.Controls[4]) {
+                enterPressed = true;
+            }
         }
     }
 

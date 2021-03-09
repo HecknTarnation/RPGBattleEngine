@@ -1,6 +1,7 @@
-package com.coolninja.rpgengine.Battle;
+package com.coolninja.rpgengine.handlers;
 
 import com.coolninja.rpgengine.Cons.*;
+import com.coolninja.rpgengine.Engine;
 import com.coolninja.rpgengine.Vars;
 
 /**
@@ -34,6 +35,10 @@ public class BattleHandler {
 
     private boolean checkWon() {
         return false;
+    }
+
+    private String localize(String key) {
+        return Engine.localizationHandler.getLocalizedString(key);
     }
 
 }
