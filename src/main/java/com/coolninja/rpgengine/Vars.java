@@ -14,9 +14,9 @@ public class Vars {
 
     /**
      * The key board is set up like this: <br>
-     * Up, Left, Down, Right,
+     * Up, Left, Down, Right, Select,
      */
-    public static int[] Controls = {NativeKeyEvent.VC_W, NativeKeyEvent.VC_A, NativeKeyEvent.VC_S, NativeKeyEvent.VC_D};
+    public static int[] Controls = {NativeKeyEvent.VC_W, NativeKeyEvent.VC_A, NativeKeyEvent.VC_S, NativeKeyEvent.VC_D, NativeKeyEvent.VC_ENTER};
     public static String Selected_Color = Colors.GREEN_BACKGROUND;
 
     public static void setPlayer(Player p) {
