@@ -1,6 +1,8 @@
 package com.coolninja.rpgengine;
 
-import com.coolninja.rpgengine.Battle.BattleHandler;
+import com.coolninja.rpgengine.handlers.InputHandler;
+import com.coolninja.rpgengine.handlers.LocalizationHandler;
+import com.coolninja.rpgengine.handlers.BattleHandler;
 import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.Cons.Item;
 import com.coolninja.rpgengine.arrays.StatusArray;
@@ -24,6 +26,7 @@ public class Engine {
 
     public static BattleHandler battleHandler;
     public static InputHandler inputHandler;
+    public static LocalizationHandler localizationHandler;
 
     public static void init() {
 
@@ -35,10 +38,12 @@ public class Engine {
      *
      * @param bHandler
      * @param iHandler
+     * @param lHandler
      */
-    public static void init(BattleHandler bHandler, InputHandler iHandler) {
+    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler) {
         battleHandler = bHandler == null ? new BattleHandler() : bHandler;
         inputHandler = iHandler == null ? new InputHandler() : iHandler;
+        localizationHandler = lHandler == null ? new LocalizationHandler() : lHandler;
 
         init();
     }
