@@ -19,6 +19,9 @@ public class Vars {
     public static int[] Controls = {NativeKeyEvent.VC_W, NativeKeyEvent.VC_A, NativeKeyEvent.VC_S, NativeKeyEvent.VC_D, NativeKeyEvent.VC_ENTER};
     public static String Selected_Color = Colors.GREEN_BACKGROUND;
 
+    public static String Enemy_Color = Colors.RED_BACKGROUND;
+    public static String Ally_Color = Colors.BLUE_BACKGROUND;
+
     public static void setPlayer(Player p) {
         player = p;
     }

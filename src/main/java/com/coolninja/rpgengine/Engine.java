@@ -1,11 +1,11 @@
 package com.coolninja.rpgengine;
 
-import com.coolninja.rpgengine.handlers.InputHandler;
-import com.coolninja.rpgengine.handlers.LocalizationHandler;
-import com.coolninja.rpgengine.handlers.BattleHandler;
 import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.Cons.Item;
 import com.coolninja.rpgengine.arrays.StatusArray;
+import com.coolninja.rpgengine.handlers.BattleHandler;
+import com.coolninja.rpgengine.handlers.InputHandler;
+import com.coolninja.rpgengine.handlers.LocalizationHandler;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,9 +24,9 @@ import org.json.simple.parser.ParseException;
  */
 public class Engine {
 
-    public static BattleHandler battleHandler;
-    public static InputHandler inputHandler;
-    public static LocalizationHandler localizationHandler;
+    public static BattleHandler battleHandler = new BattleHandler();
+    public static InputHandler inputHandler = new InputHandler();
+    public static LocalizationHandler localizationHandler = new LocalizationHandler();
 
     public static void init() {
 

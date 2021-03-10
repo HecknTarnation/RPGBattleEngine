@@ -13,7 +13,7 @@ import org.json.simple.JSONObject;
 public class Enemy implements Serializable {
 
     public String name;
-    public int health, attack, defense, luck, mAttack, mDefense;
+    public int health, maxHealth, attack, defense, luck, mAttack, mDefense;
     public int expVal;
     public Move[] moves;
     public AILevel aiLevel;
@@ -24,11 +24,15 @@ public class Enemy implements Serializable {
     public Enemy(String name, int health) {
         this.name = name;
         this.health = health;
+        this.maxHealth = health;
     }
 
     public Enemy setStats(StatusArray stats) {
         if (stats.get(StatusArrayPosition.Health) != null) {
             this.health = (int) stats.get(StatusArrayPosition.Health);
+        }
+        if (stats.get(StatusArrayPosition.MaxHealth) != null) {
+            this.health = (int) stats.get(StatusArrayPosition.MaxHealth);
         }
         if (stats.get(StatusArrayPosition.ATK) != null) {
             this.attack = (int) stats.get(StatusArrayPosition.ATK);

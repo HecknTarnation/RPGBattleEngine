@@ -67,9 +67,15 @@ public class Player implements Serializable {
         this.expToNextLevel = expNextLevel;
     }
 
-    public void setStats(StatusArray arr) {
+    public Player setStats(StatusArray arr) {
         if (arr.get(StatusArrayPosition.Health) != null) {
             health = (int) arr.get(StatusArrayPosition.Health);
+        }
+        if (arr.get(StatusArrayPosition.MaxHealth) != null) {
+            maxHealth = (int) arr.get(StatusArrayPosition.MaxHealth);
+        }
+        if (arr.get(StatusArrayPosition.MaxMana) != null) {
+            maxMana = (int) arr.get(StatusArrayPosition.MaxMana);
         }
         if (arr.get(StatusArrayPosition.Mana) != null) {
             mana = (int) arr.get(StatusArrayPosition.Mana);
@@ -95,6 +101,7 @@ public class Player implements Serializable {
         if (arr.get(StatusArrayPosition.StatusEffect) != null) {
             statusEffect = (StatusEffect) arr.get(StatusArrayPosition.StatusEffect);
         }
+        return this;
     }
 
     public StatusArray getStats() {
