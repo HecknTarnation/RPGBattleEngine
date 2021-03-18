@@ -41,9 +41,9 @@ public class Engine {
      * @param lHandler
      */
     public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler) {
-        battleHandler = bHandler == null ? new BattleHandler() : bHandler;
-        inputHandler = iHandler == null ? new InputHandler() : iHandler;
-        localizationHandler = lHandler == null ? new LocalizationHandler() : lHandler;
+        battleHandler = bHandler == null ? battleHandler : bHandler;
+        inputHandler = iHandler == null ? inputHandler : iHandler;
+        localizationHandler = lHandler == null ? localizationHandler : lHandler;
 
         init();
     }
