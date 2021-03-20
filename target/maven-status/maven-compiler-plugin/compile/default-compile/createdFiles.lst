@@ -5,6 +5,7 @@ com\coolninja\rpgengine\Cons\Companion.class
 com\coolninja\rpgengine\Cons\Equipment.class
 com\coolninja\rpgengine\Vars.class
 com\coolninja\rpgengine\enums\EquipSlot.class
+com\coolninja\rpgengine\enums\EN_USKeys.class
 com\coolninja\rpgengine\Cons\Player.class
 com\coolninja\rpgengine\MathFunc.class
 com\coolninja\rpgengine\Cons\Move.class
