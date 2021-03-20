@@ -1,5 +1,6 @@
 package com.coolninja.rpgengine.handlers;
 
+import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.Vars;
 import java.util.logging.Level;
@@ -25,17 +26,16 @@ public class InputHandler implements NativeKeyListener {
     private int currentMode = -1;
     private boolean enterPressed = false;
 
-    public static InputHandler instance;
-
-    public static void init() {
+    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command.
+    public void init() {
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
             Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        InputHandler i = new InputHandler();
-        GlobalScreen.addNativeKeyListener(i);
-        instance = i;
+        GlobalScreen.addNativeKeyListener(this);
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.ALL);
     }
 
     public int doMenu(String[] m) {
@@ -44,15 +44,22 @@ public class InputHandler implements NativeKeyListener {
 
     public int doMenu(String[] m, String printFirst) {
         currentMode = 0;
+        menuIndex = 0;
         menu = m;
         boolean run = true;
         while (run) {
+            if (menuIndex > m.length - 1) {
+                menuIndex = 0;
+            }
+            if (menuIndex < 0) {
+                menuIndex = m.length - 1;
+            }
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
-                System.out.println(menuIndex == i ? Vars.Selected_Color : "" + "-" + menu[i]);
+                System.out.println((menuIndex == i ? Vars.Selected_Color : "") + "-" + menu[i] + Colors.reset());
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(300);
             } catch (InterruptedException ex) {
                 Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -60,6 +67,7 @@ public class InputHandler implements NativeKeyListener {
             run = !enterPressed;
         }
         enterPressed = false;
+        currentMode = -1;
         return menuIndex;
     }
 
@@ -72,10 +80,10 @@ public class InputHandler implements NativeKeyListener {
     public void nativeKeyPressed(NativeKeyEvent nke) {
         if (currentMode == 0) {
             if (nke.getKeyCode() == Vars.Controls[0]) {
-                menuIndex++;
+                menuIndex--;
             }
             if (nke.getKeyCode() == Vars.Controls[2]) {
-                menuIndex--;
+                menuIndex++;
             }
             if (nke.getKeyCode() == Vars.Controls[4]) {
                 enterPressed = true;
