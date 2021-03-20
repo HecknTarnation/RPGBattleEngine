@@ -29,7 +29,8 @@ public class Engine {
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
 
     public static void init() {
-
+        localizationHandler.init();
+        inputHandler.init();
     }
 
     /**
@@ -46,6 +47,10 @@ public class Engine {
         localizationHandler = lHandler == null ? localizationHandler : lHandler;
 
         init();
+    }
+
+    public static void switchLang(String key) {
+        localizationHandler.changLang(key);
     }
 
     public static void startBattle(Enemy[] en) {
