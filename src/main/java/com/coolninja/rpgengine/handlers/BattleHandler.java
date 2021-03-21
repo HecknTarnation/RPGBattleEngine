@@ -84,14 +84,17 @@ public class BattleHandler {
     }
 
     private void Attack() {
+        println("Attack");
         System.exit(1);
     }
 
     private void Item() {
+        println("Item");
         System.exit(1);
     }
 
     private void Run() {
+        println("Run");
         System.exit(1);
     }
 
