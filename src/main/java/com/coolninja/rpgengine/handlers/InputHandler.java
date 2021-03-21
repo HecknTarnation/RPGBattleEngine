@@ -27,6 +27,7 @@ public class InputHandler implements NativeKeyListener {
     private boolean enterPressed = false;
 
     //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command.
+    //Problem only occurs when CMD or PowerShell is in focus, if it's not in focus it works as intented.
     public void init() {
         try {
             GlobalScreen.registerNativeHook();
@@ -35,7 +36,8 @@ public class InputHandler implements NativeKeyListener {
         }
         GlobalScreen.addNativeKeyListener(this);
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
-        logger.setLevel(Level.ALL);
+        logger.setLevel(Level.WARNING);
+        logger.setUseParentHandlers(false);
     }
 
     public int doMenu(String[] m) {
@@ -56,7 +58,7 @@ public class InputHandler implements NativeKeyListener {
             }
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
-                System.out.println((menuIndex == i ? Vars.Selected_Color : "") + "-" + menu[i] + Colors.reset());
+                System.out.println((menuIndex == i ? Vars.Selected_Color : "") + "  -" + menu[i] + Colors.reset());
             }
             try {
                 Thread.sleep(300);
