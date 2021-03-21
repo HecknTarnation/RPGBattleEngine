@@ -9,6 +9,11 @@ import java.util.logging.Logger;
  */
 public class ConsoleFunc {
 
+    /**
+     * Waits the given amount of time, in milliseconds.
+     *
+     * @param ms
+     */
     public static void wait(int ms) {
         try {
             Thread.sleep(ms);
@@ -17,10 +22,21 @@ public class ConsoleFunc {
         }
     }
 
+    //TODO: this function fails to clear the scrollback of cmd or ps (possibly also mac and linux terminals?)
+    /**
+     * Clears the screen
+     */
     public static void clear() {
         System.out.print("\033[H\033[2J");
     }
 
+    /**
+     * Prints out str with the amount of dots.
+     *
+     * @param str
+     * @param dotCount
+     * @param timeBetween
+     */
     public static void dots(String str, int dotCount, long timeBetween) {
         System.out.print(str);
         for (int i = 0; i < dotCount; i++) {
