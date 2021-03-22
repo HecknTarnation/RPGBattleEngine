@@ -24,7 +24,7 @@ public class Player implements Serializable {
     /**
      * Player's moves
      */
-    public ArrayList<Move> moves;
+    public ArrayList<Move> moves = new ArrayList<>();
 
     /**
      * 0 = feet 1 = legs 2 = arms 3 = chest 4 = head 5 = weapon 6 = mod
@@ -34,7 +34,7 @@ public class Player implements Serializable {
     /**
      * Player inventory
      */
-    public ArrayList<Item> inv;
+    public ArrayList<Item> inv = new ArrayList<>();
 
     public Weakness weakness;
     public StatusEffect statusEffect;
@@ -139,6 +139,11 @@ public class Player implements Serializable {
 
             //TODO: level up
         }
+    }
+
+    public Move[] getMoves() {
+        Move[] m = new Move[moves.size()];
+        return this.moves.toArray(m);
     }
 
 }
