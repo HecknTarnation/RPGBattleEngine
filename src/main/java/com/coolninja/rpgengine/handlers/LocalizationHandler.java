@@ -13,7 +13,7 @@ public class LocalizationHandler {
 
     public HashMap<String, HashMap<String, String>> langs = new HashMap<>();
 
-    private HashMap<String, String> en_us = new HashMap<>();
+    private final HashMap<String, String> en_us = new HashMap<>();
 
     private HashMap<String, String> currentLang;
 
@@ -29,6 +29,7 @@ public class LocalizationHandler {
         en_us.put(battle_plridle.key, "You did nothing");
         en_us.put(battle_menu.key, "Attack,Item,Idle,Run");
         en_us.put(battle_currentTurn.key, "It's %s's turn");
+        en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
         //end init en_us
         langs.put("en_us", en_us);
 
