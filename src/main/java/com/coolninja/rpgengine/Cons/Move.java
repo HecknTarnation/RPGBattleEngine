@@ -1,5 +1,6 @@
 package com.coolninja.rpgengine.Cons;
 
+import com.coolninja.rpgengine.Colors;
 import java.io.Serializable;
 import java.net.URI;
 
@@ -8,6 +9,17 @@ import java.net.URI;
  * @author Ben
  */
 public class Move implements Serializable {
+
+    public static String[] arrToStr(Move[] moves) {
+        String[] s = new String[moves.length];
+        for (int i = 0; i < moves.length; i++) {
+            if (moves[i].manaCost > 0) {
+                s[i] = moves[i].name + " | " + Colors.BLUE + "Mana: " + moves[i].manaCost + Colors.reset();
+            }
+            s[i] = moves[i].name;
+        }
+        return s;
+    }
 
     public String name;
     public int damage, mDamage, manaCost;
