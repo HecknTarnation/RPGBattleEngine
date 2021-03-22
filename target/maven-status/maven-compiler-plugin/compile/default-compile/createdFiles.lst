@@ -9,6 +9,7 @@ com\coolninja\rpgengine\enums\EN_USKeys.class
 com\coolninja\rpgengine\Cons\Player.class
 com\coolninja\rpgengine\MathFunc.class
 com\coolninja\rpgengine\Cons\Move.class
+com\coolninja\rpgengine\handlers\SoundHandler.class
 com\coolninja\rpgengine\Colors.class
 com\coolninja\rpgengine\Cons\StatusEffect.class
 com\coolninja\rpgengine\Cons\Weakness.class
