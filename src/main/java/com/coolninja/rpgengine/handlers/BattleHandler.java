@@ -20,6 +20,7 @@ public class BattleHandler {
     public Enemy[] enArchive;
 
     private Player currentPlayer;
+    private String currentStatus;
 
     public void startBattle(Enemy[] en) {
         this.ens = en;
@@ -51,6 +52,7 @@ public class BattleHandler {
             }
 
             str += String.format(localize(battle_currentTurn), currentPlayer.name.equalsIgnoreCase("you") ? "your" : currentPlayer.name) + "\n";
+            currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
             int selection = Engine.inputHandler.doMenu(menu, str);
@@ -58,8 +60,10 @@ public class BattleHandler {
             switch (selection) {
                 case 0:
                     Attack();
+                    break;
                 case 1:
                     Item();
+                    break;
                 case 2:
                     if (currentPlayer == player) {
                         ConsoleFunc.dots(player.name.equalsIgnoreCase("you") ? player.name + localize(battle_compidle) : localize(battle_plridle), 3, 300);
@@ -70,6 +74,7 @@ public class BattleHandler {
                     break;
                 case 3:
                     Run();
+                    break;
             }
 
             //check if won
@@ -80,22 +85,47 @@ public class BattleHandler {
     }
 
     private void EnemyTurn() {
+        for (Enemy en : ens) {
+            EnemyTurnSub(en);
+        }
+    }
+
+    private void EnemyTurnSub(Enemy en) {
 
     }
 
     private void Attack() {
-        println("Attack");
-        System.exit(1);
+        Move[] moves = currentPlayer.getMoves();
+        String[] mNames = Move.arrToStr(moves);
+        int selection = Engine.inputHandler.doMenu(mNames, currentStatus);
+        Move selectedMove = moves[selection];
+        int d = selectedMove.damage + currentPlayer.attack;
+        int mD = selectedMove.mDamage + currentPlayer.mAttack;
+        int cost = selectedMove.manaCost;
+        currentPlayer.mana -= cost;
+        int target = 0;
+        String[] enNames = new String[ens.length];
+        for (int i = 0; i < ens.length; i++) {
+            enNames[i] = ens[i].name;
+        }
+        target = Engine.inputHandler.doMenu(enNames, currentStatus);
+
+        int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
+                + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
+
+        ens[target].health -= finalD;
+        println(String.format(localize(battle_moveused), currentPlayer.name, selectedMove.name, ens[target].name, finalD));
+        ConsoleFunc.wait(2000);
     }
 
     private void Item() {
         println("Item");
-        System.exit(1);
+        System.exit(0);
     }
 
     private void Run() {
         println("Run");
-        System.exit(1);
+        System.exit(0);
     }
 
     private boolean checkWon() {
@@ -118,25 +148,30 @@ public class BattleHandler {
     private void println(String str) {
         System.out.println(str);
     }
+    //end macros
 
-    private int currentIndex = -1;
+    private int currentIndex = 0;
 
     private void getTurn() {
         getTurn(0);
     }
 
     private void getTurn(int amountToInc) {
+        if (comps == null) {
+            currentPlayer = (currentIndex == 0 ? player : null);
+            return;
+        }
+        Player[] t = new Player[comps.length + 1];
+        t[0] = player;
+        for (int i = 1; i < comps.length; i++) {
+            t[i] = comps[i - 1];
+        }
         currentIndex += amountToInc;
-        if (currentIndex == -1) {
-            currentPlayer = player;
-        } else {
-            try {
-                currentPlayer = comps[currentIndex];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                currentIndex = -1;
-                currentPlayer = null;
-            }
+        try {
+            currentPlayer = t[currentIndex];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            currentIndex = 0;
+            currentPlayer = null;
         }
     }
-
 }
