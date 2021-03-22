@@ -3,9 +3,7 @@ package com.coolninja.rpgengine;
 import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.Cons.Item;
 import com.coolninja.rpgengine.arrays.StatusArray;
-import com.coolninja.rpgengine.handlers.BattleHandler;
-import com.coolninja.rpgengine.handlers.InputHandler;
-import com.coolninja.rpgengine.handlers.LocalizationHandler;
+import com.coolninja.rpgengine.handlers.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,6 +25,7 @@ public class Engine {
     public static BattleHandler battleHandler = new BattleHandler();
     public static InputHandler inputHandler = new InputHandler();
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
+    public static SoundHandler soundHandler = new SoundHandler();
 
     public static void init() {
         localizationHandler.init();
@@ -40,11 +39,13 @@ public class Engine {
      * @param bHandler
      * @param iHandler
      * @param lHandler
+     * @param sHandler
      */
-    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler) {
+    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler, SoundHandler sHandler) {
         battleHandler = bHandler == null ? battleHandler : bHandler;
         inputHandler = iHandler == null ? inputHandler : iHandler;
         localizationHandler = lHandler == null ? localizationHandler : lHandler;
+        soundHandler = sHandler == null ? soundHandler : sHandler;
 
         init();
     }
