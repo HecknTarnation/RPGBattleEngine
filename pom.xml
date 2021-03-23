@@ -32,6 +32,13 @@
           <reportOutputDirectory>./docs/1.0</reportOutputDirectory>
           <destDir>docs/1.0</destDir>
         </configuration>
+            <distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>GitHub CoolninjaGames Apache Maven Packages</name>
+     <url>https://maven.pkg.github.com/CoolninjaGames/RPGBattleEngine</url>
+   </repository>
+</distributionManagement>
   <executions>
     <execution>
       <id>attach-sources</id>
