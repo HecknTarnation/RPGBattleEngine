@@ -7,14 +7,18 @@ package com.coolninja.rpgengine.enums;
 public enum EN_USKeys {
     err_invalidlang("err_invalidlang"),
     err_missinglangkey("err_missinglangkey"),
-    battle_compidle("battle_compidle"),
-    battle_plridle("battle_plridle"),
+    battle_idle("battle_idle"),
     battle_menu("battle_menu"),
     battle_currentTurn("battle_currentTurn"),
     /**
      * "[p1] used [p2] and hit [p3] for [p4] damage!"
      */
-    battle_moveused("battle_moveused");
+    battle_moveused("battle_moveused"),
+    /**
+     * "[p1 (name + doesn't/don't)] have enough mana!"
+     */
+    battle_missingmana("battle_missingmana"),
+    gen_your("gen_your");
 
     public String key;
 

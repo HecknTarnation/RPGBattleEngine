@@ -18,6 +18,7 @@ public class BattleHandler {
     public Player player;
     public Companion[] comps;
     public Enemy[] enArchive;
+    private int expVal = 0;
 
     private Player currentPlayer;
     private String currentStatus;
@@ -27,6 +28,9 @@ public class BattleHandler {
         this.enArchive = en;
         this.player = Vars.player;
         this.comps = Vars.companions;
+        for (Enemy e : en) {
+            expVal += e.expVal;
+        }
         battleLoop();
     }
 
@@ -51,7 +55,7 @@ public class BattleHandler {
                 continue;
             }
 
-            str += String.format(localize(battle_currentTurn), currentPlayer.name.equalsIgnoreCase("you") ? "your" : currentPlayer.name) + "\n";
+            str += String.format(localize(battle_currentTurn), currentPlayer.name.equalsIgnoreCase("you") ? localize(gen_your) : currentPlayer.name) + "\n";
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
@@ -65,11 +69,7 @@ public class BattleHandler {
                     Item();
                     break;
                 case 2:
-                    if (currentPlayer == player) {
-                        ConsoleFunc.dots(player.name.equalsIgnoreCase("you") ? player.name + localize(battle_compidle) : localize(battle_plridle), 3, 300);
-                    } else {
-                        ConsoleFunc.dots(currentPlayer.name + localize(battle_compidle), 3, 300);
-                    }
+                    ConsoleFunc.dots(player.name + localize(battle_idle), 3, 300);
                     ConsoleFunc.wait(1000);
                     break;
                 case 3:
@@ -102,8 +102,16 @@ public class BattleHandler {
         int d = selectedMove.damage + currentPlayer.attack;
         int mD = selectedMove.mDamage + currentPlayer.mAttack;
         int cost = selectedMove.manaCost;
+        if (cost > 0 && currentPlayer.mana < cost) {
+            //TODO: localize
+            String p1 = currentPlayer.name.equalsIgnoreCase("you") ? "You don't" : currentPlayer.name + " doesnt't";
+            String s = String.format(localize(battle_missingmana), p1);
+            ConsoleFunc.dots(currentStatus, 3, 250);
+            ConsoleFunc.wait(1500);
+            Attack();
+        }
         currentPlayer.mana -= cost;
-        int target = 0;
+        int target;
         String[] enNames = new String[ens.length];
         for (int i = 0; i < ens.length; i++) {
             enNames[i] = ens[i].name;

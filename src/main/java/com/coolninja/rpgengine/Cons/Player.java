@@ -120,6 +120,7 @@ public class Player implements Serializable {
         this.exp += exp;
     }
 
+    //TODO: localize this method
     public void levelUp() {
         if (this.level >= 99) {
             System.out.println((this.name.equalsIgnoreCase("you") == true) ? "You are max level!" : this.name + " is max level!");

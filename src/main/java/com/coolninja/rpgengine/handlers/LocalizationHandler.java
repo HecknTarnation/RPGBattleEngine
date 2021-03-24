@@ -25,11 +25,12 @@ public class LocalizationHandler {
         //init en_us
         en_us.put(err_invalidlang.key, "Invalid Language");
         en_us.put(err_missinglangkey.key, "Missing or Invalid Key, returning null...");
-        en_us.put(battle_compidle.key, " did nothing");
-        en_us.put(battle_plridle.key, "You did nothing");
+        en_us.put(battle_idle.key, "%s did nothing");
         en_us.put(battle_menu.key, "Attack,Item,Idle,Run");
         en_us.put(battle_currentTurn.key, "It's %s's turn");
         en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
+        en_us.put(battle_missingmana.key, "%s have enough mana!");
+        en_us.put(gen_your.key, "your");
         //end init en_us
         langs.put("en_us", en_us);
 
