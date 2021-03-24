@@ -106,7 +106,7 @@ public class BattleHandler {
             //TODO: localize
             String p1 = currentPlayer.name.equalsIgnoreCase("you") ? "You don't" : currentPlayer.name + " doesnt't";
             String s = String.format(localize(battle_missingmana), p1);
-            ConsoleFunc.dots(currentStatus, 3, 250);
+            ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
         }
