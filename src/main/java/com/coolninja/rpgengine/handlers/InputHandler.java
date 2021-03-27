@@ -3,6 +3,7 @@ package com.coolninja.rpgengine.handlers;
 import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.Vars;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jnativehook.GlobalScreen;
@@ -21,8 +22,9 @@ public class InputHandler implements NativeKeyListener {
 
     public String[] menu;
     private int menuIndex;
+    public Scanner scan;
 
-    //-1 = None, 0 = Menu
+    //-1 = None, 0 = Menu, 1 = Text Input
     private int currentMode = -1;
     private boolean enterPressed = false;
 
@@ -38,6 +40,7 @@ public class InputHandler implements NativeKeyListener {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
         logger.setUseParentHandlers(false);
+        scan = new Scanner(System.in);
     }
 
     public int doMenu(String[] m) {
@@ -71,6 +74,13 @@ public class InputHandler implements NativeKeyListener {
         enterPressed = false;
         currentMode = -1;
         return menuIndex;
+    }
+
+    public String doText() {
+        currentMode = 1;
+        String s = scan.nextLine();
+        currentMode = -1;
+        return s;
     }
 
     @Override
