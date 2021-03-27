@@ -123,6 +123,7 @@ public class BattleHandler {
 
         ens[target].health -= finalD;
         println(String.format(localize(battle_moveused), currentPlayer.name, selectedMove.name, ens[target].name, finalD));
+        selectedMove.Use();
         ConsoleFunc.wait(2000);
     }
 
