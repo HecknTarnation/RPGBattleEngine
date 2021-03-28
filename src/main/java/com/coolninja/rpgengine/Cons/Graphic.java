@@ -14,8 +14,8 @@ public class Graphic {
     }
 
     public Graphic(String[] frames, short time) {
-        setFrames(frames);
-        setTime(time);
+        this.setFrames(frames);
+        this.setTime(time);
     }
 
     public Graphic setFrames(String[] frames) {
