@@ -78,9 +78,24 @@ public class InputHandler implements NativeKeyListener {
 
     public String doText() {
         currentMode = 1;
+        System.out.print("?: ");
         String s = scan.nextLine();
         currentMode = -1;
         return s;
+    }
+
+    /**
+     * Ends the InputHandler's operation (you must call init again to use this)
+     */
+    public void end() {
+        GlobalScreen.removeNativeKeyListener(this);
+        try {
+            GlobalScreen.unregisterNativeHook();
+        } catch (NativeHookException ex) {
+            Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        scan.close();
+        scan = null;
     }
 
     @Override
