@@ -31,6 +31,26 @@ public class ConsoleFunc {
     }
 
     /**
+     * Moves the cursor left
+     *
+     * @param times
+     * @return
+     */
+    public static String moveLeft(int times) {
+        return "\033[" + times + "D";
+    }
+
+    /**
+     * Moves the cursor right
+     *
+     * @param times
+     * @return
+     */
+    public static String moveRight(int times) {
+        return "\033[" + times + "C";
+    }
+
+    /**
      * Prints out str with the amount of dots.
      *
      * @param str
