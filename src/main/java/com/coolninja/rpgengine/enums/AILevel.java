@@ -5,7 +5,7 @@ package com.coolninja.rpgengine.enums;
  * @author Ben
  */
 public enum AILevel {
-    Random, Damage, Weakness, WeaknessDamage;
+    Random, Damage, DamageMagic, Weakness, WeaknessDamage, WeaknessDamageMagic;
 
     private AILevel() {
 
