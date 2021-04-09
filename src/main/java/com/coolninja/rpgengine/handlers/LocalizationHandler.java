@@ -1,5 +1,6 @@
 package com.coolninja.rpgengine.handlers;
 
+import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.enums.EN_USKeys;
 import static com.coolninja.rpgengine.enums.EN_USKeys.*;
@@ -31,6 +32,8 @@ public class LocalizationHandler {
         en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
         en_us.put(battle_missingmana.key, "%s have enough mana!");
         en_us.put(gen_your.key, "your");
+        en_us.put(battle_missed.key, "%s missed!");
+        en_us.put(battle_critical.key, Colors.BLUE + "C" + Colors.RED + " R" + Colors.YELLOW + " I" + Colors.PURPLE + " T" + Colors.RED + " I" + Colors.CYAN + " C" + Colors.GREEN + " A" + Colors.BLACK + " L" + Colors.reset());
         //end init en_us
         langs.put("en_us", en_us);
 
