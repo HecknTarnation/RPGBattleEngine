@@ -18,6 +18,11 @@ public enum EN_USKeys {
      * "[p1 (name + doesn't/don't)] have enough mana!"
      */
     battle_missingmana("battle_missingmana"),
+    /**
+     * "[p1] missed"
+     */
+    battle_missed("battle_missed"),
+    battle_critical("battle_critical"),
     gen_your("gen_your");
 
     public String key;
