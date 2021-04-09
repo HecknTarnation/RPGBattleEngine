@@ -22,7 +22,7 @@ public class Move implements Serializable {
     }
 
     public String name;
-    public int damage, mDamage, manaCost;
+    public int damage, mDamage, manaCost, accuracy;
     public String type;
     public Graphic graphic;
     public URI sound;
@@ -39,6 +39,11 @@ public class Move implements Serializable {
 
     public Move setGraphic(Graphic g) {
         this.graphic = g;
+        return this;
+    }
+
+    public Move setAccuracy(int acc) {
+        this.accuracy = acc;
         return this;
     }
 
