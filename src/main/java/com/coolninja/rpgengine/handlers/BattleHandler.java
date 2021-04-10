@@ -51,6 +51,7 @@ public class BattleHandler {
                 }
             }
 
+            //TODO: fix enemy never getting a turn
             getTurn();
             if (currentPlayer == null) {
                 EnemyTurn();
@@ -61,7 +62,7 @@ public class BattleHandler {
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
-            int selection = Engine.inputHandler.doMenu(menu, str);
+            int selection = Engine.inputHandler.doMenu(menu, str, true);
 
             switch (selection) {
                 case 0:
@@ -71,7 +72,7 @@ public class BattleHandler {
                     Item();
                     break;
                 case 2:
-                    ConsoleFunc.dots(player.name + localize(battle_idle), 3, 300);
+                    ConsoleFunc.dots(String.format(localize(battle_idle), currentPlayer.name), 3, 300);
                     ConsoleFunc.wait(1000);
                     break;
                 case 3:
@@ -99,12 +100,17 @@ public class BattleHandler {
         Move currentHeighest = new Move("").setDamage(0, 0);
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
-        for (int i = 1; i < comps.length; i++) {
+        for (int i = 1; i <= comps.length; i++) {
             t[i] = comps[i - 1];
         }
-        Player selectedPlayer = t[MathFunc.randomInt(t.length - 1)];
+        int temp = MathFunc.randomInt(t.length - 1);
+        Player selectedPlayer = t[temp];
+        if (selectedPlayer == null) {
+            print("SUS" + temp);
+            System.exit(0);
+        }
 
-        //Will default to the first move in moves if none matchin the criteria are found.
+        //Will default to the first move in moves if none matching the criteria are found.
         switch (en.aiLevel) {
             case Random:
                 int index = MathFunc.randomInt(moves.length - 1);
@@ -219,16 +225,11 @@ public class BattleHandler {
     private void Attack() {
         Move[] moves = currentPlayer.getMoves();
         String[] mNames = Move.arrToStr(moves);
-        int selection = Engine.inputHandler.doMenu(mNames, currentStatus);
+        int selection = Engine.inputHandler.doMenu(mNames, currentStatus, true);
         Move selectedMove = moves[selection];
         int d = selectedMove.damage + currentPlayer.attack;
         int mD = selectedMove.mDamage + currentPlayer.mAttack;
         int cost = selectedMove.manaCost;
-        if (!MathFunc.checkHit(selectedMove)) {
-            println(String.format(localize(battle_missed), currentPlayer.name));
-            ConsoleFunc.wait(2000);
-            return;
-        }
         if (cost > 0 && currentPlayer.mana < cost) {
             //TODO: localize
             String p1 = currentPlayer.name.equalsIgnoreCase("you") ? "You don't" : currentPlayer.name + " doesnt't";
@@ -243,7 +244,13 @@ public class BattleHandler {
         for (int i = 0; i < ens.length; i++) {
             enNames[i] = ens[i].name;
         }
-        target = Engine.inputHandler.doMenu(enNames, currentStatus);
+        target = Engine.inputHandler.doMenu(enNames, currentStatus, false);
+
+        if (!MathFunc.checkHit(selectedMove)) {
+            println(String.format(localize(battle_missed), currentPlayer.name));
+            ConsoleFunc.wait(2000);
+            return;
+        }
 
         int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
                 + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
@@ -292,7 +299,7 @@ public class BattleHandler {
 
         ens = new Enemy[z.size()];
         z.toArray(ens);
-        return ens == null;
+        return ens.length == 0;
     }
 
     private int currentIndex = 0;
@@ -309,7 +316,7 @@ public class BattleHandler {
         }
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
-        for (int i = 1; i < comps.length; i++) {
+        for (int i = 1; i <= comps.length; i++) {
             t[i] = comps[i - 1];
         }
         try {
