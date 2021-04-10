@@ -43,11 +43,11 @@ public class InputHandler implements NativeKeyListener {
         scan = new Scanner(System.in);
     }
 
-    public int doMenu(String[] m) {
-        return doMenu(m, "");
+    public int doMenu(String[] m, boolean clearAtEnd) {
+        return doMenu(m, "", clearAtEnd);
     }
 
-    public int doMenu(String[] m, String printFirst) {
+    public int doMenu(String[] m, String printFirst, boolean clearAtEnd) {
         currentMode = 0;
         menuIndex = 0;
         menu = m;
@@ -68,8 +68,12 @@ public class InputHandler implements NativeKeyListener {
             } catch (InterruptedException ex) {
                 Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ConsoleFunc.clear();
+
             run = !enterPressed;
+            if (!run && !clearAtEnd) {
+                break;
+            }
+            ConsoleFunc.clear();
         }
         enterPressed = false;
         currentMode = -1;
