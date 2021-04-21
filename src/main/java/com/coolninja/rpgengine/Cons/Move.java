@@ -3,6 +3,7 @@ package com.coolninja.rpgengine.Cons;
 import com.coolninja.rpgengine.Colors;
 import java.io.Serializable;
 import java.net.URI;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -19,6 +20,14 @@ public class Move implements Serializable {
             s[i] = moves[i].name;
         }
         return s;
+    }
+
+    public static Move[] fromJSONArr(JSONArray arr) {
+        Move[] moves = new Move[arr.size()];
+        for (int i = 0; i < arr.size(); i++) {
+            moves[i] = (Move) arr.get(i);
+        }
+        return moves;
     }
 
     public String name;
