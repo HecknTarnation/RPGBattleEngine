@@ -27,7 +27,16 @@ public class ConsoleFunc {
      * Clears the screen
      */
     public static void clear() {
-        System.out.print("\033[H\033[2J");
+        moveHome();
+        System.out.print("\033[2J");
+    }
+
+    /**
+     * Moves the cursor to the "home" position, a.k.a the start of the visible
+     * window.
+     */
+    public static void moveHome() {
+        System.out.print("\033[H");
     }
 
     /**
