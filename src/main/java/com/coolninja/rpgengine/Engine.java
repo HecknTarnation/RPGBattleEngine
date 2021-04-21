@@ -2,6 +2,8 @@ package com.coolninja.rpgengine;
 
 import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.Cons.Item;
+import com.coolninja.rpgengine.Cons.Move;
+import com.coolninja.rpgengine.Cons.Player;
 import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.handlers.*;
 import java.io.FileNotFoundException;
@@ -68,6 +70,7 @@ public class Engine {
         return loadJSON(json);
     }
 
+    //TODO: test this code
     public static Object loadJSON(JSONObject json) throws ParseException {
 
         String type = (String) json.get("type");
@@ -75,10 +78,20 @@ public class Engine {
         if (type.equalsIgnoreCase("Enemy")) {
             JSONArray stats = (JSONArray) json.get("stats");
             Enemy en = new Enemy((String) json.get("name"), (Integer) stats.get(0));
+            en.expVal = (Integer) json.get("expVal");
             en.setStats(StatusArray.fromJSONArr(stats));
             en.setDrop((Item) json.get("drop"));
-            //TODO: moves
+            en.setMoves(Move.fromJSONArr(((JSONArray) json.get("moves"))));
             return en;
+        } else if (type.equalsIgnoreCase("player")) {
+            Player plr = new Player((String) json.get("name"));
+            StatusArray arr = StatusArray.fromJSONArr((JSONArray) json.get("stats"));
+            JSONArray growthRates = (JSONArray) json.get("growthRates");
+            JSONArray moves = (JSONArray) json.get("moves");
+            JSONArray inv = (JSONArray) json.get("inv");
+
+            plr.load(arr, (Integer) json.get("level"), growthRates, moves, inv, (Integer) json.get("exp"), (Integer) json.get("expToNextLevel"));
+            return plr;
         }
 
         return null;
