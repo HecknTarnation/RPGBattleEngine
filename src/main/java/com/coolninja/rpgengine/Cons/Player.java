@@ -6,6 +6,7 @@ import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -47,8 +48,6 @@ public class Player implements Serializable {
      * Is used for loading saved data.
      *
      * @param arr
-     * @param maxHealth
-     * @param maxMana
      * @param level
      * @param growthRates
      * @param moves
@@ -56,11 +55,24 @@ public class Player implements Serializable {
      * @param exp
      * @param expNextLevel
      */
-    public void load(StatusArray arr, int maxHealth, int maxMana, int level, double[] growthRates, ArrayList<Move> moves, ArrayList<Item> inv, int exp, int expNextLevel) {
+    public void load(StatusArray arr, int level, double[] growthRates, ArrayList<Move> moves, ArrayList<Item> inv, int exp, int expNextLevel) {
         this.setStats(arr);
-        this.maxHealth = maxHealth;
-        this.maxMana = maxMana;
+        this.maxHealth = (Integer) arr.get(StatusArrayPosition.MaxHealth);
+        this.maxMana = (Integer) arr.get(StatusArrayPosition.MaxMana);
         this.growthRates = growthRates;
+        this.moves = moves;
+        this.inv = inv;
+        this.exp = exp;
+        this.expToNextLevel = expNextLevel;
+    }
+
+    public void load(StatusArray arr, int level, JSONArray growthRates, ArrayList<Move> moves, ArrayList<Item> inv, int exp, int expNextLevel) {
+        this.setStats(arr);
+        this.maxHealth = (Integer) arr.get(StatusArrayPosition.MaxHealth);
+        this.maxMana = (Integer) arr.get(StatusArrayPosition.MaxMana);
+        for (int i = 0; i < this.growthRates.length; i++) {
+            this.growthRates[i] = (Double) growthRates.get(i);
+        }
         this.moves = moves;
         this.inv = inv;
         this.exp = exp;
