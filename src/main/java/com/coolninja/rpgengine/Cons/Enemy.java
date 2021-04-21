@@ -61,6 +61,11 @@ public class Enemy implements Serializable {
         return this;
     }
 
+    public Enemy setMoves(Move[] moves) {
+        this.moves = moves;
+        return this;
+    }
+
     public Enemy setDrop(Item d) {
         this.drop = d;
         return this;
