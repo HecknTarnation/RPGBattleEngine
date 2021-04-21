@@ -25,7 +25,7 @@ public class BattleHandler {
     private Player currentPlayer;
     private String currentStatus;
 
-    public void startBattle(Enemy[] en) {
+    public void startBattle(Enemy... en) {
         this.ens = en;
         this.enArchive = en;
         this.player = Vars.player;
@@ -53,6 +53,11 @@ public class BattleHandler {
 
             //TODO: fix enemy never getting a turn
             getTurn();
+            if (currentPlayer != null) {
+                while (currentPlayer.health <= 0 && currentPlayer != null) {
+                    getTurn(1);
+                }
+            }
             if (currentPlayer == null) {
                 EnemyTurn();
                 continue;
@@ -83,7 +88,7 @@ public class BattleHandler {
             //check if won
             won = checkWon();
             ConsoleFunc.clear();
-            getTurn(1);
+            currentIndex++;
         }
         System.out.println("Battle Ended");
     }
@@ -96,7 +101,6 @@ public class BattleHandler {
 
     private void EnemyTurnSub(Enemy en) {
         Move[] moves = en.moves;
-        int selection = 0;
         Move currentHeighest = new Move("").setDamage(0, 0);
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
@@ -106,11 +110,12 @@ public class BattleHandler {
         int temp = MathFunc.randomInt(t.length - 1);
         Player selectedPlayer = t[temp];
         if (selectedPlayer == null) {
-            print("SUS" + temp);
+            print("Err: Player is null | index:" + temp);
             System.exit(0);
         }
 
         //Will default to the first move in moves if none matching the criteria are found.
+        int selection = 0;
         switch (en.aiLevel) {
             case Random:
                 int index = MathFunc.randomInt(moves.length - 1);
@@ -220,6 +225,7 @@ public class BattleHandler {
             }
         }
         println(String.format(localize(battle_moveused), en.name, selectedMove.name, selectedPlayer.name, finalD));
+        ConsoleFunc.wait(2000);
     }
 
     private void Attack() {
@@ -316,8 +322,8 @@ public class BattleHandler {
         }
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
-        for (int i = 1; i <= comps.length; i++) {
-            t[i] = comps[i - 1];
+        for (int i = 0; i < comps.length; i++) {
+            t[i + 1] = comps[i];
         }
         try {
             currentPlayer = t[currentIndex];
