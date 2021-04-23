@@ -6,10 +6,10 @@ import com.coolninja.rpgengine.Cons.Move;
 import com.coolninja.rpgengine.Cons.Player;
 import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.handlers.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -60,10 +60,10 @@ public class Engine {
         battleHandler.startBattle(en);
     }
 
-    public static Object loadJSON(URI path) throws FileNotFoundException, IOException, ParseException {
+    public static Object loadJSON(File file) throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
 
-        Object obj = parser.parse(new FileReader(path.toString()));
+        Object obj = parser.parse(new FileReader(file.toString()));
 
         JSONObject json = (JSONObject) obj;
 
@@ -76,21 +76,21 @@ public class Engine {
         String type = (String) json.get("type");
 
         if (type.equalsIgnoreCase("Enemy")) {
-            JSONArray stats = (JSONArray) json.get("stats");
-            Enemy en = new Enemy((String) json.get("name"), (Integer) stats.get(0));
-            en.expVal = (Integer) json.get("expVal");
+            JSONObject stats = (JSONObject) json.get("stats");
+            Enemy en = new Enemy((String) json.get("name"), (int) (long) stats.get("health"));
+            en.expVal = (int) ((long) json.get("expVal"));
             en.setStats(StatusArray.fromJSONArr(stats));
             en.setDrop((Item) json.get("drop"));
             en.setMoves(Move.fromJSONArr(((JSONArray) json.get("moves"))));
             return en;
         } else if (type.equalsIgnoreCase("player")) {
             Player plr = new Player((String) json.get("name"));
-            StatusArray arr = StatusArray.fromJSONArr((JSONArray) json.get("stats"));
+            StatusArray arr = StatusArray.fromJSONArr((JSONObject) json.get("stats"));
             JSONArray growthRates = (JSONArray) json.get("growthRates");
             JSONArray moves = (JSONArray) json.get("moves");
             JSONArray inv = (JSONArray) json.get("inv");
 
-            plr.load(arr, (Integer) json.get("level"), growthRates, moves, inv, (Integer) json.get("exp"), (Integer) json.get("expToNextLevel"));
+            plr.load(arr, (int) (long) json.get("level"), growthRates, moves, inv, (int) (long) json.get("exp"), (int) (long) json.get("expToNextLevel"));
             return plr;
         }
 
