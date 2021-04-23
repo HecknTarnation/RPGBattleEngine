@@ -2,7 +2,7 @@ package com.coolninja.rpgengine.arrays;
 
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -28,21 +28,21 @@ public class StatusArray {
         return this.statuses.get(index.actualPos);
     }
 
-    public static StatusArray fromJSONArr(JSONArray json) {
+    public static StatusArray fromJSONArr(JSONObject json) {
         StatusArray arr = new StatusArray();
 
-        arr.modify(StatusArrayPosition.Health, json.get(StatusArrayPosition.Health.actualPos));
-        arr.modify(StatusArrayPosition.MaxHealth, json.get(StatusArrayPosition.MaxHealth.actualPos));
-        arr.modify(StatusArrayPosition.MaxMana, json.get(StatusArrayPosition.MaxMana.actualPos));
-        arr.modify(StatusArrayPosition.Mana, json.get(StatusArrayPosition.Mana.actualPos));
-        arr.modify(StatusArrayPosition.ATK, json.get(StatusArrayPosition.ATK.actualPos));
-        arr.modify(StatusArrayPosition.DEF, json.get(StatusArrayPosition.DEF.actualPos));
-        arr.modify(StatusArrayPosition.Luck, json.get(StatusArrayPosition.Luck.actualPos));
-        arr.modify(StatusArrayPosition.MATK, json.get(StatusArrayPosition.MATK.actualPos));
-        arr.modify(StatusArrayPosition.MDEF, json.get(StatusArrayPosition.MDEF.actualPos));
-        arr.modify(StatusArrayPosition.Weakness, json.get(StatusArrayPosition.Weakness.actualPos));
-        arr.modify(StatusArrayPosition.AILevel, json.get(StatusArrayPosition.AILevel.actualPos));
-        arr.modify(StatusArrayPosition.StatusEffect, json.get(StatusArrayPosition.StatusEffect.actualPos));
+        arr.modify(StatusArrayPosition.Health, json.get("health"));
+        arr.modify(StatusArrayPosition.MaxHealth, json.get("maxHealth"));
+        arr.modify(StatusArrayPosition.MaxMana, json.get("maxMana"));
+        arr.modify(StatusArrayPosition.Mana, json.get("mana"));
+        arr.modify(StatusArrayPosition.ATK, json.get("attack"));
+        arr.modify(StatusArrayPosition.DEF, json.get("defense"));
+        arr.modify(StatusArrayPosition.Luck, json.get("luck"));
+        arr.modify(StatusArrayPosition.MATK, json.get("magicAttack"));
+        arr.modify(StatusArrayPosition.MDEF, json.get("magicDefense"));
+        arr.modify(StatusArrayPosition.Weakness, json.get("weakness"));
+        arr.modify(StatusArrayPosition.AILevel, json.get("aiLevel"));
+        arr.modify(StatusArrayPosition.StatusEffect, json.get("statusEffect"));
 
         return arr;
     }
