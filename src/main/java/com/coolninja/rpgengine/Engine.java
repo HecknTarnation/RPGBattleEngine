@@ -35,6 +35,22 @@ public class Engine {
     }
 
     /**
+     * Returns some info about the JVM in an Object[], in the following format.
+     * <br>
+     * Available Processors, Max Memory, Total Memory, Free Memory
+     *
+     * @return
+     */
+    public static Object[] getJVMInfo() {
+        Object[] info = new Object[4];
+        info[0] = Runtime.getRuntime().availableProcessors();
+        info[1] = Runtime.getRuntime().maxMemory();
+        info[2] = Runtime.getRuntime().totalMemory();
+        info[3] = Runtime.getRuntime().freeMemory();
+        return info;
+    }
+
+    /**
      * Used to change handlers to custom ones (leave any null to use default
      * ones)
      *
