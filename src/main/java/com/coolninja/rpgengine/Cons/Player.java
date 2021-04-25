@@ -159,4 +159,12 @@ public class Player implements Serializable {
         return this.moves.toArray(m);
     }
 
+    public String[] invToStringArr() {
+        String[] temp = new String[]{};
+        for (int i = 0; i < inv.size(); i++) {
+            temp[i] = inv.get(i).name;
+        }
+        return temp;
+    }
+
 }
