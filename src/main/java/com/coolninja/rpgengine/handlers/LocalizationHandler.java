@@ -23,6 +23,7 @@ public class LocalizationHandler {
      * language)
      */
     public void init() {
+
         //init en_us
         en_us.put(err_invalidlang.key, "Invalid Language");
         en_us.put(err_missinglangkey.key, "Missing or Invalid Key, returning null...");
@@ -34,6 +35,7 @@ public class LocalizationHandler {
         en_us.put(gen_your.key, "your");
         en_us.put(battle_missed.key, "%s missed!");
         en_us.put(battle_critical.key, Colors.BLUE + "C" + Colors.RED + " R" + Colors.YELLOW + " I" + Colors.PURPLE + " T" + Colors.RED + " I" + Colors.CYAN + " C" + Colors.GREEN + " A" + Colors.BLACK + " L" + Colors.reset());
+        en_us.put(inv_noitems.key, "You have no items.");
         //end init en_us
         langs.put("en_us", en_us);
 
