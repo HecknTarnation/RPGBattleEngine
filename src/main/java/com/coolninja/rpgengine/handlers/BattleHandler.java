@@ -284,7 +284,17 @@ public class BattleHandler {
 
     private void Item() {
         println("Item");
-        System.exit(0);
+        if (player.inv.isEmpty()) {
+            println(inv_noitems);
+            ConsoleFunc.wait(2000);
+            return;
+        }
+        String[] m = player.invToStringArr();
+        int index = Engine.inputHandler.doMenu(m, currentStatus, true);
+        Item selectedItem = player.inv.get(index);
+        selectedItem.Use();
+        player.inv.remove(selectedItem);
+        ConsoleFunc.wait(2000);
     }
 
     private void Run() {
