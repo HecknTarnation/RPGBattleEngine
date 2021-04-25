@@ -12,6 +12,7 @@ com\coolninja\rpgengine\handlers\BattleHandler.class
 com\coolninja\rpgengine\handlers\InputHandler.class
 com\coolninja\rpgengine\Cons\Item.class
 com\coolninja\rpgengine\enums\StatusArrayPosition.class
+com\coolninja\rpgengine\dev\ObjectSize.class
 com\coolninja\rpgengine\enums\AILevel.class
 com\coolninja\rpgengine\Cons\Enemy.class
 com\coolninja\rpgengine\Cons\Companion.class
