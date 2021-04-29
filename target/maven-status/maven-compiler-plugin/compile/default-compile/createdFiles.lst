@@ -12,7 +12,6 @@ com\coolninja\rpgengine\handlers\BattleHandler.class
 com\coolninja\rpgengine\handlers\InputHandler.class
 com\coolninja\rpgengine\Cons\Item.class
 com\coolninja\rpgengine\enums\StatusArrayPosition.class
-com\coolninja\rpgengine\dev\ObjectSize.class
 com\coolninja\rpgengine\enums\AILevel.class
 com\coolninja\rpgengine\Cons\Enemy.class
 com\coolninja\rpgengine\Cons\Companion.class
@@ -21,6 +20,7 @@ com\coolninja\rpgengine\Vars.class
 com\coolninja\rpgengine\Cons\Player.class
 com\coolninja\rpgengine\Colors.class
 com\coolninja\rpgengine\Cons\Weakness.class
+com\coolninja\rpgengine\Cons\Drop.class
 com\coolninja\rpgengine\handlers\LocalizationHandler.class
 com\coolninja\rpgengine\arrays\StatusArray.class
 com\coolninja\rpgengine\Cons\Graphic.class
