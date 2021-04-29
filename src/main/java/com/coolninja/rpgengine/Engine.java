@@ -1,7 +1,6 @@
 package com.coolninja.rpgengine;
 
 import com.coolninja.rpgengine.Cons.Enemy;
-import com.coolninja.rpgengine.Cons.Item;
 import com.coolninja.rpgengine.Cons.Move;
 import com.coolninja.rpgengine.Cons.Player;
 import com.coolninja.rpgengine.arrays.StatusArray;
@@ -28,26 +27,12 @@ public class Engine {
     public static InputHandler inputHandler = new InputHandler();
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
     public static SoundHandler soundHandler = new SoundHandler();
+    private static boolean initialized = false;
 
     public static void init() {
         localizationHandler.init();
         inputHandler.init();
-    }
-
-    /**
-     * Returns some info about the JVM in an Object[], in the following format.
-     * <br>
-     * Available Processors, Max Memory, Total Memory, Free Memory
-     *
-     * @return
-     */
-    public static Object[] getJVMInfo() {
-        Object[] info = new Object[4];
-        info[0] = Runtime.getRuntime().availableProcessors();
-        info[1] = Runtime.getRuntime().maxMemory();
-        info[2] = Runtime.getRuntime().totalMemory();
-        info[3] = Runtime.getRuntime().freeMemory();
-        return info;
+        initialized = true;
     }
 
     /**
@@ -76,6 +61,38 @@ public class Engine {
         battleHandler.startBattle(en);
     }
 
+    /**
+     * Returns some info about the JVM in an Object[], in the following format.
+     * <br>
+     * (long) Available Processors, (long) Max Memory, (long) Total Memory,
+     * (long) Free Memory
+     *
+     * @return
+     */
+    public static Object[] getJVMInfo() {
+        Object[] info = new Object[4];
+        info[0] = Runtime.getRuntime().availableProcessors();
+        info[1] = Runtime.getRuntime().maxMemory();
+        info[2] = Runtime.getRuntime().totalMemory();
+        info[3] = Runtime.getRuntime().freeMemory();
+        return info;
+    }
+
+    /**
+     * Returns some info about the Engine in an Object[], in the following
+     * format.
+     * <br>
+     * (String) Version, (boolean) initialized.
+     *
+     * @return
+     */
+    public static Object[] getEngineInfo() {
+        Object[] info = new Object[2];
+        info[0] = "0.0.0-Beta";
+        info[1] = initialized;
+        return info;
+    }
+
     public static Object loadJSON(File file) throws FileNotFoundException, IOException, ParseException {
         JSONParser parser = new JSONParser();
 
@@ -91,12 +108,13 @@ public class Engine {
 
         String type = (String) json.get("type");
 
+        //TODO: rewrite and fix this
         if (type.equalsIgnoreCase("Enemy")) {
             JSONObject stats = (JSONObject) json.get("stats");
             Enemy en = new Enemy((String) json.get("name"), (int) (long) stats.get("health"));
             en.expVal = (int) ((long) json.get("expVal"));
             en.setStats(StatusArray.fromJSONArr(stats));
-            en.setDrop((Item) json.get("drop"));
+            //en.setDrop((Item) json.get("drop"));
             en.setMoves(Move.fromJSONArr(((JSONArray) json.get("moves"))));
             return en;
         } else if (type.equalsIgnoreCase("player")) {
