@@ -19,7 +19,7 @@ public class Enemy implements Serializable {
     public AILevel aiLevel;
     public Weakness weakness;
     public StatusEffect statusEffect;
-    public Item drop;
+    public Drop[] drops;
 
     public Enemy(String name, int health) {
         this.name = name;
@@ -66,13 +66,18 @@ public class Enemy implements Serializable {
         return this;
     }
 
-    public Enemy setDrop(Item d) {
-        this.drop = d;
+    public Enemy setDrop(Drop[] drops) {
+        this.drops = drops;
         return this;
     }
 
-    public Item getDrop() {
-        return this.drop;
+    public Drop getDrop() {
+        for (Drop d : drops) {
+            if (d.getIfShouldDrop()) {
+                return d;
+            }
+        }
+        return null;
     }
 
     /**
