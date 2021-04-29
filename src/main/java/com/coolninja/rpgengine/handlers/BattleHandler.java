@@ -91,6 +91,21 @@ public class BattleHandler {
             currentIndex++;
         }
         System.out.println("Battle Ended");
+        BattleEnd();
+    }
+
+    private void BattleEnd() {
+        for (Companion c : comps) {
+            c.exp += expVal;
+        }
+        player.exp += expVal;
+        for (Enemy e : enArchive) {
+            Drop d = e.getDrop();
+            if (d != null) {
+                player.inv.add(d.getItem());
+                println(String.format(localize(battle_gotitem), player.name, d.getItem().name));
+            }
+        }
     }
 
     private void EnemyTurn() {
@@ -285,7 +300,7 @@ public class BattleHandler {
     private void Item() {
         println("Item");
         if (player.inv.isEmpty()) {
-            println(inv_noitems);
+            println(String.format(localize(inv_noitems), player.name));
             ConsoleFunc.wait(2000);
             return;
         }
