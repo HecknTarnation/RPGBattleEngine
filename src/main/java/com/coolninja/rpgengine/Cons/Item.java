@@ -9,7 +9,6 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
     public String name, desc;
-    public float chance;
 
     public Item(String name) {
 
@@ -22,15 +21,6 @@ public class Item implements Serializable {
 
     public String getDesc() {
         return this.desc;
-    }
-
-    public Item setChance(float chance) {
-        this.chance = chance;
-        return this;
-    }
-
-    public float getChance() {
-        return this.chance;
     }
 
     public void Use() {
