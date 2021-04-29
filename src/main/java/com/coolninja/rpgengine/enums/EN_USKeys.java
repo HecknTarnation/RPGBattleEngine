@@ -23,6 +23,10 @@ public enum EN_USKeys {
      */
     battle_missed("battle_missed"),
     battle_critical("battle_critical"),
+    /**
+     * "[name] received [item]"
+     */
+    battle_gotitem("battle_gotitem"),
     inv_noitems("inv_noitems"),
     gen_your("gen_your");
 
