@@ -35,7 +35,8 @@ public class LocalizationHandler {
         en_us.put(gen_your.key, "your");
         en_us.put(battle_missed.key, "%s missed!");
         en_us.put(battle_critical.key, Colors.BLUE + "C" + Colors.RED + " R" + Colors.YELLOW + " I" + Colors.PURPLE + " T" + Colors.RED + " I" + Colors.CYAN + " C" + Colors.GREEN + " A" + Colors.BLACK + " L" + Colors.reset());
-        en_us.put(inv_noitems.key, "You have no items.");
+        en_us.put(inv_noitems.key, "%s have no items.");
+        en_us.put(battle_gotitem.key, "%1$s received %2$s");
         //end init en_us
         langs.put("en_us", en_us);
 
