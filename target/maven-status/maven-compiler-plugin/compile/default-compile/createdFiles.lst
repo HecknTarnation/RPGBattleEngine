@@ -1,5 +1,4 @@
 com\coolninja\rpgengine\enums\EquipSlot.class
-com\coolninja\rpgengine\enums\EN_USKeys.class
 com\coolninja\rpgengine\handlers\SoundHandler$SoundThread.class
 com\coolninja\rpgengine\MathFunc.class
 com\coolninja\rpgengine\Cons\Move.class
@@ -11,6 +10,7 @@ com\coolninja\rpgengine\Engine.class
 com\coolninja\rpgengine\handlers\BattleHandler.class
 com\coolninja\rpgengine\handlers\InputHandler.class
 com\coolninja\rpgengine\Cons\Item.class
+com\coolninja\rpgengine\enums\LangKeys.class
 com\coolninja\rpgengine\enums\StatusArrayPosition.class
 com\coolninja\rpgengine\enums\AILevel.class
 com\coolninja\rpgengine\Cons\Enemy.class
