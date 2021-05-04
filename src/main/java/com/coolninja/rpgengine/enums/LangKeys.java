@@ -4,7 +4,7 @@ package com.coolninja.rpgengine.enums;
  *
  * @author Ben
  */
-public enum EN_USKeys {
+public enum LangKeys {
     err_invalidlang("err_invalidlang"),
     err_missinglangkey("err_missinglangkey"),
     battle_idle("battle_idle"),
@@ -32,7 +32,7 @@ public enum EN_USKeys {
 
     public String key;
 
-    private EN_USKeys(String key) {
+    private LangKeys(String key) {
         this.key = key;
     }
 }
