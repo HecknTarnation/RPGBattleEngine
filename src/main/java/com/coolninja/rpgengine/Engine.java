@@ -124,7 +124,7 @@ public class Engine {
             JSONArray moves = (JSONArray) json.get("moves");
             JSONArray inv = (JSONArray) json.get("inv");
 
-            plr.load(arr, (int) (long) json.get("level"), growthRates, moves, inv, (int) (long) json.get("exp"), (int) (long) json.get("expToNextLevel"));
+            //plr.load(arr, (int) (long) json.get("level"), growthRates, moves, inv, (int) (long) json.get("exp"), (int) (long) json.get("expToNextLevel"));
             return plr;
         }
 
