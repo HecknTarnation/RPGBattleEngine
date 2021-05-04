@@ -6,7 +6,6 @@ import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
 
 /**
  *
@@ -66,19 +65,6 @@ public class Player implements Serializable {
         this.expToNextLevel = expNextLevel;
     }
 
-    public void load(StatusArray arr, int level, JSONArray growthRates, ArrayList<Move> moves, ArrayList<Item> inv, int exp, int expNextLevel) {
-        this.setStats(arr);
-        this.maxHealth = (Integer) arr.get(StatusArrayPosition.MaxHealth);
-        this.maxMana = (Integer) arr.get(StatusArrayPosition.MaxMana);
-        for (int i = 0; i < this.growthRates.length; i++) {
-            this.growthRates[i] = (Double) growthRates.get(i);
-        }
-        this.moves = moves;
-        this.inv = inv;
-        this.exp = exp;
-        this.expToNextLevel = expNextLevel;
-    }
-
     public Player setStats(StatusArray arr) {
         if (arr.get(StatusArrayPosition.Health) != null) {
             health = (int) arr.get(StatusArrayPosition.Health);
@@ -130,6 +116,11 @@ public class Player implements Serializable {
 
     public void giveExp(int exp) {
         this.exp += exp;
+    }
+
+    public void levelUp(int exp) {
+        this.giveExp(exp);
+        levelUp();
     }
 
     //TODO: localize this method

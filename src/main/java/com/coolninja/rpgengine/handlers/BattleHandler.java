@@ -7,7 +7,7 @@ import com.coolninja.rpgengine.Engine;
 import com.coolninja.rpgengine.MathFunc;
 import com.coolninja.rpgengine.Vars;
 import com.coolninja.rpgengine.enums.*;
-import static com.coolninja.rpgengine.enums.EN_USKeys.*;
+import static com.coolninja.rpgengine.enums.LangKeys.*;
 import java.util.ArrayList;
 
 /**
@@ -96,9 +96,9 @@ public class BattleHandler {
 
     private void BattleEnd() {
         for (Companion c : comps) {
-            c.exp += expVal;
+            c.levelUp(expVal);
         }
-        player.exp += expVal;
+        player.levelUp(expVal);
         for (Enemy e : enArchive) {
             Drop d = e.getDrop();
             if (d != null) {
@@ -363,11 +363,11 @@ public class BattleHandler {
         return Engine.localizationHandler.getLocalizedString(key);
     }
 
-    private String localize(EN_USKeys key) {
+    private String localize(LangKeys key) {
         return localize(key.key);
     }
 
-    private void print(EN_USKeys key) {
+    private void print(LangKeys key) {
         print(localize(key));
     }
 
@@ -375,7 +375,7 @@ public class BattleHandler {
         System.out.print(str);
     }
 
-    private void println(EN_USKeys key) {
+    private void println(LangKeys key) {
         println(localize(key));
     }
 

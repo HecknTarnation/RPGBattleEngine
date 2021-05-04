@@ -2,8 +2,8 @@ package com.coolninja.rpgengine.handlers;
 
 import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
-import com.coolninja.rpgengine.enums.EN_USKeys;
-import static com.coolninja.rpgengine.enums.EN_USKeys.*;
+import com.coolninja.rpgengine.enums.LangKeys;
+import static com.coolninja.rpgengine.enums.LangKeys.*;
 import java.util.HashMap;
 
 /**
@@ -55,7 +55,7 @@ public class LocalizationHandler {
         langs.put(key, lang);
     }
 
-    public String getLocalizedString(EN_USKeys key) {
+    public String getLocalizedString(LangKeys key) {
         return getLocalizedString(key.key);
     }
 
