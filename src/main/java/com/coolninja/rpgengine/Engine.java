@@ -65,7 +65,7 @@ public class Engine {
      * Returns some info about the JVM in an Object[], in the following format.
      * <br>
      * (long) Available Processors, (long) Max Memory, (long) Total Memory,
-     * (long) Free Memory
+     * (long) Free Memory.
      *
      * @return
      */
