@@ -3,4 +3,4 @@ The Required Dependencies are:
 JNativeHook (https://github.com/kwhat/jnativehook)
 JSON-Simple (https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple)
 
-and any of their dependencies.
+and any of their dependencies. 
