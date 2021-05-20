@@ -133,7 +133,7 @@ public class Player implements Serializable {
             int levelNeeded = 1;
             while (this.exp >= this.expToNextLevel) {
                 this.exp -= this.expToNextLevel;
-                this.expToNextLevel = (MathFunc.randomInt() + (3 * level));
+                this.expToNextLevel = (MathFunc.randomInt(level + 5, level + 20) + (3 * level));
                 levelNeeded++;
             }
 

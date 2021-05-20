@@ -10,29 +10,21 @@ import java.util.Collections;
  */
 public class MathFunc {
 
-    public static double randomD() {
-        return (Math.random() * 10);
+    /**
+     * Returns a number between 0 and 100, as a double (which means it can have
+     * a random decimal value). <br>
+     * This function is not guaranteed to be random.
+     *
+     * @param min
+     * @param max
+     * @return
+     */
+    public static double randomD(int min, int max) {
+        return (Math.random() * ((max - min) + 1)) + min;
     }
 
-    public static double randomD(double clamp) {
-        double i = randomInt();
-        if (i > clamp) {
-            i = randomD(clamp);
-        }
-        return i;
-    }
-
-    public static int randomInt() {
-        return (int) Math.round(randomD());
-    }
-
-    //TODO: fix functions not returning values greater than 10 (because randomD doesn't)
-    public static int randomInt(int clamp) {
-        int i = randomInt();
-        if (i > clamp) {
-            i = randomInt(clamp);
-        }
-        return i;
+    public static int randomInt(int min, int max) {
+        return (int) Math.round(randomD(min, max));
     }
 
     /**
@@ -53,7 +45,7 @@ public class MathFunc {
             }
         }
         Collections.shuffle(t);
-        int index = randomInt(t.size() - 1);
+        int index = randomInt(0, t.size() - 1);
         Object result = t.get(index);
         t.clear();
         t = null;
@@ -71,7 +63,7 @@ public class MathFunc {
         if (selectedMove.accuracy == 1.0f) {
             return true;
         }
-        return selectedMove.accuracy > (randomD() / 10);
+        return selectedMove.accuracy > (randomD(0, 1));
     }
 
 }

@@ -122,7 +122,7 @@ public class BattleHandler {
         for (int i = 1; i <= comps.length; i++) {
             t[i] = comps[i - 1];
         }
-        int temp = MathFunc.randomInt(t.length - 1);
+        int temp = MathFunc.randomInt(0, t.length - 1);
         Player selectedPlayer = t[temp];
         if (selectedPlayer == null) {
             print("Err: Player is null | index:" + temp);
@@ -133,7 +133,7 @@ public class BattleHandler {
         int selection = 0;
         switch (en.aiLevel) {
             case Random:
-                int index = MathFunc.randomInt(moves.length - 1);
+                int index = MathFunc.randomInt(0, moves.length - 1);
                 selection = index > 0 ? index : 0;
                 break;
             case Damage:
@@ -176,7 +176,7 @@ public class BattleHandler {
                 if (currentDamage == currentWeakness && currentDamage != -1) {
                     selection = currentDamage;
                 } else {
-                    if (MathFunc.randomInt(1) == 0) {
+                    if (MathFunc.randomInt(0, 1) == 0) {
                         selection = currentDamage;
                     } else {
                         if (currentWeakness != -1) {
@@ -201,7 +201,7 @@ public class BattleHandler {
                 if (currentDamage == currentWeakness && currentDamage != -1) {
                     selection = currentDamage;
                 } else {
-                    if (MathFunc.randomInt(1) == 0) {
+                    if (MathFunc.randomInt(0, 1) == 0) {
                         selection = currentDamage;
                     } else {
                         if (currentWeakness != -1) {
@@ -227,7 +227,7 @@ public class BattleHandler {
         Object[] obj = new Object[]{1, 0};
         if ((int) MathFunc.hatpull(chances, obj) == 1) {
             println(localize(battle_critical));
-            finalD = (finalD * en.luck) / (en.luck - MathFunc.randomInt(en.luck > 0 ? en.luck - 2 : 1));
+            finalD = (finalD * en.luck) / (en.luck - MathFunc.randomInt(0, en.luck > 0 ? en.luck - 2 : 1));
             ConsoleFunc.wait(2000);
         }
         selectedPlayer.health -= finalD;
@@ -280,7 +280,7 @@ public class BattleHandler {
         Object[] obj = new Object[]{1, 0};
         if ((int) MathFunc.hatpull(chances, obj) == 1) {
             println(localize(battle_critical));
-            finalD = (finalD * currentPlayer.luck) / (currentPlayer.luck - MathFunc.randomInt(currentPlayer.luck > 0 ? currentPlayer.luck - 2 : 1));
+            finalD = (finalD * currentPlayer.luck) / (currentPlayer.luck - MathFunc.randomInt(0, currentPlayer.luck > 0 ? currentPlayer.luck - 2 : 1));
             ConsoleFunc.wait(2000);
         }
         ens[target].health -= finalD;
