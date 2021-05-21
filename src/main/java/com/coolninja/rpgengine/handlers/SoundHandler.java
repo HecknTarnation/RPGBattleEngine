@@ -1,5 +1,6 @@
 package com.coolninja.rpgengine.handlers;
 
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 
@@ -40,12 +41,16 @@ public class SoundHandler {
      * Starts a thread to play a sound, provided in the passed file, at the
      * specified volume for the specified amount of time.
      *
-     * @param file
+     * @param uri
      * @param volume
      * @param repeatTime (1 = play once, and 0 = play until stopSound() is
      * called).
      */
-    public void playSound(URI file, int volume, int repeatTime) {
+    public void playSound(URI uri, int volume, int repeatTime) {
+        playSound(new File(uri.toString()), volume, repeatTime);
+    }
+
+    public void playSound(File file, int volume, int repeatTime) {
         SoundThread t = new SoundThread(file, repeatTime).setVolume(volume);
         if (threads.size() > maxThreads) {
             threads.get(0).end();
@@ -93,12 +98,12 @@ public class SoundHandler {
 
     public class SoundThread extends Thread {
 
-        public URI file;
+        public File file;
         public int repeatTime;
         public int volume;
         protected int prevVolume;
 
-        public SoundThread(URI file, int repeatTime) {
+        public SoundThread(File file, int repeatTime) {
             super("SoundThread");
             this.file = file;
             this.repeatTime = repeatTime;
