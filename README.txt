@@ -12,11 +12,11 @@ This engine and its code is distributed under GNU General Public License v3.0
 
 Modifying the code for your own purpose is allowed as long as these 2 conditions are met:
 
-    1). You say that you have modified the code somewhere in the release, in a visable place that a normal player will be able to see, (e.g.: At the top of this file "This game contains modified engine code from CoolninjaGames' RPG Battle Engine (link to this repository)", or in your game's credits screen "This game is using a modified version of CoolninjaGames' RPG Battle Engine (link to this repository)").
+    1). You say that you have modified the code somewhere in the release, in a visable place that a normal player will be able to see, (e.g.: At the top of this file "This game contains modified engine code from HecknTarnation's RPG Battle Engine (link to this repository)", or in your game's credits screen "This game is using a modified version of HecknTarnation's RPG Battle Engine (link to this repository)").
     
     2). You do not distribute your modified code while claming it as your own (meaning that you may rerelease this engine with the modified code as long as you say that you did not make it and give a link to this repository).
 
-Documentation can be found here: https://coolninjagames.github.io/RPGBattleEngine/1.0/
+Documentation can be found here: https://heckntarnation.github.io/RPGBattleEngine/1.0/
 
 For this to work correctly, ANSI control codes must be enabled (this only applies to Windows, Mac and Linux support this by default)
 
