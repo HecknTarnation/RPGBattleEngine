@@ -2,7 +2,10 @@ package com.coolninja.rpgengine.Cons;
 
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.MathFunc;
+import com.coolninja.rpgengine.Vars;
 import com.coolninja.rpgengine.arrays.StatusArray;
+import static com.coolninja.rpgengine.dev.Macros.*;
+import static com.coolninja.rpgengine.enums.LangKeys.*;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,13 +16,16 @@ import java.util.ArrayList;
  */
 public class Player implements Serializable {
 
-    public String name;
-    public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     /**
      * {healthgrowthRate, manaGrowhRate, attackGrowthRate, defenseGrowthRate,
      * luckGrowthRate, mAttackGrowthRate, mDefenseGrowthRate};
      */
     public double[] growthRates = {1.0, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0};
+    public int baseExp = 50;
+    public int expMod = 1;
+
+    public String name;
+    public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel = baseExp;
 
     /**
      * Player's moves
@@ -27,7 +33,7 @@ public class Player implements Serializable {
     public ArrayList<Move> moves = new ArrayList<>();
 
     /**
-     * 0 = feet 1 = legs 2 = arms 3 = chest 4 = head 5 = weapon 6 = mod
+     * 0 = feet, 1 = legs, 2 = arms, 3 = chest, 4 = head, 5 = weapon, 6 = mod
      */
     public Equipment[] equipment = new Equipment[7];
 
@@ -39,8 +45,10 @@ public class Player implements Serializable {
     public Weakness weakness;
     public StatusEffect statusEffect;
 
-    public Player(String name) {
+    public Player(String name, int baseExp, int expmod) {
         this.name = name;
+        this.baseExp = baseExp;
+        this.expMod = expmod;
     }
 
     /**
@@ -125,15 +133,18 @@ public class Player implements Serializable {
 
     //TODO: localize this method
     public void levelUp() {
-        if (this.level >= 99) {
+        if (this.level >= Vars.maxLevel) {
             System.out.println((this.name.equalsIgnoreCase("you") == true) ? "You are max level!" : this.name + " is max level!");
+            return;
         }
 
+        int[] oldStats = {this.health, this.mana, this.attack, this.mAttack, this.luck, this.defense, this.mDefense};
+
         if (this.exp >= this.expToNextLevel) {
-            int levelNeeded = 1;
+            int levelNeeded = 0;
             while (this.exp >= this.expToNextLevel) {
                 this.exp -= this.expToNextLevel;
-                this.expToNextLevel = (MathFunc.randomInt(level + 5, level + 20) + (3 * level));
+                this.expToNextLevel = (MathFunc.expToNextLevel(level, this.baseExp, this.expMod));
                 levelNeeded++;
             }
 
@@ -142,6 +153,22 @@ public class Player implements Serializable {
             ConsoleFunc.wait(2000);
 
             //TODO: level up
+            int[] newStats = oldStats.clone();
+            for (int i = 0; i < 7; i++) {
+                newStats[i] = MathFunc.statIncrease(oldStats[i], levelNeeded, growthRates[i]);
+            }
+            System.out.println(
+                    localize(stat_health) + ": " + oldStats[0] + " => " + newStats[0] + "\n"
+                    + localize(stat_mana) + ": " + oldStats[1] + " => " + newStats[1] + "\n"
+                    + localize(stat_attack) + ": " + oldStats[2] + " => " + newStats[2] + "\n"
+                    + localize(stat_mAttack) + ": " + oldStats[3] + " => " + newStats[3] + "\n"
+                    + localize(stat_luck) + ": " + oldStats[4] + " => " + newStats[4] + "\n"
+                    + localize(stat_defense) + ": " + oldStats[5] + " => " + newStats[5] + "\n"
+                    + localize(stat_mDefense) + ": " + oldStats[6] + " => " + newStats[6] + "\n"
+                    + localize(stat_expNeeded) + ": " + exp + "/" + expToNextLevel + "\n"
+            );
+
+            ConsoleFunc.wait(10000);
         }
     }
 

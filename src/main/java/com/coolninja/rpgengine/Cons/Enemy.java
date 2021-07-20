@@ -72,6 +72,9 @@ public class Enemy implements Serializable {
     }
 
     public Drop getDrop() {
+        if (drops == null) {
+            return null;
+        }
         for (Drop d : drops) {
             if (d.getIfShouldDrop()) {
                 return d;

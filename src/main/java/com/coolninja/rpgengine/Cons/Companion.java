@@ -6,8 +6,8 @@ package com.coolninja.rpgengine.Cons;
  */
 public class Companion extends Player {
 
-    public Companion(String name) {
-        super(name);
+    public Companion(String name, int baseExp, int expMod) {
+        super(name, baseExp, expMod);
     }
 
     //TODO: rest of it
