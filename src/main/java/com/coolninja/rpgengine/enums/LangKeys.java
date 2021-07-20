@@ -15,9 +15,13 @@ public enum LangKeys {
      */
     battle_moveused("battle_moveused"),
     /**
-     * "[p1 (name + doesn't/don't)] have enough mana!"
+     * "[p1] doesn't have enough mana!"
      */
     battle_missingmana("battle_missingmana"),
+    /**
+     * "You don't have enough mana!"
+     */
+    battle_missingmana_1stp("battle_missingmana_1stp"),
     /**
      * "[p1] missed"
      */
@@ -28,7 +32,17 @@ public enum LangKeys {
      */
     battle_gotitem("battle_gotitem"),
     inv_noitems("inv_noitems"),
-    gen_your("gen_your");
+    gen_your("gen_your"),
+    gen_firstppronoun("gen_firstppronoun"),
+    //Stats section
+    stat_health("stat_health"),
+    stat_mana("stat_mana"),
+    stat_attack("stat_attack"),
+    stat_defense("stat_defense"),
+    stat_mAttack("stat_mAttack"),
+    stat_mDefense("stat_mDefense"),
+    stat_luck("stat_luck"),
+    stat_expNeeded("stat_expNeeded");
 
     public String key;
 
