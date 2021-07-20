@@ -7,6 +7,8 @@ import static com.coolninja.rpgengine.enums.LangKeys.*;
 import java.util.HashMap;
 
 /**
+ * TODO: Make sure I don't use localize(key) + string. Because that will cause
+ * problems.
  *
  * @author Ben
  */
@@ -31,12 +33,21 @@ public class LocalizationHandler {
         en_us.put(battle_menu.key, "Attack,Item,Idle,Run");
         en_us.put(battle_currentTurn.key, "It's %s's turn");
         en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
-        en_us.put(battle_missingmana.key, "%s have enough mana!");
+        en_us.put(battle_missingmana.key, "%s doesn't have enough mana!");
         en_us.put(gen_your.key, "your");
+        en_us.put(gen_firstppronoun.key, "you");
         en_us.put(battle_missed.key, "%s missed!");
         en_us.put(battle_critical.key, Colors.BLUE + "C" + Colors.RED + " R" + Colors.YELLOW + " I" + Colors.PURPLE + " T" + Colors.RED + " I" + Colors.CYAN + " C" + Colors.GREEN + " A" + Colors.BLACK + " L" + Colors.reset());
         en_us.put(inv_noitems.key, "%s have no items.");
         en_us.put(battle_gotitem.key, "%1$s received %2$s");
+        en_us.put(stat_health.key, "Health");
+        en_us.put(stat_mana.key, "Mana");
+        en_us.put(stat_attack.key, "Attack");
+        en_us.put(stat_mAttack.key, "Magic Attack");
+        en_us.put(stat_defense.key, "Defense");
+        en_us.put(stat_mDefense.key, "Magic Defense");
+        en_us.put(stat_luck.key, "Luck");
+        en_us.put(stat_expNeeded.key, "Exp to next level");
         //end init en_us
         langs.put("en_us", en_us);
 
