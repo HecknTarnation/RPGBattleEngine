@@ -1,15 +1,11 @@
 package com.coolninja.rpgengine;
 
 import com.coolninja.rpgengine.Cons.Enemy;
-import com.coolninja.rpgengine.Cons.Move;
-import com.coolninja.rpgengine.Cons.Player;
-import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.handlers.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -109,7 +105,7 @@ public class Engine {
         String type = (String) json.get("type");
 
         //TODO: rewrite and fix this
-        if (type.equalsIgnoreCase("Enemy")) {
+        /*if (type.equalsIgnoreCase("Enemy")) {
             JSONObject stats = (JSONObject) json.get("stats");
             Enemy en = new Enemy((String) json.get("name"), (int) (long) stats.get("health"));
             en.expVal = (int) ((long) json.get("expVal"));
@@ -118,7 +114,7 @@ public class Engine {
             en.setMoves(Move.fromJSONArr(((JSONArray) json.get("moves"))));
             return en;
         } else if (type.equalsIgnoreCase("player")) {
-            Player plr = new Player((String) json.get("name"));
+            //Player plr = new Player((String) json.get("name"));
             StatusArray arr = StatusArray.fromJSONArr((JSONObject) json.get("stats"));
             JSONArray growthRates = (JSONArray) json.get("growthRates");
             JSONArray moves = (JSONArray) json.get("moves");
@@ -126,8 +122,7 @@ public class Engine {
 
             //plr.load(arr, (int) (long) json.get("level"), growthRates, moves, inv, (int) (long) json.get("exp"), (int) (long) json.get("expToNextLevel"));
             return plr;
-        }
-
+        }*/
         return null;
     }
 }
