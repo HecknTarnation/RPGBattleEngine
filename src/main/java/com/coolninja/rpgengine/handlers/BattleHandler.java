@@ -6,7 +6,7 @@ import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.Engine;
 import com.coolninja.rpgengine.MathFunc;
 import com.coolninja.rpgengine.Vars;
-import com.coolninja.rpgengine.enums.*;
+import static com.coolninja.rpgengine.dev.Macros.*;
 import static com.coolninja.rpgengine.enums.LangKeys.*;
 import java.util.ArrayList;
 
@@ -90,21 +90,21 @@ public class BattleHandler {
             ConsoleFunc.clear();
             currentIndex++;
         }
-        System.out.println("Battle Ended");
         BattleEnd();
     }
 
     private void BattleEnd() {
-        for (Companion c : comps) {
-            c.levelUp(expVal);
-        }
-        player.levelUp(expVal);
+        System.out.println("Battle Ended");
         for (Enemy e : enArchive) {
             Drop d = e.getDrop();
             if (d != null) {
                 player.inv.add(d.getItem());
                 println(String.format(localize(battle_gotitem), player.name, d.getItem().name));
             }
+        }
+        player.levelUp(expVal);
+        for (Companion c : comps) {
+            c.levelUp(expVal);
         }
     }
 
@@ -252,9 +252,7 @@ public class BattleHandler {
         int mD = selectedMove.mDamage + currentPlayer.mAttack;
         int cost = selectedMove.manaCost;
         if (cost > 0 && currentPlayer.mana < cost) {
-            //TODO: localize
-            String p1 = currentPlayer.name.equalsIgnoreCase("you") ? "You don't" : currentPlayer.name + " doesnt't";
-            String s = String.format(localize(battle_missingmana), p1);
+            String s = currentPlayer.name.equalsIgnoreCase(localize(gen_firstppronoun)) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
             ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
@@ -357,30 +355,4 @@ public class BattleHandler {
             currentPlayer = null;
         }
     }
-
-    //some macros for me
-    private String localize(String key) {
-        return Engine.localizationHandler.getLocalizedString(key);
-    }
-
-    private String localize(LangKeys key) {
-        return localize(key.key);
-    }
-
-    private void print(LangKeys key) {
-        print(localize(key));
-    }
-
-    private void print(String str) {
-        System.out.print(str);
-    }
-
-    private void println(LangKeys key) {
-        println(localize(key));
-    }
-
-    private void println(String str) {
-        System.out.println(str);
-    }
-    //end macros
 }
