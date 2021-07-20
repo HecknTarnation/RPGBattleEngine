@@ -66,4 +66,28 @@ public class MathFunc {
         return selectedMove.accuracy > (randomD(0, 1));
     }
 
+    /**
+     * Calculates the experience required for the next level.
+     *
+     * @param level
+     * @param baseExp
+     * @param exponent
+     * @return
+     */
+    //TODO: change temp formula
+    public static int expToNextLevel(int level, int baseExp, int exponent) {
+        int i = 0;
+        i = (int) Math.floor(baseExp * (level ^ exponent));
+        return i;
+    }
+
+    //TODO: change temp formula
+    public static int statIncrease(int oldStat, int levelNeeded, double growthRate) {
+        int newStat = oldStat;
+        for (int i = 0; i < levelNeeded; i++) {
+            newStat = newStat + (int) (1 * growthRate);
+        }
+        return newStat;
+    }
+
 }
