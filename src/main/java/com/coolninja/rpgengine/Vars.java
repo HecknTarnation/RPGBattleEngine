@@ -21,6 +21,7 @@ public class Vars {
 
     public static String Enemy_Color = Colors.RED_BACKGROUND;
     public static String Ally_Color = Colors.BLUE_BACKGROUND;
+    public static int maxLevel = 99;
 
     public static void setPlayer(Player p) {
         player = p;
