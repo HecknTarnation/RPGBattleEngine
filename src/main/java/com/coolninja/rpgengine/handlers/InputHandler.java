@@ -88,8 +88,18 @@ public class InputHandler implements NativeKeyListener {
         return s;
     }
 
+    public void waitUntilEnter() {
+        System.out.println("Press Enter...");
+        try {
+            System.in.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
-     * Ends the InputHandler's operation (you must call init again to use this)
+     * Ends the InputHandler's operation (you must call init to use InputHandler
+     * again)
      */
     public void end() {
         GlobalScreen.removeNativeKeyListener(this);

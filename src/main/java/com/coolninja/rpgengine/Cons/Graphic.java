@@ -28,4 +28,9 @@ public class Graphic {
         return this;
     }
 
+    public Graphic setTime(int time) {
+        this.time = (short) time;
+        return this;
+    }
+
 }

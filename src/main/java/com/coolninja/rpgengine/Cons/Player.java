@@ -1,6 +1,7 @@
 package com.coolninja.rpgengine.Cons;
 
 import com.coolninja.rpgengine.ConsoleFunc;
+import com.coolninja.rpgengine.Engine;
 import com.coolninja.rpgengine.MathFunc;
 import com.coolninja.rpgengine.Vars;
 import com.coolninja.rpgengine.arrays.StatusArray;
@@ -152,7 +153,6 @@ public class Player implements Serializable {
 
             ConsoleFunc.wait(2000);
 
-            //TODO: level up
             int[] newStats = oldStats.clone();
             for (int i = 0; i < 7; i++) {
                 newStats[i] = MathFunc.statIncrease(oldStats[i], levelNeeded, growthRates[i]);
@@ -168,7 +168,7 @@ public class Player implements Serializable {
                     + localize(stat_expNeeded) + ": " + exp + "/" + expToNextLevel + "\n"
             );
 
-            ConsoleFunc.wait(10000);
+            Engine.inputHandler.waitUntilEnter();
         }
     }
 

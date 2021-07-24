@@ -274,7 +274,7 @@ public class BattleHandler {
         int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
                 + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
         int failAmount = 100 - currentPlayer.luck;
-        int[] chances = new int[]{currentPlayer.luck, failAmount};
+        int[] chances = new int[]{currentPlayer.luck + 1, failAmount};
         Object[] obj = new Object[]{1, 0};
         if ((int) MathFunc.hatpull(chances, obj) == 1) {
             println(localize(battle_critical));
@@ -284,6 +284,7 @@ public class BattleHandler {
         ens[target].health -= finalD;
         Graphic graphic = selectedMove.getGraphic();
         if (graphic != null) {
+            ConsoleFunc.clear();
             for (String s : graphic.frames) {
                 print(s);
                 ConsoleFunc.wait(graphic.time);

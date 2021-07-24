@@ -23,6 +23,7 @@ public class Engine {
     public static InputHandler inputHandler = new InputHandler();
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
     public static SoundHandler soundHandler = new SoundHandler();
+
     private static boolean initialized = false;
 
     public static void init() {
@@ -99,7 +100,6 @@ public class Engine {
         return loadJSON(json);
     }
 
-    //TODO: test this code
     public static Object loadJSON(JSONObject json) throws ParseException {
 
         String type = (String) json.get("type");

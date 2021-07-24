@@ -85,7 +85,7 @@ public class Enemy implements Serializable {
 
     /**
      * Is run when the enemy dies (at the end of everyone's turn when checkWon
-     * is run). Should be overwritten.
+     * is run).
      */
     public void onDeath() {
 
