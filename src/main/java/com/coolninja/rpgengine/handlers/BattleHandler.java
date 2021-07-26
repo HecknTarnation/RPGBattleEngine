@@ -51,7 +51,6 @@ public class BattleHandler {
                 }
             }
 
-            //TODO: fix enemy never getting a turn
             getTurn();
             if (currentPlayer != null) {
                 while (currentPlayer.health <= 0 && currentPlayer != null) {
@@ -87,6 +86,9 @@ public class BattleHandler {
 
             //check if won
             won = checkWon();
+            if (checkDie()) {
+
+            }
             ConsoleFunc.clear();
             currentIndex++;
         }
@@ -118,6 +120,7 @@ public class BattleHandler {
         Move[] moves = en.moves;
         Move currentHeighest = new Move("").setDamage(0, 0);
         Player[] t = new Player[comps.length + 1];
+        //TODO: it would be more efficient to make the array only contain alive characters, but it's late so I can't think good.
         t[0] = player;
         for (int i = 1; i <= comps.length; i++) {
             t[i] = comps[i - 1];
@@ -134,6 +137,7 @@ public class BattleHandler {
         switch (en.aiLevel) {
             case Random:
                 int index = MathFunc.randomInt(0, moves.length - 1);
+                index = index > moves.length - 1 ? moves.length - 1 : index;
                 selection = index > 0 ? index : 0;
                 break;
             case Damage:
@@ -330,6 +334,21 @@ public class BattleHandler {
         ens = new Enemy[z.size()];
         z.toArray(ens);
         return ens.length == 0;
+    }
+
+    private boolean checkDie() {
+        Player[] t = new Player[comps.length + 1];
+        t[0] = player;
+        for (int i = 0; i < comps.length; i++) {
+            t[i + 1] = comps[i];
+        }
+        int dead = 0;
+        for (Player p : t) {
+            if (p.health <= 0) {
+                dead++;
+            }
+        }
+        return dead == t.length;
     }
 
     private int currentIndex = 0;
