@@ -3,6 +3,7 @@ package com.coolninja.rpgengine;
 import com.coolninja.rpgengine.Cons.Move;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  *
@@ -10,9 +11,10 @@ import java.util.Collections;
  */
 public class MathFunc {
 
+    private static final Random rand = new Random();
+
     /**
-     * Returns a number between 0 and 100, as a double (which means it can have
-     * a random decimal value). <br>
+     * Returns a number between min and max, as a double. <br>
      * This function is not guaranteed to be random.
      *
      * @param min
@@ -20,11 +22,19 @@ public class MathFunc {
      * @return
      */
     public static double randomD(int min, int max) {
-        return (Math.random() * ((max - min) + 1)) + min;
+        return (double) randomInt(min, max);
     }
 
+    /**
+     * Returns a number between min and max. <br>
+     * This function is not guaranteed to be random.
+     *
+     * @param min
+     * @param max
+     * @return
+     */
     public static int randomInt(int min, int max) {
-        return (int) Math.round(randomD(min, max));
+        return rand.nextInt(max + 1 - min) + min;
     }
 
     /**
