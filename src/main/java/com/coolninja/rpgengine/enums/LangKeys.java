@@ -31,6 +31,7 @@ public enum LangKeys {
      * "[name] received [item]"
      */
     battle_gotitem("battle_gotitem"),
+    battle_gameover("battle_gameover"),
     inv_noitems("inv_noitems"),
     gen_your("gen_your"),
     gen_firstppronoun("gen_firstppronoun"),
@@ -42,6 +43,7 @@ public enum LangKeys {
     stat_mAttack("stat_mAttack"),
     stat_mDefense("stat_mDefense"),
     stat_luck("stat_luck"),
+    stat_point("stat_point"),
     stat_expNeeded("stat_expNeeded");
 
     public String key;
