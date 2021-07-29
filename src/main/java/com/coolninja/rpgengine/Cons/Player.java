@@ -139,7 +139,7 @@ public class Player implements Serializable {
             return;
         }
 
-        int[] oldStats = {this.health, this.mana, this.attack, this.mAttack, this.luck, this.defense, this.mDefense};
+        int[] oldStats = {this.maxHealth, this.maxMana, this.attack, this.mAttack, this.luck, this.defense, this.mDefense};
 
         if (this.exp >= this.expToNextLevel) {
             int levelNeeded = 0;
@@ -167,6 +167,35 @@ public class Player implements Serializable {
                     + localize(stat_mDefense) + ": " + oldStats[6] + " => " + newStats[6] + "\n"
                     + localize(stat_expNeeded) + ": " + exp + "/" + expToNextLevel + "\n"
             );
+
+            ConsoleFunc.wait(4000);
+
+            int statPoints = 5;
+            while (statPoints > 0) {
+                String[] str = {
+                    localize(stat_health),
+                    localize(stat_mana),
+                    localize(stat_attack),
+                    localize(stat_mAttack),
+                    localize(stat_luck),
+                    localize(stat_defense),
+                    localize(stat_mDefense)
+                };
+                int index = Engine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
+                newStats[index]++;
+                statPoints--;
+            }
+            maxHealth = newStats[0];
+            maxMana = newStats[1];
+            attack = newStats[2];
+            mAttack = newStats[3];
+            luck = newStats[4];
+            defense = newStats[5];
+            mDefense = newStats[6];
+
+            //this isn't working correctly for some reason
+            health = maxMana;
+            mana = maxMana;
 
             Engine.inputHandler.waitUntilEnter();
         }

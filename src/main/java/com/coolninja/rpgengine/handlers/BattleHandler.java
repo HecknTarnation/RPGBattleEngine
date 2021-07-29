@@ -26,8 +26,8 @@ public class BattleHandler {
     private String currentStatus;
 
     public void startBattle(Enemy... en) {
-        this.ens = en;
-        this.enArchive = en;
+        this.ens = en.clone();
+        this.enArchive = ens.clone();
         this.player = Vars.player;
         this.comps = Vars.companions;
         for (Enemy e : en) {
@@ -39,7 +39,9 @@ public class BattleHandler {
     private void battleLoop() {
         boolean won = false;
         while (!won) {
-
+            if (checkDie()) {
+                break;
+            }
             String str = "";
             for (Enemy en : ens) {
                 str += Vars.Enemy_Color + en.name + ": " + en.health + "/" + en.maxHealth + Colors.reset() + "\n";
@@ -53,7 +55,7 @@ public class BattleHandler {
 
             getTurn();
             if (currentPlayer != null) {
-                while (currentPlayer.health <= 0 && currentPlayer != null) {
+                while (currentPlayer != null && currentPlayer.health <= 0) {
                     getTurn(1);
                 }
             }
@@ -86,16 +88,25 @@ public class BattleHandler {
 
             //check if won
             won = checkWon();
-            if (checkDie()) {
-
-            }
             ConsoleFunc.clear();
             currentIndex++;
         }
-        BattleEnd();
+        BattleEnd(won);
     }
 
-    private void BattleEnd() {
+    private void BattleEnd(boolean won) {
+        if (!won) {
+            System.out.println("[---" + Colors.RED + Colors.BLACK_BACKGROUND + localize(battle_gameover) + Colors.reset() + "---]");
+            ConsoleFunc.wait(5000);
+            Engine.deathHandler.OnDeath();
+        }
+        ens = null;
+        player = null;
+        comps = null;
+        currentIndex = 0;
+        currentPlayer = null;
+        currentStatus = null;
+
         System.out.println("Battle Ended");
         for (Enemy e : enArchive) {
             Drop d = e.getDrop();
@@ -104,10 +115,12 @@ public class BattleHandler {
                 println(String.format(localize(battle_gotitem), player.name, d.getItem().name));
             }
         }
-        player.levelUp(expVal);
-        for (Companion c : comps) {
+        Vars.player.levelUp(expVal);
+        for (Companion c : Vars.companions) {
             c.levelUp(expVal);
         }
+        enArchive = null;
+        expVal = 0;
     }
 
     private void EnemyTurn() {
@@ -119,18 +132,20 @@ public class BattleHandler {
     private void EnemyTurnSub(Enemy en) {
         Move[] moves = en.moves;
         Move currentHeighest = new Move("").setDamage(0, 0);
-        Player[] t = new Player[comps.length + 1];
         //TODO: it would be more efficient to make the array only contain alive characters, but it's late so I can't think good.
-        t[0] = player;
-        for (int i = 1; i <= comps.length; i++) {
-            t[i] = comps[i - 1];
+        ArrayList<Player> aliveArr = new ArrayList<>();
+        if (player.health > 0) {
+            aliveArr.add(player);
         }
+        for (int i = 0; i < comps.length; i++) {
+            if (comps[i].health > 0) {
+                aliveArr.add(comps[i]);
+            }
+        }
+        Player[] t = new Player[aliveArr.size()];
+        t = aliveArr.toArray(t);
         int temp = MathFunc.randomInt(0, t.length - 1);
         Player selectedPlayer = t[temp];
-        if (selectedPlayer == null) {
-            print("Err: Player is null | index:" + temp);
-            System.exit(0);
-        }
 
         //Will default to the first move in moves if none matching the criteria are found.
         int selection = 0;
