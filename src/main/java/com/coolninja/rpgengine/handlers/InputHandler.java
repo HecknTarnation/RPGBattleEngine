@@ -3,6 +3,7 @@ package com.coolninja.rpgengine.handlers;
 import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.Vars;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,7 @@ public class InputHandler implements NativeKeyListener {
     private int currentMode = -1;
     private boolean enterPressed = false;
 
-    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command.
+    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command. This problem also affects the use of the doText method.
     //Problem only occurs when CMD or PowerShell is in focus, if it's not in focus it works as intented.
     public void init() {
         try {
@@ -92,7 +93,7 @@ public class InputHandler implements NativeKeyListener {
         System.out.println("Press Enter...");
         try {
             System.in.read();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
