@@ -23,6 +23,7 @@ public class Engine {
     public static InputHandler inputHandler = new InputHandler();
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
     public static SoundHandler soundHandler = new SoundHandler();
+    public static DeathHandler deathHandler = new DeathHandler();
 
     private static boolean initialized = false;
 
@@ -41,11 +42,12 @@ public class Engine {
      * @param lHandler
      * @param sHandler
      */
-    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler, SoundHandler sHandler) {
+    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler, SoundHandler sHandler, DeathHandler dHandler) {
         battleHandler = bHandler == null ? battleHandler : bHandler;
         inputHandler = iHandler == null ? inputHandler : iHandler;
         localizationHandler = lHandler == null ? localizationHandler : lHandler;
         soundHandler = sHandler == null ? soundHandler : sHandler;
+        deathHandler = dHandler == null ? deathHandler : dHandler;
 
         init();
     }
