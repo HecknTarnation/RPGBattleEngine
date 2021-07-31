@@ -43,6 +43,8 @@ public class LocalizationHandler {
         en_us.put(battle_gameover.key, "Game Over");
         en_us.put(stat_health.key, "Health");
         en_us.put(stat_mana.key, "Mana");
+        en_us.put(stat_maxHealth.key, "Max Health");
+        en_us.put(stat_maxMana.key, "Max Mana");
         en_us.put(stat_attack.key, "Attack");
         en_us.put(stat_mAttack.key, "Magic Attack");
         en_us.put(stat_defense.key, "Defense");
