@@ -26,7 +26,10 @@ public class BattleHandler {
     private String currentStatus;
 
     public void startBattle(Enemy... en) {
-        this.ens = en.clone();
+        ens = new Enemy[en.length];
+        for (int i = 0; i < ens.length; i++) {
+            ens[i] = en[i].clone();
+        }
         this.enArchive = ens.clone();
         this.player = Vars.player;
         this.comps = Vars.companions;
@@ -46,10 +49,18 @@ public class BattleHandler {
             for (Enemy en : ens) {
                 str += Vars.Enemy_Color + en.name + ": " + en.health + "/" + en.maxHealth + Colors.reset() + "\n";
             }
-            str += "\n" + Vars.Ally_Color + player.name + ": " + player.health + "/" + player.maxHealth + Colors.reset() + "\n";
-            if (Vars.companions != null) {
+            if (player.health > 0) {
+                str += "\n" + Vars.Ally_Color + player.name + ": " + player.health + "/" + player.maxHealth + Colors.reset() + "\n";
+            } else {
+                str += "\n" + Colors.RED_BACKGROUND + player.name + ": DEAD" + Colors.reset() + "\n";
+            }
+            if (comps != null) {
                 for (Companion com : Vars.companions) {
-                    str += Vars.Ally_Color + com.name + ": " + com.health + "/" + com.maxHealth + Colors.reset() + "\n";
+                    if (com.health > 0) {
+                        str += Vars.Ally_Color + com.name + ": " + com.health + "/" + com.maxHealth + Colors.reset() + "\n";
+                    } else {
+                        str += Colors.RED_BACKGROUND + com.name + ": DEAD" + Colors.reset() + "\n";
+                    }
                 }
             }
 
@@ -121,6 +132,7 @@ public class BattleHandler {
         }
         enArchive = null;
         expVal = 0;
+        System.gc();
     }
 
     private void EnemyTurn() {

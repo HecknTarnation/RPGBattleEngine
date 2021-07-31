@@ -4,13 +4,15 @@ import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.enums.AILevel;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 
 /**
  *
  * @author Ben
  */
-public class Enemy implements Serializable {
+public class Enemy implements Serializable, Cloneable {
 
     public String name;
     public int health, maxHealth, attack, defense, luck, mAttack, mDefense;
@@ -79,6 +81,21 @@ public class Enemy implements Serializable {
             if (d.getIfShouldDrop()) {
                 return d;
             }
+        }
+        return null;
+    }
+
+    /**
+     * Creates a clone of this enemy
+     *
+     * @return
+     */
+    @Override
+    public Enemy clone() {
+        try {
+            return (Enemy) super.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Enemy.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
