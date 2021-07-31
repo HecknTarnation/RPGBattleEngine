@@ -38,6 +38,8 @@ public enum LangKeys {
     //Stats section
     stat_health("stat_health"),
     stat_mana("stat_mana"),
+    stat_maxHealth("stat_maxHealth"),
+    stat_maxMana("stat_maxMana"),
     stat_attack("stat_attack"),
     stat_defense("stat_defense"),
     stat_mAttack("stat_mAttack"),
