@@ -29,7 +29,7 @@ public class InputHandler implements NativeKeyListener {
     private int currentMode = -1;
     private boolean enterPressed = false;
 
-    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command. This problem also affects the use of the doText method.
+    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command. This problem also affects the use of the doText and waitUntilEnter method.
     //Problem only occurs when CMD or PowerShell is in focus, if it's not in focus it works as intented.
     public void init() {
         try {
