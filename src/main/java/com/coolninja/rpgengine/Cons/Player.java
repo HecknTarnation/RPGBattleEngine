@@ -169,17 +169,18 @@ public class Player implements Serializable {
             );
 
             ConsoleFunc.wait(4000);
+            ConsoleFunc.clear();
 
             int statPoints = 5;
             while (statPoints > 0) {
                 String[] str = {
-                    localize(stat_health),
-                    localize(stat_mana),
-                    localize(stat_attack),
-                    localize(stat_mAttack),
-                    localize(stat_luck),
-                    localize(stat_defense),
-                    localize(stat_mDefense)
+                    localize(stat_maxHealth) + ": " + maxHealth,
+                    localize(stat_maxMana) + ": " + maxMana,
+                    localize(stat_attack) + ": " + attack,
+                    localize(stat_mAttack) + ": " + mAttack,
+                    localize(stat_luck) + ": " + luck,
+                    localize(stat_defense) + ": " + defense,
+                    localize(stat_mDefense) + ": " + mDefense
                 };
                 int index = Engine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
                 newStats[index]++;
@@ -193,8 +194,7 @@ public class Player implements Serializable {
             defense = newStats[5];
             mDefense = newStats[6];
 
-            //this isn't working correctly for some reason
-            health = maxMana;
+            health = maxHealth;
             mana = maxMana;
 
             Engine.inputHandler.waitUntilEnter();
