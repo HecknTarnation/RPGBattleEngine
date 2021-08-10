@@ -1,8 +1,12 @@
 package com.coolninja.rpgengine.handlers;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.*;
 
 /**
  *
@@ -47,16 +51,26 @@ public class SoundHandler {
      * called).
      */
     public void playSound(URI uri, int volume, int repeatTime) {
+        if (uri == null) {
+            return;
+        }
         playSound(new File(uri.toString()), volume, repeatTime);
     }
 
     public void playSound(File file, int volume, int repeatTime) {
-        SoundThread t = new SoundThread(file, repeatTime).setVolume(volume);
-        if (threads.size() > maxThreads) {
-            threads.get(0).end();
+        if (file == null) {
+            return;
         }
-        t.play();
-        threads.add(t);
+        try {
+            SoundThread t = new SoundThread(file, repeatTime).setVolume(volume);
+            if (threads.size() > maxThreads) {
+                threads.get(0).end();
+            }
+            t.play();
+            threads.add(t);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            Logger.getLogger(SoundHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -88,12 +102,31 @@ public class SoundHandler {
     }
 
     /**
+     * Mutes the sound of a specific thread
+     *
+     * @param threadIndex
+     */
+    public void mute(int threadIndex) {
+        threads.get(threadIndex).prevVolume = threads.get(threadIndex).volume;
+        threads.get(threadIndex).volume = 0;
+    }
+
+    /**
      * Unmutes the sound.
      */
     public void unmute() {
         for (SoundThread s : threads) {
             s.volume = s.prevVolume;
         }
+    }
+
+    /**
+     * Unmutes the sound of a specific thread.
+     *
+     * @param threadIndex
+     */
+    public void unmute(int threadIndex) {
+        threads.get(threadIndex).volume = threads.get(threadIndex).prevVolume;
     }
 
     public class SoundThread extends Thread {
@@ -103,21 +136,22 @@ public class SoundHandler {
         public int volume;
         protected int prevVolume;
 
-        public SoundThread(File file, int repeatTime) {
+        private Clip clip;
+        private AudioInputStream audioStream;
+
+        public SoundThread(File file, int repeatTime) throws UnsupportedAudioFileException, IOException {
             super("SoundThread");
+            this.audioStream = AudioSystem.getAudioInputStream(file);
             this.file = file;
             this.repeatTime = repeatTime;
         }
 
         @Override
         public void run() {
-            while (!this.isInterrupted()) {
-                //TODO: sound code
-            }
+
         }
 
-        public void play() {
-            //TODO: set up sound variables
+        public void play() throws LineUnavailableException, IOException {
             this.start();
         }
 
