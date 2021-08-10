@@ -86,7 +86,7 @@ public class MathFunc {
      */
     //TODO: change temp formula
     public static int expToNextLevel(int level, int baseExp, int exponent) {
-        int i = 0;
+        int i;
         i = (int) Math.floor(baseExp * (level ^ exponent));
         return i;
     }
