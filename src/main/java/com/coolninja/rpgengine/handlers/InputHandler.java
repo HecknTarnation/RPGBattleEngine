@@ -120,6 +120,11 @@ public class InputHandler implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
+
+    }
+
+    @Override
+    public void nativeKeyReleased(NativeKeyEvent nke) {
         if (currentMode == 0) {
             if (nke.getKeyCode() == Vars.Controls[0]) {
                 menuIndex--;
@@ -131,11 +136,6 @@ public class InputHandler implements NativeKeyListener {
                 enterPressed = true;
             }
         }
-    }
-
-    @Override
-    public void nativeKeyReleased(NativeKeyEvent nke) {
-
     }
 
 }
