@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -31,6 +32,13 @@ public class Engine {
         localizationHandler.init();
         inputHandler.init();
         initialized = true;
+    }
+
+    /**
+     * Ends the engine's operation
+     */
+    public static void end() {
+        inputHandler.end();
     }
 
     /**
@@ -126,5 +134,9 @@ public class Engine {
             return plr;
         }*/
         return null;
+    }
+
+    public static void playSound(URI sound, int volume, int repeatTime) {
+        soundHandler.playSound(sound, volume, repeatTime);
     }
 }
