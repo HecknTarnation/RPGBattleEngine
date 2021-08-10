@@ -174,13 +174,13 @@ public class Player implements Serializable {
             int statPoints = 5;
             while (statPoints > 0) {
                 String[] str = {
-                    localize(stat_maxHealth) + ": " + maxHealth,
-                    localize(stat_maxMana) + ": " + maxMana,
-                    localize(stat_attack) + ": " + attack,
-                    localize(stat_mAttack) + ": " + mAttack,
-                    localize(stat_luck) + ": " + luck,
-                    localize(stat_defense) + ": " + defense,
-                    localize(stat_mDefense) + ": " + mDefense
+                    localize(stat_maxHealth) + ": " + newStats[0],
+                    localize(stat_maxMana) + ": " + newStats[1],
+                    localize(stat_attack) + ": " + newStats[2],
+                    localize(stat_mAttack) + ": " + newStats[3],
+                    localize(stat_luck) + ": " + newStats[4],
+                    localize(stat_defense) + ": " + newStats[5],
+                    localize(stat_mDefense) + ": " + newStats[6]
                 };
                 int index = Engine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
                 newStats[index]++;
