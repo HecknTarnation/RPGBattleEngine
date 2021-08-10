@@ -316,6 +316,7 @@ public class BattleHandler {
         Graphic graphic = selectedMove.getGraphic();
         if (graphic != null) {
             ConsoleFunc.clear();
+            Engine.playSound(selectedMove.sound, 1, 1);
             for (String s : graphic.frames) {
                 print(s);
                 ConsoleFunc.wait(graphic.time);
