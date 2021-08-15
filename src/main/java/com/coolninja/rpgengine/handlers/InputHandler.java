@@ -4,11 +4,15 @@ import com.coolninja.rpgengine.Colors;
 import com.coolninja.rpgengine.ConsoleFunc;
 import com.coolninja.rpgengine.Vars;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.AbstractExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
+import org.jnativehook.*;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
@@ -29,9 +33,8 @@ public class InputHandler implements NativeKeyListener {
     private int currentMode = -1;
     private boolean enterPressed = false;
 
-    //TODO: fix problem where, upon pressing enter and if the program exits, it will attempt to run the input as a command. This problem also affects the use of the doText and waitUntilEnter method.
-    //Problem only occurs when CMD or PowerShell is in focus, if it's not in focus it works as intented.
     public void init() {
+        GlobalScreen.setEventDispatcher(new VoidDispatchService());
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
@@ -120,22 +123,71 @@ public class InputHandler implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
-
-    }
-
-    @Override
-    public void nativeKeyReleased(NativeKeyEvent nke) {
         if (currentMode == 0) {
-            if (nke.getKeyCode() == Vars.Controls[0]) {
+            int code = nke.getKeyCode();
+            if (code == Vars.Controls[0]) {
                 menuIndex--;
             }
-            if (nke.getKeyCode() == Vars.Controls[2]) {
+            if (code == Vars.Controls[2]) {
                 menuIndex++;
             }
-            if (nke.getKeyCode() == Vars.Controls[4]) {
+            if (code == Vars.Controls[4]) {
                 enterPressed = true;
+            }
+            try {
+                Field f = NativeInputEvent.class.getDeclaredField("reserved");
+                f.setAccessible(true);
+                f.setShort(nke, (short) 0x01);
+
+            } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException ex) {
+                System.out.print("[ !! ]\n");
+                ex.printStackTrace();
             }
         }
     }
 
+    @Override
+    public void nativeKeyReleased(NativeKeyEvent nke) {
+
+    }
+
+    private class VoidDispatchService extends AbstractExecutorService {
+
+        private boolean running = false;
+
+        public VoidDispatchService() {
+            running = true;
+        }
+
+        @Override
+        public void shutdown() {
+            running = false;
+        }
+
+        @Override
+        public List<Runnable> shutdownNow() {
+            running = false;
+            return new ArrayList<>(0);
+        }
+
+        @Override
+        public boolean isShutdown() {
+            return !running;
+        }
+
+        @Override
+        public boolean isTerminated() {
+            return !running;
+        }
+
+        @Override
+        public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
+            return true;
+        }
+
+        @Override
+        public void execute(Runnable r) {
+            r.run();
+        }
+    }
 }
