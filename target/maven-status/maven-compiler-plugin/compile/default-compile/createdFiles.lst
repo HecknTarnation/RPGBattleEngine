@@ -13,6 +13,7 @@ com\coolninja\rpgengine\handlers\BattleHandler.class
 com\coolninja\rpgengine\handlers\InputHandler.class
 com\coolninja\rpgengine\Cons\Item.class
 com\coolninja\rpgengine\enums\LangKeys.class
+com\coolninja\rpgengine\handlers\InputHandler$VoidDispatchService.class
 com\coolninja\rpgengine\enums\StatusArrayPosition.class
 com\coolninja\rpgengine\enums\AILevel.class
 com\coolninja\rpgengine\Cons\Enemy.class
