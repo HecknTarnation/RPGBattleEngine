@@ -168,7 +168,7 @@ public class Player implements Serializable {
                     + localize(stat_expNeeded) + ": " + exp + "/" + expToNextLevel + "\n"
             );
 
-            ConsoleFunc.wait(4000);
+            Engine.inputHandler.waitUntilEnter();
             ConsoleFunc.clear();
 
             int statPoints = 5;
@@ -196,8 +196,6 @@ public class Player implements Serializable {
 
             health = maxHealth;
             mana = maxMana;
-
-            Engine.inputHandler.waitUntilEnter();
         }
     }
 
