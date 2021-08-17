@@ -24,6 +24,7 @@ public class Player implements Serializable {
     public double[] growthRates = {1.0, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0};
     public int baseExp = 50;
     public int expMod = 1;
+    public int skillPointsOnLevel = 5;
 
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel = baseExp;
@@ -43,8 +44,8 @@ public class Player implements Serializable {
      */
     public ArrayList<Item> inv = new ArrayList<>();
 
-    public Weakness weakness;
-    public StatusEffect statusEffect;
+    public ArrayList<Weakness> weakness;
+    public ArrayList<StatusEffect> statusEffects;
 
     public Player(String name, int baseExp, int expmod) {
         this.name = name;
@@ -103,10 +104,10 @@ public class Player implements Serializable {
             mDefense = (int) arr.get(StatusArrayPosition.MDEF);
         }
         if (arr.get(StatusArrayPosition.Weakness) != null) {
-            weakness = (Weakness) arr.get(StatusArrayPosition.Weakness);
+            weakness = (ArrayList<Weakness>) arr.get(StatusArrayPosition.Weakness);
         }
         if (arr.get(StatusArrayPosition.StatusEffect) != null) {
-            statusEffect = (StatusEffect) arr.get(StatusArrayPosition.StatusEffect);
+            statusEffects = (ArrayList<StatusEffect>) arr.get(StatusArrayPosition.StatusEffect);
         }
         return this;
     }
@@ -171,7 +172,7 @@ public class Player implements Serializable {
             Engine.inputHandler.waitUntilEnter();
             ConsoleFunc.clear();
 
-            int statPoints = 5;
+            int statPoints = skillPointsOnLevel;
             while (statPoints > 0) {
                 String[] str = {
                     localize(stat_maxHealth) + ": " + newStats[0],
@@ -210,6 +211,41 @@ public class Player implements Serializable {
             temp[i] = inv.get(i).name;
         }
         return temp;
+    }
+
+    public void statusEffectTick() {
+        statusEffects.forEach(effect -> {
+            effect.tick();
+            statusEffects.removeIf(filter -> {
+                return effect.shouldBeRemoved;
+            });
+        });
+    }
+
+    public void equip(Equipment equip) {
+        if (equipment[equip.slot.index] == null) {
+            maxHealth += equip.maxHealth;
+            maxMana += equip.maxMana;
+            attack += equip.attack;
+            defense += equip.defense;
+            luck += equip.luck;
+            mAttack += equip.mAttack;
+            mDefense += equip.mDefense;
+            weakness.add(equip.weakness);
+            equipment[equip.slot.index] = equip;
+        } else {
+            maxHealth -= equipment[equip.slot.index].maxHealth;
+            maxMana -= equipment[equip.slot.index].maxMana;
+            attack -= equipment[equip.slot.index].attack;
+            defense -= equipment[equip.slot.index].defense;
+            luck -= equipment[equip.slot.index].luck;
+            mAttack -= equipment[equip.slot.index].mAttack;
+            mDefense -= equipment[equip.slot.index].mDefense;
+            weakness.remove(equipment[equip.slot.index].weakness);
+            equipment[equip.slot.index] = null;
+            equip(equip);
+        }
+
     }
 
 }
