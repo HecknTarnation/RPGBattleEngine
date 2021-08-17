@@ -124,6 +124,15 @@ public class InputHandler implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
         if (currentMode == 0) {
+            try {
+                Field f = NativeInputEvent.class.getDeclaredField("reserved");
+                f.setAccessible(true);
+                f.setShort(nke, (short) 0x01);
+
+            } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException ex) {
+                System.out.print("[ !! ]\n");
+                ex.printStackTrace();
+            }
             int code = nke.getKeyCode();
             if (code == Vars.Controls[0]) {
                 menuIndex--;
@@ -133,15 +142,6 @@ public class InputHandler implements NativeKeyListener {
             }
             if (code == Vars.Controls[4]) {
                 enterPressed = true;
-            }
-            try {
-                Field f = NativeInputEvent.class.getDeclaredField("reserved");
-                f.setAccessible(true);
-                f.setShort(nke, (short) 0x01);
-
-            } catch (IllegalAccessException | IllegalArgumentException | NoSuchFieldException | SecurityException ex) {
-                System.out.print("[ !! ]\n");
-                ex.printStackTrace();
             }
         }
     }
