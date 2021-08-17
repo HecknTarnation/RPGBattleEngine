@@ -72,6 +72,10 @@ public class BattleHandler {
             }
             if (currentPlayer == null) {
                 EnemyTurn();
+                player.statusEffectTick();
+                for (Companion comp : comps) {
+                    comp.statusEffectTick();
+                }
                 continue;
             }
 
@@ -144,7 +148,6 @@ public class BattleHandler {
     private void EnemyTurnSub(Enemy en) {
         Move[] moves = en.moves;
         Move currentHeighest = new Move("").setDamage(0, 0);
-        //TODO: it would be more efficient to make the array only contain alive characters, but it's late so I can't think good.
         ArrayList<Player> aliveArr = new ArrayList<>();
         if (player.health > 0) {
             aliveArr.add(player);
@@ -158,6 +161,8 @@ public class BattleHandler {
         t = aliveArr.toArray(t);
         int temp = MathFunc.randomInt(0, t.length - 1);
         Player selectedPlayer = t[temp];
+
+        ArrayList<Weakness> weakness = selectedPlayer.weakness;
 
         //Will default to the first move in moves if none matching the criteria are found.
         int selection = 0;
@@ -184,11 +189,13 @@ public class BattleHandler {
                 }
                 break;
             case Weakness:
-                Weakness weak = selectedPlayer.weakness;
+                //TODO: adjust all of these
                 for (int i = 0; i < moves.length; i++) {
-                    if (moves[i].type.equalsIgnoreCase(weak.type)) {
-                        selection = i;
-                        break;
+                    for (Weakness weak : weakness) {
+                        if (moves[i].type.equalsIgnoreCase(weak.type)) {
+                            selection = i;
+                            break;
+                        }
                     }
                 }
                 break;
@@ -196,12 +203,14 @@ public class BattleHandler {
                 int currentDamage = -1;
                 int currentWeakness = -1;
                 for (int i = 0; i < moves.length; i++) {
-                    if (selectedPlayer.weakness.type.equalsIgnoreCase(moves[i].type)) {
-                        currentWeakness = i;
-                    }
-                    if (moves[i].damage > currentHeighest.damage) {
-                        currentDamage = i;
-                        currentHeighest = moves[i];
+                    for (Weakness weak : weakness) {
+                        if (weak.type.equalsIgnoreCase(moves[i].type)) {
+                            currentWeakness = i;
+                        }
+                        if (moves[i].damage > currentHeighest.damage) {
+                            currentDamage = i;
+                            currentHeighest = moves[i];
+                        }
                     }
                 }
                 if (currentDamage == currentWeakness && currentDamage != -1) {
@@ -221,12 +230,14 @@ public class BattleHandler {
                 currentDamage = -1;
                 currentWeakness = -1;
                 for (int i = 0; i < moves.length; i++) {
-                    if (selectedPlayer.weakness.type.equalsIgnoreCase(moves[i].type)) {
-                        currentWeakness = i;
-                    }
-                    if (moves[i].mDamage > currentHeighest.mDamage) {
-                        currentDamage = i;
-                        currentHeighest = moves[i];
+                    for (Weakness weak : weakness) {
+                        if (weak.type.equalsIgnoreCase(moves[i].type)) {
+                            currentWeakness = i;
+                        }
+                        if (moves[i].mDamage > currentHeighest.mDamage) {
+                            currentDamage = i;
+                            currentHeighest = moves[i];
+                        }
                     }
                 }
                 if (currentDamage == currentWeakness && currentDamage != -1) {
