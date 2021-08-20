@@ -76,6 +76,9 @@ public class BattleHandler {
                 for (Companion comp : comps) {
                     comp.statusEffectTick();
                 }
+                for (Enemy en : ens) {
+                    en.statusEffectTick();
+                }
                 continue;
             }
 
