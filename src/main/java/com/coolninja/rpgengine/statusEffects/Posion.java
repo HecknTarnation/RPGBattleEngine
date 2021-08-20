@@ -19,6 +19,7 @@ public class Posion extends StatusEffect {
     @Override
     public void tick() {
         character.health -= tickDamage;
+        System.out.println(character.name + " took " + tickDamage + "damage.");
         duration--;
         if (duration == 0) {
             this.shouldBeRemoved = true;
