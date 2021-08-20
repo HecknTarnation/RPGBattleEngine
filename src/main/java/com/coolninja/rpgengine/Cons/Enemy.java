@@ -4,6 +4,7 @@ import com.coolninja.rpgengine.arrays.StatusArray;
 import com.coolninja.rpgengine.enums.AILevel;
 import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONObject;
@@ -19,8 +20,8 @@ public class Enemy implements Serializable, Cloneable {
     public int expVal;
     public Move[] moves;
     public AILevel aiLevel;
-    public Weakness weakness;
-    public StatusEffect statusEffect;
+    public ArrayList<Weakness> weakness;
+    public ArrayList<StatusEffect> statusEffects;
     public Drop[] drops;
 
     public Enemy(String name, int health) {
@@ -52,13 +53,13 @@ public class Enemy implements Serializable, Cloneable {
             this.mDefense = (int) stats.get(StatusArrayPosition.MDEF);
         }
         if (stats.get(StatusArrayPosition.Weakness) != null) {
-            this.weakness = (Weakness) stats.get(StatusArrayPosition.Weakness);
+            this.weakness = (ArrayList<Weakness>) stats.get(StatusArrayPosition.Weakness);
         }
         if (stats.get(StatusArrayPosition.AILevel) != null) {
             this.aiLevel = (AILevel) stats.get(StatusArrayPosition.AILevel);
         }
         if (stats.get(StatusArrayPosition.StatusEffect) != null) {
-            this.statusEffect = (StatusEffect) stats.get(StatusArrayPosition.StatusEffect);
+            this.statusEffects = (ArrayList<StatusEffect>) stats.get(StatusArrayPosition.StatusEffect);
         }
         return this;
     }
@@ -83,6 +84,15 @@ public class Enemy implements Serializable, Cloneable {
             }
         }
         return null;
+    }
+
+    public void statusEffectTick() {
+        statusEffects.forEach(effect -> {
+            effect.tick();
+            statusEffects.removeIf(filter -> {
+                return effect.shouldBeRemoved;
+            });
+        });
     }
 
     /**
