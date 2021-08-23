@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
 
 /**
  *
@@ -17,6 +16,10 @@ public class Enemy implements Serializable, Cloneable {
 
     public String name;
     public int health, maxHealth, attack, defense, luck, mAttack, mDefense;
+    /**
+     * Chance of dodging an attack
+     */
+    public float evasion = 0.0f;
     public int expVal;
     public Move[] moves;
     public AILevel aiLevel;
@@ -28,6 +31,11 @@ public class Enemy implements Serializable, Cloneable {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
+    }
+
+    public Enemy setEvasion(float evasion) {
+        this.evasion = evasion;
+        return this;
     }
 
     public Enemy setStats(StatusArray stats) {
@@ -116,16 +124,6 @@ public class Enemy implements Serializable, Cloneable {
      */
     public void onDeath() {
 
-    }
-
-    /**
-     * TODO: write
-     *
-     * @return JSONObject
-     */
-    public JSONObject writeToFile() {
-
-        return null;
     }
 
 }
