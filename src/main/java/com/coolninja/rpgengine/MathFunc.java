@@ -22,7 +22,7 @@ public class MathFunc {
      * @return
      */
     public static double randomD(int min, int max) {
-        return (double) randomInt(min, max);
+        return min + (max - min) * rand.nextDouble();
     }
 
     /**
@@ -67,13 +67,19 @@ public class MathFunc {
      * Checks to see if a move should hit. An accuracy of 1.0f will always hit.
      *
      * @param selectedMove
+     * @param targetEvasion
      * @return
      */
-    public static boolean checkHit(Move selectedMove) {
+    public static boolean checkHit(Move selectedMove, float targetEvasion) {
+        boolean hit;
         if (selectedMove.accuracy == 1.0f) {
             return true;
         }
-        return selectedMove.accuracy > (randomD(0, 1));
+        hit = selectedMove.accuracy > (randomD(0, 1));
+        if (hit && targetEvasion > randomD(0, 1)) {
+            hit = false;
+        }
+        return hit;
     }
 
     /**
