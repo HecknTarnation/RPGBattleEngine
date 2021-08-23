@@ -110,29 +110,8 @@ public class Engine {
         return loadJSON(json);
     }
 
+    //TODO: Add JSON loading of enemies, characrers, items, status effects, etc.
     public static Object loadJSON(JSONObject json) throws ParseException {
-
-        String type = (String) json.get("type");
-
-        //TODO: rewrite and fix this
-        /*if (type.equalsIgnoreCase("Enemy")) {
-            JSONObject stats = (JSONObject) json.get("stats");
-            Enemy en = new Enemy((String) json.get("name"), (int) (long) stats.get("health"));
-            en.expVal = (int) ((long) json.get("expVal"));
-            en.setStats(StatusArray.fromJSONArr(stats));
-            //en.setDrop((Item) json.get("drop"));
-            en.setMoves(Move.fromJSONArr(((JSONArray) json.get("moves"))));
-            return en;
-        } else if (type.equalsIgnoreCase("player")) {
-            //Player plr = new Player((String) json.get("name"));
-            StatusArray arr = StatusArray.fromJSONArr((JSONObject) json.get("stats"));
-            JSONArray growthRates = (JSONArray) json.get("growthRates");
-            JSONArray moves = (JSONArray) json.get("moves");
-            JSONArray inv = (JSONArray) json.get("inv");
-
-            //plr.load(arr, (int) (long) json.get("level"), growthRates, moves, inv, (int) (long) json.get("exp"), (int) (long) json.get("expToNextLevel"));
-            return plr;
-        }*/
         return null;
     }
 
