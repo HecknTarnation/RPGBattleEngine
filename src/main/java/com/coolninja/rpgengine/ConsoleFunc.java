@@ -22,7 +22,6 @@ public class ConsoleFunc {
         }
     }
 
-    //TODO: this function fails to clear the scrollback of cmd or ps (possibly also mac and linux terminals?)
     /**
      * Clears the screen
      */
