@@ -192,7 +192,6 @@ public class BattleHandler {
                 }
                 break;
             case Weakness:
-                //TODO: adjust all of these
                 for (int i = 0; i < moves.length; i++) {
                     for (Weakness weak : weakness) {
                         if (moves[i].type.equalsIgnoreCase(weak.type)) {
@@ -260,7 +259,7 @@ public class BattleHandler {
         Move selectedMove = moves[selection];
         int d = selectedMove.damage;
         int mD = selectedMove.mDamage;
-        if (!MathFunc.checkHit(selectedMove)) {
+        if (!MathFunc.checkHit(selectedMove, currentPlayer.evasion)) {
             println(String.format(localize(battle_missed), en));
             ConsoleFunc.wait(2000);
             return;
@@ -311,7 +310,7 @@ public class BattleHandler {
         }
         target = Engine.inputHandler.doMenu(enNames, currentStatus, false);
 
-        if (!MathFunc.checkHit(selectedMove)) {
+        if (!MathFunc.checkHit(selectedMove, ens[target].evasion)) {
             println(String.format(localize(battle_missed), currentPlayer.name));
             ConsoleFunc.wait(2000);
             return;
