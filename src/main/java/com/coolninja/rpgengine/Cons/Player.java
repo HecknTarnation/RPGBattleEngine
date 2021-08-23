@@ -28,6 +28,10 @@ public class Player implements Serializable {
 
     public String name;
     public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel = baseExp;
+    /**
+     * Chance of dodging an attack
+     */
+    public float evasion = 0.0f;
 
     /**
      * Player's moves
