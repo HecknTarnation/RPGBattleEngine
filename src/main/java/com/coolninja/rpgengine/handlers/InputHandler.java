@@ -55,23 +55,26 @@ public class InputHandler implements NativeKeyListener {
         currentMode = 0;
         menuIndex = 0;
         menu = m;
+        ArrayList<String> temp = new ArrayList<>();
+        for (String s : menu) {
+            if (s != null) {
+                temp.add(s);
+            }
+        }
+        menu = temp.toArray(menu);
         boolean run = true;
         while (run) {
-            if (menuIndex > m.length - 1) {
+            if (menuIndex > menu.length - 1) {
                 menuIndex = 0;
             }
             if (menuIndex < 0) {
-                menuIndex = m.length - 1;
+                menuIndex = menu.length - 1;
             }
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
                 System.out.println((menuIndex == i ? Vars.Selected_Color : "") + "  -" + menu[i] + Colors.reset());
             }
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ConsoleFunc.wait(300);
 
             run = !enterPressed;
             if (!run && !clearAtEnd) {
