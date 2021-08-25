@@ -34,6 +34,8 @@ public class LocalizationHandler {
         en_us.put(battle_currentTurn.key, "It's %s's turn");
         en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
         en_us.put(battle_missingmana.key, "%s doesn't have enough mana!");
+        en_us.put(battle_ran.key, "%s ran.");
+        en_us.put(battle_failedToRun.key, "%s couldn't get away!");
         en_us.put(gen_your.key, "your");
         en_us.put(gen_firstppronoun.key, "you");
         en_us.put(battle_missed.key, "%s missed!");
@@ -68,6 +70,10 @@ public class LocalizationHandler {
 
     public void addLang(String key, HashMap<String, String> lang) {
         langs.put(key, lang);
+    }
+
+    public void addString(String key, String string) {
+        currentLang.put(key, string);
     }
 
     public String getLocalizedString(LangKeys key) {
