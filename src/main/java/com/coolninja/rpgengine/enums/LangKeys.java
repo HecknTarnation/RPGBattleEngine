@@ -28,6 +28,14 @@ public enum LangKeys {
     battle_missed("battle_missed"),
     battle_critical("battle_critical"),
     /**
+     * "[p1] ran."
+     */
+    battle_ran("battle_ran"),
+    /**
+     * "[p1] couldn't get away!"
+     */
+    battle_failedToRun("battle_failedToRun"),
+    /**
      * "[name] received [item]"
      */
     battle_gotitem("battle_gotitem"),
