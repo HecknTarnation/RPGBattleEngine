@@ -95,6 +95,9 @@ public class Enemy implements Serializable, Cloneable {
     }
 
     public void statusEffectTick() {
+        if (statusEffects.isEmpty()) {
+            return;
+        }
         statusEffects.forEach(effect -> {
             effect.tick();
             statusEffects.removeIf(filter -> {
