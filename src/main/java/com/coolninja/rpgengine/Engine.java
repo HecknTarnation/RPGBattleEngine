@@ -64,8 +64,8 @@ public class Engine {
         localizationHandler.changLang(key);
     }
 
-    public static void startBattle(Enemy[] en) {
-        battleHandler.startBattle(en);
+    public static void startBattle(boolean canRun, Enemy[] en) {
+        battleHandler.startBattle(canRun, en);
     }
 
     /**
