@@ -1,6 +1,8 @@
 package com.coolninja.rpgengine;
 
+import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.Cons.Move;
+import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -104,6 +106,18 @@ public class MathFunc {
             newStat = newStat + (int) (1 * growthRate);
         }
         return newStat;
+    }
+
+    public static int addStatFromArray(Enemy[] ens, StatusArrayPosition pos) {
+        int stat = 0;
+        switch (pos) {
+            case Luck:
+                for (Enemy en : ens) {
+                    stat += en.luck;
+                }
+                break;
+        }
+        return stat;
     }
 
 }
