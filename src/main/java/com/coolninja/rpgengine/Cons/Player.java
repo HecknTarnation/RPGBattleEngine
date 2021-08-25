@@ -218,6 +218,9 @@ public class Player implements Serializable {
     }
 
     public void statusEffectTick() {
+        if (statusEffects.isEmpty()) {
+            return;
+        }
         statusEffects.forEach(effect -> {
             effect.tick();
             statusEffects.removeIf(filter -> {
