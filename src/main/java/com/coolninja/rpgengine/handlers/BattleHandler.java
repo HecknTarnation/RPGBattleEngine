@@ -8,6 +8,7 @@ import com.coolninja.rpgengine.MathFunc;
 import com.coolninja.rpgengine.Vars;
 import static com.coolninja.rpgengine.dev.Macros.*;
 import static com.coolninja.rpgengine.enums.LangKeys.*;
+import com.coolninja.rpgengine.enums.StatusArrayPosition;
 import java.util.ArrayList;
 
 /**
@@ -20,12 +21,14 @@ public class BattleHandler {
     public Player player;
     public Companion[] comps;
     public Enemy[] enArchive;
+    public boolean canRun;
     private int expVal = 0;
 
     private Player currentPlayer;
     private String currentStatus;
 
-    public void startBattle(Enemy... en) {
+    public void startBattle(boolean canRun, Enemy... en) {
+        this.canRun = canRun;
         ens = new Enemy[en.length];
         for (int i = 0; i < ens.length; i++) {
             ens[i] = en[i].clone();
@@ -41,6 +44,7 @@ public class BattleHandler {
 
     private void battleLoop() {
         boolean won = false;
+        exit:
         while (!won) {
             if (checkDie()) {
                 break;
@@ -86,6 +90,9 @@ public class BattleHandler {
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
+            if (!canRun) {
+                menu[3] = null;
+            }
             int selection = Engine.inputHandler.doMenu(menu, str, true);
 
             switch (selection) {
@@ -100,7 +107,11 @@ public class BattleHandler {
                     ConsoleFunc.wait(1000);
                     break;
                 case 3:
-                    Run();
+                    boolean ran = Run();
+                    if (ran) {
+                        won = false;
+                        break exit;
+                    }
                     break;
             }
 
@@ -113,10 +124,12 @@ public class BattleHandler {
     }
 
     private void BattleEnd(boolean won) {
-        if (!won) {
+        if (!won && player.health <= 0) {
             System.out.println("[---" + Colors.RED + Colors.BLACK_BACKGROUND + localize(battle_gameover) + Colors.reset() + "---]");
             ConsoleFunc.wait(5000);
             Engine.deathHandler.OnDeath();
+        } else if (!won) {
+            return;
         }
         ens = null;
         player = null;
@@ -125,7 +138,6 @@ public class BattleHandler {
         currentPlayer = null;
         currentStatus = null;
 
-        System.out.println("Battle Ended");
         for (Enemy e : enArchive) {
             Drop d = e.getDrop();
             if (d != null) {
@@ -252,14 +264,13 @@ public class BattleHandler {
                             selection = currentWeakness;
                         }
                     }
-
                 }
                 break;
         }
         Move selectedMove = moves[selection];
         int d = selectedMove.damage;
         int mD = selectedMove.mDamage;
-        if (!MathFunc.checkHit(selectedMove, currentPlayer.evasion)) {
+        if (!MathFunc.checkHit(selectedMove, selectedPlayer.evasion)) {
             println(String.format(localize(battle_missed), en));
             ConsoleFunc.wait(2000);
             return;
@@ -357,9 +368,23 @@ public class BattleHandler {
         ConsoleFunc.wait(2000);
     }
 
-    private void Run() {
-        println("Run");
-        System.exit(0);
+    private boolean Run() {
+        int amount = (MathFunc.addStatFromArray(ens, StatusArrayPosition.Luck) + 10) - currentPlayer.luck;
+        if (amount < 0) {
+            amount = 0;
+        }
+        int[] a = {currentPlayer.luck + 5, amount};
+        String[] b = {"run", "failed"};
+        String result = (String) MathFunc.hatpull(a, b);
+        if (result.equalsIgnoreCase("run")) {
+            println(String.format(localize(battle_ran), currentPlayer.name));
+        } else {
+            println(Colors.RED_BACKGROUND + String.format(localize(battle_failedToRun), currentPlayer.name) + Colors.reset());
+            ConsoleFunc.wait(3000);
+            return false;
+        }
+        ConsoleFunc.wait(3000);
+        return true;
     }
 
     private boolean checkWon() {
