@@ -1,5 +1,6 @@
 com\coolninja\rpgengine\dev\Macros.class
 com\coolninja\rpgengine\handlers\DeathHandler.class
+com\coolninja\rpgengine\MathFunc$1.class
 com\coolninja\rpgengine\enums\EquipSlot.class
 com\coolninja\rpgengine\handlers\SoundHandler$SoundThread.class
 com\coolninja\rpgengine\MathFunc.class
