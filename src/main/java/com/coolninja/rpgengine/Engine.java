@@ -2,14 +2,8 @@ package com.coolninja.rpgengine;
 
 import com.coolninja.rpgengine.Cons.Enemy;
 import com.coolninja.rpgengine.handlers.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URI;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  * The main file for the engine
@@ -25,6 +19,7 @@ public class Engine {
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
     public static SoundHandler soundHandler = new SoundHandler();
     public static DeathHandler deathHandler = new DeathHandler();
+    public static JSONHandler jsonHandler = new JSONHandler();
 
     private static boolean initialized = false;
 
@@ -49,13 +44,16 @@ public class Engine {
      * @param iHandler
      * @param lHandler
      * @param sHandler
+     * @param dHandler
+     * @param jHandler
      */
-    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler, SoundHandler sHandler, DeathHandler dHandler) {
+    public static void init(BattleHandler bHandler, InputHandler iHandler, LocalizationHandler lHandler, SoundHandler sHandler, DeathHandler dHandler, JSONHandler jHandler) {
         battleHandler = bHandler == null ? battleHandler : bHandler;
         inputHandler = iHandler == null ? inputHandler : iHandler;
         localizationHandler = lHandler == null ? localizationHandler : lHandler;
         soundHandler = sHandler == null ? soundHandler : sHandler;
         deathHandler = dHandler == null ? deathHandler : dHandler;
+        jsonHandler = jHandler == null ? jsonHandler : jHandler;
 
         init();
     }
@@ -66,6 +64,18 @@ public class Engine {
 
     public static void startBattle(boolean canRun, Enemy[] en) {
         battleHandler.startBattle(canRun, en);
+    }
+
+    public static void playSound(URI sound, int volume, int repeatTime) {
+        soundHandler.playSound(sound, volume, repeatTime);
+    }
+
+    public static <T extends Object> T loadFromJSON(JSONObject obj) {
+        return jsonHandler.fromJson(obj);
+    }
+
+    public static JSONObject saveToJSON(Object obj) {
+        return jsonHandler.toJson(obj);
     }
 
     /**
@@ -98,24 +108,5 @@ public class Engine {
         info[0] = "0.0.0-Beta";
         info[1] = initialized;
         return info;
-    }
-
-    public static Object loadJSON(File file) throws FileNotFoundException, IOException, ParseException {
-        JSONParser parser = new JSONParser();
-
-        Object obj = parser.parse(new FileReader(file.toString()));
-
-        JSONObject json = (JSONObject) obj;
-
-        return loadJSON(json);
-    }
-
-    //TODO: Add JSON loading of enemies, characrers, items, status effects, etc.
-    public static Object loadJSON(JSONObject json) throws ParseException {
-        return null;
-    }
-
-    public static void playSound(URI sound, int volume, int repeatTime) {
-        soundHandler.playSound(sound, volume, repeatTime);
     }
 }
