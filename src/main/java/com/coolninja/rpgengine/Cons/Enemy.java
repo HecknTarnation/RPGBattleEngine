@@ -27,15 +27,10 @@ public class Enemy implements Serializable, Cloneable {
     public ArrayList<StatusEffect> statusEffects;
     public Drop[] drops;
 
-    public Enemy(String name, int health) {
+    public Enemy(String name, int health, int expVal) {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
-    }
-
-    public Enemy setEvasion(float evasion) {
-        this.evasion = evasion;
-        return this;
     }
 
     public Enemy setStats(StatusArray stats) {
@@ -68,6 +63,9 @@ public class Enemy implements Serializable, Cloneable {
         }
         if (stats.get(StatusArrayPosition.StatusEffect) != null) {
             this.statusEffects = (ArrayList<StatusEffect>) stats.get(StatusArrayPosition.StatusEffect);
+        }
+        if (stats.get(StatusArrayPosition.Evasion) != null) {
+            this.evasion = (float) stats.get(StatusArrayPosition.Evasion);
         }
         return this;
     }
