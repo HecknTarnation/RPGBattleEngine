@@ -22,6 +22,7 @@ com\coolninja\rpgengine\Cons\Companion.class
 com\coolninja\rpgengine\Cons\Equipment.class
 com\coolninja\rpgengine\Vars.class
 com\coolninja\rpgengine\Cons\Player.class
+com\coolninja\rpgengine\handlers\JSONHandler.class
 com\coolninja\rpgengine\statusEffects\Posion.class
 com\coolninja\rpgengine\Colors.class
 com\coolninja\rpgengine\Cons\Weakness.class
