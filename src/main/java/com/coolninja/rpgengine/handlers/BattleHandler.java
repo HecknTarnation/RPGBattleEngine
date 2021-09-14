@@ -287,7 +287,7 @@ public class BattleHandler {
         }
         selectedPlayer.health -= finalD;
         Graphic graphic = selectedMove.getGraphic();
-        Engine.playSound(selectedMove.sound, 1, 1);
+        Engine.playSound(selectedMove.sound, 1);
         if (graphic != null) {
             for (String s : graphic.frames) {
                 print(s);
@@ -339,7 +339,7 @@ public class BattleHandler {
         }
         ens[target].health -= finalD;
         Graphic graphic = selectedMove.getGraphic();
-        Engine.playSound(selectedMove.sound, 1, 1);
+        Engine.playSound(selectedMove.sound, 1);
         if (graphic != null) {
             ConsoleFunc.clear();
             for (String s : graphic.frames) {
