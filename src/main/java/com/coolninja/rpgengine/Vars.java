@@ -23,6 +23,8 @@ public class Vars {
     public static String Ally_Color = Colors.BLUE_BACKGROUND;
     public static int maxLevel = 99;
 
+    public static boolean mute = false;
+
     public static void setPlayer(Player p) {
         player = p;
     }
