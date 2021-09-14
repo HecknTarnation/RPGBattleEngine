@@ -44,6 +44,8 @@ public enum LangKeys {
     gen_your("gen_your"),
     gen_firstppronoun("gen_firstppronoun"),
     //Stats section
+    stat_maxlevelfirstp("stat_maxlevelfirstp"),
+    stat_maxlevel("stat_maxlevel"),
     stat_health("stat_health"),
     stat_mana("stat_mana"),
     stat_maxHealth("stat_maxHealth"),
