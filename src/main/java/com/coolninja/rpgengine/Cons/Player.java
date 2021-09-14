@@ -137,10 +137,9 @@ public class Player implements Serializable {
         levelUp();
     }
 
-    //TODO: localize this method
     public void levelUp() {
         if (this.level >= Vars.maxLevel) {
-            System.out.println((this.name.equalsIgnoreCase("you") == true) ? "You are max level!" : this.name + " is max level!");
+            System.out.println((this.name.equalsIgnoreCase(Engine.localizationHandler.getLocalizedString(gen_firstppronoun)) == true) ? localize(stat_maxlevelfirstp) : String.format(this.name, stat_maxlevel));
             return;
         }
 
