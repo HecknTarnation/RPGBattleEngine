@@ -1,5 +1,6 @@
 package com.coolninja.rpgengine.handlers;
 
+import com.coolninja.rpgengine.Vars;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -46,23 +47,22 @@ public class SoundHandler {
      * specified volume for the specified amount of time.
      *
      * @param uri
-     * @param volume
-     * @param repeatTime (1 = play once, and 0 = play until stopSound() is
+     * @param repeatTime (1 = repeat once, and -1 = play until stopSound() is
      * called).
      */
-    public void playSound(URI uri, int volume, int repeatTime) {
+    public void playSound(URI uri, int repeatTime) {
         if (uri == null) {
             return;
         }
-        playSound(new File(uri.toString()), volume, repeatTime);
+        playSound(new File(uri.toString()), repeatTime);
     }
 
-    public void playSound(File file, int volume, int repeatTime) {
+    public void playSound(File file, int repeatTime) {
         if (file == null) {
             return;
         }
         try {
-            SoundThread t = new SoundThread(file, repeatTime).setVolume(volume);
+            SoundThread t = new SoundThread(file, repeatTime);
             if (threads.size() > maxThreads) {
                 threads.get(0).end();
             }
@@ -95,10 +95,9 @@ public class SoundHandler {
      * Mutes the sound
      */
     public void mute() {
-        for (SoundThread s : threads) {
-            s.prevVolume = s.volume;
-            s.volume = 0;
-        }
+        threads.forEach(s -> {
+            s.mute();
+        });
     }
 
     /**
@@ -107,17 +106,16 @@ public class SoundHandler {
      * @param threadIndex
      */
     public void mute(int threadIndex) {
-        threads.get(threadIndex).prevVolume = threads.get(threadIndex).volume;
-        threads.get(threadIndex).volume = 0;
+        threads.get(threadIndex).mute();
     }
 
     /**
      * Unmutes the sound.
      */
     public void unmute() {
-        for (SoundThread s : threads) {
-            s.volume = s.prevVolume;
-        }
+        threads.forEach(s -> {
+            s.unmute();
+        });
     }
 
     /**
@@ -126,29 +124,62 @@ public class SoundHandler {
      * @param threadIndex
      */
     public void unmute(int threadIndex) {
-        threads.get(threadIndex).volume = threads.get(threadIndex).prevVolume;
+        threads.get(threadIndex).unmute();
     }
 
     public class SoundThread extends Thread {
 
         public File file;
         public int repeatTime;
-        public int volume;
-        protected int prevVolume;
+        public boolean muted;
 
-        private Clip clip;
-        private AudioInputStream audioStream;
+        private Clip audio;
+        private AudioInputStream input;
 
         public SoundThread(File file, int repeatTime) throws UnsupportedAudioFileException, IOException {
             super("SoundThread");
-            this.audioStream = AudioSystem.getAudioInputStream(file);
+            this.input = AudioSystem.getAudioInputStream(file);
             this.file = file;
             this.repeatTime = repeatTime;
         }
 
         @Override
         public void run() {
+            if (Vars.mute) {
+                return;
+            }
 
+            input = null;
+            try {
+                input = AudioSystem.getAudioInputStream(file);
+            } catch (UnsupportedAudioFileException | IOException e) {
+            }
+            AudioFormat format = input.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+            audio = null;
+            try {
+                audio = (Clip) AudioSystem.getLine(info);
+            } catch (LineUnavailableException e) {
+                e.printStackTrace();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            try {
+                audio.open(input);
+            } catch (LineUnavailableException | IOException e) {
+                e.printStackTrace();
+            }
+            audio.loop(repeatTime);
+            audio.start();
+            while (audio.isRunning() && !this.isInterrupted()) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                }
+            }
         }
 
         public void play() throws LineUnavailableException, IOException {
@@ -159,9 +190,14 @@ public class SoundHandler {
             this.interrupt();
         }
 
-        public SoundThread setVolume(int vol) {
-            this.volume = vol;
-            return this;
+        public void mute() {
+            this.muted = true;
+            audio.stop();
+        }
+
+        public void unmute() {
+            this.muted = false;
+            audio.start();
         }
 
     }
