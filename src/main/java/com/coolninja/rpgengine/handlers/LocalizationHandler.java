@@ -43,6 +43,8 @@ public class LocalizationHandler {
         en_us.put(inv_noitems.key, "%s have no items.");
         en_us.put(battle_gotitem.key, "%1$s received %2$s");
         en_us.put(battle_gameover.key, "Game Over");
+        en_us.put(stat_maxlevelfirstp.key, "You are max level!");
+        en_us.put(stat_maxlevel.key, "%s is max level!");
         en_us.put(stat_health.key, "Health");
         en_us.put(stat_mana.key, "Mana");
         en_us.put(stat_maxHealth.key, "Max Health");
