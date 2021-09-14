@@ -66,11 +66,11 @@ public class Engine {
         battleHandler.startBattle(canRun, en);
     }
 
-    public static void playSound(URI sound, int volume, int repeatTime) {
-        soundHandler.playSound(sound, volume, repeatTime);
+    public static void playSound(URI sound, int repeatTime) {
+        soundHandler.playSound(sound, repeatTime);
     }
 
-    public static <T extends Object> T loadFromJSON(JSONObject obj) {
+    public static Object loadFromJSON(JSONObject obj) {
         return jsonHandler.fromJson(obj);
     }
 
