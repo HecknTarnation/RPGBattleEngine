@@ -206,7 +206,7 @@ public class BattleHandler {
             case Weakness:
                 for (int i = 0; i < moves.length; i++) {
                     for (Weakness weak : weakness) {
-                        if (moves[i].type.equalsIgnoreCase(weak.type)) {
+                        if (moves[i].type.type.equalsIgnoreCase(weak.type)) {
                             selection = i;
                             break;
                         }
@@ -218,7 +218,7 @@ public class BattleHandler {
                 int currentWeakness = -1;
                 for (int i = 0; i < moves.length; i++) {
                     for (Weakness weak : weakness) {
-                        if (weak.type.equalsIgnoreCase(moves[i].type)) {
+                        if (weak.type.equalsIgnoreCase(moves[i].type.type)) {
                             currentWeakness = i;
                         }
                         if (moves[i].damage > currentHeighest.damage) {
@@ -245,7 +245,7 @@ public class BattleHandler {
                 currentWeakness = -1;
                 for (int i = 0; i < moves.length; i++) {
                     for (Weakness weak : weakness) {
-                        if (weak.type.equalsIgnoreCase(moves[i].type)) {
+                        if (weak.type.equalsIgnoreCase(moves[i].type.type)) {
                             currentWeakness = i;
                         }
                         if (moves[i].mDamage > currentHeighest.mDamage) {
@@ -277,6 +277,9 @@ public class BattleHandler {
         }
         int finalD = ((d - selectedPlayer.defense) >= 0 ? (d - selectedPlayer.defense) : 0)
                 + ((mD - selectedPlayer.mDefense) >= 0 ? (mD - selectedPlayer.mDefense) : 0);
+        if (Weakness.isWeak(selectedPlayer.weakness, selectedMove)) {
+            finalD *= selectedMove.type.effectiveness;
+        }
         int failAmount = 100 - en.luck;
         int[] chances = new int[]{en.luck, failAmount};
         Object[] obj = new Object[]{1, 0};
@@ -329,6 +332,9 @@ public class BattleHandler {
 
         int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
                 + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
+        if (Weakness.isWeak(ens[target].weakness, selectedMove)) {
+            finalD *= selectedMove.type.effectiveness;
+        }
         int failAmount = 100 - currentPlayer.luck;
         int[] chances = new int[]{currentPlayer.luck + 1, failAmount};
         Object[] obj = new Object[]{1, 0};
@@ -369,7 +375,7 @@ public class BattleHandler {
     }
 
     private boolean Run() {
-        int amount = (MathFunc.addStatFromArray(ens, StatusArrayPosition.Luck) + 10) - currentPlayer.luck;
+        int amount = ((int) MathFunc.addStatFromArray(ens, StatusArrayPosition.Luck) + 10) - currentPlayer.luck;
         if (amount < 0) {
             amount = 0;
         }
