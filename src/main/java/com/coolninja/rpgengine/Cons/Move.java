@@ -32,7 +32,7 @@ public class Move implements Serializable {
 
     public String name;
     public int damage, mDamage, manaCost, accuracy;
-    public String type;
+    public Weakness type;
     public Graphic graphic;
     public URI sound;
 
@@ -82,12 +82,12 @@ public class Move implements Serializable {
         return this.sound;
     }
 
-    public Move setType(String type) {
+    public Move setType(Weakness type) {
         this.type = type;
         return this;
     }
 
-    public String getType() {
+    public Weakness getType() {
         return this.type;
     }
 
