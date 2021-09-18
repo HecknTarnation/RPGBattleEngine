@@ -22,8 +22,11 @@ public class Player implements Serializable {
      * luckGrowthRate, mAttackGrowthRate, mDefenseGrowthRate};
      */
     public double[] growthRates = {1.0, 1.0, 1.0, 1.0, 0.1, 1.0, 1.0};
+    /**
+     * The base requirement for experience to level up.
+     */
     public int baseExp = 50;
-    public int expMod = 1;
+    public float expMod = 1.5f;
     public int skillPointsOnLevel = 5;
 
     public String name;
