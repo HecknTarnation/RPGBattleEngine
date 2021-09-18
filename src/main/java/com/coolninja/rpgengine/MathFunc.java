@@ -106,8 +106,8 @@ public class MathFunc {
         return newStat;
     }
 
-    public static int addStatFromArray(Enemy[] ens, StatusArrayPosition pos) {
-        int stat = 0;
+    public static float addStatFromArray(Enemy[] ens, StatusArrayPosition pos) {
+        float stat = 0;
         switch (pos) {
             case ATK: {
                 for (Enemy en : ens) {
