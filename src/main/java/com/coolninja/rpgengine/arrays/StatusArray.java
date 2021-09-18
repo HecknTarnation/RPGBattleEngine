@@ -30,7 +30,7 @@ public class StatusArray {
         return this.statuses.get(index.actualPos);
     }
 
-    public static StatusArray fromJSONArr(JSONObject json) {
+    public static StatusArray fromJSONObj(JSONObject json) {
         StatusArray arr = new StatusArray();
 
         arr.modify(StatusArrayPosition.Health, json.get("health"));
