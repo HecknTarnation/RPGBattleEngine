@@ -7,8 +7,7 @@ import static com.coolninja.rpgengine.enums.LangKeys.*;
 import java.util.HashMap;
 
 /**
- * TODO: Make sure I don't use localize(key) + string. Because that will cause
- * problems.
+ * TODO: Make sure I don't use localize(key) + string.
  *
  * @author Ben
  */
