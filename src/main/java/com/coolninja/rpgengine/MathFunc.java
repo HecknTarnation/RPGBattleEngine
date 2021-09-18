@@ -92,18 +92,16 @@ public class MathFunc {
      * @param exponent
      * @return
      */
-    //TODO: change temp formula
-    public static int expToNextLevel(int level, int baseExp, int exponent) {
+    public static int expToNextLevel(int level, int baseExp, float exponent) {
         int i;
-        i = (int) Math.floor(baseExp * (level ^ exponent));
+        i = (int) Math.floor(baseExp * ((Math.pow(level, exponent))));
         return i;
     }
 
-    //TODO: change temp formula
     public static int statIncrease(int oldStat, int levelNeeded, double growthRate) {
         int newStat = oldStat;
         for (int i = 0; i < levelNeeded; i++) {
-            newStat = newStat + (int) (1 * growthRate);
+            newStat += randomInt(1, 2) * growthRate;
         }
         return newStat;
     }
@@ -111,11 +109,42 @@ public class MathFunc {
     public static int addStatFromArray(Enemy[] ens, StatusArrayPosition pos) {
         int stat = 0;
         switch (pos) {
-            case Luck:
+            case ATK: {
+                for (Enemy en : ens) {
+                    stat += en.attack;
+                }
+            }
+            case DEF: {
+                for (Enemy en : ens) {
+                    stat += en.defense;
+                }
+            }
+            case Luck: {
                 for (Enemy en : ens) {
                     stat += en.luck;
                 }
                 break;
+            }
+            case MATK: {
+                for (Enemy en : ens) {
+                    stat += en.mAttack;
+                }
+            }
+            case MDEF: {
+                for (Enemy en : ens) {
+                    stat += en.mDefense;
+                }
+            }
+            case Evasion: {
+                for (Enemy en : ens) {
+                    stat += en.evasion;
+                }
+            }
+            case Health: {
+                for (Enemy en : ens) {
+                    stat += en.health;
+                }
+            }
         }
         return stat;
     }
