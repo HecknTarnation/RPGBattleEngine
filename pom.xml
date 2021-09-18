@@ -64,8 +64,8 @@
    <distributionManagement>
       <repository>
          <id>github</id>
-         <name>GitHub CoolninjaGames Apache Maven Packages</name>
-         <url>https://maven.pkg.github.com/CoolninjaGames/RPGBattleEngine</url>
+         <name>GitHub HecknTarnation Apache Maven Packages</name>
+         <url>https://maven.pkg.github.com/HecknTarnation/RPGBattleEngine</url>
       </repository>
    </distributionManagement>
 </project>
