@@ -1,7 +1,8 @@
-com.coolninja.rpgengine
-com.coolninja.rpgengine.Cons
-com.coolninja.rpgengine.arrays
-com.coolninja.rpgengine.dev
-com.coolninja.rpgengine.enums
-com.coolninja.rpgengine.handlers
-com.coolninja.rpgengine.statusEffects
+com.heckntarnation.rpgbattleengine
+com.heckntarnation.rpgbattleengine.Cons
+com.heckntarnation.rpgbattleengine.arrays
+com.heckntarnation.rpgbattleengine.dev
+com.heckntarnation.rpgbattleengine.enums
+com.heckntarnation.rpgbattleengine.exceptions
+com.heckntarnation.rpgbattleengine.handlers
+com.heckntarnation.rpgbattleengine.statusEffects
