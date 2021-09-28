@@ -2,19 +2,19 @@ cmd.exe
 /X
 /C
 ""C:\Program Files\Java\jdk1.8.0_191\jre\..\bin\javadoc.exe" @options @argfile"
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-frame.html = 1632372555038
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-noframe.html = 1632372555040
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\argfile = 1632372552171
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\constant-values.html = 1632372554717
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\deprecated-list.html = 1632372555035
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\help-doc.html = 1632372555054
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index-all.html = 1632372555031
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index.html = 1632372555042
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\options = 1632372552168
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-frame.html = 1632372554561
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-summary.html = 1632372555050
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-tree.html = 1632372554999
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-list = 1632372554552
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\script.js = 1632372555056
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\serialized-form.html = 1632372554762
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-frame.html = 1632800092116
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-noframe.html = 1632800092118
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\argfile = 1632800088514
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\constant-values.html = 1632800091448
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\deprecated-list.html = 1632800092113
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\help-doc.html = 1632800092126
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index-all.html = 1632800092108
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index.html = 1632800092120
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\options = 1632800088511
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-frame.html = 1632800091319
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-summary.html = 1632800092123
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-tree.html = 1632800092068
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-list = 1632800091311
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\script.js = 1632800092128
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\serialized-form.html = 1632800091481
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\stylesheet.css = 1612821191980
