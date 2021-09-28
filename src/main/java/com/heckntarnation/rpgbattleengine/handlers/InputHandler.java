@@ -1,5 +1,8 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
+import com.github.kwhat.jnativehook.*;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
@@ -12,9 +15,6 @@ import java.util.concurrent.AbstractExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jnativehook.*;
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
 
 /**
  * The built-in input handler

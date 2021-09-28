@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine;
 
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.heckntarnation.rpgbattleengine.Cons.*;
-import org.jnativehook.keyboard.NativeKeyEvent;
 
 /**
  *

@@ -32,9 +32,9 @@ public class JSONHandler {
         return null;
     }
 
-    private final Object LOAD_LATER = new Object();
+    public final Object LOAD_LATER = new Object();
 
-    private ArrayList<JSONObject> loadLater = new ArrayList<>();
+    private final ArrayList<JSONObject> loadLater = new ArrayList<>();
 
     public Object[] fromJSON(JSONObject[] files) throws ObjectAlreadyLoadedException {
         ArrayList<Object> objs = new ArrayList<>();
@@ -79,6 +79,11 @@ public class JSONHandler {
                 en.id = id;
                 en.setStats(StatusArray.fromJSONObj((JSONObject) file.get("statusArray")));
                 en.drops = Drop.fromJSON((JSONArray) file.get("drops"));
+                for (Drop d : en.drops) {
+                    if (d == LOAD_LATER) {
+                        return LOAD_LATER;
+                    }
+                }
                 obj = en;
             }
             case "item": {

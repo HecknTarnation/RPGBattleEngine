@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class Weakness implements Serializable {
 
     public static boolean isWeak(ArrayList<Weakness> weakness, Move move) {
-        if (weakness.stream().anyMatch(w -> (w.type.equalsIgnoreCase(move.type.type)))) {
-            return true;
+        if (move.type == null || weakness == null) {
+            return false;
         }
-        return false;
+        return weakness.stream().anyMatch(w -> (w.type.equalsIgnoreCase(move.type.type)));
     }
 
     /**

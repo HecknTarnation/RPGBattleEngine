@@ -35,7 +35,7 @@ public class Player implements Serializable {
     public int skillPointsOnLevel = 5;
 
     public String name;
-    public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel = baseExp;
+    public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     /**
      * Chance of dodging an attack
      */
@@ -63,6 +63,7 @@ public class Player implements Serializable {
         this.name = name;
         this.baseExp = baseExp;
         this.expMod = expmod;
+        this.expToNextLevel = baseExp;
     }
 
     /**
@@ -161,6 +162,7 @@ public class Player implements Serializable {
                 levelNeeded++;
             }
 
+            //TODO: localize
             System.out.println((this.name.equalsIgnoreCase("you") == true) ? "You have leveled up!" : this.name + " has leveld up!");
 
             ConsoleFunc.wait(2000);

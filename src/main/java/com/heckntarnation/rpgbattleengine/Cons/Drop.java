@@ -18,6 +18,11 @@ public class Drop implements Serializable {
             Drop drop;
             if (objs.get(i) instanceof String) {
                 drop = (Drop) Engine.jsonHandler.getObject((String) objs.get(i));
+                if (drop == null) {
+                    drop = (Drop) Engine.jsonHandler.LOAD_LATER;
+                    drops[i] = drop;
+                    return drops;
+                }
             } else {
                 JSONObject o = (JSONObject) objs.get(i);
                 drop = new Drop((Item) Engine.jsonHandler.getObject((String) o.get("id")), (String) o.get("chance"));
