@@ -4,9 +4,10 @@ com\heckntarnation\rpgbattleengine\arrays\StatusArray.class
 com\heckntarnation\rpgbattleengine\Colors.class
 com\heckntarnation\rpgbattleengine\handlers\JSONHandler$TypedObject.class
 com\heckntarnation\rpgbattleengine\handlers\SoundHandler.class
+com\heckntarnation\rpgbattleengine\Vars$ControlMapping.class
 com\heckntarnation\rpgbattleengine\Engine.class
+com\heckntarnation\rpgbattleengine\Vars$1.class
 com\heckntarnation\rpgbattleengine\enums\EquipSlot.class
-com\heckntarnation\rpgbattleengine\handlers\InputHandler$VoidDispatchService.class
 com\heckntarnation\rpgbattleengine\enums\StatusArrayPosition.class
 com\heckntarnation\rpgbattleengine\MathFunc$1.class
 com\heckntarnation\rpgbattleengine\handlers\InputHandler.class
