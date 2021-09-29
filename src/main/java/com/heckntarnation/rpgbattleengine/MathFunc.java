@@ -94,7 +94,7 @@ public class MathFunc {
      */
     public static int expToNextLevel(int level, int baseExp, float exponent) {
         int i;
-        i = (int) Math.floor(baseExp * ((Math.pow(level, exponent))));
+        i = (int) Math.round(baseExp * ((Math.pow(level, exponent))));
         return i;
     }
 
