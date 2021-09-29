@@ -1,18 +1,17 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
 import com.github.kwhat.jnativehook.*;
+import com.github.kwhat.jnativehook.dispatcher.VoidDispatchService;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
+import com.heckntarnation.rpgbattleengine.Vars.ControlMapping;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.AbstractExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,6 +33,8 @@ public class InputHandler implements NativeKeyListener {
     private boolean enterPressed = false;
 
     public void init() {
+        //TODO: This prevents any keyboard input (system wide) from working if an error occurs while mode == 0. Closing the application fixes this.
+        //Input is also disabled system wide while in mode 0 (even while command prompt isn't in focus).
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
         try {
             GlobalScreen.registerNativeHook();
@@ -61,7 +62,7 @@ public class InputHandler implements NativeKeyListener {
                 temp.add(s);
             }
         }
-        menu = temp.toArray(menu);
+        menu = temp.toArray(new String[temp.size()]);
         boolean run = true;
         while (run) {
             if (menuIndex > menu.length - 1) {
@@ -137,13 +138,13 @@ public class InputHandler implements NativeKeyListener {
                 ex.printStackTrace();
             }
             int code = nke.getKeyCode();
-            if (code == Vars.Controls[0]) {
+            if (code == Vars.Controls.get(ControlMapping.Up)) {
                 menuIndex--;
             }
-            if (code == Vars.Controls[2]) {
+            if (code == Vars.Controls.get(ControlMapping.Down)) {
                 menuIndex++;
             }
-            if (code == Vars.Controls[4]) {
+            if (code == Vars.Controls.get(ControlMapping.Select)) {
                 enterPressed = true;
             }
         }
@@ -154,43 +155,4 @@ public class InputHandler implements NativeKeyListener {
 
     }
 
-    private class VoidDispatchService extends AbstractExecutorService {
-
-        private boolean running = false;
-
-        public VoidDispatchService() {
-            running = true;
-        }
-
-        @Override
-        public void shutdown() {
-            running = false;
-        }
-
-        @Override
-        public List<Runnable> shutdownNow() {
-            running = false;
-            return new ArrayList<>(0);
-        }
-
-        @Override
-        public boolean isShutdown() {
-            return !running;
-        }
-
-        @Override
-        public boolean isTerminated() {
-            return !running;
-        }
-
-        @Override
-        public boolean awaitTermination(long timeout, TimeUnit unit) throws InterruptedException {
-            return true;
-        }
-
-        @Override
-        public void execute(Runnable r) {
-            r.run();
-        }
-    }
 }
