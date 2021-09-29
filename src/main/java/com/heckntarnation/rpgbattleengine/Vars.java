@@ -2,6 +2,7 @@ package com.heckntarnation.rpgbattleengine;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.heckntarnation.rpgbattleengine.Cons.*;
+import java.util.HashMap;
 
 /**
  *
@@ -13,10 +14,18 @@ public class Vars {
     public static Companion[] companions;
 
     /**
-     * The key board is set up like this: <br>
+     * The keyboard is set up like this: <br>
      * Up, Left, Down, Right, Select,
      */
-    public static int[] Controls = {NativeKeyEvent.VC_W, NativeKeyEvent.VC_A, NativeKeyEvent.VC_S, NativeKeyEvent.VC_D, NativeKeyEvent.VC_ENTER};
+    public static HashMap<ControlMapping, Integer> Controls = new HashMap<ControlMapping, Integer>() {
+        {
+            put(ControlMapping.Up, NativeKeyEvent.VC_W);
+            put(ControlMapping.Left, NativeKeyEvent.VC_A);
+            put(ControlMapping.Down, NativeKeyEvent.VC_S);
+            put(ControlMapping.Right, NativeKeyEvent.VC_D);
+            put(ControlMapping.Select, NativeKeyEvent.VC_ENTER);
+        }
+    };
     public static String Selected_Color = Colors.GREEN_BACKGROUND;
 
     public static String Enemy_Color = Colors.RED_BACKGROUND;
@@ -33,4 +42,7 @@ public class Vars {
         companions = comps;
     }
 
+    public enum ControlMapping {
+        Up, Left, Down, Right, Select;
+    }
 }
