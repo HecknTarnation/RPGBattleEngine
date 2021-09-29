@@ -32,10 +32,15 @@ public class Player implements Serializable {
      */
     public int baseExp = 50;
     public float expMod = 1.5f;
+    /**
+     * How many skill points are given to the player to increase their stats on
+     * level up. <br>
+     * Set to zero to disable this feature.
+     */
     public int skillPointsOnLevel = 5;
 
     public String name;
-    public int level, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
+    public int level = 1, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     /**
      * Chance of dodging an attack
      */
@@ -47,12 +52,13 @@ public class Player implements Serializable {
     public ArrayList<Move> moves = new ArrayList<>();
 
     /**
-     * 0 = feet, 1 = legs, 2 = arms, 3 = chest, 4 = head, 5 = weapon, 6 = mod
+     * 0 = feet, 1 = legs, 2 = arms, 3 = chest, 4 = head, 5 = weapon, 6 =
+     * accessory
      */
     public Equipment[] equipment = new Equipment[7];
 
     /**
-     * Player inventory
+     * Player's inventory
      */
     public ArrayList<Item> inv = new ArrayList<>();
 
@@ -63,7 +69,7 @@ public class Player implements Serializable {
         this.name = name;
         this.baseExp = baseExp;
         this.expMod = expmod;
-        this.expToNextLevel = baseExp;
+        this.expToNextLevel = this.baseExp;
     }
 
     /**
@@ -158,7 +164,8 @@ public class Player implements Serializable {
             int levelNeeded = 0;
             while (this.exp >= this.expToNextLevel) {
                 this.exp -= this.expToNextLevel;
-                this.expToNextLevel = (MathFunc.expToNextLevel(level, this.baseExp, this.expMod));
+                this.expToNextLevel = MathFunc.expToNextLevel(this.level, this.baseExp, this.expMod);
+                this.level++;
                 levelNeeded++;
             }
 
@@ -185,7 +192,7 @@ public class Player implements Serializable {
             Engine.inputHandler.waitUntilEnter();
             ConsoleFunc.clear();
 
-            int statPoints = skillPointsOnLevel;
+            int statPoints = skillPointsOnLevel * levelNeeded;
             while (statPoints > 0) {
                 String[] str = {
                     localize(stat_maxHealth) + ": " + newStats[0],
