@@ -32,7 +32,7 @@ public class BattleHandler {
         ens = new Enemy[en.length];
         for (int i = 0; i < ens.length; i++) {
             ens[i] = en[i].clone();
-            expVal += ens[i].expVal;
+            expVal += en[i].expVal;
         }
         this.enArchive = ens.clone();
         this.player = Vars.player;
