@@ -36,11 +36,12 @@ public class Enemy implements Serializable, Cloneable {
         this.name = name;
         this.health = health;
         this.maxHealth = health;
+        this.expVal = expVal;
     }
 
     public Enemy(String name, int expVal) {
         this.name = name;
-        this.maxHealth = health;
+        this.expVal = expVal;
     }
 
     public Enemy setStats(StatusArray stats) {
