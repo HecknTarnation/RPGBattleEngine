@@ -3,6 +3,7 @@ package com.heckntarnation.rpgbattleengine.handlers;
 import com.heckntarnation.rpgbattleengine.Cons.*;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.simple.*;
@@ -85,9 +86,28 @@ public class JSONHandler {
                     }
                 }
                 obj = en;
+                break;
             }
             case "item": {
-
+                Item item = new Item((String) file.get("name"));
+                item.namespace = namespace;
+                item.id = id;
+                //TODO: figure out a way to load the "Use" method.
+                obj = item;
+                break;
+            }
+            case "move": {
+                Move move = new Move((String) file.get("name"));
+                move.namespace = namespace;
+                move.id = id;
+                move.damage = (int) file.get("damage");
+                move.mDamage = (int) file.get("mDamage");
+                move.accuracy = (float) file.get("accuracy");
+                move.sound = (URI) file.get("sound"); //TODO: figure out how to do these three
+                move.type = (Weakness) file.get("type");
+                move.graphic = (Graphic) file.get("graphic");
+                obj = move;
+                break;
             }
         }
         if (getObject(namespace + ":" + id) != null) {
