@@ -16,7 +16,7 @@ public class Item implements Serializable {
     public String name, desc;
 
     public Item(String name) {
-
+        this.name = name;
     }
 
     public Item setDesc(String desc) {
@@ -28,6 +28,9 @@ public class Item implements Serializable {
         return this.desc;
     }
 
+    /**
+     * This function should be overridden
+     */
     public void Use() {
 
     }
