@@ -27,7 +27,8 @@ public class Move implements Serializable {
     public String namespace, id;
 
     public String name;
-    public int damage, mDamage, manaCost, accuracy;
+    public int damage, mDamage, manaCost;
+    public float accuracy;
     public Weakness type;
     public Graphic graphic;
     public URI sound;
@@ -87,6 +88,9 @@ public class Move implements Serializable {
         return this.type;
     }
 
+    /**
+     * Should be overridden
+     */
     public void Use() {
 
     }
