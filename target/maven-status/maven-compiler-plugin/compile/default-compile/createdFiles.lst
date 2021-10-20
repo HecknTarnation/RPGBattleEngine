@@ -25,6 +25,7 @@ com\heckntarnation\rpgbattleengine\Cons\Item.class
 com\heckntarnation\rpgbattleengine\Cons\Drop.class
 com\heckntarnation\rpgbattleengine\handlers\DeathHandler.class
 com\heckntarnation\rpgbattleengine\handlers\BattleHandler$1.class
+com\heckntarnation\rpgbattleengine\exceptions\StringAlreadyDefinedException.class
 com\heckntarnation\rpgbattleengine\exceptions\ObjectAlreadyLoadedException.class
 com\heckntarnation\rpgbattleengine\enums\AILevel.class
 com\heckntarnation\rpgbattleengine\Cons\Enemy.class
