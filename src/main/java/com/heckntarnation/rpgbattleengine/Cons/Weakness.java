@@ -15,6 +15,7 @@ public class Weakness implements Serializable {
         }
         return weakness.stream().anyMatch(w -> (w.type.equalsIgnoreCase(move.type.type)));
     }
+
     /**
      * For JSON loading
      */
