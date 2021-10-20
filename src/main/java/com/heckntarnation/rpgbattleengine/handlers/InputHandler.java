@@ -148,6 +148,9 @@ public class InputHandler implements NativeKeyListener {
                 enterPressed = true;
             }
         }
+        if (currentMode == 2) {
+
+        }
     }
 
     @Override
