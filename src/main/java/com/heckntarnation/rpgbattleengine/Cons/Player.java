@@ -169,8 +169,7 @@ public class Player implements Serializable {
                 levelNeeded++;
             }
 
-            //TODO: localize
-            System.out.println((this.name.equalsIgnoreCase("you") == true) ? "You have leveled up!" : this.name + " has leveld up!");
+            System.out.println((this.name.equalsIgnoreCase("you") == true) ? localize(stat_firstplevelup) : String.format(this.name, localize(stat_levelup)));
 
             ConsoleFunc.wait(2000);
 
