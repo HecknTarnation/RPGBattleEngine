@@ -4,6 +4,7 @@ import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.enums.LangKeys;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
+import com.heckntarnation.rpgbattleengine.exceptions.StringAlreadyDefinedException;
 import java.util.HashMap;
 
 /**
@@ -44,6 +45,8 @@ public class LocalizationHandler {
         en_us.put(battle_gameover.key, "Game Over");
         en_us.put(stat_maxlevelfirstp.key, "You are max level!");
         en_us.put(stat_maxlevel.key, "%s is max level!");
+        en_us.put(stat_firstplevelup.key, "You have leveled up!");
+        en_us.put(stat_levelup.key, "%s has leveled up!");
         en_us.put(stat_health.key, "Health");
         en_us.put(stat_mana.key, "Mana");
         en_us.put(stat_maxHealth.key, "Max Health");
@@ -73,7 +76,10 @@ public class LocalizationHandler {
         langs.put(key, lang);
     }
 
-    public void addString(String key, String string) {
+    public void addString(String key, String string) throws StringAlreadyDefinedException {
+        if (currentLang.get(key) != null) {
+            throw new StringAlreadyDefinedException(key);
+        }
         currentLang.put(key, string);
     }
 
