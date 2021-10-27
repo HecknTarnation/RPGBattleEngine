@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class LocalizationHandler {
 
+    //this is probably, no definatly, really memory inefficient but I can't think of a better solution.
     public HashMap<String, HashMap<String, String>> langs = new HashMap<>();
 
     private final HashMap<String, String> en_us = new HashMap<>();
@@ -49,15 +50,15 @@ public class LocalizationHandler {
         en_us.put(stat_levelup.key, "%s has leveled up!");
         en_us.put(stat_health.key, "Health");
         en_us.put(stat_mana.key, "Mana");
-        en_us.put(stat_maxHealth.key, "Max Health");
-        en_us.put(stat_maxMana.key, "Max Mana");
-        en_us.put(stat_attack.key, "Attack");
-        en_us.put(stat_mAttack.key, "Magic Attack");
-        en_us.put(stat_defense.key, "Defense");
-        en_us.put(stat_mDefense.key, "Magic Defense");
-        en_us.put(stat_luck.key, "Luck");
+        en_us.put(stat_maxHealth.key, "Max Health: ");
+        en_us.put(stat_maxMana.key, "Max Mana: ");
+        en_us.put(stat_attack.key, "Attack: ");
+        en_us.put(stat_mAttack.key, "Magic Attack: ");
+        en_us.put(stat_defense.key, "Defense: ");
+        en_us.put(stat_mDefense.key, "Magic Defense: ");
+        en_us.put(stat_luck.key, "Luck: ");
         en_us.put(stat_point.key, "Stat Points: %s");
-        en_us.put(stat_expNeeded.key, "Exp to next level");
+        en_us.put(stat_expNeeded.key, "Exp to next level: ");
         //end init en_us
         langs.put("en_us", en_us);
 
