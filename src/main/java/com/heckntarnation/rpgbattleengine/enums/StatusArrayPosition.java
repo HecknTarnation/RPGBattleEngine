@@ -6,10 +6,12 @@ package com.heckntarnation.rpgbattleengine.enums;
  */
 public enum StatusArrayPosition {
 
-    Health(0), Mana(1), ATK(2), DEF(3), Luck(4), MATK(5), MDEF(6), Weakness(7), AILevel(8), StatusEffect(9), MaxHealth(10), MaxMana(11), Evasion(12);
-    public int actualPos;
+    Health((byte) 0), Mana((byte) 1), ATK((byte) 2), DEF((byte) 3), Luck((byte) 4), MATK((byte) 5), MDEF((byte) 6),
+    Weakness((byte) 7), AILevel((byte) 8), StatusEffect((byte) 9), MaxHealth((byte) 10), MaxMana((byte) 11), Evasion((byte) 12);
 
-    private StatusArrayPosition(int p) {
+    public byte actualPos;
+
+    private StatusArrayPosition(byte p) {
         this.actualPos = p;
     }
 }
