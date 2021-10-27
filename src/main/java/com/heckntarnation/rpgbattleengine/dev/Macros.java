@@ -9,7 +9,7 @@ import com.heckntarnation.rpgbattleengine.enums.LangKeys;
  */
 public class Macros {
 
-    //some macros for me
+    //some macros for me (feel free to use them)
     public static String localize(String key) {
         return Engine.localizationHandler.getLocalizedString(key);
     }
@@ -33,6 +33,9 @@ public class Macros {
     public static void println(String str) {
         System.out.println(str);
     }
-    //end macros
+
+    public static void getMemSize(Object obj) {
+
+    }
 
 }
