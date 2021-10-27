@@ -29,7 +29,7 @@ public class InputHandler implements NativeKeyListener {
     public Scanner scan;
 
     //-1 = None, 0 = Menu, 1 = Text Input
-    private int currentMode = -1;
+    private byte currentMode = -1;
     private boolean enterPressed = false;
 
     public void init() {
