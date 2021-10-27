@@ -9,12 +9,12 @@ package com.heckntarnation.rpgbattleengine.enums;
  */
 public enum EquipSlot {
 
-    Feet(0), Legs(1), Arms(2), Chest(3), Head(4), Weapon(5), Accessory(6);
+    Feet((byte) 0), Legs((byte) 1), Arms((byte) 2), Chest((byte) 3), Head((byte) 4), Weapon((byte) 5), Accessory((byte) 6);
 
-    public int index;
+    public byte index;
 
     //index is where it belongs in the equipment array
-    private EquipSlot(int index) {
+    private EquipSlot(byte index) {
         this.index = index;
     }
 
