@@ -31,6 +31,12 @@ public class Vars {
     public static String Enemy_Color = Colors.RED_BACKGROUND;
     public static String Ally_Color = Colors.BLUE_BACKGROUND;
     public static int maxLevel = 99;
+    /**
+     * How many skill points are given to the player to increase their stats on
+     * level up. <br>
+     * Set to zero to disable this feature.
+     */
+    public static int skillPointsOnLevel = 5;
 
     public static boolean mute = false;
 
