@@ -32,12 +32,6 @@ public class Player implements Serializable {
      */
     public int baseExp = 50;
     public float expMod = 1.5f;
-    /**
-     * How many skill points are given to the player to increase their stats on
-     * level up. <br>
-     * Set to zero to disable this feature.
-     */
-    public int skillPointsOnLevel = 5;
 
     public String name;
     public int level = 1, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
@@ -178,20 +172,20 @@ public class Player implements Serializable {
                 newStats[i] = MathFunc.statIncrease(oldStats[i], levelNeeded, growthRates[i]);
             }
             System.out.println(
-                    localize(stat_health) + ": " + oldStats[0] + " => " + newStats[0] + "\n"
-                    + localize(stat_mana) + ": " + oldStats[1] + " => " + newStats[1] + "\n"
-                    + localize(stat_attack) + ": " + oldStats[2] + " => " + newStats[2] + "\n"
-                    + localize(stat_mAttack) + ": " + oldStats[3] + " => " + newStats[3] + "\n"
-                    + localize(stat_luck) + ": " + oldStats[4] + " => " + newStats[4] + "\n"
-                    + localize(stat_defense) + ": " + oldStats[5] + " => " + newStats[5] + "\n"
-                    + localize(stat_mDefense) + ": " + oldStats[6] + " => " + newStats[6] + "\n"
-                    + localize(stat_expNeeded) + ": " + exp + "/" + expToNextLevel + "\n"
+                    localize(stat_health) + oldStats[0] + " => " + newStats[0] + "\n"
+                    + localize(stat_mana) + oldStats[1] + " => " + newStats[1] + "\n"
+                    + localize(stat_attack) + oldStats[2] + " => " + newStats[2] + "\n"
+                    + localize(stat_mAttack) + oldStats[3] + " => " + newStats[3] + "\n"
+                    + localize(stat_luck) + oldStats[4] + " => " + newStats[4] + "\n"
+                    + localize(stat_defense) + oldStats[5] + " => " + newStats[5] + "\n"
+                    + localize(stat_mDefense) + oldStats[6] + " => " + newStats[6] + "\n"
+                    + localize(stat_expNeeded) + exp + "/" + expToNextLevel + "\n"
             );
 
             Engine.inputHandler.waitUntilEnter();
             ConsoleFunc.clear();
 
-            int statPoints = skillPointsOnLevel * levelNeeded;
+            int statPoints = Vars.skillPointsOnLevel * levelNeeded;
             while (statPoints > 0) {
                 String[] str = {
                     localize(stat_maxHealth) + ": " + newStats[0],
