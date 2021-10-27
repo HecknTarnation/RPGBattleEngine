@@ -62,6 +62,11 @@ public class Drop implements Serializable {
         return this;
     }
 
+    public Drop setChance(int numerator, int denominator) {
+        this.chance = numerator + "/" + denominator;
+        return this;
+    }
+
     public String getChance() {
         return this.chance;
     }
