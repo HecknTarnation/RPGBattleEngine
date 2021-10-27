@@ -2,8 +2,9 @@ package com.heckntarnation.rpgbattleengine.Cons;
 
 /**
  * This class should be complete made by you, the only calls by the engine will
- * be to the tick and setCharacter method. It also used the shouldbeRemoved
- * boolean. Feel free to add any variables and methods in your implementation.
+ * be to the tick and setCharacter methods. It will also use the shouldbeRemoved
+ * boolean, and the namespace + id strings. Feel free to add any variables and
+ * methods in your implementation.
  *
  * @author Ben
  */
