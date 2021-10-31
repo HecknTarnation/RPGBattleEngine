@@ -14,6 +14,13 @@ import java.util.HashMap;
  */
 public class LocalizationHandler {
 
+    /**
+     * This denotes wether or not to use second person versions of strings, such
+     * as stat_secondpersonlevelup. You should set the player's name to this
+     * value to do this.
+     */
+    public final String SECOND_PERSON_STRING = "SECOND_PERSON";
+
     //this is probably, no definatly, really memory inefficient but I can't think of a better solution.
     public HashMap<String, HashMap<String, String>> langs = new HashMap<>();
 
@@ -37,16 +44,14 @@ public class LocalizationHandler {
         en_us.put(battle_missingmana.key, "%s doesn't have enough mana!");
         en_us.put(battle_ran.key, "%s ran.");
         en_us.put(battle_failedToRun.key, "%s couldn't get away!");
-        en_us.put(gen_your.key, "your");
-        en_us.put(gen_firstppronoun.key, "you");
         en_us.put(battle_missed.key, "%s missed!");
         en_us.put(battle_critical.key, Colors.BLUE + "C" + Colors.RED + " R" + Colors.YELLOW + " I" + Colors.PURPLE + " T" + Colors.RED + " I" + Colors.CYAN + " C" + Colors.GREEN + " A" + Colors.BLACK + " L" + Colors.reset());
         en_us.put(inv_noitems.key, "%s have no items.");
         en_us.put(battle_gotitem.key, "%1$s received %2$s");
         en_us.put(battle_gameover.key, "Game Over");
-        en_us.put(stat_maxlevelfirstp.key, "You are max level!");
+        en_us.put(stat_maxlevelsecondperson.key, "You are max level!");
         en_us.put(stat_maxlevel.key, "%s is max level!");
-        en_us.put(stat_firstplevelup.key, "You have leveled up!");
+        en_us.put(stat_secondpersonlevelup.key, "You have leveled up!");
         en_us.put(stat_levelup.key, "%s has leveled up!");
         en_us.put(stat_health.key, "Health");
         en_us.put(stat_mana.key, "Mana");
