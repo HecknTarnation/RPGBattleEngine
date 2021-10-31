@@ -33,9 +33,4 @@ public class Macros {
     public static void println(String str) {
         System.out.println(str);
     }
-
-    public static void getMemSize(Object obj) {
-
-    }
-
 }
