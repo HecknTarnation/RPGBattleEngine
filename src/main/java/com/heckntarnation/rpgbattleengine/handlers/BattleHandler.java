@@ -84,7 +84,7 @@ public class BattleHandler {
                 continue;
             }
 
-            str += String.format(localize(battle_currentTurn), currentPlayer.name.equalsIgnoreCase("you") ? localize(gen_your) : currentPlayer.name) + "\n";
+            str += currentPlayer.name.equalsIgnoreCase(Engine.localizationHandler.SECOND_PERSON_STRING) ? String.format(localize(battle_currentTurn), "your") : String.format(localize(battle_currentTurn), currentPlayer.name);
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
@@ -309,7 +309,7 @@ public class BattleHandler {
         int mD = selectedMove.mDamage + currentPlayer.mAttack;
         int cost = selectedMove.manaCost;
         if (cost > 0 && currentPlayer.mana < cost) {
-            String s = currentPlayer.name.equalsIgnoreCase(localize(gen_firstppronoun)) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
+            String s = currentPlayer.name.equalsIgnoreCase(Engine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
             ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
