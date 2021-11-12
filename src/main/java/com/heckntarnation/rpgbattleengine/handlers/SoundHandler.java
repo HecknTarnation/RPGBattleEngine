@@ -145,7 +145,7 @@ public class SoundHandler {
 
         @Override
         public void run() {
-            if (Vars.mute) {
+            if (Vars.disableAudio) {
                 return;
             }
 
