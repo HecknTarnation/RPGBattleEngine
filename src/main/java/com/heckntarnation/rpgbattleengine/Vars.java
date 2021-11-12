@@ -14,8 +14,7 @@ public class Vars {
     public static Companion[] companions;
 
     /**
-     * The keyboard is set up like this: <br>
-     * Up, Left, Down, Right, Select,
+     * The keyboard control mapping.
      */
     public static HashMap<ControlMapping, Integer> Controls = new HashMap<ControlMapping, Integer>() {
         {
@@ -30,15 +29,18 @@ public class Vars {
 
     public static String Enemy_Color = Colors.RED_BACKGROUND;
     public static String Ally_Color = Colors.BLUE_BACKGROUND;
-    public static int maxLevel = 99;
+    public static short maxLevel = 99;
     /**
      * How many skill points are given to the player to increase their stats on
      * level up. <br>
      * Set to zero to disable this feature.
      */
-    public static int skillPointsOnLevel = 5;
+    public static short skillPointsOnLevel = 5;
 
-    public static boolean mute = false;
+    /**
+     * If this is true, no audio should play.
+     */
+    public static boolean disableAudio = false;
 
     public static void setPlayer(Player p) {
         player = p;
