@@ -1,10 +1,12 @@
 package com.heckntarnation.rpgbattleengine.Cons;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ben
  */
-public class Graphic {
+public class Graphic implements Serializable {
 
     /**
      * For JSON loading
