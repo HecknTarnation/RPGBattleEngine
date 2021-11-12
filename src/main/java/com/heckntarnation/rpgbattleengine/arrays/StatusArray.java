@@ -3,6 +3,7 @@ package com.heckntarnation.rpgbattleengine.arrays;
 import com.heckntarnation.rpgbattleengine.Cons.StatusEffect;
 import com.heckntarnation.rpgbattleengine.Cons.Weakness;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
+import java.io.Serializable;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
 
@@ -10,7 +11,7 @@ import org.json.simple.JSONObject;
  *
  * @author Ben
  */
-public class StatusArray {
+public class StatusArray implements Serializable {
 
     public ArrayList<Object> statuses;
 
