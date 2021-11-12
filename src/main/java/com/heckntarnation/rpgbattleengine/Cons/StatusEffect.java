@@ -1,5 +1,7 @@
 package com.heckntarnation.rpgbattleengine.Cons;
 
+import java.io.Serializable;
+
 /**
  * This class should be complete made by you, the only calls by the engine will
  * be to the tick and setCharacter methods. It will also use the shouldbeRemoved
@@ -8,7 +10,7 @@ package com.heckntarnation.rpgbattleengine.Cons;
  *
  * @author Ben
  */
-public class StatusEffect {
+public class StatusEffect implements Serializable {
 
     /**
      * For JSON loading
