@@ -35,11 +35,12 @@ public class Engine {
      */
     public static void end() {
         inputHandler.end();
+        System.gc();
     }
 
     /**
      * Used to change handlers to custom ones (leave any null to use default
-     * ones)
+     * one/one's you already set)
      *
      * @param bHandler
      * @param iHandler
