@@ -1,6 +1,7 @@
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\exceptions\StringAlreadyDefinedException.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\BattleHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\enums\StatusArrayPosition.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\LuaHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Weakness.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\enums\LangKeys.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Drop.java
@@ -8,8 +9,9 @@ C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbatt
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Item.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\enums\EquipSlot.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\JSONHandler.java
-C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Engine.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Player.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\lua\item_management.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\lua\localization.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\MathFunc.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Graphic.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Colors.java
@@ -25,6 +27,7 @@ C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbatt
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\StatusEffect.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\statusEffects\Posion.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\ConsoleFunc.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\BattleEngine.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\arrays\StatusArray.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Move.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Vars.java
