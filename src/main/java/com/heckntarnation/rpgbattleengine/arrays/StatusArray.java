@@ -43,11 +43,9 @@ public class StatusArray implements Serializable {
         arr.modify(StatusArrayPosition.Luck, json.get("luck"));
         arr.modify(StatusArrayPosition.MATK, json.get("magicAttack"));
         arr.modify(StatusArrayPosition.MDEF, json.get("magicDefense"));
-        //TODO: change to use Weakness.fromJSON() method.
-        arr.modify(StatusArrayPosition.Weakness, (Weakness[]) json.get("weakness"));
+        arr.modify(StatusArrayPosition.Weakness, Weakness.fromJSON(json.get("weakness")));
         arr.modify(StatusArrayPosition.AILevel, json.get("aiLevel"));
-        //TODO: change to use StatusEffect.fromJSON() method.
-        arr.modify(StatusArrayPosition.StatusEffect, (StatusEffect[]) json.get("statusEffect"));
+        arr.modify(StatusArrayPosition.StatusEffect, StatusEffect.fromJSON(json.get("statusEffects")));
         arr.modify(StatusArrayPosition.Evasion, json.get("evasion"));
 
         return arr;
