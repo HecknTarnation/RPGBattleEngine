@@ -10,6 +10,12 @@
       <maven.compiler.source>1.8</maven.compiler.source>
       <maven.compiler.target>1.8</maven.compiler.target>
    </properties>
+   <repositories>
+	<repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+	</repository>
+    </repositories>
    <dependencies>
       <dependency>
          <groupId>com.github.kwhat</groupId>
@@ -20,16 +26,21 @@
          <groupId>com.googlecode.json-simple</groupId>
          <artifactId>json-simple</artifactId>
          <version>1.1.1</version>
-        </dependency>
+      </dependency>
+      <dependency>
+          <groupId>org.luaj</groupId>
+          <artifactId>luaj-jse</artifactId>
+          <version>3.0.1</version>
+      </dependency>
    </dependencies>
    <build>
       <finalName>RPGBattleEngine</finalName>
       <plugins>
-          <plugin>
+         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-deploy-plugin</artifactId>
             <version>3.0.0-M1</version>
-          </plugin>
+         </plugin>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
