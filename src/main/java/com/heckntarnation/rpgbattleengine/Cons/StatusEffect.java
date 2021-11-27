@@ -12,6 +12,10 @@ import java.io.Serializable;
  */
 public class StatusEffect implements Serializable {
 
+    public static Object fromJSON(Object get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * For JSON loading
      */
