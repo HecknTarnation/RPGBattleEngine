@@ -5,4 +5,5 @@ com.heckntarnation.rpgbattleengine.dev
 com.heckntarnation.rpgbattleengine.enums
 com.heckntarnation.rpgbattleengine.exceptions
 com.heckntarnation.rpgbattleengine.handlers
+com.heckntarnation.rpgbattleengine.lua
 com.heckntarnation.rpgbattleengine.statusEffects
