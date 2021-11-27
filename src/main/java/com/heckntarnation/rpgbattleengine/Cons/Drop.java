@@ -1,6 +1,6 @@
 package com.heckntarnation.rpgbattleengine.Cons;
 
-import com.heckntarnation.rpgbattleengine.Engine;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import java.io.Serializable;
 import org.json.simple.JSONArray;
@@ -17,15 +17,15 @@ public class Drop implements Serializable {
         for (int i = 0; i < objs.size(); i++) {
             Drop drop;
             if (objs.get(i) instanceof String) {
-                drop = (Drop) Engine.jsonHandler.getObject((String) objs.get(i));
+                drop = (Drop) BattleEngine.jsonHandler.getObject((String) objs.get(i));
                 if (drop == null) {
-                    drop = (Drop) Engine.jsonHandler.LOAD_LATER;
+                    drop = (Drop) BattleEngine.jsonHandler.LOAD_LATER;
                     drops[i] = drop;
                     return drops;
                 }
             } else {
                 JSONObject o = (JSONObject) objs.get(i);
-                drop = new Drop((Item) Engine.jsonHandler.getObject((String) o.get("id")), (String) o.get("chance"));
+                drop = new Drop((Item) BattleEngine.jsonHandler.getObject((String) o.get("id")), (String) o.get("chance"));
             }
             drops[i] = drop;
         }
