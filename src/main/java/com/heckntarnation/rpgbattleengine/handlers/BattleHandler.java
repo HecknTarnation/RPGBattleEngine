@@ -1,15 +1,18 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.Cons.*;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
-import com.heckntarnation.rpgbattleengine.Engine;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
+import com.heckntarnation.rpgbattleengine.exceptions.IncorrectObjectRecieved;
+import com.heckntarnation.rpgbattleengine.handlers.JSONHandler.TypedObject;
 import java.util.ArrayList;
+import org.luaj.vm2.LuaTable;
 
 /**
  *
@@ -26,6 +29,18 @@ public class BattleHandler {
 
     private Player currentPlayer;
     private String currentStatus;
+
+    public void startBattle(boolean canRun, LuaTable en) throws IncorrectObjectRecieved {
+        Enemy[] ens = new Enemy[en.length()];
+        for (int i = 0; i < ens.length; i++) {
+            TypedObject obj = BattleEngine.jsonHandler.getLoadedObjects().get(en.get(i).checkstring().toString());
+            if (!obj.type.equalsIgnoreCase(BattleEngine.jsonHandler.ENEMY)) {
+                throw new IncorrectObjectRecieved("Expected enemy, got " + obj.type);
+            }
+            ens[i] = (Enemy) obj.object;
+        }
+        startBattle(canRun, ens);
+    }
 
     public void startBattle(boolean canRun, Enemy... en) {
         this.canRun = canRun;
@@ -84,14 +99,14 @@ public class BattleHandler {
                 continue;
             }
 
-            str += currentPlayer.name.equalsIgnoreCase(Engine.localizationHandler.SECOND_PERSON_STRING) ? String.format(localize(battle_currentTurn), "your") : String.format(localize(battle_currentTurn), currentPlayer.name);
+            str += currentPlayer.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? String.format(localize(battle_currentTurn), "your") : String.format(localize(battle_currentTurn), currentPlayer.name);
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
             if (!canRun) {
                 menu[3] = null;
             }
-            int selection = Engine.inputHandler.doMenu(menu, str, true);
+            int selection = BattleEngine.inputHandler.doMenu(menu, str, true);
 
             switch (selection) {
                 case 0:
@@ -125,7 +140,7 @@ public class BattleHandler {
         if (!won && player.health <= 0) {
             System.out.println("[---" + Colors.RED + Colors.BLACK_BACKGROUND + localize(battle_gameover) + Colors.reset() + "---]");
             ConsoleFunc.wait(5000);
-            Engine.deathHandler.OnDeath();
+            BattleEngine.deathHandler.OnDeath();
         } else if (!won) {
             return;
         }
@@ -288,7 +303,7 @@ public class BattleHandler {
         }
         selectedPlayer.health -= finalD;
         Graphic graphic = selectedMove.getGraphic();
-        Engine.playSound(selectedMove.sound, 1);
+        BattleEngine.playSound(selectedMove.sound, 1);
         if (graphic != null) {
             for (String s : graphic.frames) {
                 print(s);
@@ -303,13 +318,13 @@ public class BattleHandler {
     private void Attack() {
         Move[] moves = currentPlayer.getMoves();
         String[] mNames = Move.arrToStr(moves);
-        int selection = Engine.inputHandler.doMenu(mNames, currentStatus, true);
+        int selection = BattleEngine.inputHandler.doMenu(mNames, currentStatus, true);
         Move selectedMove = moves[selection];
         int d = selectedMove.damage + currentPlayer.attack;
         int mD = selectedMove.mDamage + currentPlayer.mAttack;
         int cost = selectedMove.manaCost;
         if (cost > 0 && currentPlayer.mana < cost) {
-            String s = currentPlayer.name.equalsIgnoreCase(Engine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
+            String s = currentPlayer.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
             ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
@@ -320,7 +335,7 @@ public class BattleHandler {
         for (int i = 0; i < ens.length; i++) {
             enNames[i] = ens[i].name;
         }
-        target = Engine.inputHandler.doMenu(enNames, currentStatus, false);
+        target = BattleEngine.inputHandler.doMenu(enNames, currentStatus, false);
 
         if (!MathFunc.checkHit(selectedMove, ens[target].evasion)) {
             println(String.format(localize(battle_missed), currentPlayer.name));
@@ -343,7 +358,7 @@ public class BattleHandler {
         }
         ens[target].health -= finalD;
         Graphic graphic = selectedMove.getGraphic();
-        Engine.playSound(selectedMove.sound, 1);
+        BattleEngine.playSound(selectedMove.sound, 1);
         if (graphic != null) {
             ConsoleFunc.clear();
             for (String s : graphic.frames) {
@@ -365,7 +380,7 @@ public class BattleHandler {
             return;
         }
         String[] m = player.invToStringArr();
-        int index = Engine.inputHandler.doMenu(m, currentStatus, true);
+        int index = BattleEngine.inputHandler.doMenu(m, currentStatus, true);
         Item selectedItem = player.inv.get(index);
         selectedItem.Use();
         player.inv.remove(selectedItem);
