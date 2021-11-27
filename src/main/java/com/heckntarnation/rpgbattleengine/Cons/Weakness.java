@@ -16,6 +16,10 @@ public class Weakness implements Serializable {
         return weakness.stream().anyMatch(w -> (w.type.equalsIgnoreCase(move.type.type)));
     }
 
+    public static Object fromJSON(Object get) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * For JSON loading
      */
