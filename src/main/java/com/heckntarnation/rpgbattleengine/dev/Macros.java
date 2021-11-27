@@ -1,6 +1,6 @@
 package com.heckntarnation.rpgbattleengine.dev;
 
-import com.heckntarnation.rpgbattleengine.Engine;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.enums.LangKeys;
 
 /**
@@ -11,7 +11,7 @@ public class Macros {
 
     //some macros for me (feel free to use them)
     public static String localize(String key) {
-        return Engine.localizationHandler.getLocalizedString(key);
+        return BattleEngine.localizationHandler.getLocalizedString(key);
     }
 
     public static String localize(LangKeys key) {
