@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine.Cons;
 
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
-import com.heckntarnation.rpgbattleengine.Engine;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
@@ -148,7 +148,7 @@ public class Player implements Serializable {
 
     public void levelUp() {
         if (this.level >= Vars.maxLevel) {
-            System.out.println((this.name.equalsIgnoreCase(Engine.localizationHandler.SECOND_PERSON_STRING) == true) ? localize(stat_maxlevelsecondperson) : String.format(this.name, stat_maxlevel));
+            System.out.println((this.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) == true) ? localize(stat_maxlevelsecondperson) : String.format(this.name, stat_maxlevel));
             return;
         }
 
@@ -182,7 +182,7 @@ public class Player implements Serializable {
                     + localize(stat_expNeeded) + exp + "/" + expToNextLevel + "\n"
             );
 
-            Engine.inputHandler.waitUntilEnter();
+            BattleEngine.inputHandler.waitUntilEnter();
             ConsoleFunc.clear();
 
             int statPoints = Vars.skillPointsOnLevel * levelNeeded;
@@ -196,7 +196,7 @@ public class Player implements Serializable {
                     localize(stat_defense) + ": " + newStats[5],
                     localize(stat_mDefense) + ": " + newStats[6]
                 };
-                int index = Engine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
+                int index = BattleEngine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
                 newStats[index]++;
                 statPoints--;
             }
