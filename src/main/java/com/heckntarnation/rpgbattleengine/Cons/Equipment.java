@@ -79,14 +79,14 @@ public class Equipment extends Item implements Serializable {
 
     public StatusArray getBoosts() {
         StatusArray arr = new StatusArray();
-        arr.modify(StatusArrayPosition.Health, maxHealth);
-        arr.modify(StatusArrayPosition.Mana, maxMana);
-        arr.modify(StatusArrayPosition.ATK, attack);
-        arr.modify(StatusArrayPosition.DEF, defense);
-        arr.modify(StatusArrayPosition.Luck, luck);
-        arr.modify(StatusArrayPosition.MATK, mAttack);
-        arr.modify(StatusArrayPosition.MDEF, mDefense);
-        arr.modify(StatusArrayPosition.Weakness, weakness);
+        arr.put(StatusArrayPosition.Health, maxHealth);
+        arr.put(StatusArrayPosition.Mana, maxMana);
+        arr.put(StatusArrayPosition.ATK, attack);
+        arr.put(StatusArrayPosition.DEF, defense);
+        arr.put(StatusArrayPosition.Luck, luck);
+        arr.put(StatusArrayPosition.MATK, mAttack);
+        arr.put(StatusArrayPosition.MDEF, mDefense);
+        arr.put(StatusArrayPosition.Weakness, weakness);
         return arr;
     }
 
