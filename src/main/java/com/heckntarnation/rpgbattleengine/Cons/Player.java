@@ -127,13 +127,13 @@ public class Player implements Serializable {
 
     public StatusArray getStats() {
         StatusArray arr = new StatusArray();
-        arr.modify(StatusArrayPosition.Health, health);
-        arr.modify(StatusArrayPosition.Mana, mana);
-        arr.modify(StatusArrayPosition.ATK, attack);
-        arr.modify(StatusArrayPosition.DEF, defense);
-        arr.modify(StatusArrayPosition.Luck, luck);
-        arr.modify(StatusArrayPosition.MATK, mAttack);
-        arr.modify(StatusArrayPosition.MDEF, mDefense);
+        arr.put(StatusArrayPosition.Health, health);
+        arr.put(StatusArrayPosition.Mana, mana);
+        arr.put(StatusArrayPosition.ATK, attack);
+        arr.put(StatusArrayPosition.DEF, defense);
+        arr.put(StatusArrayPosition.Luck, luck);
+        arr.put(StatusArrayPosition.MATK, mAttack);
+        arr.put(StatusArrayPosition.MDEF, mDefense);
         return arr;
     }
 
