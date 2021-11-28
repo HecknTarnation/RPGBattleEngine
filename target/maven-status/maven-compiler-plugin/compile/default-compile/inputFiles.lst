@@ -4,6 +4,7 @@ C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbatt
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\LuaHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Weakness.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\enums\LangKeys.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\exceptions\IncorrectObjectRecieved.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Drop.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Equipment.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Item.java
@@ -22,6 +23,8 @@ C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbatt
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\enums\AILevel.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\SoundHandler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\handlers\InputHandler.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\lua\json.java
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\lua\battle_handler.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\exceptions\ObjectAlreadyLoadedException.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\Enemy.java
 C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java\com\heckntarnation\rpgbattleengine\Cons\StatusEffect.java
