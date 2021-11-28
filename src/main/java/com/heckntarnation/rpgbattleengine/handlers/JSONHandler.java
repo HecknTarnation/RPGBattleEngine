@@ -1,7 +1,9 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
 import com.heckntarnation.rpgbattleengine.BattleEngine;
+import com.heckntarnation.rpgbattleengine.Cons.Enemy;
 import com.heckntarnation.rpgbattleengine.Cons.Item;
+import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,20 +57,18 @@ public class JSONHandler {
                 objs.add(fromJSON((JSONObject) parser.parse(new FileReader(f))));
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
+            } catch (IOException | ParseException ex) {
                 Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return objs.toArray();
     }
 
-    public Object[] fromJSON(JSONObject[] files) throws ObjectAlreadyLoadedException {
-        ArrayList<Object> objs = new ArrayList<>();
+    public TypedObject[] fromJSON(JSONObject[] files) throws ObjectAlreadyLoadedException {
+        ArrayList<TypedObject> objs = new ArrayList<>();
 
         for (JSONObject file : files) {
-            Object o = fromJSON(file);
+            TypedObject o = fromJSON(file);
             if (o == LOAD_LATER) {
                 loadLater.add(file);
                 continue;
@@ -77,7 +77,7 @@ public class JSONHandler {
         }
         int index = 0;
         while (!loadLater.isEmpty()) {
-            Object o = fromJSON(loadLater.get(index));
+            TypedObject o = fromJSON(loadLater.get(index));
             if (o == LOAD_LATER) {
                 loadLater.add(loadLater.get(index));
                 loadLater.remove(index);
@@ -94,26 +94,24 @@ public class JSONHandler {
                 index = 0;
             }
         }
-
-        return objs.toArray();
+        TypedObject[] to = new TypedObject[objs.size()];
+        return objs.toArray(to);
     }
 
-    public Object fromJSON(File file) throws ObjectAlreadyLoadedException {
+    public TypedObject fromJSON(File file) throws ObjectAlreadyLoadedException {
         JSONParser parser = new JSONParser();
         JSONObject f = null;
         try {
             f = (JSONObject) parser.parse(new FileReader(file));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
+        } catch (IOException | ParseException ex) {
             Logger.getLogger(JSONHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         return fromJSON(f);
     }
 
-    public Object fromJSON(JSONObject file) throws ObjectAlreadyLoadedException {
+    public TypedObject fromJSON(JSONObject file) throws ObjectAlreadyLoadedException {
         Object obj = null;
         String namespace, id;
         namespace = (String) file.get("namespace");
@@ -133,19 +131,34 @@ public class JSONHandler {
                 item.id = id;
                 item.desc = (String) file.get("desc");
                 obj = item;
+                break;
+            }
+            case ENEMY: {
+                Enemy en = new Enemy("", (int) file.get("expVal"));
+                en.namespace = namespace;
+                en.id = id;
+                en.setStats(StatusArray.fromJSONObj(file));
+                obj = en;
+                break;
             }
         }
         if (getObject(namespace + ":" + id) != null) {
             throw new ObjectAlreadyLoadedException(namespace + ":" + id);
         }
-        loadedObjects.put(namespace + ":" + id, new TypedObject(type, obj));
-        return obj;
+        TypedObject tObj = new TypedObject(type, obj);
+        tObj.namespace = namespace;
+        tObj.id = id;
+        loadedObjects.put(namespace + ":" + id, tObj);
+        return tObj;
     }
 
     public class TypedObject {
 
         public String type;
         public Object object;
+
+        public String namespace;
+        public String id;
 
         public TypedObject(String type, Object obj) {
             this.type = type;
