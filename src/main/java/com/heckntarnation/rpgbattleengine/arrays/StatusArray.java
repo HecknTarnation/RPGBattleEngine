@@ -2,6 +2,7 @@ package com.heckntarnation.rpgbattleengine.arrays;
 
 import com.heckntarnation.rpgbattleengine.Cons.StatusEffect;
 import com.heckntarnation.rpgbattleengine.Cons.Weakness;
+import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class StatusArray implements Serializable {
         }
     }
 
-    public StatusArray modify(StatusArrayPosition pos, Object value) {
+    public StatusArray put(StatusArrayPosition pos, Object value) {
         this.statuses.set(pos.actualPos, value);
         return this;
     }
@@ -34,19 +35,44 @@ public class StatusArray implements Serializable {
     public static StatusArray fromJSONObj(JSONObject json) {
         StatusArray arr = new StatusArray();
 
-        arr.modify(StatusArrayPosition.Health, json.get("health"));
-        arr.modify(StatusArrayPosition.MaxHealth, json.get("maxHealth"));
-        arr.modify(StatusArrayPosition.MaxMana, json.get("maxMana"));
-        arr.modify(StatusArrayPosition.Mana, json.get("mana"));
-        arr.modify(StatusArrayPosition.ATK, json.get("attack"));
-        arr.modify(StatusArrayPosition.DEF, json.get("defense"));
-        arr.modify(StatusArrayPosition.Luck, json.get("luck"));
-        arr.modify(StatusArrayPosition.MATK, json.get("magicAttack"));
-        arr.modify(StatusArrayPosition.MDEF, json.get("magicDefense"));
-        arr.modify(StatusArrayPosition.Weakness, Weakness.fromJSON(json.get("weakness")));
-        arr.modify(StatusArrayPosition.AILevel, json.get("aiLevel"));
-        arr.modify(StatusArrayPosition.StatusEffect, StatusEffect.fromJSON(json.get("statusEffects")));
-        arr.modify(StatusArrayPosition.Evasion, json.get("evasion"));
+        arr.put(StatusArrayPosition.Health, json.get("health"));
+        arr.put(StatusArrayPosition.MaxHealth, json.get("maxHealth"));
+        arr.put(StatusArrayPosition.MaxMana, json.get("maxMana"));
+        arr.put(StatusArrayPosition.Mana, json.get("mana"));
+        arr.put(StatusArrayPosition.ATK, json.get("attack"));
+        arr.put(StatusArrayPosition.DEF, json.get("defense"));
+        arr.put(StatusArrayPosition.Luck, json.get("luck"));
+        arr.put(StatusArrayPosition.MATK, json.get("magicAttack"));
+        arr.put(StatusArrayPosition.MDEF, json.get("magicDefense"));
+        arr.put(StatusArrayPosition.Weakness, Weakness.fromJSON(json.get("weakness")));
+        switch ((String) json.get("aiLevel")) {
+            case "random": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.Random);
+                break;
+            }
+            case "damage": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.Damage);
+                break;
+            }
+            case "damageMagic": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.DamageMagic);
+                break;
+            }
+            case "weakness": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.Weakness);
+                break;
+            }
+            case "weaknessDamage": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.WeaknessDamage);
+                break;
+            }
+            case "weaknessDamageMagic": {
+                arr.put(StatusArrayPosition.AILevel, AILevel.WeaknessDamageMagic);
+                break;
+            }
+        }
+        arr.put(StatusArrayPosition.StatusEffect, StatusEffect.fromJSON(json.get("statusEffects")));
+        arr.put(StatusArrayPosition.Evasion, json.get("evasion"));
 
         return arr;
     }
