@@ -18,4 +18,33 @@ public enum EquipSlot {
         this.index = index;
     }
 
+    public static EquipSlot getFromString(String slot) {
+        switch (slot) {
+            case "feet": {
+                return EquipSlot.Feet;
+            }
+            case "arms": {
+                return EquipSlot.Arms;
+            }
+            case "chest": {
+                return EquipSlot.Chest;
+            }
+            case "legs": {
+                return EquipSlot.Legs;
+            }
+            case "head": {
+                return EquipSlot.Head;
+            }
+            case "accessory": {
+                return EquipSlot.Accessory;
+            }
+            case "weapon": {
+                return EquipSlot.Weapon;
+            }
+            default: {
+                return null;
+            }
+        }
+    }
+
 }
