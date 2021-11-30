@@ -1,36 +1,13 @@
 package com.heckntarnation.rpgbattleengine.Cons;
 
-import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import java.io.Serializable;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Ben
  */
 public class Drop implements Serializable {
-
-    public static Drop[] fromJSON(JSONArray objs) {
-        Drop[] drops = new Drop[objs.size()];
-        for (int i = 0; i < objs.size(); i++) {
-            Drop drop;
-            if (objs.get(i) instanceof String) {
-                drop = (Drop) BattleEngine.jsonHandler.getObject((String) objs.get(i));
-                if (drop == null) {
-                    drop = (Drop) BattleEngine.jsonHandler.LOAD_LATER;
-                    drops[i] = drop;
-                    return drops;
-                }
-            } else {
-                JSONObject o = (JSONObject) objs.get(i);
-                drop = new Drop((Item) BattleEngine.jsonHandler.getObject((String) o.get("id")), (String) o.get("chance"));
-            }
-            drops[i] = drop;
-        }
-        return drops;
-    }
 
     /**
      * For JSON loading
@@ -72,7 +49,7 @@ public class Drop implements Serializable {
     }
 
     public boolean getIfShouldDrop() {
-        String[] c = this.chance.split("(\\/)\\w");
+        String[] c = this.chance.split("/");
         int[] amount = new int[]{Integer.parseInt(c[1]), Integer.parseInt(c[1]) - Integer.parseInt(c[0])};
         String[] elements = new String[]{"get", "miss"};
         return ((String) MathFunc.hatpull(amount, elements)).equalsIgnoreCase("get");
