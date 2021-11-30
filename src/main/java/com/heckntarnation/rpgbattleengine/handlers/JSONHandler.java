@@ -142,6 +142,20 @@ public class JSONHandler {
                 en.namespace = namespace;
                 en.id = id;
                 en.setStats(StatusArray.fromJSONObj(file));
+                JSONArray drops = (JSONArray) file.get("drops");
+                if (drops != null) {
+                    String[] dropIds = new String[drops.size()];
+                    dropIds = (String[]) drops.toArray(dropIds);
+                    Drop[] dr = new Drop[dropIds.length];
+                    for (int i = 0; i < dr.length; i++) {
+                        Drop d = (Drop) loadedObjects.get(dropIds[i]).object;
+                        if (d == null) {
+                            return LOAD_LATER;
+                        }
+                        dr[i] = d;
+                    }
+                    en.drops = dr;
+                }
                 obj = en;
                 break;
             }
