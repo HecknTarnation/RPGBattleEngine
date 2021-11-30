@@ -1,9 +1,9 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
 import com.heckntarnation.rpgbattleengine.BattleEngine;
-import com.heckntarnation.rpgbattleengine.Cons.Enemy;
-import com.heckntarnation.rpgbattleengine.Cons.Item;
+import com.heckntarnation.rpgbattleengine.Cons.*;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
+import com.heckntarnation.rpgbattleengine.enums.EquipSlot;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,6 +26,9 @@ public class JSONHandler {
 
     public final String ITEM = "item";
     public final String ENEMY = "enemy";
+    public final String DROP = "drop";
+    public final String GRAPHIC = "graphic";
+    public final String EQUIPMENT = "equipment";
 
     public Object getObject(String key) {
         return loadedObjects.get(key);
@@ -45,7 +48,7 @@ public class JSONHandler {
         return null;
     }
 
-    public final Object LOAD_LATER = new Object();
+    public final TypedObject LOAD_LATER = new TypedObject("builtin:load_later", null);
 
     private final ArrayList<JSONObject> loadLater = new ArrayList<>();
 
@@ -114,8 +117,9 @@ public class JSONHandler {
     public TypedObject fromJSON(JSONObject file) throws ObjectAlreadyLoadedException {
         Object obj = null;
         String namespace, id;
-        namespace = (String) file.get("namespace");
-        id = (String) file.get("id");
+        String[] namespacedid = ((String) file.get("id")).split(":");
+        namespace = namespacedid[0];
+        id = namespacedid[1];
         String type = (String) file.get("type");
         switch (type) {
             case ITEM: {
@@ -141,6 +145,31 @@ public class JSONHandler {
                 obj = en;
                 break;
             }
+            case DROP: {
+                Item it = (Item) loadedObjects.get((String) file.get("item")).object;
+                if (it == null) {
+                    return LOAD_LATER;
+                }
+                Drop drop = new Drop(it, (String) file.get("chance"));
+                obj = drop;
+                break;
+            }
+            case GRAPHIC: {
+                Graphic gr = new Graphic();
+                gr.setTime((int) file.get("time"));
+                JSONArray jsonArr = (JSONArray) file.get("frames");
+                String[] frameArray = new String[jsonArr.size()];
+                frameArray = (String[]) jsonArr.toArray(frameArray);
+                gr.setFrames(frameArray);
+                obj = gr;
+                break;
+            }
+            case EQUIPMENT: {
+                EquipSlot slot = EquipSlot.getFromString((String) file.get("slot"));
+                Equipment equip = new Equipment((String) file.get("name"), slot);
+                obj = equip;
+                break;
+            }
         }
         if (getObject(namespace + ":" + id) != null) {
             throw new ObjectAlreadyLoadedException(namespace + ":" + id);
@@ -161,6 +190,13 @@ public class JSONHandler {
         public String id;
 
         public TypedObject(String type, Object obj) {
+            this.type = type;
+            this.object = obj;
+        }
+
+        public TypedObject(String id, String type, Object obj) {
+            this.namespace = id.split(":")[0];
+            this.id = id.split(":")[1];
             this.type = type;
             this.object = obj;
         }
