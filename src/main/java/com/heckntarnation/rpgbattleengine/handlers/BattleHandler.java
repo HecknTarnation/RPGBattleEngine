@@ -1,8 +1,15 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
+import com.heckntarnation.rpgbattleengine.cons.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Player;
+import com.heckntarnation.rpgbattleengine.cons.Graphic;
+import com.heckntarnation.rpgbattleengine.cons.Weakness;
+import com.heckntarnation.rpgbattleengine.cons.Move;
+import com.heckntarnation.rpgbattleengine.cons.Item;
 import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Colors;
-import com.heckntarnation.rpgbattleengine.Cons.*;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
