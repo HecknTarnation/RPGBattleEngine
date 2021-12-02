@@ -1,7 +1,7 @@
-package com.heckntarnation.rpgbattleengine.Cons;
+package com.heckntarnation.rpgbattleengine.cons;
 
-import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.BattleEngine;
+import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
@@ -64,28 +64,6 @@ public class Player implements Serializable {
         this.baseExp = baseExp;
         this.expMod = expmod;
         this.expToNextLevel = this.baseExp;
-    }
-
-    /**
-     * Is used for loading saved data.
-     *
-     * @param arr
-     * @param level
-     * @param growthRates
-     * @param moves
-     * @param inv
-     * @param exp
-     * @param expNextLevel
-     */
-    public void load(StatusArray arr, int level, double[] growthRates, ArrayList<Move> moves, ArrayList<Item> inv, int exp, int expNextLevel) {
-        this.setStats(arr);
-        this.maxHealth = (Integer) arr.get(StatusArrayPosition.MaxHealth);
-        this.maxMana = (Integer) arr.get(StatusArrayPosition.MaxMana);
-        this.growthRates = growthRates;
-        this.moves = moves;
-        this.inv = inv;
-        this.exp = exp;
-        this.expToNextLevel = expNextLevel;
     }
 
     public Player setStats(StatusArray arr) {
