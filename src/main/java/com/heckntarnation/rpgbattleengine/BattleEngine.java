@@ -1,6 +1,6 @@
 package com.heckntarnation.rpgbattleengine;
 
-import com.heckntarnation.rpgbattleengine.Cons.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Enemy;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import com.heckntarnation.rpgbattleengine.handlers.*;
 import java.io.File;
