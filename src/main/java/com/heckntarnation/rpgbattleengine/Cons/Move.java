@@ -1,4 +1,4 @@
-package com.heckntarnation.rpgbattleengine.Cons;
+package com.heckntarnation.rpgbattleengine.cons;
 
 import com.heckntarnation.rpgbattleengine.Colors;
 import java.io.Serializable;
