@@ -6,6 +6,7 @@ import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -32,7 +33,7 @@ public class StatusArray implements Serializable {
         return this.statuses.get(index.actualPos);
     }
 
-    public static StatusArray fromJSONObj(JSONObject json) {
+    public static StatusArray fromJSONObj(JSONObject json, Object character) {
         StatusArray arr = new StatusArray();
 
         arr.put(StatusArrayPosition.Health, json.get("health"));
@@ -71,7 +72,7 @@ public class StatusArray implements Serializable {
                 break;
             }
         }
-        arr.put(StatusArrayPosition.StatusEffect, StatusEffect.fromJSON(json.get("statusEffects")));
+        arr.put(StatusArrayPosition.StatusEffect, StatusEffect.fromJSON((JSONArray) json.get("statusEffects"), character).toArray());
         arr.put(StatusArrayPosition.Evasion, json.get("evasion"));
 
         return arr;
