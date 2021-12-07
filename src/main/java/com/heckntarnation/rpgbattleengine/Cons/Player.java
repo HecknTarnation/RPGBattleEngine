@@ -204,6 +204,10 @@ public class Player implements Serializable {
         return temp;
     }
 
+    public void addItemToInv(Item item) {
+        inv.add(item);
+    }
+
     public void statusEffectTick() {
         if (statusEffects.isEmpty()) {
             return;
