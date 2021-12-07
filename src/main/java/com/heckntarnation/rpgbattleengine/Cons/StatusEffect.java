@@ -1,6 +1,10 @@
 package com.heckntarnation.rpgbattleengine.cons;
 
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import java.io.Serializable;
+import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  * This class should be complete made by you, the only calls by the engine will
@@ -11,28 +15,37 @@ import java.io.Serializable;
  * @author Ben
  */
 public class StatusEffect implements Serializable {
-
-    public static Object fromJSON(Object get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public static ArrayList<StatusEffect> fromJSON(JSONArray arr, Object character) {
+        ArrayList<StatusEffect> effects = new ArrayList<>();
+        for (Object o : arr) {
+            JSONObject jo = (JSONObject) o;
+            StatusEffect ef = (StatusEffect) BattleEngine.jsonHandler.getObject((String) jo.get("id")).object;
+            ef.character = character;
+            ef.tickScript = (String) jo.get("tickScript");
+        }
+        return effects;
     }
+    
+    public String tickScript;
 
     /**
      * For JSON loading
      */
     public String namespace, id;
-
-    public Player character;
+    
+    public Object character;
     public boolean shouldBeRemoved;
-
+    
     public StatusEffect() {
-
+        
     }
 
     /**
      * Main status effect code (should be overridden)
      */
     public void tick() {
-
+        BattleEngine.luaHandler.runscript(tickScript);
     }
 
     /**
@@ -43,5 +56,5 @@ public class StatusEffect implements Serializable {
     public void setCharacter(Player character) {
         this.character = character;
     }
-
+    
 }
