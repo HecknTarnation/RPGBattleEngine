@@ -149,7 +149,7 @@ public class JSONHandler {
                 Enemy en = new Enemy((String) file.get("name"), (int) file.get("expVal"));
                 en.namespace = namespace;
                 en.id = id;
-                en.setStats(StatusArray.fromJSONObj(file));
+                en.setStats(StatusArray.fromJSONObj(file, en));
                 JSONArray drops = (JSONArray) file.get("drops");
                 if (drops != null) {
                     String[] dropIds = new String[drops.size()];
@@ -253,8 +253,20 @@ public class JSONHandler {
             moves.add(m);
         }
         obj.moves = moves;
-        //TODO: equipment
-        //TODO: status effect
+        JSONArray equipmentIds = (JSONArray) file.get("equipment");
+        ArrayList<Equipment> equipment = new ArrayList<>();
+        for (int i = 0; i < equipmentIds.size(); i++) {
+            String id = (String) equipmentIds.get(i);
+            Equipment e = (Equipment) getObject(id).object;
+            if (e == null) {
+                return (Player) LOAD_LATER.object;
+            }
+            equipment.add(e);
+        }
+        obj.equipment = equipment.toArray(obj.equipment);
+        JSONArray statusEffects = (JSONArray) file.get("statusEffects");
+        ArrayList<StatusEffect> effects = StatusEffect.fromJSON(statusEffects, obj);
+        obj.statusEffects = effects;
         //TODO: inv
         //TODO: weaknesses
         return obj;
