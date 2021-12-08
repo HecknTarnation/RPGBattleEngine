@@ -22,4 +22,10 @@ public class LuaHandler {
         chunk.call();
     }
 
+    public void runscript(String scriptPath, LuaValue param, String paramName) {
+        globals.set(paramName, param);
+        runscript(scriptPath);
+        globals.set(paramName, LuaValue.valueOf((String) null));
+    }
+
 }
