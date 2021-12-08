@@ -1,10 +1,12 @@
 package com.heckntarnation.rpgbattleengine.cons;
 
 import com.heckntarnation.rpgbattleengine.BattleEngine;
+import com.heckntarnation.rpgbattleengine.lua.character_lookup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.luaj.vm2.LuaValue;
 
 /**
  * This class should be complete made by you, the only calls by the engine will
@@ -15,7 +17,7 @@ import org.json.simple.JSONObject;
  * @author Ben
  */
 public class StatusEffect implements Serializable {
-    
+
     public static ArrayList<StatusEffect> fromJSON(JSONArray arr, Object character) {
         ArrayList<StatusEffect> effects = new ArrayList<>();
         for (Object o : arr) {
@@ -26,26 +28,26 @@ public class StatusEffect implements Serializable {
         }
         return effects;
     }
-    
+
     public String tickScript;
 
     /**
      * For JSON loading
      */
     public String namespace, id;
-    
+
     public Object character;
     public boolean shouldBeRemoved;
-    
+
     public StatusEffect() {
-        
+
     }
 
     /**
      * Main status effect code (should be overridden)
      */
     public void tick() {
-        BattleEngine.luaHandler.runscript(tickScript);
+        BattleEngine.luaHandler.runscript(tickScript, LuaValue.valueOf(character_lookup.lookupID(character)), "character");
     }
 
     /**
@@ -56,5 +58,5 @@ public class StatusEffect implements Serializable {
     public void setCharacter(Player character) {
         this.character = character;
     }
-    
+
 }
