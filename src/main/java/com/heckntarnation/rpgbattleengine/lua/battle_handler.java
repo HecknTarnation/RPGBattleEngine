@@ -16,7 +16,7 @@ public class battle_handler extends TwoArgFunction {
     @Override
     public LuaValue call(LuaValue modname, LuaValue env) {
         LuaValue library = tableOf();
-        library.set("", new start_battle());
+        library.set("start_battle", new start_battle());
         env.set("battle_handler", library);
         return library;
     }
