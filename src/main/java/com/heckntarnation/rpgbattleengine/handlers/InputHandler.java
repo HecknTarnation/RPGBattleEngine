@@ -35,7 +35,7 @@ public class InputHandler implements NativeKeyListener {
     public void init() {
         //TODO: This prevents any keyboard input (system wide) from working if an error occurs while mode == 0. Closing the application fixes this.
         //Input is also disabled system wide while in mode 0 (even while command prompt isn't in focus).
-        GlobalScreen.setEventDispatcher(new VDPService());
+        GlobalScreen.setEventDispatcher(new VoidDispatchService());
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException ex) {
@@ -157,9 +157,5 @@ public class InputHandler implements NativeKeyListener {
     public void nativeKeyReleased(NativeKeyEvent nke) {
 
     }
-
-}
-
-class VDPService extends VoidDispatchService {
 
 }
