@@ -141,7 +141,7 @@ public class Player implements Serializable {
                 levelNeeded++;
             }
 
-            System.out.println((this.name.equalsIgnoreCase("you") == true) ? localize(stat_secondpersonlevelup) : String.format(this.name, localize(stat_levelup)));
+            System.out.println((this.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) == true) ? localize(stat_secondpersonlevelup) : String.format(this.name, localize(stat_levelup)));
 
             ConsoleFunc.wait(2000);
 
