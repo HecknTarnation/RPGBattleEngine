@@ -8,6 +8,7 @@ import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.Vars.ControlMapping;
+import com.heckntarnation.rpgbattleengine.cons.CycleValues.CycleValue;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 public class InputHandler implements NativeKeyListener {
 
     public String[] menu;
-    private int menuIndex;
+    private CycleValue menuIndex;
     public Scanner scan;
 
     //-1 = None, 0 = Menu, 1 = Text Input
@@ -52,28 +53,22 @@ public class InputHandler implements NativeKeyListener {
         return doMenu(m, "", clearAtEnd);
     }
 
+    //TODO: you can select an option that doesn't exist.
     public int doMenu(String[] m, String printFirst, boolean clearAtEnd) {
         currentMode = 0;
-        menuIndex = 0;
-        menu = m;
         ArrayList<String> temp = new ArrayList<>();
-        for (String s : menu) {
+        for (String s : m) {
             if (s != null) {
                 temp.add(s);
             }
         }
         menu = temp.toArray(new String[temp.size()]);
+        menuIndex = new CycleValue(0, m.length - 1);
         boolean run = true;
         while (run) {
-            if (menuIndex > menu.length - 1) {
-                menuIndex = 0;
-            }
-            if (menuIndex < 0) {
-                menuIndex = menu.length - 1;
-            }
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
-                System.out.println((menuIndex == i ? Vars.Selected_Color : "") + "  -" + menu[i] + Colors.reset());
+                System.out.println((menuIndex.getValue() == i ? Vars.Selected_Color : "") + "  -" + menu[i] + Colors.reset());
             }
             ConsoleFunc.wait(300);
 
@@ -85,7 +80,7 @@ public class InputHandler implements NativeKeyListener {
         }
         enterPressed = false;
         currentMode = -1;
-        return menuIndex;
+        return menuIndex.getValue();
     }
 
     public String doText() {
@@ -139,10 +134,10 @@ public class InputHandler implements NativeKeyListener {
             }
             int code = nke.getKeyCode();
             if (code == Vars.Controls.get(ControlMapping.Up)) {
-                menuIndex--;
+                menuIndex.decValue();
             }
             if (code == Vars.Controls.get(ControlMapping.Down)) {
-                menuIndex++;
+                menuIndex.incValue();
             }
             if (code == Vars.Controls.get(ControlMapping.Select)) {
                 enterPressed = true;
