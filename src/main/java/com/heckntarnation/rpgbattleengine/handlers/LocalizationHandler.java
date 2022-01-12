@@ -53,8 +53,8 @@ public class LocalizationHandler {
         en_us.put(stat_maxlevel.key, "%s is max level!");
         en_us.put(stat_secondpersonlevelup.key, "You have leveled up!");
         en_us.put(stat_levelup.key, "%s has leveled up!");
-        en_us.put(stat_health.key, "Health");
-        en_us.put(stat_mana.key, "Mana");
+        en_us.put(stat_health.key, "Health: ");
+        en_us.put(stat_mana.key, "Mana: ");
         en_us.put(stat_maxHealth.key, "Max Health: ");
         en_us.put(stat_maxMana.key, "Max Mana: ");
         en_us.put(stat_attack.key, "Attack: ");
