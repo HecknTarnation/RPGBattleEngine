@@ -1,18 +1,18 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
-import com.heckntarnation.rpgbattleengine.cons.Drop;
-import com.heckntarnation.rpgbattleengine.cons.Companion;
-import com.heckntarnation.rpgbattleengine.cons.Enemy;
-import com.heckntarnation.rpgbattleengine.cons.Player;
-import com.heckntarnation.rpgbattleengine.cons.Graphic;
-import com.heckntarnation.rpgbattleengine.cons.Weakness;
-import com.heckntarnation.rpgbattleengine.cons.Move;
-import com.heckntarnation.rpgbattleengine.cons.Item;
 import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
+import com.heckntarnation.rpgbattleengine.cons.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Graphic;
+import com.heckntarnation.rpgbattleengine.cons.Item;
+import com.heckntarnation.rpgbattleengine.cons.Move;
+import com.heckntarnation.rpgbattleengine.cons.Player;
+import com.heckntarnation.rpgbattleengine.cons.Weakness;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
@@ -73,10 +73,11 @@ public class BattleHandler {
             for (Enemy en : ens) {
                 str += Vars.Enemy_Color + en.name + ": " + en.health + "/" + en.maxHealth + Colors.reset() + "\n";
             }
+            String pName = player.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : player.name;
             if (player.health > 0) {
-                str += "\n" + Vars.Ally_Color + player.name + ": " + player.health + "/" + player.maxHealth + Colors.reset() + "\n";
+                str += "\n" + Vars.Ally_Color + pName + ": " + player.health + "/" + player.maxHealth + Colors.reset() + "\n";
             } else {
-                str += "\n" + Colors.RED_BACKGROUND + player.name + ": DEAD" + Colors.reset() + "\n";
+                str += "\n" + Colors.RED_BACKGROUND + pName + ": DEAD" + Colors.reset() + "\n";
             }
             if (comps != null) {
                 for (Companion com : Vars.companions) {
