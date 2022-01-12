@@ -1,6 +1,7 @@
 com.heckntarnation.rpgbattleengine
 com.heckntarnation.rpgbattleengine.arrays
 com.heckntarnation.rpgbattleengine.cons
+com.heckntarnation.rpgbattleengine.cons.CycleValues
 com.heckntarnation.rpgbattleengine.dev
 com.heckntarnation.rpgbattleengine.enums
 com.heckntarnation.rpgbattleengine.exceptions
