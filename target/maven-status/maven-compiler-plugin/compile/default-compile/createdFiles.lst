@@ -6,6 +6,7 @@ com\heckntarnation\rpgbattleengine\cons\Move.class
 com\heckntarnation\rpgbattleengine\enums\StatusArrayPosition.class
 com\heckntarnation\rpgbattleengine\MathFunc$1.class
 com\heckntarnation\rpgbattleengine\handlers\LuaHandler.class
+com\heckntarnation\rpgbattleengine\cons\CycleValues\CycleValue.class
 com\heckntarnation\rpgbattleengine\cons\Enemy.class
 com\heckntarnation\rpgbattleengine\lua\character_lookup$lookupID.class
 com\heckntarnation\rpgbattleengine\cons\Player.class
@@ -32,13 +33,13 @@ com\heckntarnation\rpgbattleengine\lua\json$load.class
 com\heckntarnation\rpgbattleengine\handlers\InputHandler.class
 com\heckntarnation\rpgbattleengine\lua\battle_handler.class
 com\heckntarnation\rpgbattleengine\statusEffects\Posion.class
+com\heckntarnation\rpgbattleengine\cons\CycleValues\CycleValueLong.class
 com\heckntarnation\rpgbattleengine\handlers\LocalizationHandler.class
 com\heckntarnation\rpgbattleengine\cons\Item.class
 com\heckntarnation\rpgbattleengine\cons\Weakness.class
 com\heckntarnation\rpgbattleengine\lua\character_lookup$lookup.class
 com\heckntarnation\rpgbattleengine\lua\item_management$delete.class
 com\heckntarnation\rpgbattleengine\enums\LangKeys.class
-com\heckntarnation\rpgbattleengine\handlers\VDPService.class
 com\heckntarnation\rpgbattleengine\lua\localization.class
 com\heckntarnation\rpgbattleengine\ConsoleFunc.class
 com\heckntarnation\rpgbattleengine\handlers\JSONHandler$1.class
