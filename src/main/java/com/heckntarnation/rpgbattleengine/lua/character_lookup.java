@@ -2,9 +2,9 @@ package com.heckntarnation.rpgbattleengine.lua;
 
 import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Vars;
-import com.heckntarnation.rpgbattleengine.cons.Companion;
-import com.heckntarnation.rpgbattleengine.cons.Enemy;
-import com.heckntarnation.rpgbattleengine.cons.Player;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;

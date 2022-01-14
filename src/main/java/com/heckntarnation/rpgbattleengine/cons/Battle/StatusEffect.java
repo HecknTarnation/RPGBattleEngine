@@ -1,5 +1,6 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Battle;
 
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
 import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.lua.character_lookup;
 import java.io.Serializable;

@@ -1,6 +1,10 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Characters;
 
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
+import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
+import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.io.Serializable;

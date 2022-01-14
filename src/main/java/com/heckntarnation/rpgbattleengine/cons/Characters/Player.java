@@ -1,10 +1,15 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Characters;
 
 import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
+import com.heckntarnation.rpgbattleengine.cons.Items.Equipment;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
+import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;

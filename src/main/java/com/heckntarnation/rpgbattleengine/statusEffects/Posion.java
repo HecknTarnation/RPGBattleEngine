@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine.statusEffects;
 
-import com.heckntarnation.rpgbattleengine.cons.Player;
-import com.heckntarnation.rpgbattleengine.cons.StatusEffect;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
+import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
 
 /**
  * This is an example of how a status effect should be created

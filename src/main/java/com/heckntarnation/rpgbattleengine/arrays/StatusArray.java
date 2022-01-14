@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine.arrays;
 
-import com.heckntarnation.rpgbattleengine.cons.StatusEffect;
-import com.heckntarnation.rpgbattleengine.cons.Weakness;
+import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.io.Serializable;

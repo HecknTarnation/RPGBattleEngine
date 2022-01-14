@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine;
 
-import com.heckntarnation.rpgbattleengine.cons.Companion;
-import com.heckntarnation.rpgbattleengine.cons.Player;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine;
 
-import com.heckntarnation.rpgbattleengine.cons.Enemy;
-import com.heckntarnation.rpgbattleengine.cons.Move;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.util.ArrayList;
 import java.util.Collections;

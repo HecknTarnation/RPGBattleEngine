@@ -1,5 +1,6 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Items;
 
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import java.io.Serializable;
 

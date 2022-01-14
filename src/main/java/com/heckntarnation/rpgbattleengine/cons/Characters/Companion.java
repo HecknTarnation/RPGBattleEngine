@@ -1,6 +1,8 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Characters;
 
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
 import com.heckntarnation.rpgbattleengine.Vars;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 
 /**
  *

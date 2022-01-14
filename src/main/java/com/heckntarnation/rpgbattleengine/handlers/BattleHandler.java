@@ -5,14 +5,14 @@ import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
-import com.heckntarnation.rpgbattleengine.cons.Companion;
-import com.heckntarnation.rpgbattleengine.cons.Drop;
-import com.heckntarnation.rpgbattleengine.cons.Enemy;
-import com.heckntarnation.rpgbattleengine.cons.Graphic;
-import com.heckntarnation.rpgbattleengine.cons.Item;
-import com.heckntarnation.rpgbattleengine.cons.Move;
-import com.heckntarnation.rpgbattleengine.cons.Player;
-import com.heckntarnation.rpgbattleengine.cons.Weakness;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Graphic;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
@@ -38,15 +38,15 @@ public class BattleHandler {
     private String currentStatus;
 
     public void startBattle(boolean canRun, LuaTable en) throws IncorrectObjectRecieved {
-        Enemy[] ens = new Enemy[en.length()];
-        for (int i = 0; i < ens.length; i++) {
+        Enemy[] es = new Enemy[en.length()];
+        for (int i = 0; i < es.length; i++) {
             TypedObject obj = BattleEngine.jsonHandler.getLoadedObjects().get(en.get(i).checkstring().toString());
             if (!obj.type.equalsIgnoreCase(BattleEngine.jsonHandler.ENEMY)) {
                 throw new IncorrectObjectRecieved("Expected enemy, got " + obj.type);
             }
-            ens[i] = (Enemy) obj.object;
+            es[i] = (Enemy) obj.object;
         }
-        startBattle(canRun, ens);
+        startBattle(canRun, es);
     }
 
     public void startBattle(boolean canRun, Enemy... en) {
@@ -128,8 +128,7 @@ public class BattleHandler {
                     ConsoleFunc.wait(1000);
                     break;
                 case 3:
-                    boolean ran = Run();
-                    if (ran) {
+                    if (Run()) {
                         won = false;
                         break exit;
                     }
@@ -433,9 +432,7 @@ public class BattleHandler {
     private boolean checkDie() {
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
-        for (int i = 0; i < comps.length; i++) {
-            t[i + 1] = comps[i];
-        }
+        System.arraycopy(comps, 0, t, 1, comps.length);
         int dead = 0;
         for (Player p : t) {
             if (p.health <= 0) {
@@ -459,9 +456,7 @@ public class BattleHandler {
         }
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
-        for (int i = 0; i < comps.length; i++) {
-            t[i + 1] = comps[i];
-        }
+        System.arraycopy(comps, 0, t, 1, comps.length);
         try {
             currentPlayer = t[currentIndex];
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -1,4 +1,4 @@
-package com.heckntarnation.rpgbattleengine.cons;
+package com.heckntarnation.rpgbattleengine.cons.Battle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
