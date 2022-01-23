@@ -5,14 +5,14 @@ import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
-import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
-import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
-import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Graphic;
-import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
-import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
+import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
@@ -34,7 +34,7 @@ public class BattleHandler {
     public boolean canRun;
     private int expVal = 0;
 
-    private Player currentPlayer;
+    private Player currentCharacter;
     private String currentStatus;
 
     public void startBattle(boolean canRun, LuaTable en) throws IncorrectObjectRecieved {
@@ -90,12 +90,12 @@ public class BattleHandler {
             }
 
             getTurn();
-            if (currentPlayer != null) {
-                while (currentPlayer != null && currentPlayer.health <= 0) {
+            if (currentCharacter != null) {
+                while (currentCharacter != null && currentCharacter.health <= 0) {
                     getTurn(1);
                 }
             }
-            if (currentPlayer == null) {
+            if (currentCharacter == null) {
                 EnemyTurn();
                 player.statusEffectTick();
                 for (Companion comp : comps) {
@@ -107,7 +107,7 @@ public class BattleHandler {
                 continue;
             }
 
-            str += currentPlayer.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? String.format(localize(battle_currentTurn), "your") : String.format(localize(battle_currentTurn), currentPlayer.name);
+            str += currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? String.format(localize(battle_currentTurn), "your") : String.format(localize(battle_currentTurn), currentCharacter.name);
             currentStatus = str;
             String m = localize(battle_menu);
             String[] menu = m.split(",");
@@ -124,7 +124,7 @@ public class BattleHandler {
                     Item();
                     break;
                 case 2:
-                    ConsoleFunc.dots(String.format(localize(battle_idle), currentPlayer.name), 3, 300);
+                    ConsoleFunc.dots(String.format(localize(battle_idle), currentCharacter.name), 3, 300);
                     ConsoleFunc.wait(1000);
                     break;
                 case 3:
@@ -155,7 +155,7 @@ public class BattleHandler {
         player = null;
         comps = null;
         currentIndex = 0;
-        currentPlayer = null;
+        currentCharacter = null;
         currentStatus = null;
 
         for (Enemy e : enArchive) {
@@ -323,20 +323,20 @@ public class BattleHandler {
     }
 
     private void Attack() {
-        Move[] moves = currentPlayer.getMoves();
+        Move[] moves = currentCharacter.getMoves();
         String[] mNames = Move.arrToStr(moves);
         int selection = BattleEngine.inputHandler.doMenu(mNames, currentStatus, true);
         Move selectedMove = moves[selection];
-        int d = selectedMove.damage + currentPlayer.attack;
-        int mD = selectedMove.mDamage + currentPlayer.mAttack;
+        int d = selectedMove.damage + currentCharacter.attack;
+        int mD = selectedMove.mDamage + currentCharacter.mAttack;
         int cost = selectedMove.manaCost;
-        if (cost > 0 && currentPlayer.mana < cost) {
-            String s = currentPlayer.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentPlayer.name);
+        if (cost > 0 && currentCharacter.mana < cost) {
+            String s = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentCharacter.name);
             ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
         }
-        currentPlayer.mana -= cost;
+        currentCharacter.mana -= cost;
         int target;
         String[] enNames = new String[ens.length];
         for (int i = 0; i < ens.length; i++) {
@@ -345,7 +345,7 @@ public class BattleHandler {
         target = BattleEngine.inputHandler.doMenu(enNames, currentStatus, false);
 
         if (!MathFunc.checkHit(selectedMove, ens[target].evasion)) {
-            println(String.format(localize(battle_missed), currentPlayer.name));
+            println(String.format(localize(battle_missed), currentCharacter.name));
             ConsoleFunc.wait(2000);
             return;
         }
@@ -355,12 +355,12 @@ public class BattleHandler {
         if (Weakness.isWeak(ens[target].weakness, selectedMove)) {
             finalD *= selectedMove.type.effectiveness;
         }
-        int failAmount = 100 - currentPlayer.luck;
-        int[] chances = new int[]{currentPlayer.luck + 1, failAmount};
+        int failAmount = 100 - currentCharacter.luck;
+        int[] chances = new int[]{currentCharacter.luck + 1, failAmount};
         Object[] obj = new Object[]{1, 0};
         if ((int) MathFunc.hatpull(chances, obj) == 1) {
             println(localize(battle_critical));
-            finalD = (finalD * currentPlayer.luck) / (currentPlayer.luck - MathFunc.randomInt(0, currentPlayer.luck > 0 ? currentPlayer.luck - 2 : 1));
+            finalD = (finalD * currentCharacter.luck) / (currentCharacter.luck - MathFunc.randomInt(0, currentCharacter.luck > 0 ? currentCharacter.luck - 2 : 1));
             ConsoleFunc.wait(2000);
         }
         ens[target].health -= finalD;
@@ -374,7 +374,8 @@ public class BattleHandler {
                 ConsoleFunc.clear();
             }
         }
-        println(String.format(localize(battle_moveused), currentPlayer.name, selectedMove.name, ens[target].name, finalD));
+        String name = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
+        println(String.format(localize(battle_moveused), name, selectedMove.name, ens[target].name, finalD));
         selectedMove.Use();
         ConsoleFunc.wait(2000);
     }
@@ -395,17 +396,17 @@ public class BattleHandler {
     }
 
     private boolean Run() {
-        int amount = ((int) MathFunc.addStatFromArray(ens, StatusArrayPosition.Luck) + 10) - currentPlayer.luck;
+        int amount = ((int) MathFunc.addStatFromArray(ens, StatusArrayPosition.Luck) + 10) - currentCharacter.luck;
         if (amount < 0) {
             amount = 0;
         }
-        int[] a = {currentPlayer.luck + 5, amount};
+        int[] a = {currentCharacter.luck + 5, amount};
         String[] b = {"run", "failed"};
         String result = (String) MathFunc.hatpull(a, b);
         if (result.equalsIgnoreCase("run")) {
-            println(String.format(localize(battle_ran), currentPlayer.name));
+            println(String.format(localize(battle_ran), currentCharacter.name));
         } else {
-            println(Colors.RED_BACKGROUND + String.format(localize(battle_failedToRun), currentPlayer.name) + Colors.reset());
+            println(Colors.RED_BACKGROUND + String.format(localize(battle_failedToRun), currentCharacter.name) + Colors.reset());
             ConsoleFunc.wait(3000);
             return false;
         }
@@ -451,17 +452,17 @@ public class BattleHandler {
     private void getTurn(int amountToInc) {
         currentIndex += amountToInc;
         if (comps == null) {
-            currentPlayer = (currentIndex == 0 ? player : null);
+            currentCharacter = (currentIndex == 0 ? player : null);
             return;
         }
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
         System.arraycopy(comps, 0, t, 1, comps.length);
         try {
-            currentPlayer = t[currentIndex];
+            currentCharacter = t[currentIndex];
         } catch (ArrayIndexOutOfBoundsException e) {
             currentIndex = 0;
-            currentPlayer = null;
+            currentCharacter = null;
         }
     }
 }
