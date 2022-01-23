@@ -1,10 +1,10 @@
 package com.heckntarnation.rpgbattleengine.cons.Characters;
 
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
-import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
 import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
+import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
 import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.io.Serializable;
@@ -32,8 +32,8 @@ public class Enemy implements Serializable, Cloneable {
     public int expVal;
     public Move[] moves;
     public AILevel aiLevel;
-    public ArrayList<Weakness> weakness;
-    public ArrayList<StatusEffect> statusEffects;
+    public ArrayList<Weakness> weakness = new ArrayList<>();
+    public ArrayList<StatusEffect> statusEffects = new ArrayList<>();
     public Drop[] drops;
 
     public Enemy(String name, int health, int expVal) {
@@ -108,7 +108,7 @@ public class Enemy implements Serializable, Cloneable {
     }
 
     public void statusEffectTick() {
-        if (statusEffects.isEmpty()) {
+        if (statusEffects == null || statusEffects.isEmpty()) {
             return;
         }
         statusEffects.forEach(effect -> {
