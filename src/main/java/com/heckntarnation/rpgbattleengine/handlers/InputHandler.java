@@ -56,6 +56,7 @@ public class InputHandler implements NativeKeyListener {
     //TODO: you can select an option that doesn't exist.
     public int doMenu(String[] m, String printFirst, boolean clearAtEnd) {
         currentMode = 0;
+        menu = null;
         ArrayList<String> temp = new ArrayList<>();
         for (String s : m) {
             if (s != null) {
@@ -63,7 +64,7 @@ public class InputHandler implements NativeKeyListener {
             }
         }
         menu = temp.toArray(new String[temp.size()]);
-        menuIndex = new CycleValue(0, m.length - 1);
+        System.out.println(String.join(",", menu) + " | " + menu.length);
         boolean run = true;
         while (run) {
             System.out.println(printFirst);
