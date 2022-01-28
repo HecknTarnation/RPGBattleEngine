@@ -41,6 +41,10 @@ public class Player implements Serializable {
     public String name;
     public int level = 1, health, maxHealth, mana, maxMana, attack, defense, luck, mAttack, mDefense, exp, expToNextLevel;
     /**
+     * How much damage to add on crit (percentage)
+     */
+    public float critDMG = 0.5f;
+    /**
      * Chance of dodging an attack
      */
     public float evasion = 0.0f;
@@ -61,7 +65,7 @@ public class Player implements Serializable {
      */
     public ArrayList<Item> inv = new ArrayList<>();
 
-    public ArrayList<Weakness> weakness = new ArrayList<>();
+    public ArrayList<Weakness> weaknesses = new ArrayList<>();
     public ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
     public Player(String name, int baseExp, int expmod) {
@@ -99,8 +103,11 @@ public class Player implements Serializable {
         if (arr.get(StatusArrayPosition.MDEF) != null) {
             mDefense = (int) arr.get(StatusArrayPosition.MDEF);
         }
+        if (arr.get(StatusArrayPosition.CRIT_DMG) != null) {
+            critDMG = (float) arr.get(StatusArrayPosition.CRIT_DMG);
+        }
         if (arr.get(StatusArrayPosition.Weakness) != null) {
-            weakness = (ArrayList<Weakness>) arr.get(StatusArrayPosition.Weakness);
+            weaknesses = (ArrayList<Weakness>) arr.get(StatusArrayPosition.Weakness);
         }
         if (arr.get(StatusArrayPosition.StatusEffect) != null) {
             statusEffects = (ArrayList<StatusEffect>) arr.get(StatusArrayPosition.StatusEffect);
@@ -108,6 +115,11 @@ public class Player implements Serializable {
         return this;
     }
 
+    /**
+     * Returns a StatusArray for this characters stats.
+     *
+     * @return
+     */
     public StatusArray getStats() {
         StatusArray arr = new StatusArray();
         arr.put(StatusArrayPosition.Health, health);
@@ -117,6 +129,11 @@ public class Player implements Serializable {
         arr.put(StatusArrayPosition.Luck, luck);
         arr.put(StatusArrayPosition.MATK, mAttack);
         arr.put(StatusArrayPosition.MDEF, mDefense);
+        arr.put(StatusArrayPosition.CRIT_DMG, critDMG);
+        arr.put(StatusArrayPosition.Weakness, weaknesses);
+        arr.put(StatusArrayPosition.StatusEffect, statusEffects);
+        arr.put(StatusArrayPosition.MaxHealth, maxHealth);
+        arr.put(StatusArrayPosition.MaxMana, maxMana);
         return arr;
     }
 
@@ -234,7 +251,7 @@ public class Player implements Serializable {
             luck += equip.luck;
             mAttack += equip.mAttack;
             mDefense += equip.mDefense;
-            weakness.add(equip.weakness);
+            weaknesses.add(equip.weakness);
             equipment[equip.slot.index] = equip;
         } else {
             maxHealth -= equipment[equip.slot.index].maxHealth;
@@ -244,7 +261,7 @@ public class Player implements Serializable {
             luck -= equipment[equip.slot.index].luck;
             mAttack -= equipment[equip.slot.index].mAttack;
             mDefense -= equipment[equip.slot.index].mDefense;
-            weakness.remove(equipment[equip.slot.index].weakness);
+            weaknesses.remove(equipment[equip.slot.index].weakness);
             equipment[equip.slot.index] = null;
             equip(equip);
         }
