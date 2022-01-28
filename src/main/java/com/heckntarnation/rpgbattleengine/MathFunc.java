@@ -1,7 +1,7 @@
 package com.heckntarnation.rpgbattleengine;
 
-import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,6 +98,15 @@ public class MathFunc {
         return i;
     }
 
+    /**
+     * Increases a stat, given the old stat, the levels needed, and the growth
+     * rate.
+     *
+     * @param oldStat
+     * @param levelNeeded
+     * @param growthRate
+     * @return
+     */
     public static int statIncrease(int oldStat, int levelNeeded, double growthRate) {
         int newStat = oldStat;
         for (int i = 0; i < levelNeeded; i++) {
@@ -106,6 +115,25 @@ public class MathFunc {
         return newStat;
     }
 
+    /**
+     * Gets an amount from number, given the percent.
+     *
+     * @param percent
+     * @param number
+     * @return
+     */
+    public static int getPercentageOf(float percent, int number) {
+        return Math.round(number * percent);
+    }
+
+    /**
+     * Adds stats from an array of enemies, given what StatusArrayPosition you
+     * want.
+     *
+     * @param ens
+     * @param pos
+     * @return
+     */
     public static float addStatFromArray(Enemy[] ens, StatusArrayPosition pos) {
         float stat = 0;
         switch (pos) {
