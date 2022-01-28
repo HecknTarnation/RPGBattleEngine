@@ -29,10 +29,14 @@ public class Enemy implements Serializable, Cloneable {
      * Chance of dodging an attack
      */
     public float evasion = 0.0f;
+    /**
+     * The damage to add on crit (percentage).
+     */
+    public float critDMG = 0.5f;
     public int expVal;
     public Move[] moves;
     public AILevel aiLevel;
-    public ArrayList<Weakness> weakness = new ArrayList<>();
+    public ArrayList<Weakness> weaknesses = new ArrayList<>();
     public ArrayList<StatusEffect> statusEffects = new ArrayList<>();
     public Drop[] drops;
 
@@ -71,7 +75,7 @@ public class Enemy implements Serializable, Cloneable {
             this.mDefense = (int) stats.get(StatusArrayPosition.MDEF);
         }
         if (stats.get(StatusArrayPosition.Weakness) != null) {
-            this.weakness = (ArrayList<Weakness>) stats.get(StatusArrayPosition.Weakness);
+            this.weaknesses = (ArrayList<Weakness>) stats.get(StatusArrayPosition.Weakness);
         }
         if (stats.get(StatusArrayPosition.AILevel) != null) {
             this.aiLevel = (AILevel) stats.get(StatusArrayPosition.AILevel);
@@ -81,6 +85,9 @@ public class Enemy implements Serializable, Cloneable {
         }
         if (stats.get(StatusArrayPosition.Evasion) != null) {
             this.evasion = (float) stats.get(StatusArrayPosition.Evasion);
+        }
+        if (stats.get(StatusArrayPosition.CRIT_DMG) != null) {
+            this.critDMG = (float) stats.get(StatusArrayPosition.CRIT_DMG);
         }
         return this;
     }
