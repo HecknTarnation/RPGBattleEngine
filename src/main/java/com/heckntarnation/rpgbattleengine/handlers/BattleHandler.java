@@ -197,7 +197,7 @@ public class BattleHandler {
         int temp = MathFunc.randomInt(0, t.length - 1);
         Player selectedPlayer = t[temp];
 
-        ArrayList<Weakness> weakness = selectedPlayer.weakness;
+        ArrayList<Weakness> weakness = selectedPlayer.weaknesses;
 
         //Will default to the first move in moves if none matching the criteria are found.
         int selection = 0;
@@ -297,7 +297,7 @@ public class BattleHandler {
         }
         int finalD = ((d - selectedPlayer.defense) >= 0 ? (d - selectedPlayer.defense) : 0)
                 + ((mD - selectedPlayer.mDefense) >= 0 ? (mD - selectedPlayer.mDefense) : 0);
-        if (Weakness.isWeak(selectedPlayer.weakness, selectedMove)) {
+        if (Weakness.isWeak(selectedPlayer.weaknesses, selectedMove)) {
             finalD *= selectedMove.type.effectiveness;
         }
         int failAmount = 100 - en.luck;
@@ -305,7 +305,7 @@ public class BattleHandler {
         Object[] obj = new Object[]{1, 0};
         if ((int) MathFunc.hatpull(chances, obj) == 1) {
             println(localize(battle_critical));
-            finalD = (finalD * en.luck) / (en.luck - MathFunc.randomInt(0, en.luck > 0 ? en.luck - 2 : 1));
+            finalD += MathFunc.getPercentageOf(en.critDMG, finalD);
             ConsoleFunc.wait(2000);
         }
         selectedPlayer.health -= finalD;
@@ -331,7 +331,7 @@ public class BattleHandler {
         int mD = selectedMove.mDamage + currentCharacter.mAttack;
         int cost = selectedMove.manaCost;
         if (cost > 0 && currentCharacter.mana < cost) {
-            String s = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_1stp) : String.format(localize(battle_missingmana), currentCharacter.name);
+            String s = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? localize(battle_missingmana_2ndp) : String.format(localize(battle_missingmana), currentCharacter.name);
             ConsoleFunc.dots(s, 3, 250);
             ConsoleFunc.wait(1500);
             Attack();
@@ -352,15 +352,15 @@ public class BattleHandler {
 
         int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
                 + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
-        if (Weakness.isWeak(ens[target].weakness, selectedMove)) {
+        if (Weakness.isWeak(ens[target].weaknesses, selectedMove)) {
             finalD *= selectedMove.type.effectiveness;
         }
-        int failAmount = 100 - currentCharacter.luck;
+        int failAmount = 100 - currentCharacter.luck + 1;
         int[] chances = new int[]{currentCharacter.luck + 1, failAmount};
-        Object[] obj = new Object[]{1, 0};
-        if ((int) MathFunc.hatpull(chances, obj) == 1) {
+        Object[] obj = new Object[]{true, false};
+        if ((boolean) MathFunc.hatpull(chances, obj)) {
             println(localize(battle_critical));
-            finalD = (finalD * currentCharacter.luck) / (currentCharacter.luck - MathFunc.randomInt(0, currentCharacter.luck > 0 ? currentCharacter.luck - 2 : 1));
+            finalD += MathFunc.getPercentageOf(currentCharacter.critDMG, finalD);
             ConsoleFunc.wait(2000);
         }
         ens[target].health -= finalD;
