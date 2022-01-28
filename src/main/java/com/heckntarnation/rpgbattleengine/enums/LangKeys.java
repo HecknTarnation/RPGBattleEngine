@@ -21,7 +21,7 @@ public enum LangKeys {
     /**
      * "You don't have enough mana!"
      */
-    battle_missingmana_2ndp("battle_missingmana_1stp"),
+    battle_missingmana_2ndp("battle_missingmana_2ndp"),
     /**
      * "[p1] missed"
      */
