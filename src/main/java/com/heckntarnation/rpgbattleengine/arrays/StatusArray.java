@@ -45,7 +45,7 @@ public class StatusArray implements Serializable {
         arr.put(StatusArrayPosition.Luck, json.get("luck"));
         arr.put(StatusArrayPosition.MATK, json.get("magicAttack"));
         arr.put(StatusArrayPosition.MDEF, json.get("magicDefense"));
-        arr.put(StatusArrayPosition.Weakness, Weakness.fromJSON(json.get("weakness")));
+        arr.put(StatusArrayPosition.Weakness, Weakness.fromJSON((JSONArray) json.get("weakness")));
         switch ((String) json.get("aiLevel")) {
             case "random": {
                 arr.put(StatusArrayPosition.AILevel, AILevel.Random);
