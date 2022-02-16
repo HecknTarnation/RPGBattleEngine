@@ -318,6 +318,7 @@ public class BattleHandler {
                 ConsoleFunc.clear();
             }
         }
+        playGraphic(selectedMove);
         println(String.format(localize(battle_moveused), en.name, selectedMove.name, selectedPlayer.name, finalD));
         ConsoleFunc.wait(2000);
     }
@@ -364,16 +365,7 @@ public class BattleHandler {
             ConsoleFunc.wait(2000);
         }
         ens[target].health -= finalD;
-        Graphic graphic = selectedMove.getGraphic();
-        BattleEngine.playSound(selectedMove.sound, 1);
-        if (graphic != null) {
-            ConsoleFunc.clear();
-            for (String s : graphic.frames) {
-                print(s);
-                ConsoleFunc.wait(graphic.time);
-                ConsoleFunc.clear();
-            }
-        }
+        playGraphic(selectedMove);
         String name = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
         println(String.format(localize(battle_moveused), name, selectedMove.name, ens[target].name, finalD));
         selectedMove.Use();
@@ -412,6 +404,19 @@ public class BattleHandler {
         }
         ConsoleFunc.wait(3000);
         return true;
+    }
+
+    private void playGraphic(Move move) {
+        BattleEngine.playSound(move.sound, 1);
+        Graphic graphic = move.getGraphic();
+        if (graphic != null) {
+            ConsoleFunc.clear();
+            for (String s : graphic.frames) {
+                print(s);
+                ConsoleFunc.wait(graphic.time);
+                ConsoleFunc.clear();
+            }
+        }
     }
 
     private boolean checkWon() {
