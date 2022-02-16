@@ -2,6 +2,8 @@ package com.heckntarnation.rpgbattleengine.cons.Battle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -16,8 +18,26 @@ public class Weakness implements Serializable {
         return weakness.stream().anyMatch(w -> (w.type.equalsIgnoreCase(move.type.type)));
     }
 
-    public static Object fromJSON(Object get) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static ArrayList<Weakness> fromJSONforCharacter(JSONObject file) {
+        JSONObject[] objs = (JSONObject[]) file.get("weakness");
+        ArrayList<Weakness> weakness = new ArrayList<>();
+        for (Object o : objs) {
+            Weakness w = new Weakness((String) file.get("type"), (float) file.get("effectiveness"));
+            w.id = (String) file.get("id");
+            w.namespace = (String) file.get("namespace");
+            weakness.add(w);
+        }
+        return weakness;
+    }
+
+    /**
+     * TODO: this
+     *
+     * @param arr
+     * @return
+     */
+    public static ArrayList<Weakness> fromJSON(JSONArray arr) {
+        return null;
     }
 
     /**
