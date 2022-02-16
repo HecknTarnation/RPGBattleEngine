@@ -1,16 +1,17 @@
 package com.heckntarnation.rpgbattleengine.handlers;
 
-import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
+import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Graphic;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
 import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
-import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
-import com.heckntarnation.rpgbattleengine.cons.Items.Equipment;
-import com.heckntarnation.rpgbattleengine.cons.Items.Item;
+import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
-import com.heckntarnation.rpgbattleengine.BattleEngine;
-import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
+import com.heckntarnation.rpgbattleengine.cons.Items.Drop;
+import com.heckntarnation.rpgbattleengine.cons.Items.Equipment;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.enums.EquipSlot;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import java.io.File;
@@ -29,7 +30,6 @@ import org.json.simple.parser.ParseException;
  *
  * @author Ben
  */
-//TODO: write
 public class JSONHandler {
 
     public final String ITEM = "item";
@@ -172,6 +172,7 @@ public class JSONHandler {
                     }
                     en.drops = dr;
                 }
+                en.weaknesses = Weakness.fromJSONforCharacter((JSONObject) file.get("stats"));
                 obj = en;
                 break;
             }
@@ -228,6 +229,19 @@ public class JSONHandler {
                 obj = plr;
                 break;
             }
+            case STATUS_EFFECT:
+                StatusEffect effect = new StatusEffect((Object[]) file.get("properties"));
+                effect.tickScript = (String) file.get("tickScript");
+                effect.namespace = namespace;
+                effect.id = id;
+                obj = effect;
+                break;
+            case WEAKNESS:
+                Weakness weak = new Weakness((String) file.get("type"), (float) file.get("effectiveness"));
+                weak.namespace = namespace;
+                weak.id = id;
+                obj = weak;
+                break;
         }
         TypedObject tObj = new TypedObject(type, obj);
         tObj.namespace = namespace;
