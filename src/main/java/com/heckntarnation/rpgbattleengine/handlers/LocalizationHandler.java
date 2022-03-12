@@ -101,4 +101,17 @@ public class LocalizationHandler {
         return currentLang.get(key);
     }
 
+    /**
+     * Same as getLocalizedString, but does not print an error.
+     *
+     * @param key
+     * @return
+     */
+    public String getLocalizedString_surpressed(String key) {
+        if (!currentLang.containsKey(key)) {
+            return null;
+        }
+        return currentLang.get(key);
+    }
+
 }
