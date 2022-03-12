@@ -70,6 +70,10 @@ public class Player implements Serializable {
 
     public Player(String name, int baseExp, int expmod) {
         this.name = name;
+        String locName = BattleEngine.localizationHandler.getLocalizedString_surpressed(name);
+        if (locName != null) {
+            this.name = locName;
+        }
         this.baseExp = baseExp;
         this.expMod = expmod;
         this.expToNextLevel = this.baseExp;

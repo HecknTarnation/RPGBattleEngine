@@ -1,5 +1,6 @@
 package com.heckntarnation.rpgbattleengine.cons.Characters;
 
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
 import com.heckntarnation.rpgbattleengine.cons.Battle.StatusEffect;
@@ -42,6 +43,10 @@ public class Enemy implements Serializable, Cloneable {
 
     public Enemy(String name, int health, int expVal) {
         this.name = name;
+        String locName = BattleEngine.localizationHandler.getLocalizedString_surpressed(name);
+        if (locName != null) {
+            this.name = locName;
+        }
         this.health = health;
         this.maxHealth = health;
         this.expVal = expVal;
@@ -49,6 +54,10 @@ public class Enemy implements Serializable, Cloneable {
 
     public Enemy(String name, int expVal) {
         this.name = name;
+        String locName = BattleEngine.localizationHandler.getLocalizedString_surpressed(name);
+        if (locName != null) {
+            this.name = locName;
+        }
         this.expVal = expVal;
     }
 
