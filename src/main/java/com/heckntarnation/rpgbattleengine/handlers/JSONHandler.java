@@ -27,6 +27,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 /**
+ * The handler for loading JSON files. (This class is currently not supported, I
+ * am having trouble finding an effective way to do this.)
  *
  * @author Ben
  */
