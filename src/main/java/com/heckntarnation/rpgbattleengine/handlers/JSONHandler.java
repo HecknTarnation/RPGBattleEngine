@@ -28,7 +28,12 @@ import org.json.simple.parser.ParseException;
 
 /**
  * The handler for loading JSON files. (This class is currently not supported, I
- * am having trouble finding an effective way to do this.)
+ * am having trouble finding an effective way to do this. You are free to
+ * override this handler with a working version in your game/engine)
+ *
+ * TODO: make this work
+ *
+ * TODO: make it use the itemList HashMap in the BattleEngine class.
  *
  * @author Ben
  */
