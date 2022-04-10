@@ -8,7 +8,7 @@ import com.heckntarnation.rpgbattleengine.exceptions.StringAlreadyDefinedExcepti
 import java.util.HashMap;
 
 /**
- * TODO: Make sure I don't use localize(key) + string.
+ * A handler for localization support.
  *
  * @author Ben
  */
