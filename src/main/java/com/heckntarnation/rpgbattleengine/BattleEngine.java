@@ -1,10 +1,12 @@
 package com.heckntarnation.rpgbattleengine;
 
 import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import com.heckntarnation.rpgbattleengine.handlers.*;
 import java.io.File;
 import java.net.URI;
+import java.util.HashMap;
 import org.json.simple.JSONObject;
 
 /**
@@ -15,7 +17,7 @@ import org.json.simple.JSONObject;
  * @author Ben
  */
 public class BattleEngine {
-    
+
     public static BattleHandler battleHandler = new BattleHandler();
     public static InputHandler inputHandler = new InputHandler();
     public static LocalizationHandler localizationHandler = new LocalizationHandler();
@@ -23,9 +25,16 @@ public class BattleEngine {
     public static DeathHandler deathHandler = new DeathHandler();
     public static JSONHandler jsonHandler = new JSONHandler();
     public static LuaHandler luaHandler = new LuaHandler();
-    
+
+    /**
+     * An HashMap that can be used to store items, using an id (it's recommended
+     * to use namespace:item_id for this). You must use this if you want to
+     * interface with HeckScript.
+     */
+    public static HashMap<String, Item> itemList = new HashMap<String, Item>();
+
     private static boolean initialized = false;
-    
+
     public static void init() {
         localizationHandler.init();
         inputHandler.init();
@@ -61,34 +70,34 @@ public class BattleEngine {
         deathHandler = dHandler == null ? deathHandler : dHandler;
         jsonHandler = jHandler == null ? jsonHandler : jHandler;
         luaHandler = luHandler == null ? luaHandler : luHandler;
-        
+
         init();
     }
-    
+
     public static void switchLang(String key) {
         localizationHandler.changLang(key);
     }
-    
+
     public static void startBattle(boolean canRun, Enemy[] en) {
         battleHandler.startBattle(canRun, en);
     }
-    
+
     public static void playSound(URI sound, int repeatTime) {
         soundHandler.playSound(sound, repeatTime);
     }
-    
+
     public static Object loadFromJSON(File file) throws ObjectAlreadyLoadedException {
         return jsonHandler.fromJSON(file);
     }
-    
+
     public static Object[] loadFromJSON(File[] files) throws ObjectAlreadyLoadedException {
         return jsonHandler.fromJSON(files);
     }
-    
+
     public static Object loadFromJSON(JSONObject obj) throws ObjectAlreadyLoadedException {
         return jsonHandler.fromJSON(obj);
     }
-    
+
     public static JSONObject saveToJSON(Object obj) {
         return jsonHandler.toJson(obj);
     }
