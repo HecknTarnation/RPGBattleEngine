@@ -66,6 +66,7 @@ public class InputHandler implements NativeKeyListener {
         menu = temp.toArray(new String[temp.size()]);
         System.out.println(String.join(",", menu) + " | " + menu.length);
         boolean run = true;
+        menuIndex = new CycleValue(0, 0, menu.length);
         while (run) {
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
