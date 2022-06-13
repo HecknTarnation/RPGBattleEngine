@@ -148,6 +148,7 @@ public class BattleHandler {
             System.out.println("[---" + Colors.RED + Colors.BLACK_BACKGROUND + localize(battle_gameover) + Colors.reset() + "---]");
             ConsoleFunc.wait(5000);
             BattleEngine.deathHandler.OnDeath();
+            return;
         } else if (!won) {
             return;
         }
@@ -166,8 +167,10 @@ public class BattleHandler {
             }
         }
         Vars.player.levelUp(expVal);
-        for (Companion c : Vars.companions) {
-            c.levelUp(expVal);
+        if (Vars.companions != null) {
+            for (Companion c : Vars.companions) {
+                c.levelUp(expVal);
+            }
         }
         enArchive = null;
         expVal = 0;
@@ -187,9 +190,11 @@ public class BattleHandler {
         if (player.health > 0) {
             aliveArr.add(player);
         }
-        for (int i = 0; i < comps.length; i++) {
-            if (comps[i].health > 0) {
-                aliveArr.add(comps[i]);
+        if (comps != null) {
+            for (int i = 0; i < comps.length; i++) {
+                if (comps[i].health > 0) {
+                    aliveArr.add(comps[i]);
+                }
             }
         }
         Player[] t = new Player[aliveArr.size()];
@@ -436,6 +441,9 @@ public class BattleHandler {
     }
 
     private boolean checkDie() {
+        if (comps == null) {
+            return player.health <= 0;
+        }
         Player[] t = new Player[comps.length + 1];
         t[0] = player;
         System.arraycopy(comps, 0, t, 1, comps.length);
