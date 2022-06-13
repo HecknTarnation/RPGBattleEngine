@@ -1,6 +1,7 @@
 com\heckntarnation\rpgbattleengine\cons\Characters\Enemy.class
 com\heckntarnation\rpgbattleengine\handlers\BattleHandler.class
 com\heckntarnation\rpgbattleengine\arrays\StatusArray.class
+example\basicbattle\Main.class
 com\heckntarnation\rpgbattleengine\handlers\JSONHandler$TypedObject.class
 com\heckntarnation\rpgbattleengine\enums\EquipSlot.class
 com\heckntarnation\rpgbattleengine\enums\StatusArrayPosition.class
@@ -27,6 +28,7 @@ com\heckntarnation\rpgbattleengine\cons\Battle\StatusEffect.class
 com\heckntarnation\rpgbattleengine\Vars.class
 com\heckntarnation\rpgbattleengine\cons\Characters\Companion.class
 com\heckntarnation\rpgbattleengine\Colors.class
+example\basicbattle\MyPlayer.class
 com\heckntarnation\rpgbattleengine\handlers\SoundHandler.class
 com\heckntarnation\rpgbattleengine\Vars$ControlMapping.class
 com\heckntarnation\rpgbattleengine\Vars$1.class
@@ -43,11 +45,14 @@ com\heckntarnation\rpgbattleengine\lua\item_management$delete.class
 com\heckntarnation\rpgbattleengine\cons\Battle\Move.class
 com\heckntarnation\rpgbattleengine\enums\LangKeys.class
 com\heckntarnation\rpgbattleengine\lua\localization.class
+example\basicbattle\MyEnemy.class
 com\heckntarnation\rpgbattleengine\ConsoleFunc.class
 com\heckntarnation\rpgbattleengine\handlers\JSONHandler$1.class
 com\heckntarnation\rpgbattleengine\handlers\DeathHandler.class
 com\heckntarnation\rpgbattleengine\exceptions\StringAlreadyDefinedException.class
 com\heckntarnation\rpgbattleengine\BattleEngine.class
 com\heckntarnation\rpgbattleengine\MathFunc.class
+example\basicbattle\MyDeathHandler.class
 com\heckntarnation\rpgbattleengine\cons\Characters\Player.class
 com\heckntarnation\rpgbattleengine\lua\json.class
+example\examples.class
