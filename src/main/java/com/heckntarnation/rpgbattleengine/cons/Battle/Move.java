@@ -35,6 +35,7 @@ public class Move implements Serializable {
 
     public Move(String name) {
         this.name = name;
+        this.accuracy = 1.0f;
     }
 
     public Move setDamage(int damage, int mDamage) {
