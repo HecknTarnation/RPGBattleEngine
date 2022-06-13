@@ -36,6 +36,10 @@ public class BattleEngine {
     private static boolean initialized = false;
 
     public static void init() {
+        //Uninitilizes the engine before reinitilizing.
+        if (initialized) {
+            end();
+        }
         localizationHandler.init();
         inputHandler.init();
         luaHandler.init();
