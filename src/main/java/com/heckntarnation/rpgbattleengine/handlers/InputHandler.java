@@ -64,7 +64,6 @@ public class InputHandler implements NativeKeyListener {
             }
         }
         menu = temp.toArray(new String[temp.size()]);
-        System.out.println(String.join(",", menu) + " | " + menu.length);
         boolean run = true;
         menuIndex = new CycleValue(0, 0, menu.length);
         while (run) {
@@ -113,7 +112,7 @@ public class InputHandler implements NativeKeyListener {
         } catch (NativeHookException ex) {
             Logger.getLogger(InputHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        scan.close();
+        //scan.close();
         scan = null;
     }
 
