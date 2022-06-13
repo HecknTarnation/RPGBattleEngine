@@ -10,3 +10,5 @@ com.heckntarnation.rpgbattleengine.exceptions
 com.heckntarnation.rpgbattleengine.handlers
 com.heckntarnation.rpgbattleengine.lua
 com.heckntarnation.rpgbattleengine.statusEffects
+example
+example.basicbattle
