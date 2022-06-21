@@ -11,7 +11,7 @@ import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
  *
  * @author Ben
  */
-public class Main {
+public class BasicBattleMain {
 
     /*
     There are a few steps that must be taken before you can begin a battle.

@@ -13,12 +13,18 @@ public class examples {
         System.out.println("Select example to run.");
         String[] menu = new String[]{
             "Basic Battle",
-            "empty"
+            "Configs"
         };
         int index = BattleEngine.inputHandler.doMenu(menu, "Select example to run.", true);
         switch (index) {
             case 0: {
-                example.basicbattle.Main.main(null);
+                example.basicbattle.BasicBattleMain.main(args);
+            }
+            case 1: {
+                example.configs.ConfigsMain.main(args);
+            }
+            case 2: {
+                example.localization.LocalizationMain.main(args);
             }
         }
 
