@@ -12,3 +12,5 @@ com.heckntarnation.rpgbattleengine.lua
 com.heckntarnation.rpgbattleengine.statusEffects
 example
 example.basicbattle
+example.configs
+example.localization
