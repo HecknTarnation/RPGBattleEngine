@@ -1,8 +1,8 @@
 package com.heckntarnation.rpgbattleengine;
 
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Companion;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
-import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import java.util.HashMap;
 
 /**
@@ -42,6 +42,12 @@ public class Vars {
      * If this is true, no audio should play.
      */
     public static boolean disableAudio = false;
+
+    /**
+     * Maximum Threads playing at once (if this is reached, and a new one is
+     * created, it will destroy the oldest one (the first one in the list).
+     */
+    public static int maxThreads = 3;
 
     public static void setPlayer(Player p) {
         player = p;
