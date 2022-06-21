@@ -64,7 +64,7 @@ jobs:
     #    uses a compiled language
 
     - run: |
-       mvn install
+       mvn install:copy-dependencies
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
