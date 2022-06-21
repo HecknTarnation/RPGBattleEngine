@@ -20,12 +20,6 @@ public class SoundHandler {
      */
     public ArrayList<SoundThread> threads;
 
-    /**
-     * Maximum Threads playing at once (if this is reached, and a new one is
-     * created, it will destroy the oldest one (the first one in the list).
-     */
-    public int maxThreads = 3;
-
     public void init() {
         threads = new ArrayList<>();
     }
@@ -38,7 +32,7 @@ public class SoundHandler {
      * @return
      */
     public SoundHandler setMaxThreads(int max) {
-        this.maxThreads = max;
+        Vars.maxThreads = max;
         return this;
     }
 
@@ -63,7 +57,7 @@ public class SoundHandler {
         }
         try {
             SoundThread t = new SoundThread(file, repeatTime);
-            if (threads.size() > maxThreads) {
+            if (threads.size() > Vars.maxThreads) {
                 threads.get(0).end();
             }
             t.play();
