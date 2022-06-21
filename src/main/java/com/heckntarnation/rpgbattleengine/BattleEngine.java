@@ -51,6 +51,7 @@ public class BattleEngine {
      */
     public static void end() {
         inputHandler.end();
+        initialized = false;
         System.gc();
     }
 
