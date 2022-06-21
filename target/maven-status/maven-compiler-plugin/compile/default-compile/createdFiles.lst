@@ -1,7 +1,6 @@
 com\heckntarnation\rpgbattleengine\cons\Characters\Enemy.class
 com\heckntarnation\rpgbattleengine\handlers\BattleHandler.class
 com\heckntarnation\rpgbattleengine\arrays\StatusArray.class
-example\basicbattle\Main.class
 com\heckntarnation\rpgbattleengine\handlers\JSONHandler$TypedObject.class
 com\heckntarnation\rpgbattleengine\enums\EquipSlot.class
 com\heckntarnation\rpgbattleengine\enums\StatusArrayPosition.class
@@ -12,6 +11,7 @@ com\heckntarnation\rpgbattleengine\lua\character_lookup$lookupID.class
 com\heckntarnation\rpgbattleengine\lua\localization$add_string.class
 com\heckntarnation\rpgbattleengine\cons\Battle\Weakness.class
 com\heckntarnation\rpgbattleengine\handlers\SoundHandler$SoundThread.class
+example\configs\ConfigsMain.class
 com\heckntarnation\rpgbattleengine\lua\character_lookup.class
 com\heckntarnation\rpgbattleengine\cons\Items\Equipment.class
 com\heckntarnation\rpgbattleengine\cons\Items\Item.class
@@ -26,7 +26,9 @@ com\heckntarnation\rpgbattleengine\lua\localization$get_string.class
 com\heckntarnation\rpgbattleengine\cons\Battle\Graphic.class
 com\heckntarnation\rpgbattleengine\cons\Battle\StatusEffect.class
 com\heckntarnation\rpgbattleengine\Vars.class
+example\localization\LocalizationMain.class
 com\heckntarnation\rpgbattleengine\cons\Characters\Companion.class
+example\basicbattle\BasicBattleMain.class
 com\heckntarnation\rpgbattleengine\Colors.class
 example\basicbattle\MyPlayer.class
 com\heckntarnation\rpgbattleengine\handlers\SoundHandler.class
