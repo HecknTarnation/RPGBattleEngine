@@ -1,6 +1,7 @@
 package example.configs;
 
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.Vars;
 import java.util.HashMap;
@@ -13,8 +14,9 @@ public class ConfigsMain {
 
     //This example will show you the different settings you can change.
     public static void main(String[] args) {
-        //Many of the engine's settings are stored in the 'Vars' class which you can freely edit at any time.
+        BattleEngine.init();
 
+        //Many of the engine's settings are stored in the 'Vars' class which you can freely edit at any time.
         //Controls
         //You can edit the keyboard controls by setting 'Vars.Controls'.
         HashMap<Vars.ControlMapping, Integer> controls = new HashMap<>();
