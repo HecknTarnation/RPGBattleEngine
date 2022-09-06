@@ -55,6 +55,7 @@ com\heckntarnation\rpgbattleengine\exceptions\StringAlreadyDefinedException.clas
 com\heckntarnation\rpgbattleengine\BattleEngine.class
 com\heckntarnation\rpgbattleengine\MathFunc.class
 example\basicbattle\MyDeathHandler.class
+example\sounds\SoundsMain.class
 com\heckntarnation\rpgbattleengine\cons\Characters\Player.class
 com\heckntarnation\rpgbattleengine\lua\json.class
 example\examples.class
