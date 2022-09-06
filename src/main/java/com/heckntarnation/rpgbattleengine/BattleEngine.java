@@ -5,6 +5,7 @@ import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.exceptions.ObjectAlreadyLoadedException;
 import com.heckntarnation.rpgbattleengine.handlers.*;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import org.json.simple.JSONObject;
@@ -43,6 +44,7 @@ public class BattleEngine {
         localizationHandler.init();
         inputHandler.init();
         luaHandler.init();
+        soundHandler.init();
         initialized = true;
     }
 
@@ -88,6 +90,14 @@ public class BattleEngine {
     }
 
     public static void playSound(URI sound, int repeatTime) {
+        soundHandler.playSound(sound, repeatTime);
+    }
+
+    public static void playSound(File sound, int repeatTime) {
+        soundHandler.playSound(sound, repeatTime);
+    }
+
+    public static void playSound(InputStream sound, int repeatTime) {
         soundHandler.playSound(sound, repeatTime);
     }
 
