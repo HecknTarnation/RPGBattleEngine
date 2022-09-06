@@ -3,6 +3,7 @@ package com.heckntarnation.rpgbattleengine.handlers;
 import com.heckntarnation.rpgbattleengine.Vars;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -19,7 +20,7 @@ public class SoundHandler {
      * An array of all sound threads
      */
     public ArrayList<SoundThread> threads;
-
+    
     public void init() {
         threads = new ArrayList<>();
     }
@@ -50,7 +51,23 @@ public class SoundHandler {
         }
         playSound(new File(uri.toString()), repeatTime);
     }
-
+    
+    public void playSound(InputStream stream, int repeatTime) {
+        if (stream == null) {
+            return;
+        }
+        try {
+            SoundThread t = new SoundThread(stream, repeatTime);
+            if (threads.size() > Vars.maxThreads) {
+                threads.get(0).end();
+            }
+            t.play();
+            threads.add(t);
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+            Logger.getLogger(SoundHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void playSound(File file, int repeatTime) {
         if (file == null) {
             return;
@@ -120,37 +137,44 @@ public class SoundHandler {
     public void unmute(int threadIndex) {
         threads.get(threadIndex).unmute();
     }
-
+    
     public class SoundThread extends Thread {
-
+        
         public File file;
         public int repeatTime;
         public boolean muted;
-
+        
         private Clip audio;
         private AudioInputStream input;
-
+        
         public SoundThread(File file, int repeatTime) throws UnsupportedAudioFileException, IOException {
             super("SoundThread");
             this.input = AudioSystem.getAudioInputStream(file);
             this.file = file;
             this.repeatTime = repeatTime;
         }
-
+        
+        public SoundThread(InputStream stream, int repeatTime) throws UnsupportedAudioFileException, IOException {
+            super("SoundThread");
+            this.input = AudioSystem.getAudioInputStream(stream);
+            this.repeatTime = repeatTime;
+        }
+        
         @Override
         public void run() {
             if (Vars.disableAudio) {
                 return;
             }
-
-            input = null;
+            
             try {
-                input = AudioSystem.getAudioInputStream(file);
+                if (input == null) {
+                    input = AudioSystem.getAudioInputStream(file);
+                }
             } catch (UnsupportedAudioFileException | IOException e) {
             }
             AudioFormat format = input.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format);
-
+            
             audio = null;
             try {
                 audio = (Clip) AudioSystem.getLine(info);
@@ -160,7 +184,7 @@ public class SoundHandler {
                 e.printStackTrace();
                 return;
             }
-
+            
             try {
                 audio.open(input);
             } catch (LineUnavailableException | IOException e) {
@@ -175,24 +199,24 @@ public class SoundHandler {
                 }
             }
         }
-
+        
         public void play() throws LineUnavailableException, IOException {
             this.start();
         }
-
+        
         public void end() {
             this.interrupt();
         }
-
+        
         public void mute() {
             this.muted = true;
             audio.stop();
         }
-
+        
         public void unmute() {
             this.muted = false;
             audio.start();
         }
-
+        
     }
 }
