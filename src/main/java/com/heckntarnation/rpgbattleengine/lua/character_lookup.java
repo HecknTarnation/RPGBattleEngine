@@ -66,7 +66,7 @@ public class character_lookup extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue lv) {
-            //TODO: this
+            //TO\DO: this
             return LuaValue.valueOf(lookupID(lv.checkint()));
         }
 
