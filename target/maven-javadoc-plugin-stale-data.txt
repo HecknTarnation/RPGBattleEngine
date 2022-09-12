@@ -1,38 +1,131 @@
-cmd.exe
-/X
-/C
-""C:\Program Files\Eclipse Foundation\jdk-8.0.302.8-hotspot\jre\..\bin\javadoc.exe" @options @argfile"
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-frame.html = 1662496100872
+@options
+@packages
+@argfile
+-classpath
+'C:/Users/Ben/.m2/repository/com/github/kwhat/jnativehook/2.2.0/jnativehook-2.2.0.jar;C:/Users/Ben/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar;C:/Users/Ben/.m2/repository/junit/junit/4.10/junit-4.10.jar;C:/Users/Ben/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar;C:/Users/Ben/.m2/repository/org/luaj/luaj-jse/3.0.1/luaj-jse-3.0.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'1.8'
+-sourcepath
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Ben/Documents/GitHub/RPGEngine/docs/1.0'
+-docencoding
+'UTF-8'
+-doctitle
+'rpgbattleengine 1.0 API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' 'C:/Users/Ben/Documents/GitHub/RPGEngine/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'rpgbattleengine 1.0 API'
+com.heckntarnation.rpgbattleengine.arrays
+com.heckntarnation.rpgbattleengine
+com.heckntarnation.rpgbattleengine.cons.Battle
+com.heckntarnation.rpgbattleengine.cons.Characters
+com.heckntarnation.rpgbattleengine.cons.CycleValues
+com.heckntarnation.rpgbattleengine.cons.Items
+com.heckntarnation.rpgbattleengine.dev
+com.heckntarnation.rpgbattleengine.enums
+com.heckntarnation.rpgbattleengine.exceptions
+com.heckntarnation.rpgbattleengine.handlers
+com.heckntarnation.rpgbattleengine.lua
+com.heckntarnation.rpgbattleengine.statusEffects
+example.basicbattle
+example.configs
+example
+example.localization
+example.sounds
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/arrays/StatusArray.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/BattleEngine.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/Colors.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Battle/Graphic.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Battle/Move.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Battle/StatusEffect.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Battle/Weakness.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Characters/Companion.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Characters/Enemy.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Characters/Player.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/CycleValues/CycleValue.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/CycleValues/CycleValueLong.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Items/Drop.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Items/Equipment.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/cons/Items/Item.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/ConsoleFunc.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/dev/Macros.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/enums/AILevel.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/enums/EquipSlot.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/enums/LangKeys.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/enums/StatusArrayPosition.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/exceptions/IncorrectObjectRecieved.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/exceptions/ObjectAlreadyLoadedException.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/exceptions/StringAlreadyDefinedException.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/BattleHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/DeathHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/InputHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/JSONHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/LocalizationHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/LuaHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/handlers/SoundHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/lua/battle_handler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/lua/character_lookup.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/lua/item_management.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/lua/json.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/lua/localization.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/MathFunc.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/statusEffects/Posion.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/com/heckntarnation/rpgbattleengine/Vars.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/basicbattle/BasicBattleMain.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/basicbattle/MyDeathHandler.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/basicbattle/MyEnemy.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/basicbattle/MyPlayer.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/configs/ConfigsMain.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/examples.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/localization/LocalizationMain.java'
+'C:/Users/Ben/Documents/GitHub/RPGEngine/src/main/java/example/sounds/SoundsMain.java'
+C:\Users\Ben\.m2\repository\com\github\kwhat\jnativehook\2.2.0\jnativehook-2.2.0.jar = 1632797962110
+C:\Users\Ben\.m2\repository\com\googlecode\json-simple\json-simple\1.1.1\json-simple-1.1.1.jar = 1560913846441
+C:\Users\Ben\.m2\repository\junit\junit\4.10\junit-4.10.jar = 1560913846550
+C:\Users\Ben\.m2\repository\org\hamcrest\hamcrest-core\1.1\hamcrest-core-1.1.jar = 1546277042943
+C:\Users\Ben\.m2\repository\org\luaj\luaj-jse\3.0.1\luaj-jse-3.0.1.jar = 1637984108098
+C:\Users\Ben\Documents\GitHub\RPGEngine\src\main\java = 1655082573295
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-frame.html = 1663016762889
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-index.html = 1634691155905
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-noframe.html = 1662496100874
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses-noframe.html = 1663016762896
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allclasses.html = 1634075655665
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\allpackages-index.html = 1634691155910
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\argfile = 1662496096177
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\constant-values.html = 1662496100186
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\deprecated-list.html = 1662496100869
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\constant-values.html = 1663016761998
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\deprecated-list.html = 1663016762880
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\element-list = 1634691155374
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\help-doc.html = 1662496100881
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index-all.html = 1662496100864
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index.html = 1662496100876
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\help-doc.html = 1663016762908
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index-all.html = 1663016762874
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\index.html = 1663016762898
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\jquery-ui.overrides.css = 1634691156199
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\localization.html = 1637994758462
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\member-search-index.js = 1634691155924
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\member-search-index.zip = 1634075655608
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\module-search-index.js = 1634691155915
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\options = 1662496096175
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-frame.html = 1662496099909
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-summary.html = 1662496100879
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-tree.html = 1662496100647
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-frame.html = 1663016761669
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-summary.html = 1663016762904
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\overview-tree.html = 1663016762786
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-frame.html = 1637994759852
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-list = 1662496099901
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-list = 1663016761630
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-search-index.js = 1634691155917
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-search-index.zip = 1634075655586
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-summary.html = 1637994759873
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-tree.html = 1637994759878
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\package-use.html = 1637994760495
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\script.js = 1662496100884
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\script.js = 1663016762913
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\search.js = 1634691156131
-C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\serialized-form.html = 1662496100259
+C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\serialized-form.html = 1663016762068
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\stylesheet.css = 1634691156124
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\tag-search-index.js = 1634691155927
 C:\Users\Ben\Documents\GitHub\RPGEngine\docs\1.0\type-search-index.js = 1634691155919
