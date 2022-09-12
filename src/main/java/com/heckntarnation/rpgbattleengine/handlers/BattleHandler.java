@@ -359,7 +359,7 @@ public class BattleHandler {
         int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
                 + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
         if (Weakness.isWeak(ens[target].weaknesses, selectedMove)) {
-            finalD *= selectedMove.type.effectiveness;
+            finalD = (int) (finalD * selectedMove.type.effectiveness);
         }
         int failAmount = 100 - currentCharacter.luck + 1;
         int[] chances = new int[]{currentCharacter.luck + 1, failAmount};

@@ -60,7 +60,6 @@ public class MathFunc {
         int index = randomInt(0, t.size() - 1);
         Object result = t.get(index);
         t.clear();
-        t = null;
         System.gc();
         return result;
     }
@@ -110,7 +109,7 @@ public class MathFunc {
     public static int statIncrease(int oldStat, int levelNeeded, double growthRate) {
         int newStat = oldStat;
         for (int i = 0; i < levelNeeded; i++) {
-            newStat += randomInt(1, 2) * growthRate;
+            newStat += (int) (randomInt(1, 2) * growthRate);
         }
         return newStat;
     }
