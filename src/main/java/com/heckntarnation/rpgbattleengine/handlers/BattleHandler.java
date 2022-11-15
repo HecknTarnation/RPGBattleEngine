@@ -16,10 +16,7 @@ import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import static com.heckntarnation.rpgbattleengine.dev.Macros.*;
 import static com.heckntarnation.rpgbattleengine.enums.LangKeys.*;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
-import com.heckntarnation.rpgbattleengine.exceptions.IncorrectObjectRecieved;
-import com.heckntarnation.rpgbattleengine.handlers.JSONHandler.TypedObject;
 import java.util.ArrayList;
-import org.luaj.vm2.LuaTable;
 
 /**
  *
@@ -36,18 +33,6 @@ public class BattleHandler {
 
     private Player currentCharacter;
     private String currentStatus;
-
-    public void startBattle(boolean canRun, LuaTable en) throws IncorrectObjectRecieved {
-        Enemy[] es = new Enemy[en.length()];
-        for (int i = 0; i < es.length; i++) {
-            TypedObject obj = BattleEngine.jsonHandler.getLoadedObjects().get(en.get(i).checkstring().toString());
-            if (!obj.type.equalsIgnoreCase(BattleEngine.jsonHandler.ENEMY)) {
-                throw new IncorrectObjectRecieved("Expected enemy, got " + obj.type);
-            }
-            es[i] = (Enemy) obj.object;
-        }
-        startBattle(canRun, es);
-    }
 
     public void startBattle(boolean canRun, Enemy... en) {
         this.canRun = canRun;
@@ -98,12 +83,15 @@ public class BattleHandler {
             if (currentCharacter == null) {
                 EnemyTurn();
                 player.statusEffectTick();
-                for (Companion comp : comps) {
-                    comp.statusEffectTick();
+                if (comps != null) {
+                    for (Companion comp : comps) {
+                        comp.statusEffectTick();
+                    }
                 }
                 for (Enemy en : ens) {
                     en.statusEffectTick();
                 }
+                currentIndex = 0;
                 continue;
             }
 
@@ -114,7 +102,7 @@ public class BattleHandler {
             if (!canRun) {
                 menu[3] = null;
             }
-            int selection = BattleEngine.inputHandler.doMenu(menu, str, true);
+            int selection = BattleEngine.inputHandler.doMenu(menu, str, true, 0);
 
             switch (selection) {
                 case 0:
@@ -184,7 +172,7 @@ public class BattleHandler {
     }
 
     private void EnemyTurnSub(Enemy en) {
-        Move[] moves = en.moves;
+        ArrayList<Move> moves = en.moves;
         Move currentHeighest = new Move("").setDamage(0, 0);
         ArrayList<Player> aliveArr = new ArrayList<>();
         if (player.health > 0) {
@@ -208,30 +196,30 @@ public class BattleHandler {
         int selection = 0;
         switch (en.aiLevel) {
             case Random:
-                int index = MathFunc.randomInt(0, moves.length - 1);
-                index = index > moves.length - 1 ? moves.length - 1 : index;
+                int index = MathFunc.randomInt(0, moves.size() - 1);
+                index = index > moves.size() - 1 ? moves.size() - 1 : index;
                 selection = index > 0 ? index : 0;
                 break;
             case Damage:
-                for (int i = 0; i < moves.length; i++) {
-                    if (moves[i].damage > currentHeighest.damage) {
-                        currentHeighest = moves[i];
+                for (int i = 0; i < moves.size(); i++) {
+                    if (moves.get(i).damage > currentHeighest.damage) {
+                        currentHeighest = moves.get(i);
                         selection = i;
                     }
                 }
                 break;
             case DamageMagic:
-                for (int i = 0; i < moves.length; i++) {
-                    if (moves[i].mDamage > currentHeighest.mDamage) {
-                        currentHeighest = moves[i];
+                for (int i = 0; i < moves.size(); i++) {
+                    if (moves.get(i).mDamage > currentHeighest.mDamage) {
+                        currentHeighest = moves.get(i);
                         selection = i;
                     }
                 }
                 break;
             case Weakness:
-                for (int i = 0; i < moves.length; i++) {
+                for (int i = 0; i < moves.size(); i++) {
                     for (Weakness weak : weakness) {
-                        if (moves[i].type.type.equalsIgnoreCase(weak.type)) {
+                        if (moves.get(i).type.type.equalsIgnoreCase(weak.type)) {
                             selection = i;
                             break;
                         }
@@ -241,14 +229,14 @@ public class BattleHandler {
             case WeaknessDamage:
                 int currentDamage = -1;
                 int currentWeakness = -1;
-                for (int i = 0; i < moves.length; i++) {
+                for (int i = 0; i < moves.size(); i++) {
                     for (Weakness weak : weakness) {
-                        if (weak.type.equalsIgnoreCase(moves[i].type.type)) {
+                        if (weak.type.equalsIgnoreCase(moves.get(i).type.type)) {
                             currentWeakness = i;
                         }
-                        if (moves[i].damage > currentHeighest.damage) {
+                        if (moves.get(i).damage > currentHeighest.damage) {
                             currentDamage = i;
-                            currentHeighest = moves[i];
+                            currentHeighest = moves.get(i);
                         }
                     }
                 }
@@ -268,14 +256,14 @@ public class BattleHandler {
             case WeaknessDamageMagic:
                 currentDamage = -1;
                 currentWeakness = -1;
-                for (int i = 0; i < moves.length; i++) {
+                for (int i = 0; i < moves.size(); i++) {
                     for (Weakness weak : weakness) {
-                        if (weak.type.equalsIgnoreCase(moves[i].type.type)) {
+                        if (weak.type.equalsIgnoreCase(moves.get(i).type.type)) {
                             currentWeakness = i;
                         }
-                        if (moves[i].mDamage > currentHeighest.mDamage) {
+                        if (moves.get(i).mDamage > currentHeighest.mDamage) {
                             currentDamage = i;
-                            currentHeighest = moves[i];
+                            currentHeighest = moves.get(i);
                         }
                     }
                 }
@@ -292,7 +280,7 @@ public class BattleHandler {
                 }
                 break;
         }
-        Move selectedMove = moves[selection];
+        Move selectedMove = moves.get(selection);
         int d = selectedMove.damage;
         int mD = selectedMove.mDamage;
         if (!MathFunc.checkHit(selectedMove, selectedPlayer.evasion)) {
@@ -331,7 +319,7 @@ public class BattleHandler {
     private void Attack() {
         Move[] moves = currentCharacter.getMoves();
         String[] mNames = Move.arrToStr(moves);
-        int selection = BattleEngine.inputHandler.doMenu(mNames, currentStatus, true);
+        int selection = BattleEngine.inputHandler.doMenu(mNames, currentStatus, true, 0);
         Move selectedMove = moves[selection];
         int d = selectedMove.damage + currentCharacter.attack;
         int mD = selectedMove.mDamage + currentCharacter.mAttack;
@@ -344,36 +332,54 @@ public class BattleHandler {
         }
         currentCharacter.mana -= cost;
         int target;
-        String[] enNames = new String[ens.length];
-        for (int i = 0; i < ens.length; i++) {
-            enNames[i] = ens[i].name;
-        }
-        target = BattleEngine.inputHandler.doMenu(enNames, currentStatus, false);
+        int finalD = 0;
+        if (!selectedMove.targetAlly) {
+            String[] enNames = new String[ens.length];
+            for (int i = 0; i < ens.length; i++) {
+                enNames[i] = ens[i].name;
+            }
+            target = BattleEngine.inputHandler.doMenu(enNames, currentStatus, false, 0);
 
-        if (!MathFunc.checkHit(selectedMove, ens[target].evasion)) {
-            println(String.format(localize(battle_missed), currentCharacter.name));
-            ConsoleFunc.wait(2000);
-            return;
+            if (!MathFunc.checkHit(selectedMove, ens[target].evasion)) {
+                println(String.format(localize(battle_missed), currentCharacter.name));
+                ConsoleFunc.wait(2000);
+                return;
+            }
+
+            finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
+                    + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
+            if (Weakness.isWeak(ens[target].weaknesses, selectedMove)) {
+                finalD = (int) (finalD * selectedMove.type.effectiveness);
+            }
+            int failAmount = 100 - currentCharacter.luck + 1;
+            int[] chances = new int[]{currentCharacter.luck + 1, failAmount};
+            Object[] obj = new Object[]{true, false};
+            if ((boolean) MathFunc.hatpull(chances, obj)) {
+                println(localize(battle_critical));
+                finalD += MathFunc.getPercentageOf(currentCharacter.critDMG, finalD);
+                ConsoleFunc.wait(2000);
+            }
+            ens[target].health -= finalD;
+            playGraphic(selectedMove);
+            String name = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
+            println(String.format(localize(battle_moveused), name, selectedMove.name, ens[target].name, finalD));
+            selectedMove.Use(ens[target]);
+        } else {
+            String[] allyNames = new String[comps.length + 1];
+            allyNames[0] = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
+            for (int i = 1; i < comps.length; i++) {
+                allyNames[i] = comps[i].name;
+            }
+            target = BattleEngine.inputHandler.doMenu(allyNames, currentStatus, false, 0);
+            String name = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
+            println(String.format(localize(battle_moveusedAlly), name, selectedMove.name, ens[target].name, finalD));
+            if (target == 0) {
+                selectedMove.Use(player);
+            } else {
+                selectedMove.Use(comps[target]);
+            }
         }
 
-        int finalD = ((d - ens[target].defense) >= 0 ? (d - ens[target].defense) : 0)
-                + ((mD - ens[target].mDefense) >= 0 ? (mD - ens[target].mDefense) : 0);
-        if (Weakness.isWeak(ens[target].weaknesses, selectedMove)) {
-            finalD = (int) (finalD * selectedMove.type.effectiveness);
-        }
-        int failAmount = 100 - currentCharacter.luck + 1;
-        int[] chances = new int[]{currentCharacter.luck + 1, failAmount};
-        Object[] obj = new Object[]{true, false};
-        if ((boolean) MathFunc.hatpull(chances, obj)) {
-            println(localize(battle_critical));
-            finalD += MathFunc.getPercentageOf(currentCharacter.critDMG, finalD);
-            ConsoleFunc.wait(2000);
-        }
-        ens[target].health -= finalD;
-        playGraphic(selectedMove);
-        String name = currentCharacter.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) ? "You" : currentCharacter.name;
-        println(String.format(localize(battle_moveused), name, selectedMove.name, ens[target].name, finalD));
-        selectedMove.Use();
         ConsoleFunc.wait(2000);
     }
 
@@ -385,7 +391,7 @@ public class BattleHandler {
             return;
         }
         String[] m = player.invToStringArr();
-        int index = BattleEngine.inputHandler.doMenu(m, currentStatus, true);
+        int index = BattleEngine.inputHandler.doMenu(m, currentStatus, true, 0);
         Item selectedItem = player.inv.get(index);
         selectedItem.Use();
         player.inv.remove(selectedItem);
