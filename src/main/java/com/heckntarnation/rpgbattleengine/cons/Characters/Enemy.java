@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class Enemy implements Serializable, Cloneable {
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
@@ -35,7 +35,7 @@ public class Enemy implements Serializable, Cloneable {
      */
     public float critDMG = 0.5f;
     public int expVal;
-    public Move[] moves;
+    public ArrayList<Move> moves;
     public AILevel aiLevel;
     public ArrayList<Weakness> weaknesses = new ArrayList<>();
     public ArrayList<StatusEffect> statusEffects = new ArrayList<>();
@@ -50,6 +50,7 @@ public class Enemy implements Serializable, Cloneable {
         this.health = health;
         this.maxHealth = health;
         this.expVal = expVal;
+        this.moves = new ArrayList<>();
     }
 
     public Enemy(String name, int expVal) {
@@ -101,8 +102,25 @@ public class Enemy implements Serializable, Cloneable {
         return this;
     }
 
-    public Enemy setMoves(Move[] moves) {
+    /**
+     * Sets the character's move list to the one given.
+     *
+     * @param moves
+     * @return
+     */
+    public Enemy setMoves(ArrayList<Move> moves) {
         this.moves = moves;
+        return this;
+    }
+
+    /**
+     * Adds a move to the character's move list.
+     *
+     * @param move
+     * @return
+     */
+    public Enemy addMove(Move move) {
+        this.moves.add(move);
         return this;
     }
 
@@ -123,6 +141,20 @@ public class Enemy implements Serializable, Cloneable {
         return null;
     }
 
+    /**
+     * Adds a status effect to this character.
+     *
+     * @param effect
+     */
+    public void addStatusEffect(StatusEffect effect) {
+        effect.setCharacter(this);
+        statusEffects.add(effect);
+    }
+
+    /**
+     * Ticks all of the characters status effects. This is called at the end of
+     * every turn.
+     */
     public void statusEffectTick() {
         if (statusEffects == null || statusEffects.isEmpty()) {
             return;
