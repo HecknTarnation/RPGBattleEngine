@@ -4,12 +4,13 @@ import com.github.kwhat.jnativehook.*;
 import com.github.kwhat.jnativehook.dispatcher.VoidDispatchService;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
+import com.heckntarnation.rpgbattleengine.BattleEngine;
 import com.heckntarnation.rpgbattleengine.Colors;
 import com.heckntarnation.rpgbattleengine.ConsoleFunc;
 import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.Vars.ControlMapping;
 import com.heckntarnation.rpgbattleengine.cons.CycleValues.CycleValue;
-import java.io.IOException;
+import com.heckntarnation.rpgbattleengine.enums.LangKeys;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -29,13 +30,14 @@ public class InputHandler implements NativeKeyListener {
     private CycleValue menuIndex;
     public Scanner scan;
 
-    //-1 = None, 0 = Menu, 1 = Text Input
+    //-1 = None, 0 = Menu, 1 = Text Input, 2 = wait for enter
     private byte currentMode = -1;
     private boolean enterPressed = false;
 
     public void init() {
         //TODO: This prevents any keyboard input (system wide) from working if an error occurs while mode == 0. Closing the application fixes this.
-        //Input is also disabled system wide while in mode 0 (even while command prompt isn't in focus).
+        //Input is also disabled system wide while waiting for input (even while command prompt isn't in focus).
+        //Not even sure if this can be fixed.
         GlobalScreen.setEventDispatcher(new VoidDispatchService());
         try {
             GlobalScreen.registerNativeHook();
@@ -49,12 +51,11 @@ public class InputHandler implements NativeKeyListener {
         scan = new Scanner(System.in);
     }
 
-    public int doMenu(String[] m, boolean clearAtEnd) {
-        return doMenu(m, "", clearAtEnd);
+    public int doMenu(String[] m, boolean clearAtEnd, int startIndex) {
+        return doMenu(m, "", clearAtEnd, startIndex);
     }
 
-    //TODO: you can select an option that doesn't exist.
-    public int doMenu(String[] m, String printFirst, boolean clearAtEnd) {
+    public int doMenu(String[] m, String printFirst, boolean clearAtEnd, int startIndex) {
         currentMode = 0;
         menu = null;
         ArrayList<String> temp = new ArrayList<>();
@@ -65,13 +66,13 @@ public class InputHandler implements NativeKeyListener {
         }
         menu = temp.toArray(new String[temp.size()]);
         boolean run = true;
-        menuIndex = new CycleValue(0, 0, menu.length);
+        menuIndex = new CycleValue(startIndex, 0, menu.length - 1);
         while (run) {
             System.out.println(printFirst);
             for (int i = 0; i < menu.length; i++) {
                 System.out.println((menuIndex.getValue() == i ? Vars.Selected_Color : "") + "  -" + menu[i] + Colors.reset());
             }
-            ConsoleFunc.wait(300);
+            ConsoleFunc.wait(Vars.menuWaitTime);
 
             run = !enterPressed;
             if (!run && !clearAtEnd) {
@@ -93,12 +94,14 @@ public class InputHandler implements NativeKeyListener {
     }
 
     public void waitUntilEnter() {
-        System.out.println("Press Enter...");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
+        System.out.println(BattleEngine.localizationHandler.getLocalizedString(LangKeys.press_submit));
+        currentMode = 2;
+
+        while (!enterPressed) {
+            ConsoleFunc.wait(300);
         }
+        enterPressed = false;
+        currentMode = -1;
     }
 
     /**
@@ -123,6 +126,7 @@ public class InputHandler implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nke) {
+        //menu
         if (currentMode == 0) {
             try {
                 Field f = NativeInputEvent.class.getDeclaredField("reserved");
@@ -140,12 +144,16 @@ public class InputHandler implements NativeKeyListener {
             if (code == Vars.Controls.get(ControlMapping.Down)) {
                 menuIndex.incValue();
             }
-            if (code == Vars.Controls.get(ControlMapping.Select)) {
+            if (code == Vars.Controls.get(ControlMapping.Submit)) {
                 enterPressed = true;
             }
         }
+        //wait for enter
         if (currentMode == 2) {
-
+            int code = nke.getKeyCode();
+            if (code == Vars.Controls.get(ControlMapping.Submit)) {
+                enterPressed = true;
+            }
         }
     }
 
