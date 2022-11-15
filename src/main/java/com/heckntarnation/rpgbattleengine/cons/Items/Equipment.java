@@ -1,6 +1,5 @@
 package com.heckntarnation.rpgbattleengine.cons.Items;
 
-import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Weakness;
 import com.heckntarnation.rpgbattleengine.enums.EquipSlot;
