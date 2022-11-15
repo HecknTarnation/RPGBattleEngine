@@ -41,6 +41,7 @@ public class LocalizationHandler {
         en_us.put(battle_menu.key, "Attack,Item,Idle,Run");
         en_us.put(battle_currentTurn.key, "It's %s's turn");
         en_us.put(battle_moveused.key, "%1$s used %2$s and hit %3$s for %4$s damage!");
+        en_us.put(battle_moveusedAlly.key, "%1$s used %2$s on %3$s.");
         en_us.put(battle_missingmana.key, "%s doesn't have enough mana!");
         en_us.put(battle_ran.key, "%s ran.");
         en_us.put(battle_failedToRun.key, "%s couldn't get away!");
@@ -64,6 +65,7 @@ public class LocalizationHandler {
         en_us.put(stat_luck.key, "Luck: ");
         en_us.put(stat_point.key, "Stat Points: %s");
         en_us.put(stat_expNeeded.key, "Exp to next level: ");
+        en_us.put(press_submit.key, "Press [Submit]...");
         //end init en_us
         langs.put("en_us", en_us);
 
