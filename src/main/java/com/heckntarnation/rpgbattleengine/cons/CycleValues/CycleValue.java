@@ -14,6 +14,9 @@ public class CycleValue {
         this.value = initalValue;
         this.min = minValue;
         this.max = maxValue;
+        if (initalValue > maxValue || initalValue < minValue) {
+            this.value = 0;
+        }
     }
 
     public CycleValue(int minValue, int maxValue) {
