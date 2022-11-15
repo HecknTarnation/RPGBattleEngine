@@ -23,7 +23,7 @@ public class ConfigsMain {
         //This sets the 'up' button to the up arrow.
         controls.put(Vars.ControlMapping.Up, NativeKeyEvent.VC_UP);
         //This sets the 'select' button to the backslash key.
-        controls.put(Vars.ControlMapping.Select, NativeKeyEvent.VC_BACK_SLASH);
+        controls.put(Vars.ControlMapping.Submit, NativeKeyEvent.VC_BACK_SLASH);
         Vars.Controls = controls;
 
         //Text colors

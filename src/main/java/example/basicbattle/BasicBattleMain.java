@@ -5,6 +5,7 @@ import com.heckntarnation.rpgbattleengine.Vars;
 import com.heckntarnation.rpgbattleengine.arrays.StatusArray;
 import com.heckntarnation.rpgbattleengine.cons.Battle.Move;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
+import com.heckntarnation.rpgbattleengine.enums.AILevel;
 import com.heckntarnation.rpgbattleengine.enums.StatusArrayPosition;
 
 /**
@@ -25,13 +26,15 @@ public class BasicBattleMain {
         BattleEngine.localizationHandler.changLang("en_us");
 
         //Let's also override the dealth handler by calling BattleEngine.init().
-        BattleEngine.init(null, null, null, null, new MyDeathHandler(), null, null);
+        BattleEngine.init(null, null, null, null, new MyDeathHandler());
 
         MyPlayer player = new MyPlayer("Ben", 10, 1);
         Vars.player = player;
 
         //Next we need to actually create enemies for the player to fight.
         MyEnemy enemy = new MyEnemy("Enemy", 5, 10);
+        //We set the AILevel to Random. This means the enemy will pick a random attack everytime. See the AILevel class for more details.
+        enemy.aiLevel = AILevel.Random;
 
         //Now the next things to do is to set the enemies stats. We do this using a StatusArray.
         StatusArray stats = new StatusArray();
@@ -65,6 +68,9 @@ public class BasicBattleMain {
         move.setDamage(10, 0);
 
         player.moves.add(move);
+
+        //We also give the enemy a move set. It will be the same as the player for this example.
+        enemy.moves.add(move);
 
         player.setStats(stats);
 

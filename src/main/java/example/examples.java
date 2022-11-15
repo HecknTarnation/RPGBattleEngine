@@ -17,21 +17,30 @@ public class examples {
             "Basic Battle",
             "Configs",
             "Localization",
-            "Sounds"
+            "Sounds",
+            "Status Effect"
         };
-        int index = BattleEngine.inputHandler.doMenu(menu, "Select example to run.", true);
+        int index = BattleEngine.inputHandler.doMenu(menu, "Select example to run.", true, 0);
         switch (index) {
             case 0: {
                 example.basicbattle.BasicBattleMain.main(args);
+                break;
             }
             case 1: {
                 example.configs.ConfigsMain.main(args);
+                break;
             }
             case 2: {
                 example.localization.LocalizationMain.main(args);
+                break;
             }
             case 3: {
                 example.sounds.SoundsMain.main(args);
+                break;
+            }
+            case 4: {
+                example.statuseffects.StatusEffectMain.main(args);
+                break;
             }
         }
 
