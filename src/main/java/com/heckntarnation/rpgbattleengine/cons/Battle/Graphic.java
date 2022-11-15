@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Graphic implements Serializable {
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
