@@ -22,7 +22,7 @@ public class Move implements Serializable {
     }
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
@@ -32,6 +32,7 @@ public class Move implements Serializable {
     public Weakness type;
     public Graphic graphic;
     public URI sound;
+    public boolean targetAlly = false;
 
     public Move(String name) {
         this.name = name;
@@ -89,10 +90,20 @@ public class Move implements Serializable {
         return this.type;
     }
 
+    public void setTargetAlly(boolean targetAlly) {
+        this.targetAlly = targetAlly;
+    }
+
+    public boolean getTargetAlly() {
+        return this.targetAlly;
+    }
+
     /**
      * Should be overridden
+     *
+     * @param target
      */
-    public void Use() {
+    public void Use(Object target) {
 
     }
 
