@@ -15,6 +15,10 @@ public enum LangKeys {
      */
     battle_moveused("battle_moveused"),
     /**
+     * "[p1] used [p2] on [p3]."
+     */
+    battle_moveusedAlly("battle_moveusedAlly"),
+    /**
      * "[p1] doesn't have enough mana!"
      */
     battle_missingmana("battle_missingmana"),
@@ -56,7 +60,8 @@ public enum LangKeys {
     stat_mDefense("stat_mDefense"),
     stat_luck("stat_luck"),
     stat_point("stat_point"),
-    stat_expNeeded("stat_expNeeded");
+    stat_expNeeded("stat_expNeeded"),
+    press_submit("press_submit");
 
     public String key;
 
