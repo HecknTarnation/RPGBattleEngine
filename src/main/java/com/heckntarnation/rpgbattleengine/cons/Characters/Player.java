@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class Player implements Serializable {
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
@@ -156,65 +156,69 @@ public class Player implements Serializable {
             return;
         }
 
+        if (this.exp <= this.expToNextLevel) {
+            return;
+        }
+
         int[] oldStats = {this.maxHealth, this.maxMana, this.attack, this.mAttack, this.luck, this.defense, this.mDefense};
 
-        if (this.exp >= this.expToNextLevel) {
-            int levelNeeded = 0;
-            while (this.exp >= this.expToNextLevel) {
-                this.exp -= this.expToNextLevel;
-                this.expToNextLevel = MathFunc.expToNextLevel(this.level, this.baseExp, this.expMod);
-                this.level++;
-                levelNeeded++;
-            }
-
-            System.out.println((this.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) == true) ? localize(stat_secondpersonlevelup) : String.format(this.name, localize(stat_levelup)));
-
-            ConsoleFunc.wait(2000);
-
-            int[] newStats = oldStats.clone();
-            for (int i = 0; i < 7; i++) {
-                newStats[i] = MathFunc.statIncrease(oldStats[i], levelNeeded, growthRates[i]);
-            }
-            System.out.println(
-                    localize(stat_health) + oldStats[0] + " => " + newStats[0] + "\n"
-                    + localize(stat_mana) + oldStats[1] + " => " + newStats[1] + "\n"
-                    + localize(stat_attack) + oldStats[2] + " => " + newStats[2] + "\n"
-                    + localize(stat_mAttack) + oldStats[3] + " => " + newStats[3] + "\n"
-                    + localize(stat_luck) + oldStats[4] + " => " + newStats[4] + "\n"
-                    + localize(stat_defense) + oldStats[5] + " => " + newStats[5] + "\n"
-                    + localize(stat_mDefense) + oldStats[6] + " => " + newStats[6] + "\n"
-                    + localize(stat_expNeeded) + exp + "/" + expToNextLevel + "\n"
-            );
-
-            BattleEngine.inputHandler.waitUntilEnter();
-            ConsoleFunc.clear();
-
-            int statPoints = Vars.skillPointsOnLevel * levelNeeded;
-            while (statPoints > 0) {
-                String[] str = {
-                    localize(stat_maxHealth) + ": " + newStats[0],
-                    localize(stat_maxMana) + ": " + newStats[1],
-                    localize(stat_attack) + ": " + newStats[2],
-                    localize(stat_mAttack) + ": " + newStats[3],
-                    localize(stat_luck) + ": " + newStats[4],
-                    localize(stat_defense) + ": " + newStats[5],
-                    localize(stat_mDefense) + ": " + newStats[6]
-                };
-                int index = BattleEngine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true);
-                newStats[index]++;
-                statPoints--;
-            }
-            maxHealth = newStats[0];
-            maxMana = newStats[1];
-            attack = newStats[2];
-            mAttack = newStats[3];
-            luck = newStats[4];
-            defense = newStats[5];
-            mDefense = newStats[6];
-
-            health = maxHealth;
-            mana = maxMana;
+        int levelNeeded = 0;
+        while (this.exp >= this.expToNextLevel) {
+            this.exp -= this.expToNextLevel;
+            this.expToNextLevel = MathFunc.expToNextLevel(this.level, this.baseExp, this.expMod);
+            this.level++;
+            levelNeeded++;
         }
+
+        System.out.println((this.name.equalsIgnoreCase(BattleEngine.localizationHandler.SECOND_PERSON_STRING) == true) ? localize(stat_secondpersonlevelup) : String.format(this.name, localize(stat_levelup)));
+
+        ConsoleFunc.wait(2000);
+
+        int[] newStats = oldStats.clone();
+        for (int i = 0; i < 7; i++) {
+            newStats[i] = MathFunc.statIncrease(oldStats[i], levelNeeded, growthRates[i]);
+        }
+        System.out.println(
+                localize(stat_health) + oldStats[0] + " => " + newStats[0] + "\n"
+                + localize(stat_mana) + oldStats[1] + " => " + newStats[1] + "\n"
+                + localize(stat_attack) + oldStats[2] + " => " + newStats[2] + "\n"
+                + localize(stat_mAttack) + oldStats[3] + " => " + newStats[3] + "\n"
+                + localize(stat_luck) + oldStats[4] + " => " + newStats[4] + "\n"
+                + localize(stat_defense) + oldStats[5] + " => " + newStats[5] + "\n"
+                + localize(stat_mDefense) + oldStats[6] + " => " + newStats[6] + "\n"
+                + localize(stat_expNeeded) + exp + "/" + expToNextLevel + "\n"
+        );
+
+        BattleEngine.inputHandler.waitUntilEnter();
+        ConsoleFunc.clear();
+
+        int statPoints = Vars.skillPointsOnLevel * levelNeeded;
+        int prevIndex = 0;
+        while (statPoints > 0) {
+            String[] str = {
+                localize(stat_maxHealth) + ": " + newStats[0],
+                localize(stat_maxMana) + ": " + newStats[1],
+                localize(stat_attack) + ": " + newStats[2],
+                localize(stat_mAttack) + ": " + newStats[3],
+                localize(stat_luck) + ": " + newStats[4],
+                localize(stat_defense) + ": " + newStats[5],
+                localize(stat_mDefense) + ": " + newStats[6]
+            };
+            int index = BattleEngine.inputHandler.doMenu(str, String.format(localize(stat_point), statPoints), true, prevIndex);
+            newStats[index]++;
+            prevIndex = index;
+            statPoints--;
+        }
+        maxHealth = newStats[0];
+        maxMana = newStats[1];
+        attack = newStats[2];
+        mAttack = newStats[3];
+        luck = newStats[4];
+        defense = newStats[5];
+        mDefense = newStats[6];
+
+        health = maxHealth;
+        mana = maxMana;
     }
 
     public Move[] getMoves() {
@@ -222,6 +226,23 @@ public class Player implements Serializable {
         return this.moves.toArray(m);
     }
 
+    /**
+     * Adds a move to the character's move list.
+     *
+     * @param move
+     * @return
+     */
+    public Player addMove(Move move) {
+        this.moves.add(move);
+        return this;
+    }
+
+    /**
+     * Converts and returns the players inventory to a string. Can be
+     * overridden.
+     *
+     * @return
+     */
     public String[] invToStringArr() {
         String[] temp = new String[]{};
         for (int i = 0; i < inv.size(); i++) {
@@ -234,6 +255,10 @@ public class Player implements Serializable {
         inv.add(item);
     }
 
+    /**
+     * Ticks all of the characters status effects. This is called at the end of
+     * every turn.
+     */
     public void statusEffectTick() {
         if (statusEffects == null || statusEffects.isEmpty()) {
             return;
@@ -244,6 +269,16 @@ public class Player implements Serializable {
                 return effect.shouldBeRemoved;
             });
         });
+    }
+
+    /**
+     * Adds a status effect to this character.
+     *
+     * @param effect
+     */
+    public void addStatusEffect(StatusEffect effect) {
+        effect.setCharacter(this);
+        statusEffects.add(effect);
     }
 
     public void equip(Equipment equip) {
