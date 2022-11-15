@@ -1,13 +1,8 @@
 package com.heckntarnation.rpgbattleengine.cons.Battle;
 
-import com.heckntarnation.rpgbattleengine.BattleEngine;
+import com.heckntarnation.rpgbattleengine.cons.Characters.Enemy;
 import com.heckntarnation.rpgbattleengine.cons.Characters.Player;
-import com.heckntarnation.rpgbattleengine.lua.character_lookup;
 import java.io.Serializable;
-import java.util.ArrayList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.luaj.vm2.LuaValue;
 
 /**
  * This class should be complete made by you, the only calls by the engine will
@@ -19,21 +14,10 @@ import org.luaj.vm2.LuaValue;
  */
 public class StatusEffect implements Serializable {
 
-    public static ArrayList<StatusEffect> fromJSON(JSONArray arr, Object character) {
-        ArrayList<StatusEffect> effects = new ArrayList<>();
-        for (Object o : arr) {
-            JSONObject jo = (JSONObject) o;
-            StatusEffect ef = (StatusEffect) BattleEngine.jsonHandler.getObject((String) jo.get("id")).object;
-            ef.character = character;
-            ef.tickScript = (String) jo.get("tickScript");
-        }
-        return effects;
-    }
-
     public String tickScript;
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
@@ -43,15 +27,11 @@ public class StatusEffect implements Serializable {
     public StatusEffect() {
     }
 
-    public StatusEffect(Object[] props) {
-
-    }
-
     /**
      * Main status effect code (should be overridden)
      */
     public void tick() {
-        BattleEngine.luaHandler.runscript(tickScript, LuaValue.valueOf(character_lookup.lookupID(character)), "character");
+
     }
 
     /**
@@ -60,6 +40,15 @@ public class StatusEffect implements Serializable {
      * @param character
      */
     public void setCharacter(Player character) {
+        this.character = character;
+    }
+
+    /**
+     * Sets the character this is attached to
+     *
+     * @param character
+     */
+    public void setCharacter(Enemy character) {
         this.character = character;
     }
 
