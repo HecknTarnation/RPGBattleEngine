@@ -1,6 +1,5 @@
 package com.heckntarnation.rpgbattleengine.cons.Items;
 
-import com.heckntarnation.rpgbattleengine.cons.Items.Item;
 import com.heckntarnation.rpgbattleengine.MathFunc;
 import java.io.Serializable;
 
@@ -11,7 +10,7 @@ import java.io.Serializable;
 public class Drop implements Serializable {
 
     /**
-     * For JSON loading
+     * For HeckScript Integration loading
      */
     public String namespace, id;
 
