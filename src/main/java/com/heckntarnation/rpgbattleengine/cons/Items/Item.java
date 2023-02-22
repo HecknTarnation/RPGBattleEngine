@@ -29,7 +29,7 @@ public class Item implements Serializable {
     }
 
     /**
-     * This function should be overridden
+     * This function should be overridden.
      */
     public void Use() {
 
